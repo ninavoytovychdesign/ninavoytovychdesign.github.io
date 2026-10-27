@@ -1241,6 +1241,35 @@ html.lbx-open{overflow:hidden}
 
 /* unified covers: one clean screen per case */
 #view-home .cases .case .media img{object-fit:cover!important;object-position:center top!important}
+
+/* text-only case cards: no mockups */
+#view-home .cases .case{display:flex!important;flex-direction:column!important;aspect-ratio:auto!important;min-height:340px;grid-template-columns:none!important}
+#view-home .cases .case .media{display:none!important}
+#view-home .cases .case .body{order:0!important;flex:1;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;gap:0!important;padding:28px 28px 26px!important;position:relative!important}
+#view-home .cases .case .body .num{order:1!important;margin:0 64px 40px 0!important;display:flex;align-items:center;gap:10px}
+#view-home .cases .case .body .num::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--tint,#888);flex:none}
+#view-home .cases .case .body h3{order:2!important;margin-top:auto!important;font-size:clamp(24px,2.1vw,30px)!important;line-height:1.18!important;letter-spacing:-.015em!important;font-weight:600!important}
+#view-home .cases .case .body > p:not(.role):not(.fact){display:block!important;order:3;margin:12px 0 0!important;font:400 15px/23px var(--body)!important;color:var(--muted)!important;max-width:46ch}
+#view-home .cases .case .body .role{order:4!important;margin-top:22px!important;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+#view-home .cases .case .body .fact{order:5!important;margin-top:4px!important;padding-top:0!important;border-top:0!important}
+#view-home .cases .case .body .go{position:absolute!important;top:22px!important;right:22px!important}
+#view-home .cases .case:hover .body h3{color:#fff}
+@media (min-width:761px){#view-home .cases .case:last-child:nth-child(odd){grid-column:1 / -1;min-height:300px}#view-home .cases .case:last-child:nth-child(odd) .body > p:not(.role):not(.fact){max-width:60ch}}
+@media (max-width:760px){
+  #view-home .cases .case{min-height:0}
+  #work .cases .case{align-self:stretch}
+  #view-home .cases .case .body{padding:22px 22px 22px!important}
+  #view-home .cases .case .body h3{font-size:22px!important}
+  #view-home .cases .case .body > p:not(.role):not(.fact){font-size:14.5px!important;line-height:22px!important}
+}
+
+/* phones: text cards stack instead of a carousel */
+@media (max-width:760px){
+  #work .cases{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;overflow:visible!important;scroll-snap-type:none!important;margin-inline:0!important;padding-inline:0!important}
+  #work .cases .case{flex:none!important;width:auto!important}
+  .cases-dots{display:none!important}
+  #view-home .cases .case .body .num{margin-bottom:28px!important}
+}
 </style>
 
 
