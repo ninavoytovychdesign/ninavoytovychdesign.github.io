@@ -34,7 +34,7 @@
 
   /* ── Radar ─────────────────────────────────────────
      Rings = years (2024 inside → 2026 outside), sectors = domains. ■ = selected project, shown in the card.
-     A slow sweep passes every 40s and briefly marks the node it crosses.
+     A slow sweep passes every 40s; the node it crosses is marked and the card switches to it.
      Hover or focus selects a node: the others dim, its domain lights up and the card shows it. Click opens the case. */
   var radar = document.querySelector('.radar');
   if (radar){
@@ -95,7 +95,7 @@
         sweep.setAttribute('transform', 'rotate(' + ang.toFixed(2) + ' 280 280)');
         if (!held) nodes.forEach(function(n){
           var crossed = prev <= ang ? (n._ang > prev && n._ang <= ang) : (n._ang > prev || n._ang <= ang);
-          if (crossed){ n.classList.add('ping'); setTimeout(function(){ n.classList.remove('ping'); }, 700); }
+          if (crossed){ n.classList.add('ping'); setTimeout(function(){ n.classList.remove('ping'); }, 700); select(n); }
         });
         prev = ang;
         requestAnimationFrame(tick);
