@@ -449,3 +449,22 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 @media (prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
 
 .site-footer .btn--ink{ color:var(--w1); }
+
+/* ── Case template: In short, decision status, outcome ── */
+.short-wrap{ padding-bottom:64px; }
+.in-short{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--gap); border-top:1px solid var(--line); padding-top:16px; }
+.in-short div{ display:grid; gap:8px; align-content:start; }
+.in-short dt{ font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t3); }
+.in-short dd{ font:400 20px/24px var(--sans); color:var(--t1); margin:0; }
+.in-short + .metrics{ margin-top:40px; }
+.case .d-status{ display:flex; gap:16px; font:400 14px/20px var(--sans); color:var(--t2); max-width:880px; }
+.case .d-status span{ flex:none; width:160px; font:400 12px/20px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t3); }
+.outcome{ list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--gap); }
+.outcome li{ display:grid; gap:16px; align-content:start; padding-top:16px; border-top:1px solid var(--t1); }
+.outcome .n{ font:400 12px/16px var(--mono); letter-spacing:2px; color:var(--t3); }
+.outcome p{ font:400 20px/24px var(--sans); color:var(--t1); }
+@media (max-width:1023px){ .in-short, .outcome{ grid-template-columns:1fr; row-gap:24px; } }
+@media (max-width:767px){ .short-wrap{ padding-bottom:40px; } .in-short dd, .outcome p{ font-size:18px; } .case .d-status{ flex-direction:column; gap:4px; } }
+.todo-inline{ font:600 12px/16px var(--mono); letter-spacing:2px; color:var(--t1); background:repeating-linear-gradient(135deg, transparent 0 4px, rgba(8,8,11,.06) 4px 8px); padding:2px 4px; }
+.in-short + .metrics .metric{ min-height:160px; }
+.in-short + .metrics .metric b{ font-size:64px; line-height:64px; letter-spacing:-2px; }
