@@ -146,7 +146,6 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .radar-node.ping .mk{ transform:scale(1.5); background:var(--accent); box-shadow:0 0 0 1px var(--ink); }
 .radar-node:focus-visible{ outline:none; }
 .radar-node:focus-visible .lb{ outline:2px solid var(--ink); outline-offset:4px; }
-.radar .sweep line{ stroke:var(--t3); }
 .radar.anim .ring{ stroke-dasharray:var(--len); stroke-dashoffset:var(--len); animation:draw 1.2s var(--ease) forwards; animation-delay:var(--d,0s); }
 .radar.anim .radar-node, .radar.anim .radar-domain{ opacity:0; animation:fadein .5s var(--ease) forwards; animation-delay:var(--d,0s); }
 @keyframes draw{ to{ stroke-dashoffset:0; } }
