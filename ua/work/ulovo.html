@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ulovo – кейс · Ніна Войтович</title>
+<meta name="description" content="Прогноз клювання для рибалок: активність по годинах, погода і Місяць. 12 флоу й 86 екранів, у розробці.">
+<meta name="theme-color" content="#F4F4F7">
+<link rel="preload" href="../../assets/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/outfit-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="alternate" hreflang="en" href="../../work/ulovo.html">
+<link rel="alternate" hreflang="uk" href="../work/ulovo.html">
+<link rel="stylesheet" href="../../assets/css/case-blocks.css">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Перейти до змісту</a>
+<div class="page-bg" aria-hidden="true"></div>
+<div class="col-lines" aria-hidden="true"><div><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+<header class="nav-bar">
+  <nav class="nav-pill" aria-label="Головне меню"><a class="nav-link" href="../index.html">Головна</a><a class="nav-link" href="../work/index.html" aria-current="page">Роботи</a><a class="wordmark" href="../index.html">Ніна Войтович</a><a class="nav-link" href="../index.html#about">Про мене</a><a class="nav-link" href="#contact">Контакт</a><span class="nav-sep" aria-hidden="true"></span><a class="nav-link nav-social" href="https://linkedin.com/in/nina-voytovych" rel="noopener">LinkedIn</a><a class="nav-link nav-social" href="https://dou.ua/users/nina-voytovych/" rel="noopener">DOU</a><span class="nav-lang" role="group" aria-label="Мова"><a class="lang" hreflang="en" lang="en" href="../../work/ulovo.html">EN</a><a class="lang" hreflang="uk" lang="uk" aria-current="true">UA</a></span><button class="nav-menu-btn" type="button" aria-expanded="false" aria-controls="nav-sheet">Меню</button></nav>
+  <nav class="nav-sheet" id="nav-sheet" aria-label="Menu"><a href="../index.html">Головна</a><a href="../work/index.html" aria-current="page">Роботи</a><a href="../index.html#about">Про мене</a><a href="#contact">Контакт</a><div class="sheet-extra"><a class="nav-link nav-social" href="https://linkedin.com/in/nina-voytovych" rel="noopener">LinkedIn</a><a class="nav-link nav-social" href="https://dou.ua/users/nina-voytovych/" rel="noopener">DOU</a><span class="nav-lang" role="group" aria-label="Мова"><a class="lang" hreflang="en" lang="en" href="../../work/ulovo.html">EN</a><a class="lang" hreflang="uk" lang="uk" aria-current="true">UA</a></span></div></nav>
+</header>
+<main id="main">
+<header class="case-hero wrap">
+  <nav class="crumbs" aria-label="Навігація"><a href="index.html">Роботи</a><span class="sl" aria-hidden="true">/</span><span aria-current="page">Ulovo</span></nav>
+  <h1 class="case-title">Ulovo</h1>
+  <div class="row">
+    <span class="label">Кейс</span>
+    <div><p class="case-lead">iOS-застосунок, який зводить погоду, тиск, Місяць і сутінки в один прогноз клювання для обраної водойми.</p><dl class="case-meta"><div><dt>Роль</dt><dd>UX/UI Designer</dd></div><div><dt>Команда</dt><dd>Єдина дизайнерка</dd></div><div><dt>Платформа</dt><dd>iOS</dd></div><div><dt>Статус</dt><dd>У розробці</dd></div><div><dt>Тип</dt><dd>Фриланс · 2026</dd></div></dl></div>
+  </div>
+</header>
+<div class="wrap short-wrap"><section class="row case-sec row--lined" id="ulovo-short"><span class="label">Коротко</span><div class="content"><dl class="in-short"><div><dt>Проблема</dt><dd>Рибалці потрібна одна відповідь: чи варто їхати сьогодні і коли саме.</dd></div><div><dt>Що зробила</dt><dd>Єдина дизайнерка: 12 флоу і 86 екранів і станів. Без брифу й тестів з людьми – рішення спираються на сценарії, обмеження iOS і погодний API.</dd></div><div><dt>Результат</dt><dd>Головна відповідає «їхати чи ні і коли» ще до скролу. Клієнту подобається напрям, застосунок у розробці.</dd></div></dl><div class="metrics"><div class="metric"><b>12</b><span>флоу від сплешу до системних станів</span></div><div class="metric"><b>86</b><span>екранів і станів</span></div><div class="metric"><b>103</b><span>змінні в 4 колекціях</span></div></div></div></section>
+</div>
+<div class="case-visual wrap"><figure class="tile light"><img src="../../assets/covers/ulovo.webp" alt="Ulovo – екрани проєкту" width="1320" height="824" decoding="async"></figure></div>
+<div class="wrap"><article class="case case-body" id="view-ulovo" data-case="ulovo">
+<section class="row case-sec" id="ul-task"><span class="label">Контекст</span><div class="content"><div class="txt"><p>Дані для неї розкидані – погода, вітер, тиск, Місяць, сутінки. Задача – звести їх у прогноз, який читається за кілька секунд, і закрити всі стани реального застосунку. ТЗ не було: вимоги збирала по ходу з замовником і розробником. Тестувань із людьми теж не було, тож рішення спираються на сценарії, обмеження iOS і API погоди.</p></div></div></section>
+<section class="row case-sec" id="ul-flows"><span class="label">Структура</span><div class="content"><h2>Структура</h2><div class="txt"><p>Ядро – три вкладки прогнозу: Головна, Погода, Календар. Навколо – вхід, Pro-підписка, профіль і стани, що можуть зʼявитися на будь-якому екрані.</p></div><div aria-label="Карта флоу Ulovo: 12 флоу, 86 екранів і станів" class="dgm dg-map" role="img">
+<div class="dg-group"><span class="dg-h">Вхід і акаунт</span><div class="dg-card dg-flow"><span class="dg-n">01</span><span class="dg-t">Сплеш і онбординг</span><b>4</b></div><div class="dg-card dg-flow"><span class="dg-n">02</span><span class="dg-t">Вхід через e-mail</span><b>9</b></div><div class="dg-card dg-flow"><span class="dg-n">03</span><span class="dg-t">Вхід через Google</span><b>4</b></div><div class="dg-card dg-flow"><span class="dg-n">04</span><span class="dg-t">Реєстрація</span><b>11</b></div><div class="dg-card dg-flow"><span class="dg-n">05</span><span class="dg-t">Відновлення пароля</span><b>8</b></div></div>
+<div class="dg-group"><span class="dg-h">Прогноз</span><div class="dg-card dg-flow"><span class="dg-n">06</span><span class="dg-t">Головна</span><b>15</b></div><div class="dg-card dg-flow"><span class="dg-n">07</span><span class="dg-t">Погода</span><b>6</b></div><div class="dg-card dg-flow"><span class="dg-n">08</span><span class="dg-t">Календар</span><b>5</b></div></div>
+<div class="dg-group"><span class="dg-h">Pro</span><div class="dg-card dg-flow"><span class="dg-n">09</span><span class="dg-t">Pro-підписка</span><b>4</b></div><p class="dg-note">Пейвол відкривається з фільтра риби на Головній, з Календаря і з Налаштувань</p></div>
+<div class="dg-group"><span class="dg-h">Профіль і система</span><div class="dg-card dg-flow"><span class="dg-n">10</span><span class="dg-t">Налаштування</span><b>14</b></div><div class="dg-card dg-flow"><span class="dg-n">11</span><span class="dg-t">Сповіщення</span><b>4</b></div><div class="dg-card dg-flow"><span class="dg-n">12</span><span class="dg-t">Системні стани</span><b>2</b></div><p class="dg-note">Системні стани можуть зʼявитися на будь-якому екрані: сесія завершилася, обовʼязкове оновлення</p></div>
+<p class="dg-foot">12 флоу · 86 екранів і станів. Цифра на картці – кількість екранів і станів у флоу.</p>
+</div></div></section>
+<section class="row case-sec" id="ul-decisions"><span class="label">Рішення</span><div class="content"><div class="d2">
+<span class="label">Рішення 01</span>
+<h3>Головна: відповідь першою</h3>
+<dl class="d2-dl"><div><dt>Чому</dt><dd>Перша версія суперечила сама собі: «неймовірний день» над попередженням про грозу, на кільці 100% і «Зараз 84%», різний тиск на двох екранах, підписи 6–8 px.</dd></div><div><dt>Що зробила</dt><dd>Дві версії. A – та сама структура без суперечностей і з текстом від 11 px. B – рішення першим: активність → найкращий час → графік по годинах → умови, без каруселі, що ховала графік.</dd></div><div><dt>Результат</dt><dd>Головна відповідає на «чи їхати і коли» до будь-якого скролу.</dd></div></dl><p class="d-status"><span>Статус</span>Обидві версії передала замовнику, напрям йому подобається.</p>
+<figure><img alt="Три версії головної: перша, A з виправленою структурою, B з рішенням першим" class="gl" decoding="async" height="1040" loading="lazy" src="../../assets/cases/ulovo/02.webp" width="1560"/><figcaption>Перша версія · A · B – рішення першим</figcaption></figure>
+</div><div class="d2">
+<span class="label">Рішення 02</span>
+<h3>Фільтр риби змінює весь прогноз</h3>
+<dl class="d2-dl"><div><dt>Чому</dt><dd>Вибір риби міняє розрахунок клювання для всього застосунку, а «Щука» й «Судак» доступні лише з Pro – це треба показати до тапу.</dd></div><div><dt>Що зробила</dt><dd>Фільтр вгорі Головної замість меню. «Вся риба» – для всіх, платні режими із замком і бейджем Pro. Після покупки режим вмикається одразу, без неї лишається «Вся риба».</dd></div><div><dt>Результат</dt><dd>Пейвол зʼявляється в момент цінності, а у кожного режиму свій графік і пік: щука вранці й увечері, судак – у сутінках.</dd></div></dl><p class="d-status"><span>Статус</span>Погоджений напрям, проєкт у роботі.</p>
+<figure><img alt="Фільтр риби, пейвол Щука і судак, режим Щука з Pro" class="gl" decoding="async" height="1050" loading="lazy" src="../../assets/cases/ulovo/m-fish.webp" width="1680"/><figcaption>Фільтр риби · пейвол · режим «Щука» з Pro</figcaption></figure>
+</div><div class="d2">
+<span class="label">Рішення 03</span>
+<h3>Прогноз працює біля води, без звʼязку</h3>
+<dl class="d2-dl"><div><dt>Чому</dt><dd>Прогноз потрібен біля води, де звʼязку часто немає, а геолокацію людина може не дозволити.</dd></div><div><dt>Що зробила</dt><dd>Кожен основний екран має завантаження, офлайн і помилку. Офлайн показує останній прогноз із часом оновлення, без геолокації водойму обирають пошуком.</dd></div><div><dt>Результат</dt><dd>Замість порожнього екрана біля води людина бачить останній прогноз і знає, наскільки він свіжий.</dd></div></dl><p class="d-status"><span>Статус</span>Стани є на кожному основному екрані макетів.</p>
+<figure><img alt="Головна: скелетон, немає інтернету, локацію не обрано" class="gl" decoding="async" height="1050" loading="lazy" src="../../assets/cases/ulovo/m-offline.webp" width="1680"/><figcaption>Скелетон · немає інтернету · локацію не обрано</figcaption></figure>
+</div><div class="d2">
+<span class="label">Рішення 04</span>
+<h3>Вхід: спершу e-mail</h3>
+<dl class="d2-dl"><div><dt>Чому</dt><dd>Якщо під введеним e-mail акаунта немає, звичайний вхід покаже помилку, і реєстрацію доведеться починати з нуля.</dd></div><div><dt>Що зробила</dt><dd>Спершу e-mail, потім пароль. Немає акаунта – кнопка стає «Створити акаунт» і веде в реєстрацію з уже введеною адресою. «Скасувати» в Google-вході повертає без помилки.</dd></div><div><dt>Результат</dt><dd>Людина без акаунта потрапляє в реєстрацію одним кроком, а не через помилку.</dd></div></dl><p class="d-status"><span>Статус</span>У макетах для розробки, проєкт у роботі.</p>
+<figure><img alt="Вхід, акаунта не знайдено, завантаження" class="gl" decoding="async" height="1050" loading="lazy" src="../../assets/cases/ulovo/m-signin.webp" width="1680"/><figcaption>Вхід · акаунта не знайдено · завантаження</figcaption></figure>
+</div><div class="d2">
+<span class="label">Рішення 05</span>
+<h3>Як змінити водойму</h3>
+<dl class="d2-dl"><div><dt>Чому</dt><dd>У збірці було незрозуміло, що водойму змінюють тапом по блоку з її назвою. Попередня кнопка «Оновити» плутала: дані оновлюються самі, а вона відкривала вибір локації.</dd></div><div><dt>Що зробила</dt><dd>Перебрала три варіанти. «Змінити локацію» на малих екранах із довгою назвою водойми не влазить в один рядок, а іконка мала б бути дуже очевидною. Лишила коротке «Змінити» поруч із назвою. З модалки вибору прибрала «Застосувати» і «Скасувати» – вибір спрацьовує по тапу.</dd></div><div><dt>Результат</dt><dd>Зміну водойми видно одразу, і вона більше не плутається з оновленням даних.</dd></div></dl><p class="d-status"><span>Статус</span>Замовник обрав «Змінити», кнопка є на всіх екранах із локацією.</p>
+<figure><img alt="Вибір локації: результати пошуку й вимкнена геолокація" class="gl" decoding="async" height="1050" loading="lazy" src="../../assets/cases/ulovo/m-location.webp" width="1680"/><figcaption>Вибір локації · результати пошуку · геолокацію вимкнено</figcaption></figure></div><div class="d2">
+<span class="label">Рішення 06</span>
+<h3>Дні гортаються свайпом</h3>
+<dl class="d2-dl"><div><dt>Чому</dt><dd>Розробник запропонував перемикати дні свайпом по Головній, не заходячи в календар. Але сам по собі свайп невидимий: якщо його просто додати, люди не здогадаються, що він є.</dd></div><div><dt>Що зробила</dt><dd>Два варіанти підказки. A – лічильник «1/3» біля локації і крапки внизу. B – індикатор днів угорі під локацією, як у сторіз: видно, скільки днів доступно і на якому ти зараз. Минулі дні не гортаються, без підписки доступно 3 дні, з Pro – тиждень.</dd></div><div><dt>Результат</dt><dd>У свайпу зʼявилась видима підказка: індикатор показує, що днів кілька і де ти серед них.</dd></div></dl><p class="d-status"><span>Статус</span>Замовник обрав B, я теж радила його.</p>
+<figure><img alt="Два варіанти підказки свайпу між днями на Головній" class="gl" decoding="async" height="1040" loading="lazy" src="../../assets/cases/ulovo/06.webp" width="1560"/><figcaption>A – лічильник і крапки внизу · B – індикатор днів угорі (обраний)</figcaption></figure>
+</div></div></section>
+<section class="row case-sec" id="ul-system"><span class="label">Система</span><div class="content"><h2>Стани й система</h2><div class="txt"><p>Налаштування застосовуються одразу, сесія, що завершилася, повертає на вхід із підставленим e-mail, а пуш веде на потрібний екран. UI kit: 4 колекції змінних, 14 текстових стилів на SF Pro, світла тема – перемикання режиму. Фони погоди привʼязані до кодів OpenWeather, тож розробнику не треба вигадувати мапінг. Для iOS-налаштування «Зменшити прозорість» кожна скляна поверхня має непрозорий колір-заміну: варіант із напівпрозорим кольором відкинули, бо система може ігнорувати і прозорість.</p></div><figure><img alt="Сесія завершилася, сплеш, центр сповіщень" class="gl" decoding="async" height="1040" loading="lazy" src="../../assets/cases/ulovo/07.webp" width="1560"/><figcaption>Сесія завершилася · сплеш · центр сповіщень</figcaption></figure></div></section>
+<section class="row case-sec" id="ul-outro"><span class="label">Підсумок</span><div class="content"><ol class="outcome"><li><span class="n">01</span><p>Найскладнішим була ієрархія показників: короткий огляд на Головній, детальний прогноз на «Погоді», а звʼязує їх обрана водойма й день.</p></li><li><span class="n">02</span><p>Інтерфейс багато в чому визначали дані: прогноз по годинах приходить із кроком у три години і лише на пʼять днів, температуру води API не віддає – її прибрали, а в клітинку календаря влізла лише іконка погоди.</p></li><li><span class="n">03</span><p>Далі – перевірити з рибалками, чи вистачає огляду, щоб вирішити, коли їхати, і чи зрозуміло, як читати активність клювання.</p></li></ol></div></section>
+</article></div>
+<section class="next-row wrap" aria-label="Наступний кейс">
+  <div class="row">
+    <span class="label">Далі</span>
+    <div class="content">
+      <a class="next-link" href="open-kharkiv.html">Open Kharkiv <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="next-cover light" href="open-kharkiv.html" tabindex="-1" aria-hidden="true"><img src="../../assets/covers/open-kharkiv.webp" alt="" width="1320" height="824" loading="lazy" decoding="async"></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer" id="contact" data-spy="contact">
+  <div class="wrap">
+    <div class="foot-cta">
+      <h2 class="h40">Шукаєте продуктову дизайнерку для продукту з купою станів? Напишіть мені.</h2>
+      <a class="foot-mail" href="mailto:voytovychnina@gmail.com">voytovychnina@gmail.com</a>
+      <a class="btn btn--ink" href="../../assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Завантажити CV</a>
+    </div>
+    <div class="sign-off">
+      <p class="foot-word" aria-hidden="true">Ніна Войтович</p>
+      <div class="foot-bar">
+        <span>© 2026 Ніна Войтович | Фано, Італія</span>
+        <nav aria-label="Деінде">
+          <a href="https://linkedin.com/in/nina-voytovych" rel="noopener">LinkedIn</a>
+          <a href="https://www.behance.net/ninavoytovych" rel="noopener">Behance</a>
+          <a href="https://dou.ua/users/nina-voytovych/" rel="noopener">DOU</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/site.js" defer></script>
+</body>
+</html>

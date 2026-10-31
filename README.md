@@ -36,3 +36,7 @@ To update a cover, export the frame at 2x as WebP and save it under the same nam
 - Font sizes are multiples of 2.
 - Spacing is a multiple of 4.
 - No fractional values in design tokens.
+
+## Languages
+
+English lives in the root, Ukrainian in `ua/` with the same file names. The EN / UA switch in the header links each page to its counterpart. Ukrainian case texts come from the previous site; the new texts are translated in the generator.
