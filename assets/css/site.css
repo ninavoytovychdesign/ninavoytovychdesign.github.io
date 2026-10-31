@@ -468,3 +468,48 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .todo-inline{ font:600 12px/16px var(--mono); letter-spacing:2px; color:var(--t1); background:repeating-linear-gradient(135deg, transparent 0 4px, rgba(8,8,11,.06) 4px 8px); padding:2px 4px; }
 .in-short + .metrics .metric{ min-height:160px; }
 .in-short + .metrics .metric b{ font-size:64px; line-height:64px; letter-spacing:-2px; }
+
+/* ── Grid alignment: every row sits on the six visible columns ──
+   Label = column 1, content = columns 2–6. Inside the content, blocks use the same
+   five columns, so keys, cells and tiles start on a column line. */
+.row{ grid-template-columns:repeat(6,minmax(0,1fr)); column-gap:0; }
+.row > :first-child{ grid-column:1; padding-right:24px; }
+.row > :nth-child(2){ grid-column:2 / -1; min-width:0; }
+.cols5{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); }
+.case-meta{ grid-template-columns:repeat(5,minmax(0,1fr)); gap:0; margin-top:48px; }
+.case-meta > div{ padding-right:24px; }
+.row--lined > .label{ padding-top:16px; line-height:24px; }
+.in-short{ display:grid; grid-template-columns:1fr; gap:0; padding-top:0; border-top:1px solid var(--line); }
+.in-short > div{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:0; padding:16px 0; border-bottom:1px solid var(--line); }
+.in-short dt{ grid-column:1; padding-right:24px; line-height:24px; }
+.in-short dd{ grid-column:2 / -1; max-width:720px; }
+.in-short + .metrics{ margin-top:48px; }
+.metrics{ grid-template-columns:repeat(5,minmax(0,1fr)); gap:0; }
+.metrics .metric{ margin-right:24px; }
+.case-sec > .label{ padding-top:12px; }
+.case .d2-dl{ max-width:none; }
+.case .d2-dl > div{ grid-template-columns:repeat(5,minmax(0,1fr)); gap:0; }
+.case .d2-dl dt{ grid-column:1; padding-right:24px; }
+.case .d2-dl dd{ grid-column:2 / -1; max-width:720px; }
+.case .d-status{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:0; max-width:none; }
+.case .d-status span{ grid-column:1; width:auto; padding-right:24px; }
+.case .d-status{ align-items:baseline; }
+.case .d-status > :not(span){ grid-column:2 / -1; }
+.outcome{ grid-template-columns:1fr; gap:0; border-top:1px solid var(--line); }
+.outcome li{ grid-template-columns:repeat(5,minmax(0,1fr)); gap:0; padding:16px 0; border-top:0; border-bottom:1px solid var(--line); }
+.outcome .n{ grid-column:1; line-height:24px; }
+.outcome p{ grid-column:2 / -1; max-width:720px; }
+@media (max-width:1023px){
+  .case-meta{ grid-template-columns:repeat(3,minmax(0,1fr)); row-gap:16px; }
+  .metrics{ grid-template-columns:repeat(3,minmax(0,1fr)); row-gap:24px; }
+}
+@media (max-width:767px){
+  .row{ grid-template-columns:1fr; }
+  .row > :first-child, .row > :nth-child(2){ grid-column:1; padding-right:0; }
+  .row--lined > .label, .case-sec > .label{ padding-top:0; }
+  .case-meta{ grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:32px; }
+  .in-short > div, .case .d2-dl > div, .outcome li, .case .d-status{ grid-template-columns:1fr; gap:4px; }
+  .in-short dt, .in-short dd, .case .d2-dl dt, .case .d2-dl dd, .outcome .n, .outcome p, .case .d-status span, .case .d-status > :not(span){ grid-column:1; }
+  .metrics{ grid-template-columns:1fr; }
+  .metrics .metric{ margin-right:0; }
+}
