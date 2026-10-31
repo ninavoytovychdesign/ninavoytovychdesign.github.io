@@ -513,3 +513,10 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .metrics{ grid-template-columns:1fr; }
   .metrics .metric{ margin-right:0; }
 }
+
+/* Portrait in the About label column */
+.about-side{ display:grid; gap:24px; align-content:start; padding-top:12px; }
+.about .row > .about-side{ padding-top:12px; }
+.about-side .me{ width:176px; height:176px; object-fit:cover; display:block; }
+@media (max-width:1023px){ .about-side .me{ width:128px; height:128px; } }
+@media (max-width:767px){ .about-side{ padding-top:0; grid-template-columns:auto 1fr; align-items:end; } .about-side .me{ width:96px; height:96px; grid-row:1; } }
