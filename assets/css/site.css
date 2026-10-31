@@ -523,18 +523,27 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 @media (max-width:767px){ .facts--photo{ grid-template-columns:1fr; row-gap:16px; } .facts--photo .me{ max-width:160px; margin-bottom:16px; } }
 .facts--photo .me{ height:auto; }
 
-/* About facts: photo in content column 1, each list spans two columns, one line per fact, equal rows */
-.facts--photo ul:nth-of-type(1){ grid-column:2 / span 2; padding-right:24px; }
-.facts--photo ul:nth-of-type(2){ grid-column:4 / span 2; padding-right:0; }
-.facts--photo ul{ gap:0; border-top:1px solid var(--line); }
-.facts--photo li{ padding:16px 0 16px 20px; border-bottom:1px solid var(--line); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.facts--photo li.mk::before{ top:24px; }
-@media (max-width:1023px){ .facts--photo ul:nth-of-type(1), .facts--photo ul:nth-of-type(2){ grid-column:auto; padding-right:0; } .facts--photo li{ white-space:normal; } }
-/* rows share the photo height: three equal rows, lines divide the photo */
-.facts--photo{ align-items:stretch; }
-.facts--photo ul{ display:grid; grid-template-rows:repeat(3,1fr); align-self:stretch; }
-.facts--photo li{ display:flex; align-items:center; padding-top:0; padding-bottom:0; }
-.facts--photo li.mk::before{ top:50%; margin-top:-4px; }
-.facts--photo .me{ align-self:start; }
-@media (max-width:1359px){ .facts--photo li{ white-space:normal; } }
-@media (max-width:1023px){ .facts--photo ul{ grid-template-rows:none; } .facts--photo li{ padding:16px 0 16px 20px; } }
+/* About facts as in Figma: photo in content column 1, lists in columns 3 and 5,
+   rows 48 / 48 / 24 so both lists line up; first fact primary with a marker, the rest secondary */
+.facts--photo ul{ gap:16px; }
+.facts--photo ul:nth-of-type(1){ grid-column:3; padding-right:0; }
+.facts--photo ul:nth-of-type(2){ grid-column:5; padding-right:0; }
+.facts--photo li{ padding-left:16px; color:var(--t3); }
+.facts--photo li.mk{ color:var(--t1); }
+.facts--photo li.mk::before{ top:9px; }
+@media (max-width:1359px){ .facts--photo ul:nth-of-type(1){ grid-column:2 / span 2; } .facts--photo ul:nth-of-type(2){ grid-column:4 / span 2; } }
+@media (max-width:1023px){ .facts--photo ul:nth-of-type(1), .facts--photo ul:nth-of-type(2){ grid-column:auto; } }
+
+/* ── Polish pass ── */
+.work{ padding-bottom:96px; }
+.archive{ margin-top:96px; }
+/* Focus: rings sit to the right, behind the card, never under the headline or text */
+.focus .rings{ left:auto; right:-420px; top:-160px; transform:none; opacity:.6; }
+.focus-tab .big{ color:rgba(255,255,255,.44); }
+.focus-card .media{ aspect-ratio:1320/824; background:#EAEAF0; }
+.tlink--inv{ color:var(--w1); }
+/* Footer: the rule sits below the descenders */
+.foot-word{ padding-bottom:32px; }
+.sign-off{ gap:0; }
+.focus-card{ position:relative; z-index:1; background:#000000; box-shadow:0 0 0 24px #000000; }
+.foot-word{ padding-bottom:48px; }
