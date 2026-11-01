@@ -708,3 +708,11 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 @media (max-width:1199px){ .nav-time{ display:none; } }
 @media (max-width:767px){ .nav-pill .nav-end{ display:none; } }
 .hero-card .body{ margin-right:0; }
+
+/* Hero as edited in Figma: centred 190 title, status at the top right, 20px lead */
+.hero{ position:relative; }
+.hero-title{ font-size:min(190px, 13.2vw); text-align:center; margin-left:0; }
+.hero-status{ position:absolute; right:var(--pad); top:140px; display:inline-flex; align-items:center; gap:8px; font:400 20px/24px var(--sans); color:var(--t1); z-index:1; }
+.hero-status .dot{ width:8px; height:8px; background:#34C759; }
+.hero-intro .hero-desc .lead{ font-size:20px; line-height:32px; }
+@media (max-width:1023px){ .hero-status{ position:static; margin-bottom:16px; justify-content:flex-start; } .hero-title{ text-align:left; } }
