@@ -721,3 +721,10 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 /* Language switch as a segmented control (Figma 139:7316) */
 .nav-pill .nav-lang, .nav-sheet .sheet-extra .nav-lang{ gap:0; padding:0; border:1px solid rgba(255,255,255,.2); border-radius:4px; }
 .nav-lang .lang, .nav-sheet .sheet-extra .lang{ height:32px; padding:6px 12px; border-radius:4px; }
+
+/* Hero actions on the grid: the button fills column 1, the CV link sits in the middle of column 2 */
+@media (min-width:1360px){
+  .hero-cta{ display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:center; }
+  .hero-cta .btn{ width:100%; justify-content:center; text-align:center; }
+  .hero-cta .tlink{ justify-self:center; }
+}
