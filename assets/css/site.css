@@ -144,12 +144,12 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .radar-domain.on{ color:var(--t1); }
 .radar-node{ position:absolute; display:flex; align-items:center; gap:12px; transform:translate(-6px,-50%); padding:8px 0; text-decoration:none; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; white-space:nowrap; color:var(--t2); transition:color .3s var(--ease), opacity .3s var(--ease); }
 .radar-node.left{ flex-direction:row-reverse; transform:translate(calc(-100% + 6px),-50%); }
-.radar-node .mk{ width:12px; height:12px; flex:none; background:var(--t2); transition:background-color .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease); }
+.radar-node .mk{ width:12px; height:12px; flex:none; background:var(--t2); transition:background-color .3s var(--ease), transform .3s var(--ease) }
 .radar-node.selected{ color:var(--t1); }
 .radar-node.selected .mk{ background:var(--ink); }
 .radar.hovering .radar-node{ opacity:.4; }
 .radar.hovering .radar-node.selected{ opacity:1; }
-.radar-node.ping .mk{ transform:scale(1.5); background:var(--c,var(--accent)); box-shadow:0 0 12px 3px color-mix(in srgb, var(--c,var(--accent)) 60%, transparent); }
+.radar-node.ping .mk, .radar.hovering .radar-node.selected .mk, .radar-node:focus-visible .mk{ transform:scale(1.5); background:var(--c,var(--accent)); }
 .radar-node:focus-visible{ outline:none; }
 .radar-node:focus-visible .lb{ outline:2px solid var(--ink); outline-offset:4px; }
 .radar.anim .ring{ stroke-dasharray:var(--len); stroke-dashoffset:var(--len); animation:draw 1.2s var(--ease) forwards; animation-delay:var(--d,0s); }
