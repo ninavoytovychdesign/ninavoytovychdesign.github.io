@@ -728,3 +728,24 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .hero-cta .btn{ width:100%; justify-content:center; text-align:center; }
   .hero-cta .tlink{ justify-self:center; }
 }
+
+/* Compact hero (Figma 125:130179): fits a 13" laptop screen. From 1200px wide. */
+@media (min-width:1200px){
+  .hero{ padding-top:84px; padding-bottom:40px; }
+  .hero-title{ font-size:min(106px, 7.36vw); line-height:1.66; letter-spacing:-0.047em; text-align:left; margin-left:0; white-space:nowrap; }
+  .hero-status{ top:168px; }
+  .hero-stage{ margin-top:0; grid-template-columns:calc(100% / 3) minmax(0,1fr); }
+  .hero-stage > *{ grid-area:auto; }
+  .radar-cell{ grid-column:2; grid-row:1; justify-self:end; align-self:start; margin-top:-12px; margin-right:45px; margin-bottom:0; order:initial; }
+  .hero-bottom{ grid-column:1; grid-row:1; align-self:start; display:flex; flex-direction:column; justify-content:flex-start; align-items:stretch; gap:40px; padding-right:0; order:initial; }
+  .hero-intro{ width:auto; gap:24px; order:0; }
+  .hero-card{ position:relative; width:auto; gap:8px; order:1; }
+  .hero-card .swap{ gap:8px; }
+  .hero-card .meta{ position:absolute; top:12px; left:20px; z-index:1; }
+  .radar-legend{ margin-top:32px; }
+}
+@media (min-width:1200px){
+  .hero-status{ top:156px; }
+  .radar-cell{ margin-top:0; }
+  .hero-card .meta{ top:12px; left:12px; padding:4px 8px; background:rgba(234,234,240,.88); }
+}
