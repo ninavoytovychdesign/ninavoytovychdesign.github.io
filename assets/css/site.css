@@ -716,3 +716,4 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .hero-status .dot{ width:8px; height:8px; background:#34C759; }
 .hero-intro .hero-desc .lead{ font-size:20px; line-height:32px; }
 @media (max-width:1023px){ .hero-status{ position:static; margin-bottom:16px; justify-content:flex-start; } .hero-title{ text-align:left; } }
+.hero-intro .hero-desc .lead{ font-size:24px; line-height:32px; }
