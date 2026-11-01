@@ -758,3 +758,16 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 }
 @media (min-width:1200px){ .radar-cell{ margin-top:-24px; } }
 @media (min-width:1200px) and (max-width:1439px){ .hero-title{ font-size:6.9vw; } }
+/* Compact hero v3: 18px sub; title line-height equals its size (no hidden 70px), explicit gaps */
+@media (min-width:1200px){
+  .hero-intro .hero-desc .sub{ font-size:18px; line-height:24px; }
+  .hero{ padding-top:116px; }
+  .hero-status{ position:static; margin:0 0 12px; }
+  .hero-title{ line-height:0.906; }
+  .hero-stage{ margin-top:32px; }
+}
+@media (min-width:1200px){
+  .hero{ padding-top:108px; }
+  .hero-stage{ margin-top:24px; }
+  .hero-bottom{ gap:32px; }
+}
