@@ -626,3 +626,19 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .nav-sheet .sheet-extra .lang{ height:44px; padding:12px; gap:0; }
   .nav-sheet .sheet-extra .lang::before{ display:none; }
 }
+
+/* Kind words – a real recommendation, quoted word for word */
+.words{ padding-top:112px; padding-bottom:160px; }
+.words .label{ margin:0; font-weight:400; }
+.quote{ margin:0; display:grid; gap:32px; max-width:896px; }
+.quote blockquote{ margin:0; display:grid; gap:24px; }
+.q-big{ font:400 32px/40px var(--sans); letter-spacing:-1px; color:var(--t1); text-indent:-14px; }
+.q-body{ max-width:672px; font:400 18px/24px var(--sans); color:var(--t3); }
+.quote figcaption{ display:flex; align-items:center; flex-wrap:wrap; gap:16px 24px; padding-top:24px; border-top:1px solid var(--line); }
+.q-av{ width:48px; height:48px; display:grid; place-items:center; flex:none; background:var(--ink); color:var(--accent); font:500 14px/20px var(--mono); letter-spacing:1px; }
+.q-who{ display:grid; gap:4px; }
+.q-name{ font:400 18px/24px var(--sans); color:var(--t1); }
+.q-role{ font:400 14px/20px var(--sans); color:var(--t3); }
+.q-src{ margin-left:auto; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t2); }
+.quote .tlink{ justify-self:start; }
+@media (max-width:767px){ .words{ padding-top:64px; padding-bottom:96px; } .q-big{ font-size:24px; line-height:32px; text-indent:-10px; } .q-src{ margin-left:0; width:100%; } }
