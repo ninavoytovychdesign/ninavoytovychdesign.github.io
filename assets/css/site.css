@@ -749,3 +749,12 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .radar-cell{ margin-top:0; }
   .hero-card .meta{ top:12px; left:12px; padding:4px 8px; background:rgba(234,234,240,.88); }
 }
+/* Compact hero v2 (Figma 125:130179): status above the title on the left, 20px lead and sub */
+@media (min-width:1200px){
+  .hero{ padding-top:108px; }
+  .hero-status{ left:var(--pad); right:auto; top:112px; }
+  .hero-intro .hero-desc .lead{ font-size:20px; line-height:32px; }
+  .hero-intro .hero-desc .sub{ font-size:20px; line-height:24px; color:var(--t3); }
+}
+@media (min-width:1200px){ .radar-cell{ margin-top:-24px; } }
+@media (min-width:1200px) and (max-width:1439px){ .hero-title{ font-size:6.9vw; } }
