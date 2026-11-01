@@ -604,3 +604,25 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .focus .focus-head h2{ margin:0; }
 .focus .focus-head .label{ padding-top:0; }
 @media (max-width:767px){ .focus .focus-head{ margin:40px 0; } }
+
+/* Header as in Figma 108:121765 – pill as wide as the grid, wordmark left, links centred, Eng / Ua right */
+.nav-bar{ padding:0 var(--pad); }
+.nav-pill{ width:100%; max-width:var(--max); display:grid; grid-template-columns:1fr auto 1fr; gap:40px; }
+.nav-pill .wordmark{ justify-self:start; padding:0; }
+.nav-links{ display:flex; align-items:center; gap:40px; }
+.nav-pill .nav-lang{ justify-self:end; display:inline-flex; align-items:center; gap:12px; padding:0; border:0; margin:0; }
+.nav-lang .lang{ height:44px; min-width:0; padding:12px; border-radius:4px; font:500 14px/20px var(--mono); letter-spacing:1px; text-transform:uppercase; }
+@media (max-width:1199px){ .nav-pill{ gap:24px; padding-left:24px; padding-right:24px; } .nav-links{ gap:24px; } }
+@media (max-width:767px){
+  .nav-bar{ padding:0 12px; }
+  .nav-pill{ display:flex; justify-content:space-between; padding:8px 8px 8px 16px; }
+  .nav-links{ display:none; }
+  .nav-pill .nav-lang{ display:none; }
+  .sheet-extra .nav-lang{ display:inline-flex; margin-left:0; }
+  .sheet-extra{ justify-content:flex-start; }
+}
+@media (max-width:767px){
+  .nav-sheet .sheet-extra .nav-lang{ border:0; padding:0; gap:12px; }
+  .nav-sheet .sheet-extra .lang{ height:44px; padding:12px; gap:0; }
+  .nav-sheet .sheet-extra .lang::before{ display:none; }
+}
