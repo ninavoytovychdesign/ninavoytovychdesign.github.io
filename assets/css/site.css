@@ -588,3 +588,19 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .wi-head .crumbs{ padding:0; }
   .filters{ gap:8px 24px; padding:8px 0 0; }
 }
+
+/* One line: a label sits on the centre of the first line next to it (Figma 108:121860) */
+.work-head{ align-items:center; }
+.work-head .label, .wi-head .crumbs, .filters{ padding-top:0; }
+.row > .label:has(+ div > .h64:first-child){ padding-top:42px; }
+.row > .label:has(+ div > .case-lead:first-child){ padding-top:10px; }
+.row > .label:has(+ .content > .next-link:first-child){ padding-top:26px; }
+.case-sec > .label:has(+ .content > .txt:first-child){ padding-top:4px; }
+.case-sec > .label:has(+ .content > .outcome:first-child){ padding-top:20px; }
+.case-sec > .label:has(+ .content > .in-short:first-child){ padding-top:20px; line-height:16px; }
+.case-sec > .label:has(+ .content > .d2:first-child){ padding-top:40px; }
+@media (max-width:767px){ .row > .label, .case-sec > .label{ padding-top:0 !important; } }
+.focus .focus-head{ grid-template-columns:var(--label) minmax(0,1fr); margin:80px 0 56px; }
+.focus .focus-head h2{ margin:0; }
+.focus .focus-head .label{ padding-top:0; }
+@media (max-width:767px){ .focus .focus-head{ margin:40px 0; } }
