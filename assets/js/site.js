@@ -171,3 +171,20 @@
   btns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.dataset.filter, true); }); });
   apply((location.hash || '').slice(1) || 'all', false);
 })();
+
+/* Local time in the header (Fano, Italy) – CET in winter, CEST in summer */
+(function(){
+  var t = document.querySelector('.nav-time .t'), z = document.querySelector('.nav-time .tz');
+  if (!t || !window.Intl) return;
+  var tz = t.getAttribute('data-tz') || 'Europe/Rome';
+  function tick(){
+    var d = new Date();
+    try {
+      var hm = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).format(d);
+      var name = new Intl.DateTimeFormat('en-GB', { timeZone: tz, timeZoneName: 'short' }).formatToParts(d).filter(function(p){ return p.type === 'timeZoneName'; })[0];
+      t.textContent = hm; t.setAttribute('datetime', d.toISOString());
+      if (z) z.textContent = name ? name.value.replace('GMT+1', 'CET').replace('GMT+2', 'CEST') : '';
+    } catch (e) { t.textContent = ''; }
+  }
+  tick(); setInterval(tick, 30000);
+})();

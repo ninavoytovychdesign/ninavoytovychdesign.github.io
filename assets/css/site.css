@@ -693,3 +693,18 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .hero-bottom{ padding-right:0; }
   .hero-card .body{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-right:0; }
 }
+
+/* Hero card without the tile: a larger, higher-contrast image like the project cards */
+.hero-card{ padding:0; background:none; border:0; gap:16px; }
+.hero-card .media{ border:1px solid var(--line); }
+.hero-card .swap{ gap:8px; }
+
+/* Local time in the header */
+.nav-pill .nav-end{ justify-self:end; display:inline-flex; align-items:center; gap:32px; }
+.nav-time{ display:inline-flex; align-items:center; gap:8px; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--w2); white-space:nowrap; }
+.nav-time .t, .nav-time .tz{ color:var(--w1); }
+.nav-time .tz{ margin-left:-2px; }
+.nav-time .t:empty, .nav-time .t:empty ~ .tz{ display:none; }
+@media (max-width:1199px){ .nav-time{ display:none; } }
+@media (max-width:767px){ .nav-pill .nav-end{ display:none; } }
+.hero-card .body{ margin-right:0; }
