@@ -152,3 +152,22 @@
     });
   });
 })();
+
+/* Work index filters: show products or websites; the choice lives in the URL hash */
+(function(){
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+  if (!btns.length) return;
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.work-grid > [data-type]'));
+  var status = document.querySelector('[data-filter-status]');
+  var uk = document.documentElement.lang === 'uk';
+  function apply(f, push){
+    if (!btns.some(function(b){ return b.dataset.filter === f; })) f = 'all';
+    var n = 0;
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.filter === f ? 'true' : 'false'); });
+    cards.forEach(function(c){ var on = f === 'all' || c.dataset.type === f; c.hidden = !on; if (on){ n++; c.classList.add('in'); } });
+    if (status) status.textContent = uk ? ('Показано проєктів: ' + n) : (n + ' projects shown');
+    if (push) history.replaceState(null, '', f === 'all' ? location.pathname : '#' + f);
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.dataset.filter, true); }); });
+  apply((location.hash || '').slice(1) || 'all', false);
+})();
