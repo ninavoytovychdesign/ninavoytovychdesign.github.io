@@ -687,3 +687,9 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .words{ padding-bottom:128px; }
   .site-footer{ padding-top:128px; }
 }
+@media (min-width:1360px){ .radar-cell{ justify-self:end; margin-right:45px; } }
+/* Hero card spans columns 1–2; one-line description on desktop */
+@media (min-width:1360px){
+  .hero-bottom{ padding-right:0; }
+  .hero-card .body{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-right:0; }
+}
