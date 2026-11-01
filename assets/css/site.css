@@ -717,3 +717,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .hero-intro .hero-desc .lead{ font-size:20px; line-height:32px; }
 @media (max-width:1023px){ .hero-status{ position:static; margin-bottom:16px; justify-content:flex-start; } .hero-title{ text-align:left; } }
 .hero-intro .hero-desc .lead{ font-size:24px; line-height:32px; }
+
+/* Language switch as a segmented control (Figma 139:7316) */
+.nav-pill .nav-lang, .nav-sheet .sheet-extra .nav-lang{ gap:0; padding:0; border:1px solid rgba(255,255,255,.2); border-radius:4px; }
+.nav-lang .lang, .nav-sheet .sheet-extra .lang{ height:32px; padding:6px 12px; border-radius:4px; }
