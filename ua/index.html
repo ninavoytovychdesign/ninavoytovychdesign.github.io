@@ -32,13 +32,6 @@
       <p class="radar-legend"><span class="d">Кільця 2024 → 2026, від центру назовні · Сірі капси – домен · <i aria-hidden="true"></i> – вибране</span><span class="m">7 проєктів. Кільця 2024 → 2026, від центру назовні. Повний список – у Роботах.</span></p>
     </div>
     <div class="hero-bottom">
-      <div class="hero-intro">
-        <p>Онбординг · Стани оплати · Доступність</p>
-        <div class="hero-cta">
-          <a class="btn" href="#work">Вибрані роботи</a>
-          <a class="tlink" href="../assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Завантажити CV</a>
-        </div>
-      </div>
       <a class="hero-card" href="work/lunora.html" data-key="lunora">
         <div class="media" style="background:var(--cover-light)"><img src="../assets/covers/lunora.webp" alt="" width="1320" height="824"></div>
         <div class="swap" aria-live="polite">
@@ -47,6 +40,16 @@
           <span class="body">Платіжні стани навколо processing, failed і timeout. Чотири юзабіліті-тести.</span>
         </div>
       </a>
+      <div class="hero-intro">
+        <div class="hero-desc">
+          <p class="lead">Перетворюю складні продуктові флоу на зрозумілі, зручні інтерфейси.</p>
+          <p class="sub">Працюю з FinTech, SaaS і HealthTech – від онбордингу й оплат до станів між ними.</p>
+        </div>
+        <div class="hero-cta">
+          <a class="btn" href="#work">Вибрані роботи</a>
+          <a class="tlink" href="../assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Завантажити CV</a>
+        </div>
+      </div>
     </div>
   </div>
   <template id="nda-card-tpl"><div class="nda-box"><div class="nda " aria-hidden="true"><div class="r"><span class="k">Було</span><span class="steps"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div><div class="r"><span class="k">Стало</span><span class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><b></b><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i></span></div><span class="note">→ налаштування акаунта, пізніше</span></div><span class="cap">No visuals – NDA</span></div></template>
@@ -107,7 +110,7 @@
     <span></span>
     <div class="archive">
       <p>А ще Numa, Open Kharkiv та інвестиційна платформа під NDA</p>
-      <a href="work/index.html">Усі проєкти <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="tlink" href="work/index.html">Усі проєкти <span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -117,7 +120,7 @@
   <div class="wrap">
     <div class="work-head focus-head">
       <span class="label">Фокус</span>
-      <h2 class="h40" id="focus-h">У чому я найсильніша</h2>
+      <h2 class="h64" id="focus-h">У чому я найсильніша</h2>
     </div>
     <div class="focus-grid">
       <div>
@@ -130,13 +133,13 @@
       </div>
       <div class="focus-card">
         <div role="tabpanel" id="fp-1" aria-labelledby="ft-1" hidden>
-          <div class="media"><img src="../assets/covers/ulovo.webp" alt="Ulovo: головна і час сутінок на тримачах для телефонів" width="1320" height="824" loading="lazy"></div>
+          <figure class="flow"><figcaption><span>Користувацький флоу</span>Ulovo – вхід, спершу e-mail</figcaption><ol class="fl-list"><li><span class="fl-node fl-start">Вхід</span></li><li class="fl-branches"><span class="fl-node fl-branch">Продовжити з Google</span><span class="fl-node fl-branch">Скасувати · назад, без помилки</span></li><li><span class="fl-node fl-key">E-mail</span></li><li><span class="fl-node fl-step">Акаунт знайдено?</span></li><li class="fl-branches"><span class="fl-node fl-branch">Так · пароль</span><span class="fl-node fl-branch">Ні · створити акаунт, e-mail уже заповнений</span></li><li><span class="fl-node fl-step">Головна</span></li></ol></figure>
           <p class="title">12 флоу, 86 екранів.</p>
           <p class="body">Ulovo: в основі три вкладки прогнозу, а навколо – вхід, підписка Pro і стани, які можуть зʼявитися на будь-якому екрані.</p>
           <a class="tlink tlink--inv" href="work/ulovo.html">Читати кейс <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div role="tabpanel" id="fp-2" aria-labelledby="ft-2">
-          <div class="media"><img src="../assets/covers/lunora.webp" alt="Lunora: онбординг і невдалий платіж із Retry на тримачах для телефонів" width="1320" height="824" loading="lazy"></div>
+          <figure class="flow"><figcaption><span>Користувацький флоу</span>Lunora – стани оплати</figcaption><ol class="fl-list"><li><span class="fl-node fl-start">Підписка</span></li><li><span class="fl-node fl-key">Обробка</span></li><li><span class="fl-node fl-step">Результат оплати</span></li><li class="fl-branches"><span class="fl-node fl-branch">Успіх</span><span class="fl-node fl-branch">Помилка · повторити або змінити спосіб</span><span class="fl-node fl-branch">Тайм-аут · ще обробляється</span></li><li><span class="fl-node fl-step">Активна · нова дата оплати</span></li></ol><p class="fl-note">Після повтору або зміни способу оплати помилка й тайм-аут повертають в обробку.</p></figure>
           <p class="title">Processing, failed, timeout.</p>
           <p class="body">Lunora: двоє з чотирьох не розуміли, що відбувається під час довгої обробки. Кільце прогресу з галочками це виправило.</p>
           <a class="tlink tlink--inv" href="work/lunora.html">Читати кейс <span class="arrow" aria-hidden="true">→</span></a>

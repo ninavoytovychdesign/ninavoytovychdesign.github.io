@@ -32,13 +32,6 @@
       <p class="radar-legend"><span class="d">Rings 2024 → 2026, inside out · Grey caps – domain · <i aria-hidden="true"></i> – selected</span><span class="m">7 projects. Rings 2024 → 2026, inside out. Full list in Work.</span></p>
     </div>
     <div class="hero-bottom">
-      <div class="hero-intro">
-        <p>Onboarding · Payment states · Accessibility</p>
-        <div class="hero-cta">
-          <a class="btn" href="#work">See selected work</a>
-          <a class="tlink" href="assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Download CV</a>
-        </div>
-      </div>
       <a class="hero-card" href="work/lunora.html" data-key="lunora">
         <div class="media" style="background:var(--cover-light)"><img src="assets/covers/lunora.webp" alt="" width="1320" height="824"></div>
         <div class="swap" aria-live="polite">
@@ -47,6 +40,16 @@
           <span class="body">Payment states built around processing, failed and timeout. Four usability tests.</span>
         </div>
       </a>
+      <div class="hero-intro">
+        <div class="hero-desc">
+          <p class="lead">I turn complex product flows into clear, usable interfaces.</p>
+          <p class="sub">Working across FinTech, SaaS and HealthTech – from onboarding and payments to the states in between.</p>
+        </div>
+        <div class="hero-cta">
+          <a class="btn" href="#work">See selected work</a>
+          <a class="tlink" href="assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Download CV</a>
+        </div>
+      </div>
     </div>
   </div>
   <template id="nda-card-tpl"><div class="nda-box"><div class="nda " aria-hidden="true"><div class="r"><span class="k">Before</span><span class="steps"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div><div class="r"><span class="k">After</span><span class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><b></b><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i></span></div><span class="note">→ account settings, later</span></div><span class="cap">No visuals – NDA</span></div></template>
@@ -107,7 +110,7 @@
     <span></span>
     <div class="archive">
       <p>Also Numa, Open Kharkiv and an investment platform under NDA</p>
-      <a href="work/index.html">See all projects <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="tlink" href="work/index.html">See all projects <span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -117,7 +120,7 @@
   <div class="wrap">
     <div class="work-head focus-head">
       <span class="label">Focus</span>
-      <h2 class="h40" id="focus-h">What I’m strongest at</h2>
+      <h2 class="h64" id="focus-h">What I’m strongest at</h2>
     </div>
     <div class="focus-grid">
       <div>
@@ -130,13 +133,13 @@
       </div>
       <div class="focus-card">
         <div role="tabpanel" id="fp-1" aria-labelledby="ft-1" hidden>
-          <div class="media"><img src="assets/covers/ulovo.webp" alt="Ulovo: home screen and twilight times on phone stands" width="1320" height="824" loading="lazy"></div>
+          <figure class="flow"><figcaption><span>User flow</span>Ulovo – sign-in, e-mail first</figcaption><ol class="fl-list"><li><span class="fl-node fl-start">Sign in</span></li><li class="fl-branches"><span class="fl-node fl-branch">Continue with Google</span><span class="fl-node fl-branch">Cancel · back, no error</span></li><li><span class="fl-node fl-key">E-mail</span></li><li><span class="fl-node fl-step">Account found?</span></li><li class="fl-branches"><span class="fl-node fl-branch">Yes · password</span><span class="fl-node fl-branch">No · Create account, e-mail filled in</span></li><li><span class="fl-node fl-step">Home</span></li></ol></figure>
           <p class="title">12 flows, 86 screens.</p>
           <p class="body">Ulovo: three forecast tabs at the core, with sign-in, the Pro subscription and states that can appear on any screen around them.</p>
           <a class="tlink tlink--inv" href="work/ulovo.html">Read the case <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div role="tabpanel" id="fp-2" aria-labelledby="ft-2">
-          <div class="media"><img src="assets/covers/lunora.webp" alt="Lunora: onboarding and a failed payment with Retry on phone stands" width="1320" height="824" loading="lazy"></div>
+          <figure class="flow"><figcaption><span>User flow</span>Lunora – payment states</figcaption><ol class="fl-list"><li><span class="fl-node fl-start">Subscription</span></li><li><span class="fl-node fl-key">Processing</span></li><li><span class="fl-node fl-step">Payment result</span></li><li class="fl-branches"><span class="fl-node fl-branch">Success</span><span class="fl-node fl-branch">Failed · Retry or Change method</span><span class="fl-node fl-branch">Timeout · still processing</span></li><li><span class="fl-node fl-step">Active · new payment date</span></li></ol><p class="fl-note">Failed and Timeout lead back to Processing after Retry or Change payment method.</p></figure>
           <p class="title">Processing, failed, timeout.</p>
           <p class="body">Lunora: 2 of 4 people couldn’t tell what was happening during long processing. A progress ring with checkmarks fixed it.</p>
           <a class="tlink tlink--inv" href="work/lunora.html">Read the case <span class="arrow" aria-hidden="true">→</span></a>
