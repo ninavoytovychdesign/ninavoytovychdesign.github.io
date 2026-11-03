@@ -895,3 +895,16 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .focus-card [role="tabpanel"]{ transition:none; }
 }
 .fs-scene .fs-chip{ justify-self:start; }
+
+/* Radar: year labels on the rings, domain filters instead of the legend */
+.radar svg .yr{ font:400 10px/1 var(--mono); letter-spacing:1px; fill:var(--t3); }
+.radar-domain{ display:none !important; }
+.radar-node.muted{ opacity:.25; }
+.radar-node.muted .lb{ color:var(--t3); }
+.radar-filters{ list-style:none; margin:32px 0 0; padding:0; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.rf{ display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t2); background:transparent; border:1px solid var(--line); cursor:pointer; transition:background .2s var(--ease), color .2s var(--ease); }
+.rf .cnt{ color:var(--t3); letter-spacing:0; }
+.rf:hover{ color:var(--t1); border-color:var(--t3); }
+.rf[aria-pressed="true"]{ background:var(--ink); color:#FFFFFF; border-color:var(--ink); }
+.rf[aria-pressed="true"] .cnt{ color:rgba(255,255,255,.6); }
+@media (max-width:767px){ .radar-filters{ justify-content:flex-start; margin-top:24px; } }

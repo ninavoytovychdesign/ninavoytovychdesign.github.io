@@ -83,6 +83,21 @@
       n.addEventListener('mouseleave', off); n.addEventListener('blur', off);
     });
 
+    /* Domain filters under the radar: a domain lights up its projects, dims the rest and pauses the sweep */
+    var chips = Array.prototype.slice.call(document.querySelectorAll('.radar-filters .rf'));
+    chips.forEach(function(c){
+      c.addEventListener('click', function(){
+        var d = c.dataset.domain;
+        chips.forEach(function(x){ x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+        radar.dataset.filter = d;
+        nodes.forEach(function(n){ n.classList.toggle('muted', !!d && n.dataset.domain !== d); });
+        held = !!d;
+        if (d){ var first = nodes.filter(function(n){ return n.dataset.domain === d; })[0]; if (first) select(first); }
+      });
+    });
+    nodes.forEach(function(n){
+      n.addEventListener('mouseleave', function(){ if (radar.dataset.filter) held = true; });
+    });
     nodes.forEach(function(n){ var x = +n.dataset.x, y = +n.dataset.y; n._ang = (Math.atan2(x, -y) * 180 / Math.PI + 360) % 360; });
     if ('IntersectionObserver' in window){ new IntersectionObserver(function(e){ inView = e[0].isIntersecting; }).observe(radar); }
     document.addEventListener('visibilitychange', function(){ paused = document.hidden; });
