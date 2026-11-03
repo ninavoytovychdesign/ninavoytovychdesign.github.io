@@ -128,19 +128,32 @@
       </div>
       <div class="focus-card">
         <div role="tabpanel" id="fp-1" aria-labelledby="ft-1" hidden>
-          <div class="media media--ia"><img src="../assets/cases/numa/d-ia.webp" alt="Numa: information architecture" width="3360" height="2280" loading="lazy"></div>
-          <p class="title">Three tabs and one “+”.</p>
-          <p class="body">Numa: Home, Records and Calendar for everyday use, and a single “+” that adds any of 11 entry types.</p>
+          <div class="fs-stage fs-arch" aria-hidden="true">
+            <span class="fs-cap">Numa · навігація</span>
+            <div class="fs-sheet"><span class="fs-step" style="--i:0"><i>01</i>Що додати?</span><span class="fs-step" style="--i:1"><i>02</i>Для кого</span><span class="fs-step" style="--i:2"><i>03</i>Форма</span><span class="fs-note">11 типів записів, один шлях</span></div>
+            <div class="fs-bar"><span class="fs-tab" style="--i:0">Головна</span><span class="fs-tab" style="--i:1">Медкарти</span><span class="fs-tab" style="--i:2">Календар</span><span class="fs-plus">+</span></div>
+          </div>
+          <p class="title">Три вкладки й один «+».</p>
+          <p class="body">Numa: Головна, Медкарти й Календар на щодень і один «+», який додає будь-який з 11 типів записів.</p>
           <a class="tlink tlink--inv" href="work/numa.html">Читати кейс <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div role="tabpanel" id="fp-2" aria-labelledby="ft-2">
-          <figure class="flow"><figcaption><span>Користувацький флоу</span>Lunora – стани оплати</figcaption><ol class="fl-list"><li class="fl-row"><span class="fl-node fl-start">Підписка</span></li><li class="fl-row"><span class="fl-node fl-key">Обробка</span></li><li class="fl-row"><span class="fl-node fl-step">Результат оплати</span></li><li class="fl-row fl-split"><ol class="fl-cols" style="--n:3"><li class="fl-col"><span class="fl-node fl-out fl-ok">Успіх</span><span class="fl-node fl-sub">Активна · нова дата оплати</span></li><li class="fl-col"><span class="fl-node fl-out fl-err">Помилка</span><span class="fl-node fl-sub">Повторити або змінити спосіб</span><span class="fl-loop"><span aria-hidden="true">↺ </span>назад в обробку</span></li><li class="fl-col"><span class="fl-node fl-out fl-wait">Тайм-аут</span><span class="fl-node fl-sub">Ще обробляється</span><span class="fl-loop"><span aria-hidden="true">↺ </span>назад в обробку</span></li></ol></li></ol></figure>
+          <div class="fs-stage fs-states" aria-hidden="true">
+            <span class="fs-cap">Lunora · стани оплати</span>
+            <div class="fs-scene s1"><span class="fs-chip k">Processing</span><div class="fs-proc"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26"/><circle class="arc" cx="32" cy="32" r="26"/></svg><ol><li style="--i:0"><b>✓</b>Перевіряємо картку</li><li style="--i:1"><b>✓</b>Підтверджуємо платіж</li><li style="--i:2"><b>✓</b>Майже готово</li></ol></div></div>
+            <div class="fs-scene s2"><span class="fs-chip w">Timeout</span><p class="fs-msg">Ми все ще обробляємо платіж</p><p class="fs-sub">Це не помилка – не платіть вдруге</p></div>
+            <div class="fs-scene s3"><span class="fs-chip e">Failed</span><p class="fs-msg">Платіж не пройшов</p><div class="fs-btns"><span>Retry payment</span><span>Change method</span></div></div>
+            <div class="fs-scene s4"><span class="fs-chip ok">Active</span><p class="fs-msg">Підписка активна</p><p class="fs-sub">Нова дата оплати</p></div>
+          </div>
           <p class="title">Processing, failed, timeout.</p>
           <p class="body">Lunora: двоє з чотирьох не розуміли, що відбувається під час довгої обробки. Тож я додала кільце прогресу з галочками – далі повторний тест.</p>
           <a class="tlink tlink--inv" href="work/lunora.html">Читати кейс <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div role="tabpanel" id="fp-3" aria-labelledby="ft-3" hidden>
-          <div class="media"><img src="../assets/covers/open-kharkiv.webp" alt="Open Kharkiv: головна в чотирьох кольорових режимах" width="1320" height="824" loading="lazy"></div>
+          <div class="fs-stage fs-a11y" aria-hidden="true">
+            <span class="fs-cap">Open Kharkiv · один набір токенів</span>
+            <div class="fs-scene m1"><span class="fs-chip">Default · 100%</span><div class="fs-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div></div><div class="fs-scene m2"><span class="fs-chip">Dark · 100%</span><div class="fs-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div></div><div class="fs-scene m3"><span class="fs-chip">High contrast · 130%</span><div class="fs-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div></div><div class="fs-scene m4"><span class="fs-chip">Dark · high contrast · 160%</span><div class="fs-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div></div>
+          </div>
           <p class="title">Читається і на 160%.</p>
           <p class="body">Open Kharkiv: чотири кольорові режими на одних токенах, а інтерфейс тримається, коли текст збільшують до 160%.</p>
           <a class="tlink tlink--inv" href="work/open-kharkiv.html">Читати кейс <span class="arrow" aria-hidden="true">→</span></a>

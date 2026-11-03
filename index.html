@@ -128,19 +128,32 @@
       </div>
       <div class="focus-card">
         <div role="tabpanel" id="fp-1" aria-labelledby="ft-1" hidden>
-          <div class="media media--ia"><img src="assets/cases/numa/d-ia-en.webp" alt="Numa: information architecture" width="3360" height="2280" loading="lazy"></div>
+          <div class="fs-stage fs-arch" aria-hidden="true">
+            <span class="fs-cap">Numa · navigation</span>
+            <div class="fs-sheet"><span class="fs-step" style="--i:0"><i>01</i>What to add?</span><span class="fs-step" style="--i:1"><i>02</i>For whom</span><span class="fs-step" style="--i:2"><i>03</i>Form</span><span class="fs-note">11 entry types, one path</span></div>
+            <div class="fs-bar"><span class="fs-tab" style="--i:0">Home</span><span class="fs-tab" style="--i:1">Records</span><span class="fs-tab" style="--i:2">Calendar</span><span class="fs-plus">+</span></div>
+          </div>
           <p class="title">Three tabs and one “+”.</p>
           <p class="body">Numa: Home, Records and Calendar for everyday use, and a single “+” that adds any of 11 entry types.</p>
           <a class="tlink tlink--inv" href="work/numa.html">Read the case <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div role="tabpanel" id="fp-2" aria-labelledby="ft-2">
-          <figure class="flow"><figcaption><span>User flow</span>Lunora – payment states</figcaption><ol class="fl-list"><li class="fl-row"><span class="fl-node fl-start">Subscription</span></li><li class="fl-row"><span class="fl-node fl-key">Processing</span></li><li class="fl-row"><span class="fl-node fl-step">Payment result</span></li><li class="fl-row fl-split"><ol class="fl-cols" style="--n:3"><li class="fl-col"><span class="fl-node fl-out fl-ok">Success</span><span class="fl-node fl-sub">Active · new payment date</span></li><li class="fl-col"><span class="fl-node fl-out fl-err">Failed</span><span class="fl-node fl-sub">Retry or Change method</span><span class="fl-loop"><span aria-hidden="true">↺ </span>back to Processing</span></li><li class="fl-col"><span class="fl-node fl-out fl-wait">Timeout</span><span class="fl-node fl-sub">Still processing</span><span class="fl-loop"><span aria-hidden="true">↺ </span>back to Processing</span></li></ol></li></ol></figure>
+          <div class="fs-stage fs-states" aria-hidden="true">
+            <span class="fs-cap">Lunora · payment states</span>
+            <div class="fs-scene s1"><span class="fs-chip k">Processing</span><div class="fs-proc"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26"/><circle class="arc" cx="32" cy="32" r="26"/></svg><ol><li style="--i:0"><b>✓</b>Checking card</li><li style="--i:1"><b>✓</b>Confirming payment</li><li style="--i:2"><b>✓</b>Almost done</li></ol></div></div>
+            <div class="fs-scene s2"><span class="fs-chip w">Timeout</span><p class="fs-msg">We’re still processing the payment</p><p class="fs-sub">Not an error – don’t pay again</p></div>
+            <div class="fs-scene s3"><span class="fs-chip e">Failed</span><p class="fs-msg">Payment didn’t go through</p><div class="fs-btns"><span>Retry payment</span><span>Change method</span></div></div>
+            <div class="fs-scene s4"><span class="fs-chip ok">Active</span><p class="fs-msg">Subscription is active</p><p class="fs-sub">New payment date</p></div>
+          </div>
           <p class="title">Processing, failed, timeout.</p>
           <p class="body">Lunora: 2 of 4 people couldn’t tell what was happening during long processing. So I added a progress ring with checkmarks – retest is next.</p>
           <a class="tlink tlink--inv" href="work/lunora.html">Read the case <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div role="tabpanel" id="fp-3" aria-labelledby="ft-3" hidden>
-          <div class="media"><img src="assets/covers/open-kharkiv.webp" alt="Open Kharkiv: home screen in four colour modes" width="1320" height="824" loading="lazy"></div>
+          <div class="fs-stage fs-a11y" aria-hidden="true">
+            <span class="fs-cap">Open Kharkiv · one token set</span>
+            <div class="fs-scene m1"><span class="fs-chip">Default · 100%</span><div class="fs-ui"><b>Transport map</b><span>Routes at a stop</span><i>Open</i></div></div><div class="fs-scene m2"><span class="fs-chip">Dark · 100%</span><div class="fs-ui"><b>Transport map</b><span>Routes at a stop</span><i>Open</i></div></div><div class="fs-scene m3"><span class="fs-chip">High contrast · 130%</span><div class="fs-ui"><b>Transport map</b><span>Routes at a stop</span><i>Open</i></div></div><div class="fs-scene m4"><span class="fs-chip">Dark · high contrast · 160%</span><div class="fs-ui"><b>Transport map</b><span>Routes at a stop</span><i>Open</i></div></div>
+          </div>
           <p class="title">Still readable at 160%.</p>
           <p class="body">Open Kharkiv: four colour modes on one token set, and the interface holds up when people scale text to 160%.</p>
           <a class="tlink tlink--inv" href="work/open-kharkiv.html">Read the case <span class="arrow" aria-hidden="true">→</span></a>
