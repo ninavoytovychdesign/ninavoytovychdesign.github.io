@@ -908,3 +908,9 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .rf[aria-pressed="true"]{ background:var(--ink); color:#FFFFFF; border-color:var(--ink); }
 .rf[aria-pressed="true"] .cnt{ color:rgba(255,255,255,.6); }
 @media (max-width:767px){ .radar-filters{ justify-content:flex-start; margin-top:24px; } }
+@media (min-width:768px){
+  .radar-filters{ flex-wrap:nowrap; gap:6px; }
+  .rf{ padding:0 10px; letter-spacing:1px; gap:4px; white-space:nowrap; }
+}
+@media (min-width:768px){ .rf .cnt{ display:none; } .rf{ padding:0 12px; } }
+@media (min-width:768px) and (max-width:1023px){ .radar-filters{ flex-wrap:wrap; } }
