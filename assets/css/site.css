@@ -918,3 +918,103 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 @media (min-width:1200px) and (max-width:1439px){ .radar-cell{ margin-top:-62px; } }
 .hero-card .media img{ transform:none; }
 .hero-card .meta{ position:static !important; padding:0 !important; background:none !important; }
+
+/* ── Focus · blueprint scenes ─────────────────────────
+   Thin line drawings in the radar's language. Lines draw in when a tab opens; one dot or one mode change loops. */
+.fs-stage.bp{ height:auto; min-height:340px; display:grid; grid-template-rows:auto 1fr auto; gap:12px; background:transparent; border:1px solid rgba(255,255,255,.14); }
+.bp svg{ width:100%; height:auto; overflow:visible; }
+.bp .ln{ fill:none; stroke:rgba(255,255,255,.32); stroke-width:1; vector-effect:non-scaling-stroke; stroke-dasharray:1; stroke-dashoffset:1; }
+.bp .ln.sm{ stroke:rgba(255,255,255,.18); }
+.bp .ln.acc{ stroke:var(--accent); }
+.bp .ln.loop{ stroke-dasharray:none; stroke-dashoffset:0; stroke:rgba(255,255,255,.14); stroke-width:1; }
+.bp .nd rect{ fill:#000; stroke:rgba(255,255,255,.4); stroke-width:1; vector-effect:non-scaling-stroke; }
+.bp .nd text{ fill:var(--w1); font:400 12px/1 var(--sans); text-anchor:middle; }
+.bp .nd.sm text{ fill:var(--w2); font-size:11px; }
+.bp .nd.root rect{ stroke:var(--w1); }
+.bp .nd.root text{ font-size:14px; font-weight:500; }
+.bp .nd.plus rect{ fill:var(--accent); stroke:var(--accent); }
+.bp .nd.plus text{ fill:var(--on-accent); font-size:22px; }
+.bp .nd{ opacity:0; }
+.bp-note{ font:400 14px/20px var(--sans); color:var(--w2); }
+
+[role="tabpanel"]:not([hidden]) .bp-arch .ln{ animation:bp-draw .7s var(--ease) forwards; animation-delay:calc(var(--i) * .22s + .1s); }
+[role="tabpanel"]:not([hidden]) .bp-arch .nd{ animation:bp-in .5s var(--ease) forwards; animation-delay:calc(var(--i) * .22s + .3s); }
+[role="tabpanel"]:not([hidden]) .bp-arch .nd.plus rect{ animation:bp-pulse 2.4s ease-in-out 2.6s infinite; transform-origin:316px 46px; transform-box:view-box; }
+@keyframes bp-draw{ to{ stroke-dashoffset:0; } }
+@keyframes bp-in{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:none; } }
+@keyframes bp-pulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.08); } }
+
+/* States: lines draw once, then a dot runs each outcome in turn; Failed and Timeout loop back */
+.bp-states .nd{ opacity:1; }
+.bp-states .nd.key rect{ stroke:var(--accent); }
+.bp-states .nd.err rect{ stroke:#FF8F80; } .bp-states .nd.err text{ fill:#FF8F80; }
+.bp-states .nd.wait rect{ stroke:#EDB66C; stroke-dasharray:3 3; } .bp-states .nd.wait text{ fill:#EDB66C; }
+[role="tabpanel"]:not([hidden]) .bp-states .ln{ animation:bp-draw .8s var(--ease) forwards; }
+.bp .dot{ fill:var(--accent); opacity:0; offset-rotate:0deg; }
+.bp .d1{ offset-path:path("M40 130 H210 C240 130 240 60 266 60 H300"); }
+.bp .d2{ offset-path:path("M40 130 H300 V146 C300 236 165 240 165 148"); }
+.bp .d3{ offset-path:path("M40 130 H210 C240 130 240 200 266 200 H300 V216 C300 250 165 254 165 148"); }
+[role="tabpanel"]:not([hidden]) .bp .dot{ animation:bp-run 12s linear infinite; }
+[role="tabpanel"]:not([hidden]) .bp .d1{ animation-delay:1s; }
+[role="tabpanel"]:not([hidden]) .bp .d2{ animation-delay:5s; }
+[role="tabpanel"]:not([hidden]) .bp .d3{ animation-delay:9s; }
+@keyframes bp-run{ 0%{ offset-distance:0%; opacity:0; } 2%{ opacity:1; } 26%{ offset-distance:100%; opacity:1; } 30%,100%{ offset-distance:100%; opacity:0; } }
+
+/* Accessibility: one wireframe screen switches modes and the text grows to 160% */
+.bp-screen{ position:relative; display:grid; align-content:center; padding:20px; border:1px solid rgba(255,255,255,.32); min-height:200px; }
+.bp-ui{ display:grid; gap:8px; justify-items:start; padding:16px; border:1px solid rgba(255,255,255,.32); color:var(--w1); background:transparent; }
+.bp-ui b{ font:500 18px/1.2 var(--sans); }
+.bp-ui span{ font:400 14px/1.3 var(--sans); color:var(--w2); }
+.bp-ui i{ font:500 14px/1 var(--sans); font-style:normal; padding:8px 14px; border:1px solid var(--accent); color:var(--accent); }
+[role="tabpanel"]:not([hidden]) .bp-ui{ animation:bp-mode 12s infinite; }
+[role="tabpanel"]:not([hidden]) .bp-ui b{ animation:bp-b 12s infinite; }
+[role="tabpanel"]:not([hidden]) .bp-ui span{ animation:bp-s 12s infinite; }
+[role="tabpanel"]:not([hidden]) .bp-ui i{ animation:bp-i 12s infinite; }
+@keyframes bp-mode{ 0%,22%{ background:#F3F3F5; color:#08080B; border-color:#F3F3F5; } 25%,47%{ background:#0F1F18; color:#E6F2EC; border-color:#28423A; } 50%,72%{ background:#FFFFFF; color:#000; border-color:#000; } 75%,97%{ background:#000; color:#FFF; border-color:#FFF; } 100%{ background:#F3F3F5; color:#08080B; border-color:#F3F3F5; } }
+@keyframes bp-b{ 0%,47%{ font-size:18px; } 50%,72%{ font-size:23px; } 75%,97%{ font-size:28px; } 100%{ font-size:18px; } }
+@keyframes bp-s{ 0%,22%{ font-size:14px; color:#5A6B63; } 25%,47%{ font-size:14px; color:#9DB5AA; } 50%,72%{ font-size:18px; color:#000; } 75%,97%{ font-size:22px; color:#FFF; } 100%{ font-size:14px; color:#5A6B63; } }
+@keyframes bp-i{ 0%,22%{ font-size:14px; background:#1C7154; color:#FFF; border-color:#1C7154; } 25%,47%{ font-size:14px; background:#5BC79A; color:#08140F; border-color:#5BC79A; } 50%,72%{ font-size:18px; background:#000; color:#FFF; border-color:#000; } 75%,97%{ font-size:22px; background:#FFF; color:#000; border-color:#FFF; } 100%{ font-size:14px; background:#1C7154; color:#FFF; border-color:#1C7154; } }
+.bp-steps{ list-style:none; margin:0; padding:0; display:flex; gap:6px; flex-wrap:wrap; }
+.bp-steps li{ font:400 12px/16px var(--mono); letter-spacing:1px; color:var(--w3, rgba(255,255,255,.4)); padding:4px 8px; border:1px solid rgba(255,255,255,.14); }
+[role="tabpanel"]:not([hidden]) .bp-steps li{ animation:bp-step 12s infinite; }
+.bp-steps .m2{ animation-delay:3s !important; } .bp-steps .m3{ animation-delay:6s !important; } .bp-steps .m4{ animation-delay:9s !important; }
+@keyframes bp-step{ 0%,24%{ color:var(--w1); border-color:var(--accent); } 25%,100%{ color:rgba(255,255,255,.4); border-color:rgba(255,255,255,.14); } }
+
+@media (prefers-reduced-motion:reduce){
+  .bp .ln{ stroke-dashoffset:0; animation:none !important; }
+  .bp .nd{ opacity:1; animation:none !important; }
+  .bp .dot, .bp-ui, .bp-ui *, .bp-steps li{ animation:none !important; }
+}
+.bp .nd.sm text{ text-anchor:start; font-size:12px; }
+
+/* ── Focus v3: words left, a small micro-animation in the right half ── */
+@media (min-width:1024px){
+  .focus-grid{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:center; }
+  .focus-list{ justify-items:start; }
+  .focus-tab{ justify-items:start; text-align:left; }
+  .focus-pos{ justify-self:start; }
+  .focus-card{ justify-self:start; width:100%; max-width:440px; box-shadow:none; background:transparent; }
+}
+.fs-stage.bp{ min-height:0; padding:0; border:0; gap:8px; background:transparent; }
+.bp .bp-note{ display:none; }
+.bp svg{ max-height:200px; }
+.bp-screen{ min-height:0; padding:12px; }
+.bp-ui{ padding:12px; gap:6px; }
+.focus-card [role="tabpanel"]{ gap:12px; }
+/* fixed scene size: switching tabs or modes never changes the block */
+.fs-stage.bp{ height:224px; grid-template-rows:auto minmax(0,1fr) auto; overflow:hidden; }
+.bp svg{ height:100%; max-height:none; width:100%; }
+.bp-a11y .bp-screen{ height:100%; min-height:0; overflow:hidden; align-content:center; }
+.bp-steps{ flex-wrap:nowrap; gap:4px; }
+.bp-steps li{ letter-spacing:0; padding:4px 6px; white-space:nowrap; }
+/* Focus v4: right-aligned, stretched from the top of the words to “03 / 03” */
+@media (min-width:1024px){
+  .focus-grid{ align-items:stretch; }
+  .focus-card{ justify-self:end; max-width:440px; height:100%; grid-template-rows:100%; }
+  .focus-card [role="tabpanel"]{ display:flex; flex-direction:column; gap:12px; height:100%; }
+  .focus-card [role="tabpanel"][hidden]{ display:flex; }
+  .focus-card .fs-stage.bp{ flex:1 1 auto; height:auto; min-height:224px; margin-bottom:12px; }
+  .focus-card .tlink{ margin-top:auto; align-self:flex-start; }
+}
+@media (min-width:1024px) and (max-width:1359px){ .focus-card .fs-stage.bp{ min-height:160px; } }
+@media (min-width:1024px){ .focus-card .fs-stage.bp{ flex:1 1 0; } }

@@ -10,7 +10,7 @@
 <link rel="preload" href="../assets/fonts/outfit-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="alternate" hreflang="en" href="../index.html">
 <link rel="alternate" hreflang="uk" href="index.html">
-<link rel="stylesheet" href="../assets/css/site.css?v=97214c46">
+<link rel="stylesheet" href="../assets/css/site.css?v=4e9a44ec">
 </head>
 <body>
 <a class="skip" href="#main">Перейти до змісту</a>
@@ -128,31 +128,44 @@
       </div>
       <div class="focus-card">
         <div role="tabpanel" id="fp-1" aria-labelledby="ft-1" hidden>
-          <div class="fs-stage fs-arch" aria-hidden="true">
-            <span class="fs-cap">Numa · навігація</span>
-            <div class="fs-sheet"><span class="fs-step" style="--i:0"><i>01</i>Що додати?</span><span class="fs-step" style="--i:1"><i>02</i>Для кого</span><span class="fs-step" style="--i:2"><i>03</i>Форма</span><span class="fs-note">11 типів записів, один шлях</span></div>
-            <div class="fs-bar"><span class="fs-tab" style="--i:0">Головна</span><span class="fs-tab" style="--i:1">Медкарти</span><span class="fs-tab" style="--i:2">Календар</span><span class="fs-plus">+</span></div>
+          <div class="fs-stage bp bp-arch" aria-hidden="true">
+            <span class="fs-cap">Numa · структура</span>
+            <svg viewBox="0 0 360 260" preserveAspectRatio="xMinYMid meet"><g class="nd root" style="--i:0"><rect x="128" y="26" width="104" height="40"/><text x="180" y="51">Numa</text></g><path pathLength="1" class="ln" style="--i:0" d="M180 66 V90 H60 V112"/><path pathLength="1" class="ln" style="--i:1" d="M180 66 V90 H160 V112"/><path pathLength="1" class="ln" style="--i:2" d="M180 66 V90 H260 V112"/><g class="nd" style="--i:0"><rect x="16" y="112" width="88" height="28"/><text x="60" y="130">Головна</text></g><g class="nd" style="--i:1"><rect x="116" y="112" width="88" height="28"/><text x="160" y="130">Медкарти</text></g><g class="nd" style="--i:2"><rect x="216" y="112" width="88" height="28"/><text x="260" y="130">Календар</text></g><path pathLength="1" class="ln sm" style="--i:3" d="M24 140 V178 H32"/><g class="nd sm" style="--i:3"><text x="36" y="182" text-anchor="start">План дня</text></g><path pathLength="1" class="ln sm" style="--i:4" d="M24 140 V214 H32"/><g class="nd sm" style="--i:4"><text x="36" y="218" text-anchor="start">На контролі</text></g><path pathLength="1" class="ln sm" style="--i:5" d="M124 140 V178 H132"/><g class="nd sm" style="--i:5"><text x="136" y="182" text-anchor="start">Огляд</text></g><path pathLength="1" class="ln sm" style="--i:6" d="M124 140 V214 H132"/><g class="nd sm" style="--i:6"><text x="136" y="218" text-anchor="start">Документи</text></g><path pathLength="1" class="ln sm" style="--i:7" d="M224 140 V178 H232"/><g class="nd sm" style="--i:7"><text x="236" y="182" text-anchor="start">День · тиждень</text></g><path pathLength="1" class="ln sm" style="--i:8" d="M224 140 V214 H232"/><g class="nd sm" style="--i:8"><text x="236" y="218" text-anchor="start">Подія</text></g><g class="nd plus" style="--i:9"><rect x="296" y="26" width="40" height="40"/><text x="316" y="52">+</text></g><path pathLength="1" class="ln acc" style="--i:9" d="M296 46 H232"/></svg>
+            <span class="bp-note">Три вкладки на щодень, один «+» для будь-якого запису</span>
           </div>
           <p class="title">Три вкладки й один «+».</p>
           <p class="body">Numa: Головна, Медкарти й Календар на щодень і один «+», який додає будь-який з 11 типів записів.</p>
           <a class="tlink tlink--inv" href="work/numa.html">Читати кейс <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div role="tabpanel" id="fp-2" aria-labelledby="ft-2">
-          <div class="fs-stage fs-states" aria-hidden="true">
+          <div class="fs-stage bp bp-states" aria-hidden="true">
             <span class="fs-cap">Lunora · стани оплати</span>
-            <div class="fs-scene s1"><span class="fs-chip k">Processing</span><div class="fs-proc"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26"/><circle class="arc" cx="32" cy="32" r="26"/></svg><ol><li style="--i:0"><b>✓</b>Перевіряємо картку</li><li style="--i:1"><b>✓</b>Підтверджуємо платіж</li><li style="--i:2"><b>✓</b>Майже готово</li></ol></div></div>
-            <div class="fs-scene s2"><span class="fs-chip w">Timeout</span><p class="fs-msg">Ми все ще обробляємо платіж</p><p class="fs-sub">Це не помилка – не платіть вдруге</p></div>
-            <div class="fs-scene s3"><span class="fs-chip e">Failed</span><p class="fs-msg">Платіж не пройшов</p><div class="fs-btns"><span>Retry payment</span><span>Change method</span></div></div>
-            <div class="fs-scene s4"><span class="fs-chip ok">Active</span><p class="fs-msg">Підписка активна</p><p class="fs-sub">Нова дата оплати</p></div>
+            <svg viewBox="0 0 360 260" preserveAspectRatio="xMinYMid meet">
+              <path pathLength="1" class="ln" d="M40 130 H118"/>
+              <path pathLength="1" class="ln" d="M210 130 C240 130 240 60 266 60"/>
+              <path pathLength="1" class="ln" d="M210 130 H266"/>
+              <path pathLength="1" class="ln" d="M210 130 C240 130 240 200 266 200"/>
+              <path pathLength="1" class="ln loop" d="M300 146 C300 236 165 240 165 148"/>
+              <path pathLength="1" class="ln loop" d="M300 216 C300 250 165 254 165 148"/>
+              <g class="nd key"><rect x="118" y="112" width="92" height="36"/><text x="164" y="135">Processing</text></g>
+              <g class="nd ok"><rect x="266" y="44" width="76" height="32"/><text x="304" y="65">Success</text></g>
+              <g class="nd err"><rect x="266" y="114" width="76" height="32"/><text x="304" y="135">Failed</text></g>
+              <g class="nd wait"><rect x="266" y="184" width="76" height="32"/><text x="304" y="205">Timeout</text></g>
+              <circle class="dot d1" r="4"/><circle class="dot d2" r="4"/><circle class="dot d3" r="4"/>
+            </svg>
+            <span class="bp-note">Помилка й тайм-аут повертають в обробку</span>
           </div>
           <p class="title">Processing, failed, timeout.</p>
           <p class="body">Lunora: двоє з чотирьох не розуміли, що відбувається під час довгої обробки. Тож я додала кільце прогресу з галочками – далі повторний тест.</p>
           <a class="tlink tlink--inv" href="work/lunora.html">Читати кейс <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div role="tabpanel" id="fp-3" aria-labelledby="ft-3" hidden>
-          <div class="fs-stage fs-a11y" aria-hidden="true">
+          <div class="fs-stage bp bp-a11y" aria-hidden="true">
             <span class="fs-cap">Open Kharkiv · один набір токенів</span>
-            <div class="fs-scene m1"><span class="fs-chip">Default · 100%</span><div class="fs-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div></div><div class="fs-scene m2"><span class="fs-chip">Dark · 100%</span><div class="fs-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div></div><div class="fs-scene m3"><span class="fs-chip">High contrast · 130%</span><div class="fs-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div></div><div class="fs-scene m4"><span class="fs-chip">Dark · high contrast · 160%</span><div class="fs-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div></div>
+            <div class="bp-screen">
+              <div class="bp-ui"><b>Мапа транспорту</b><span>Маршрути на зупинці</span><i>Відкрити</i></div>
+            </div>
+            <ol class="bp-steps"><li class="m1">Light</li><li class="m2">Dark</li><li class="m3">HC 130%</li><li class="m4">Dark HC 160%</li></ol>
           </div>
           <p class="title">Читається і на 160%.</p>
           <p class="body">Open Kharkiv: чотири кольорові режими на одних токенах, а інтерфейс тримається, коли текст збільшують до 160%.</p>
@@ -230,6 +243,6 @@
     </div>
   </div>
 </footer>
-<script src="../assets/js/site.js?v=97214c46" defer></script>
+<script src="../assets/js/site.js?v=4e9a44ec" defer></script>
 </body>
 </html>
