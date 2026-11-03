@@ -94,7 +94,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 
 /* ── Navigation (Nav bar 17:330) ───────────────────── */
 .nav-bar{ position:fixed; z-index:50; top:16px; left:0; right:0; display:flex; justify-content:center; padding:0 12px; pointer-events:none; }
-.nav-pill{ pointer-events:auto; display:flex; align-items:center; gap:40px; height:68px; padding:12px 32px; border-radius:12px; background:#000000; }
+.nav-pill{ pointer-events:auto; display:flex; align-items:center; gap:40px; height:60px; padding:12px 32px; border-radius:12px; background:#000000; }
 .nav-pill a{ text-decoration:none; }
 .nav-link{ display:inline-flex; align-items:center; gap:8px; height:44px; font:500 14px/20px var(--mono); letter-spacing:1px; text-transform:uppercase; color:var(--w2); transition:color .25s var(--ease); }
 .nav-link::before{ content:""; width:8px; height:8px; background:var(--accent); display:none; }
@@ -1018,3 +1018,13 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 }
 @media (min-width:1024px) and (max-width:1359px){ .focus-card .fs-stage.bp{ min-height:160px; } }
 @media (min-width:1024px){ .focus-card .fs-stage.bp{ flex:1 1 0; } }
+/* 60px from the header to the content (header 60px at ≥768, 56px below) */
+.hero{ padding-top:136px; }
+.work-index{ padding-top:136px; }
+.case-hero{ padding-top:132px; }
+@media (min-width:1200px){ .hero{ padding-top:134px; } }
+@media (max-width:767px){
+  .hero{ padding-top:126px; }
+  .work-index{ padding-top:128px; }
+  .case-hero{ padding-top:124px; }
+}
