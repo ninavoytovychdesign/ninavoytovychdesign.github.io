@@ -914,3 +914,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 }
 @media (min-width:768px){ .rf .cnt{ display:none; } .rf{ padding:0 12px; } }
 @media (min-width:768px) and (max-width:1023px){ .radar-filters{ flex-wrap:wrap; } }
+@media (min-width:1200px){ .radar-cell{ margin-top:-60px; } .radar-filters{ margin-top:32px; } }
+@media (min-width:1200px) and (max-width:1439px){ .radar-cell{ margin-top:-62px; } }
+.hero-card .media img{ transform:none; }
+.hero-card .meta{ position:static !important; padding:0 !important; background:none !important; }

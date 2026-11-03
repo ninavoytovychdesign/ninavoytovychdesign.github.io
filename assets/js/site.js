@@ -203,3 +203,21 @@
   }
   tick(); setInterval(tick, 30000);
 })();
+
+/* Hero: the radar filters sit on the same line as the bottom of the hero card (desktop) */
+(function(){
+  var cell = document.querySelector('.radar-cell'), card = document.querySelector('.hero-card'), f = document.querySelector('.radar-filters');
+  if (!cell || !card || !f) return;
+  var mq = window.matchMedia('(min-width:1200px)');
+  function align(){
+    cell.style.marginTop = '';
+    if (!mq.matches) return;
+    var d = f.getBoundingClientRect().bottom - card.getBoundingClientRect().bottom;
+    var base = parseFloat(getComputedStyle(cell).marginTop) || 0;
+    cell.style.marginTop = (base - d) + 'px';
+  }
+  align();
+  window.addEventListener('load', align);
+  window.addEventListener('resize', align);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(align);
+})();
