@@ -23,7 +23,7 @@
 <link rel="preload" href="assets/fonts/outfit-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="alternate" hreflang="en" href="index.html">
 <link rel="alternate" hreflang="uk" href="ua/index.html">
-<link rel="stylesheet" href="assets/css/site.css?v=a79e800b">
+<link rel="stylesheet" href="assets/css/site.css?v=4a2daf53">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -204,9 +204,27 @@
   <div class="work-head words-head">
     <span class="label">Testimonials</span>
     <h2 class="h64" id="words-h">What people say</h2>
+    <div class="t-nav" aria-label="Scroll testimonials" role="group">
+      <button type="button" class="t-arrow" data-dir="-1" aria-label="Previous testimonials" aria-controls="t-track" disabled><span aria-hidden="true">←</span></button>
+      <button type="button" class="t-arrow" data-dir="1" aria-label="Next testimonials" aria-controls="t-track"><span aria-hidden="true">→</span></button>
+    </div>
   </div>
-  <div class="t-grid">
-    <figure class="t-card t-card--wide reveal">
+  <div class="t-grid" id="t-track" tabindex="0" aria-label="Testimonials, newest first">
+    <figure class="t-card reveal">
+      <figcaption class="t-who">
+        <span class="t-name">Viktoriia O.</span>
+        <span class="t-role">UX/UI Designer · my mentee</span>
+        <span class="t-src">Testimonial via this site · Nov 2026</span>
+      </figcaption>
+      <blockquote lang="en" class="t-clamp" id="t-vo">
+        <div class="t-body">
+        <p class="t-quote">“Nina is a wonderful mentor. We clicked from our very first session. She took a thoughtful, teacher-like approach to what needed to change in my portfolio, and today I work very differently than I did before.”</p>
+        <p class="t-more">“She showed me how to do research, but she didn’t hold my hand: I had to defend my position and explain my design decisions. She helped me see that in design nobody tells you exactly what to do, so you need to understand for yourself why things work the way they do. I explored many topics on my own, by choice rather than obligation. We moved at my pace, without school-style deadlines, and scheduling sessions was easy.”</p>
+        </div>
+      </blockquote>
+      <button type="button" class="t-toggle tlink" aria-expanded="false" aria-controls="t-vo" data-more="Read more" data-less="Show less" hidden>Read more</button>
+    </figure>
+    <figure class="t-card reveal">
       <figcaption class="t-who">
         <span class="t-name">Viktoria D.</span>
         <span class="t-role">UI/UX Designer · my mentee</span>
@@ -226,20 +244,6 @@
       <blockquote lang="en">
         <p class="t-quote">“I worked with Nina at the same company. Her subtle approach to understanding design really stayed with me.”</p>
       </blockquote>
-    </figure>
-    <figure class="t-card t-card--full reveal">
-      <figcaption class="t-who">
-        <span class="t-name">Viktoriia O.</span>
-        <span class="t-role">UX/UI Designer · my mentee</span>
-        <span class="t-src">Testimonial via this site · Nov 2026</span>
-      </figcaption>
-      <blockquote lang="en" class="t-clamp" id="t-vo">
-        <div class="t-body">
-        <p class="t-quote">“Nina is a wonderful mentor. We clicked from our very first session. She took a thoughtful, teacher-like approach to what needed to change in my portfolio, and today I work very differently than I did before.”</p>
-        <p class="t-more">“She showed me how to do research, but she didn’t hold my hand: I had to defend my position and explain my design decisions. She helped me see that in design nobody tells you exactly what to do, so you need to understand for yourself why things work the way they do. I explored many topics on my own, by choice rather than obligation. We moved at my pace, without school-style deadlines, and scheduling sessions was easy.”</p>
-        </div>
-      </blockquote>
-      <button type="button" class="t-toggle tlink" aria-expanded="false" aria-controls="t-vo" data-more="Read more" data-less="Show less" hidden>Read more</button>
     </figure>
   </div>
   <div class="t-actions">
@@ -312,6 +316,6 @@
     </div>
   </form>
 </dialog><script>window.MD_MSG={"req": "Fill this in", "mail": "Check the email – it looks incomplete", "ok": "Please confirm to publish"};</script>
-<script src="assets/js/site.js?v=a79e800b" defer></script>
+<script src="assets/js/site.js?v=4a2daf53" defer></script>
 </body>
 </html>

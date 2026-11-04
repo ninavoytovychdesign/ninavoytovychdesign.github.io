@@ -628,3 +628,18 @@
     });
   });
 })();
+
+/* Testimonials row: arrows scroll one card; they switch off at the ends and hide when everything fits */
+(function(){
+  var track = document.getElementById('t-track'), nav = document.querySelector('.t-nav'); if (!track || !nav) return;
+  var prev = nav.querySelector('[data-dir="-1"]'), next = nav.querySelector('[data-dir="1"]');
+  function step(){ var c = track.querySelector('.t-card'); return c ? c.getBoundingClientRect().width + 24 : track.clientWidth; }
+  function update(){
+    var max = track.scrollWidth - track.clientWidth - 2;
+    nav.hidden = max <= 0;
+    prev.disabled = track.scrollLeft <= 2; next.disabled = track.scrollLeft >= max;
+  }
+  nav.addEventListener('click', function(e){ var b = e.target.closest('.t-arrow'); if (!b) return; track.scrollBy({ left: step() * +b.dataset.dir }); });
+  track.addEventListener('scroll', function(){ requestAnimationFrame(update); }, { passive:true });
+  addEventListener('resize', update); update();
+})();

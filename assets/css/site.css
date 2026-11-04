@@ -1308,3 +1308,16 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .t-toggle[hidden]{ display:none; }
 .t-toggle:focus-visible{ outline:2px solid var(--ink); outline-offset:4px; }
 @media (max-width:767px){ .t-clamp:not(.open) .t-body{ -webkit-line-clamp:6; line-clamp:6; } }
+/* Testimonials as a row: newest first, scroll with the arrows next to the title (desktop) or swipe (mobile) */
+.t-grid{ display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; overscroll-behavior-x:contain; align-items:stretch; }
+.t-grid::-webkit-scrollbar{ display:none; }
+.t-grid:focus-visible{ outline:2px solid var(--ink); outline-offset:4px; }
+.t-grid .t-card{ flex:0 0 calc((100% - 24px) / 2); scroll-snap-align:start; border:1px solid var(--line); }
+.t-nav{ display:flex; gap:8px; align-self:end; }
+.t-arrow{ width:52px; height:52px; display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:4px; background:transparent; box-shadow:inset 0 0 0 1px var(--ink); color:var(--ink); font:400 20px/1 var(--sans); cursor:pointer; transition:background-color .25s var(--ease), opacity .25s var(--ease); }
+.t-arrow:hover:not(:disabled){ background:var(--ink); color:#FFFFFF; }
+.t-arrow:disabled{ opacity:.24; cursor:default; }
+.t-arrow:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.t-nav[hidden]{ display:none; }
+@media (max-width:1023px){ .t-grid{ display:flex; gap:16px; margin-left:0; margin-right:calc(-1 * var(--pad, 20px)); padding-right:var(--pad, 20px); } .t-grid .t-card{ flex-basis:85%; } .t-nav{ display:none; } }
+@media (prefers-reduced-motion:reduce){ .t-grid{ scroll-behavior:auto; } }
