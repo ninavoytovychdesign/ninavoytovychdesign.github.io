@@ -103,7 +103,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .nav-link[aria-current]::before{ display:block; }
 .wordmark{ padding:0 16px; font:500 20px/24px var(--sans); letter-spacing:-1px; color:var(--w1); white-space:nowrap; }
 .nav-menu-btn, .nav-sheet{ display:none; }
-@media (max-width:767px){
+@media (max-width:1023px){
   .nav-bar{ top:12px; }
   .nav-pill{ width:100%; justify-content:space-between; height:56px; gap:16px; padding:8px 8px 8px 16px; }
   .nav-pill .nav-link{ display:none; }
@@ -569,7 +569,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .nav-lang .lang[aria-current]{ background:var(--accent); color:var(--on-accent); }
 .sheet-extra{ display:none; }
 @media (max-width:1199px){ .nav-pill{ gap:24px; padding-left:24px; padding-right:16px; } .nav-social, .nav-sep{ display:none; } }
-@media (max-width:767px){
+@media (max-width:1023px){
   .nav-pill .nav-lang{ display:none; }
   .sheet-extra{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 16px 4px; margin-top:4px; border-top:1px solid rgba(255,255,255,.12); }
   .sheet-extra .sheet-social{ height:44px; padding:0; font:500 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--w2); }
@@ -617,7 +617,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .nav-pill .nav-lang{ justify-self:end; display:inline-flex; align-items:center; gap:12px; padding:0; border:0; margin:0; }
 .nav-lang .lang{ height:44px; min-width:0; padding:12px; border-radius:4px; font:500 14px/20px var(--mono); letter-spacing:1px; text-transform:uppercase; }
 @media (max-width:1199px){ .nav-pill{ gap:24px; padding-left:24px; padding-right:24px; } .nav-links{ gap:24px; } }
-@media (max-width:767px){
+@media (max-width:1023px){
   .nav-bar{ padding:0 12px; }
   .nav-pill{ display:flex; justify-content:space-between; padding:8px 8px 8px 16px; }
   .nav-links{ display:none; }
@@ -625,7 +625,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .sheet-extra .nav-lang{ display:inline-flex; margin-left:0; }
   .sheet-extra{ justify-content:flex-start; }
 }
-@media (max-width:767px){
+@media (max-width:1023px){
   .nav-sheet .sheet-extra .nav-lang{ border:0; padding:0; gap:12px; }
   .nav-sheet .sheet-extra .lang{ height:44px; padding:12px; gap:0; }
   .nav-sheet .sheet-extra .lang::before{ display:none; }
@@ -720,7 +720,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .nav-time .tz{ margin-left:-2px; }
 .nav-time .t:empty, .nav-time .t:empty ~ .tz{ display:none; }
 @media (max-width:1199px){ .nav-time{ display:none; } }
-@media (max-width:767px){ .nav-pill .nav-end{ display:none; } }
+@media (max-width:1023px){ .nav-pill .nav-end{ display:none; } }
 .hero-card .body{ margin-right:0; }
 
 /* Hero as edited in Figma: centred 190 title, status at the top right, 20px lead */
@@ -1252,7 +1252,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 /* keyboard focus on a radar point shows its label on mobile too */
 @media (max-width:767px){ .radar-node:focus-visible .lb{ opacity:1; } }
 /* header: content centred vertically in the 60px pill (link hit areas are 44px tall) */
-@media (min-width:768px){ .nav-pill{ padding-top:8px; padding-bottom:8px; } }
+@media (min-width:1024px){ .nav-pill{ padding-top:8px; padding-bottom:8px; } }
 /* 404 */
 .nf{ padding-top:180px; padding-bottom:160px; display:grid; gap:24px; justify-items:start; }
 .nf .h64 span{ color:var(--t3); }
@@ -1329,3 +1329,13 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 /* Local time in the mobile menu, next to the language switch */
 @media (max-width:1199px){ .sheet-extra .nav-time{ display:inline-flex; } }
 @media (min-width:1024px) and (max-width:1199px){ .nav-pill .nav-time{ display:inline-flex; } }
+/* Radar life: a trail in the colour of the last case behind the line, a sonar ping on each case, a slow pulse in the centre */
+.radar{ --sc:#08080B; }
+.radar .trail{ fill:currentColor; color:var(--sc); transition:color 1.2s var(--ease); }
+.radar-node .mk{ position:relative; }
+.radar-node .mk::after{ content:""; position:absolute; inset:0; border:1px solid var(--c,var(--ink)); opacity:0; pointer-events:none; }
+.radar-node.ping .mk::after{ animation:sonar 1.3s cubic-bezier(.2,.7,.3,1) forwards; }
+@keyframes sonar{ 0%{ opacity:.9; transform:scale(1); } 100%{ opacity:0; transform:scale(5); } }
+.radar .core-pulse{ fill:none; stroke:var(--sc); stroke-width:1; vector-effect:non-scaling-stroke; opacity:0; transform-box:fill-box; transform-origin:center; animation:core-pulse 3.6s cubic-bezier(.2,.7,.3,1) infinite; transition:stroke 1.2s var(--ease); }
+@keyframes core-pulse{ 0%{ opacity:.6; transform:scale(1); } 70%,100%{ opacity:0; transform:scale(2.6); } }
+@media (prefers-reduced-motion:reduce){ .radar .core-pulse{ animation:none; } .radar-node.ping .mk::after{ animation:none; } }

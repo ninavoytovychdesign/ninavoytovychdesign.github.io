@@ -73,6 +73,7 @@
     }
     function select(n){
       nodes.forEach(function(x){ x.classList.toggle('selected', x === n); });
+      var col = getComputedStyle(n).getPropertyValue('--c').trim(); if (col) radar.style.setProperty('--sc', col);
       domains.forEach(function(dm){ dm.classList.toggle('on', dm.dataset.domain === n.dataset.domain); });
       setCard(n);
     }
@@ -111,7 +112,7 @@
         sweep.setAttribute('transform', 'rotate(' + ang.toFixed(2) + ' 280 280)');
         if (!held) nodes.forEach(function(n){
           var crossed = prev <= ang ? (n._ang > prev && n._ang <= ang) : (n._ang > prev || n._ang <= ang);
-          if (crossed){ n.classList.add('ping'); setTimeout(function(){ n.classList.remove('ping'); }, 700); select(n); }
+          if (crossed){ n.classList.remove('ping'); void n.offsetWidth; n.classList.add('ping'); setTimeout(function(){ n.classList.remove('ping'); }, 1400); select(n); }
         });
         prev = ang;
         requestAnimationFrame(tick);
