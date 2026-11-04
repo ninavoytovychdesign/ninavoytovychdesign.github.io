@@ -579,3 +579,37 @@
     });
   });
 })();
+
+/* Case pages: contents built from the section labels; highlights where you are */
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('main .case-sec[id]')).filter(function(s){ return s.querySelector(':scope > .label'); });
+  if (secs.length < 4) return;
+  var ua = document.documentElement.lang === 'uk';
+  var nav = document.createElement('nav'); nav.className = 'case-toc'; nav.setAttribute('aria-label', ua ? 'Зміст кейсу' : 'Case contents');
+  var ol = document.createElement('ol');
+  var links = secs.map(function(s){
+    var li = document.createElement('li'), a = document.createElement('a');
+    a.href = '#' + s.id; a.textContent = s.querySelector(':scope > .label').textContent.trim();
+    a.addEventListener('click', function(e){ e.preventDefault(); var y = s.getBoundingClientRect().top + scrollY - 120; window.scrollTo({ top:y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); history.replaceState(null, '', '#' + s.id); });
+    li.appendChild(a); ol.appendChild(li); return a;
+  });
+  nav.appendChild(ol); document.body.appendChild(nav);
+  var mq = matchMedia('(min-width:1200px)');
+  var end = document.querySelector('.next-row') || document.querySelector('.site-footer');
+  function place(){
+    var lab = secs[0].querySelector(':scope > .label').getBoundingClientRect();
+    nav.style.left = Math.round(lab.left) + 'px'; nav.style.width = Math.max(120, Math.round(lab.width)) + 'px';
+    document.body.classList.toggle('has-toc', mq.matches);
+  }
+  function tick(){
+    if (!mq.matches){ nav.classList.remove('show'); return; }
+    var first = secs[0].getBoundingClientRect().top, stop = end ? end.getBoundingClientRect().top : 1e9;
+    nav.classList.toggle('show', first < 200 && stop > nav.offsetHeight + 180);
+    var cur = 0; secs.forEach(function(s, i){ if (s.getBoundingClientRect().top < innerHeight * 0.35) cur = i; });
+    links.forEach(function(a, i){ if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }
+  place(); tick();
+  window.addEventListener('resize', function(){ place(); tick(); });
+  window.addEventListener('scroll', tick, { passive:true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
