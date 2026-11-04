@@ -1295,3 +1295,16 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 
 /* Radar: the last case the sweep passed keeps its colour until the line reaches the next one */
 .radar-node.selected .mk{ background:var(--c,var(--ink)); }
+
+/* Third testimonial: its own row across the full card width */
+.t-card--full{ grid-column:1 / -1; border-top:0; }
+.t-card--full blockquote{ max-width:880px; }
+@media (max-width:1023px){ .t-card--full{ border-top:1px solid var(--line); } }
+/* Long testimonial: 4 lines with «…», the button opens the rest */
+.t-clamp .t-body{ display:grid; gap:16px; }
+.t-clamp:not(.open) .t-body{ display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; line-clamp:4; overflow:hidden; }
+.t-clamp:not(.open) .t-more{ display:inline; }
+.t-toggle{ align-self:flex-start; margin-top:-8px; padding:0; border:0; background:none; cursor:pointer; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t1); text-decoration:underline; text-underline-offset:4px; }
+.t-toggle[hidden]{ display:none; }
+.t-toggle:focus-visible{ outline:2px solid var(--ink); outline-offset:4px; }
+@media (max-width:767px){ .t-clamp:not(.open) .t-body{ -webkit-line-clamp:6; line-clamp:6; } }

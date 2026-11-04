@@ -613,3 +613,18 @@
   window.addEventListener('scroll', tick, { passive:true });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
 })();
+
+/* Long testimonials: show the «Read more» button only when the text is actually cut */
+(function(){
+  document.querySelectorAll('.t-toggle').forEach(function(b){
+    var q = document.getElementById(b.getAttribute('aria-controls')); if (!q) return;
+    var body = q.querySelector('.t-body');
+    function check(){ if (q.classList.contains('open')) return; b.hidden = body.scrollHeight <= body.clientHeight + 2; }
+    check(); addEventListener('resize', check); if (document.fonts) document.fonts.ready.then(check);
+    b.addEventListener('click', function(){
+      var open = q.classList.toggle('open');
+      b.setAttribute('aria-expanded', open); b.textContent = open ? b.dataset.less : b.dataset.more;
+      if (!open) check();
+    });
+  });
+})();
