@@ -1082,3 +1082,20 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .radar-node .lb{ display:inline; opacity:0; transition:opacity .4s var(--ease); font-size:11px; letter-spacing:1px; }
   .radar-node.selected .lb{ opacity:1; color:var(--t1); }
 }
+/* Radar: years sit just under the horizontal axis; mobile label gets a "what is it" line */
+.radar svg .yr{ dominant-baseline:hanging; }
+.radar-node .ty{ display:none; }
+@media (max-width:767px){
+  .radar-node .lb{ display:inline-flex; flex-direction:column; gap:2px; }
+  .radar-node.left .lb{ align-items:flex-end; text-align:right; }
+  .radar-node .ty{ display:block; font:400 12px/16px var(--sans); letter-spacing:0; text-transform:none; color:var(--t2); }
+}
+@media (max-width:767px){
+  .radar-node.r-edge{ flex-direction:row-reverse; transform:translate(calc(-100% + 4px),-50%); }
+  .radar-node.r-edge .lb{ align-items:flex-end; text-align:right; }
+}
+@media (max-width:767px){
+  .radar-node.l-edge{ flex-direction:row; transform:translate(-4px,-50%); }
+  .radar-node.l-edge .lb{ align-items:flex-start; text-align:left; }
+}
+@media (max-width:767px){ .radar-node .lb{ background:var(--bg); padding:2px 4px; } .radar-node.selected{ z-index:3; } }
