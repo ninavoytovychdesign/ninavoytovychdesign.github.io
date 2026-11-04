@@ -274,6 +274,7 @@
 
   function inout(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
   function out(t){ return 1 - Math.pow(1 - t, 3); }
+  function sine(t){ return -(Math.cos(Math.PI * t) - 1) / 2; }
   function Ctx(){ this.dead = false; this.timers = []; }
   Ctx.prototype.kill = function(){ this.dead = true; this.timers.forEach(clearTimeout); };
   function tween(ctx, dur, fn, e){
@@ -301,7 +302,7 @@
   /* the signal: a bright head travels the wire, the wire fills behind it */
   Scene.prototype.travel = function(ctx, id, color, onStep){
     var p = this.w(id), hd = this.head; if (!p) return Promise.resolve(true);
-    var L = p.getTotalLength(), dur = Math.max(320, Math.min(1100, L * 5.2));
+    var L = p.getTotalLength(), dur = Math.min(1500, 420 + L * 6.5);
     p.classList.remove('fade', 'settle'); p.style.setProperty('--c', color); p.style.strokeDashoffset = 1; p.classList.add('live');
     hd.style.setProperty('--c', color); hd.classList.add('on');
     return tween(ctx, dur, function(k){
@@ -309,7 +310,7 @@
       var pt = p.getPointAtLength(L * k);
       hd.setAttribute('transform', 'translate(' + pt.x.toFixed(2) + ' ' + pt.y.toFixed(2) + ')');
       if (onStep) onStep(pt, k);
-    }).then(function(ok){
+    }, sine).then(function(ok){
       hd.classList.remove('on');
       setTimeout(function(){ p.classList.add('settle'); }, 120);
       return ok;
@@ -343,15 +344,16 @@
     var plus = s.n('plus');
     if (!RM) plus.animate([{ transform:'scale(1)' }, { transform:'scale(.88)' }, { transform:'scale(1)' }], { duration:420, easing:'cubic-bezier(.22,1,.36,1)' });
     s.on('plus', y, true);
-    if (!await wait(ctx, 260)) return false;
+    if (!await wait(ctx, 380)) return false;
     if (!await s.travel(ctx, 'plus', y)) return false;
+    if (!await wait(ctx, 140)) return false;
     s.on('root', y);
     if (!await s.travel(ctx, 'trunk', y)) return false;
     var r = await Promise.all(tabs.map(function(i, k){
-      return wait(ctx, k * 110).then(function(ok){ return ok && s.travel(ctx, 't' + i, y); }).then(function(ok){
+      return wait(ctx, 120 + k * 180).then(function(ok){ return ok && s.travel(ctx, 't' + i, y); }).then(function(ok){
         if (!ok) return false; s.on('t' + i, y);
         return Promise.all([0, 1].map(function(j){
-          return wait(ctx, 140 + j * 160).then(function(ok){ return ok && s.travel(ctx, 'c' + i + j, y); }).then(function(ok){
+          return wait(ctx, 200 + j * 220).then(function(ok){ return ok && s.travel(ctx, 'c' + i + j, y); }).then(function(ok){
             if (!ok) return false; s.q('.tip[data-n="c' + i + j + '"]').classList.add('on'); s.on('c' + i + j, y, true); return true;
           });
         }));
@@ -377,23 +379,24 @@
       if (only) ['s', 'f', 't'].forEach(function(x){ if (x !== only) s.n(x).classList.add('dim'); });
       if (!await s.travel(ctx, 'in', C.y)) return false;
       s.on('p', C.y);
-      if (!await s.ring(ctx, 1100)) return false;
+      if (!await s.ring(ctx, 1300)) return false;
+      if (!await wait(ctx, 160)) return false;
       if (!await s.travel(ctx, 'o' + r, col[r])) return false;
       s.on(r, col[r]);
       if (r === 's'){
         var ok = s.q('.ok'); ok.classList.add('live'); if (!await tween(ctx, 340, function(k){ ok.style.strokeDashoffset = 1 - k; }, out)) return false;
       } else {
-        if (!await wait(ctx, 520)) return false;
+        if (!await wait(ctx, 420)) return false;
         s.q('.ring').style.strokeDashoffset = 1; s.q('.ring-ok').style.strokeDashoffset = 1;
         if (!await s.travel(ctx, 'l' + r, col[r])) return false;
         s.on('p', col[r]);
         if (!await wait(ctx, 160)) return false;
         s.n('p').style.setProperty('--c', C.y);
-        if (!await s.ring(ctx, 700)) return false;
+        if (!await s.ring(ctx, 900)) return false;
       }
       if (only) return true;
-      if (!await wait(ctx, 1500)) return false;
-      s.decay(); if (!await wait(ctx, 900)) return false;
+      if (!await wait(ctx, 1200)) return false;
+      s.decay(); if (!await wait(ctx, 800)) return false;
     }
     return true;
   };
@@ -441,12 +444,12 @@
       if (!await s.travel(ctx, 'feed', C.y)) return false;
       paint(B, m); s.setSteps(next);
       edge.style.opacity = 1;
-      if (!await tween(ctx, 820, function(k){ var w = 224 * k; wipe.setAttribute('width', w.toFixed(1)); edge.setAttribute('x', (128 + w - .75).toFixed(1)); })) return false;
+      if (!await tween(ctx, 1000, function(k){ var w = 224 * k; wipe.setAttribute('width', w.toFixed(1)); edge.setAttribute('x', (128 + w - .75).toFixed(1)); })) return false;
       edge.style.transition = 'opacity .4s'; edge.style.opacity = 0;
       paint(A, m); wipe.setAttribute('width', 0); s.mode = next;
       if (only != null) return true;
-      if (!await wait(ctx, 1800)) return false;
-      s.decay(); if (!await wait(ctx, 500)) return false;
+      if (!await wait(ctx, 1400)) return false;
+      s.decay(); if (!await wait(ctx, 600)) return false;
     }
     return true;
   };
@@ -455,11 +458,11 @@
     if (this.ctx) this.ctx.kill();
     var ctx = this.ctx = new Ctx(), s = this;
     if (only == null){
-      if (!await wait(ctx, s.first ? 0 : 1300)) return; s.first = true;
+      if (!await wait(ctx, s.first ? 0 : 900)) return; s.first = true;
       while (!ctx.dead){
         var ok = await s[s.kind](ctx, null);
         if (!ok || ctx.dead) return;
-        if (s.kind === 'arch'){ if (!await wait(ctx, 1600)) return; s.decay(); if (!await wait(ctx, 1200)) return; }
+        if (s.kind === 'arch'){ if (!await wait(ctx, 1300)) return; s.decay(); if (!await wait(ctx, 1000)) return; }
       }
     } else {
       s.decay(); s.reset();

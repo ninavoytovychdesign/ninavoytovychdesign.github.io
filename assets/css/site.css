@@ -1161,3 +1161,16 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .bp-states .ring, .bp-states .ring-ok, .bp-states .ok{ opacity:0; transition:opacity .4s var(--fxe); }
 .bp-states .live{ opacity:1; }
 @media (prefers-reduced-motion:reduce){ .fx .chg, .bp-states .ring, .bp-states .ring-ok{ opacity:.55; } .bp-states .ok{ opacity:1; } }
+/* Home: the sixth cell points to the rest of the work */
+.more-tile .media{ display:flex; flex-direction:column; justify-content:space-between; padding:32px; background:var(--cover-light); text-decoration:none; color:var(--t1); border:1px solid var(--line); transition:background .4s var(--ease); }
+.more-tile .media:hover{ background:var(--tile, #EFEFF1); }
+.more-lead{ font:400 26px/32px var(--sans); letter-spacing:-0.5px; max-width:420px; }
+.more-cta{ font:600 14px/20px var(--mono); letter-spacing:2px; text-transform:uppercase; text-decoration:underline; text-underline-offset:4px; }
+@media (max-width:767px){ .more-tile .media{ padding:20px; aspect-ratio:auto; min-height:200px; gap:24px; } .more-lead{ font-size:22px; line-height:28px; } }
+/* Mobile: Focus scenes edge to edge, the scheme fills the width */
+@media (max-width:767px){
+  .focus-card .fs-stage.bp{ height:auto; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); padding:0 12px; overflow:visible; }
+  .focus-card .fs-stage.bp .fs-cap{ padding-left:12px; }
+  .bp svg, .bp-a11y svg{ width:100%; height:auto; max-height:none; }
+  .bp-a11y .bp-steps{ padding-left:12px; flex-wrap:wrap; }
+}
