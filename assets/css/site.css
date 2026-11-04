@@ -1259,3 +1259,5 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .nf-sub{ font:400 18px/28px var(--sans); color:var(--t2); max-width:640px; }
 .nf-cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:16px; }
 @media (max-width:767px){ .nf{ padding-top:128px; padding-bottom:96px; } .nf-cta{ display:grid; width:100%; } }
+/* Track record on the 6-column grid: numbers take 3 columns, details the last 2 (same split as the testimonial cards) */
+@media (min-width:768px){ .proof li{ grid-template-columns:3fr 2fr; column-gap:0; } .proof li > div{ padding-right:0; } }
