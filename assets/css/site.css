@@ -1238,3 +1238,5 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 /* testimonial actions sit in the content column, under the cards */
 .t-actions{ margin-left:calc(100% / 6); margin-top:40px; }
 @media (max-width:1023px){ .t-actions{ margin-left:0; } }
+/* dark button: white label everywhere */
+.btn--ink, .site-footer .btn--ink{ color:#FFFFFF; }
