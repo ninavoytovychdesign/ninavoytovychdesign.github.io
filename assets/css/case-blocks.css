@@ -416,7 +416,7 @@
 .case#view-unifies .n.l1{display:inline-block;text-align:left}
 }
 .case article.view figure img:not(.ba-a):not(.ba-b){cursor:zoom-in}
-/* contrast ratios row (ASVIDA accessibility) */
+/* contrast ratios row (accessibility) */
 .case .ratios{list-style:none;margin:32px 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:720px}
 .case .ratios li{border-top:1px solid rgba(8,8,11,.16);padding-top:16px;display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:8px;margin:0}
 .case .ratios b{font-size:32px;line-height:40px;font-weight:500;letter-spacing:-0.02em;color:var(--t1,#08080B)}
