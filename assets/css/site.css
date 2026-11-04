@@ -1075,3 +1075,10 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .foot-cta > h2.h40{ font-size:24px; line-height:28px; }
 }
 @media (max-width:767px){ .focus-tab .big{ font-size:44px; line-height:48px; letter-spacing:-1.5px; } }
+/* Radar: readable year labels at any size (--k = 560 / radar width), case name appears as the sweep reaches its dot on mobile */
+.radar svg .yr{ font-size:calc(12px * var(--k, 1)); letter-spacing:calc(1px * var(--k, 1)); fill:var(--t2); }
+@media (max-width:767px){
+  .radar svg .yr{ font-size:calc(10px * var(--k, 1)); letter-spacing:calc(0.5px * var(--k, 1)); }
+  .radar-node .lb{ display:inline; opacity:0; transition:opacity .4s var(--ease); font-size:11px; letter-spacing:1px; }
+  .radar-node.selected .lb{ opacity:1; color:var(--t1); }
+}

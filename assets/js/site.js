@@ -251,3 +251,11 @@
   document.addEventListener('click', function(e){ if (!wrap.contains(e.target)) close(); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && wrap.classList.contains('open')){ close(); tg.focus(); } });
 })();
+
+/* Radar year labels: keep them the same on-screen size when the radar scales */
+(function(){
+  var r = document.querySelector('.radar'); if (!r) return;
+  function k(){ var w = r.getBoundingClientRect().width; if (w) r.style.setProperty('--k', (560 / w).toFixed(3)); }
+  k(); window.addEventListener('resize', k); window.addEventListener('load', k);
+  if ('ResizeObserver' in window) new ResizeObserver(k).observe(r);
+})();
