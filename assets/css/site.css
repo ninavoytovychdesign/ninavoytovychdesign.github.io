@@ -1099,3 +1099,65 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
   .radar-node.l-edge .lb{ align-items:flex-start; text-align:left; }
 }
 @media (max-width:767px){ .radar-node .lb{ background:var(--bg); padding:2px 4px; } .radar-node.selected{ z-index:3; } }
+
+/* ===== Focus FX: each scene is a circuit a signal runs through ===== */
+.fx{ --ok:#5BD08F; --err:#FF8F80; --wait:#EDB66C; --fxe:cubic-bezier(.22,1,.36,1); }
+.fx .chg{ fill:none; stroke:var(--c, var(--accent)); stroke-width:1.6; vector-effect:non-scaling-stroke; stroke-linecap:round; stroke-dasharray:1 1; stroke-dashoffset:1; opacity:1; transition:opacity .9s var(--fxe), stroke-width .6s var(--fxe); }
+.fx .chg.settle{ stroke-width:1.1; }
+.fx .chg.fade{ opacity:0; }
+.fx .hd{ opacity:0; pointer-events:none; transition:opacity .25s var(--fxe); }
+.fx .hd.on{ opacity:1; }
+.fx .hd-glow{ fill:var(--c, var(--accent)); opacity:.22; }
+.fx .hd-core{ fill:var(--c, var(--accent)); }
+.fx .nd rect{ transition:fill .6s var(--fxe), stroke .6s var(--fxe), opacity .6s var(--fxe); }
+.fx .nd text{ transition:fill .6s var(--fxe), opacity .6s var(--fxe); }
+.fx .nd.on rect{ stroke:var(--c); fill:color-mix(in srgb, var(--c) 18%, #000); }
+.fx .nd.on text{ fill:#fff; }
+.fx .nd.sm.on text{ fill:var(--w1); }
+.fx .nd.dim{ opacity:.35 !important; }
+.fx .rp{ fill:none; stroke:var(--c); stroke-width:1; vector-effect:non-scaling-stroke; transform-box:fill-box; transform-origin:center; pointer-events:none; }
+.fx .tip{ fill:var(--c, var(--accent)); opacity:0; transform-box:fill-box; transform-origin:center; transform:scale(0); transition:opacity .4s var(--fxe), transform .5s var(--fxe); }
+.fx .tip.on{ opacity:1; transform:scale(1); }
+.fx .hit{ cursor:pointer; }
+/* arch: the "+" stays still; it presses when the signal starts */
+.bp-arch .nd.plus rect{ animation:none !important; transform-box:fill-box; transform-origin:center; }
+.bp-arch .nd.plus{ transform-box:fill-box; transform-origin:center; }
+/* states */
+.bp-states .nd{ opacity:1; }
+.bp-states .nd.key rect{ stroke:rgba(227,232,54,.5); }
+.bp-states .ring-bg{ fill:none; stroke:rgba(255,255,255,.18); stroke-width:1.4; vector-effect:non-scaling-stroke; }
+.bp-states .ring{ fill:none; stroke:var(--accent); stroke-width:1.6; vector-effect:non-scaling-stroke; stroke-linecap:round; stroke-dasharray:1 1; stroke-dashoffset:1; }
+.bp-states .ring-ok, .bp-states .ok{ fill:none; stroke-width:1.6; vector-effect:non-scaling-stroke; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1 1; stroke-dashoffset:1; }
+.bp-states .ring-ok{ stroke:var(--accent); }
+.bp-states .ok{ stroke:var(--ok); }
+.bp-states .nd.st rect{ stroke:rgba(255,255,255,.28); }
+.bp-states .nd.st text{ fill:var(--w2); }
+.bp-states .nd.wait rect{ stroke-dasharray:3 3; }
+.bp-states .nd.wait.on rect{ animation:fx-march .9s linear infinite; }
+@keyframes fx-march{ to{ stroke-dashoffset:-12; } }
+.bp-states .nd.key.on rect{ fill:color-mix(in srgb, var(--c) 12%, #000); }
+/* a11y */
+.bp-a11y svg{ height:100%; }
+.bp-a11y .tok text{ font:400 10px/1 var(--mono); letter-spacing:1px; fill:var(--w2); }
+.bp-a11y .sw{ stroke:rgba(255,255,255,.28); stroke-width:1; vector-effect:non-scaling-stroke; transition:fill .45s var(--fxe); }
+.bp-a11y .card .cb{ stroke-width:1; vector-effect:non-scaling-stroke; }
+.bp-a11y .card text{ font-family:var(--sans); }
+.bp-a11y .card .ct{ font-weight:500; }
+.bp-a11y .card .bt{ font-weight:500; }
+.bp-a11y .wipe-edge{ fill:var(--accent); opacity:0; }
+.bp-a11y .bp-steps li{ animation:none !important; cursor:pointer; transition:color .5s var(--fxe), border-color .5s var(--fxe), background .5s var(--fxe); }
+.bp-a11y .bp-steps li.on{ color:var(--w1); border-color:var(--accent); }
+.bp .dot{ display:none; }
+@media (prefers-reduced-motion:reduce){
+  .fx .chg{ stroke-dashoffset:0; transition:none; opacity:.55; }
+  .fx .tip{ opacity:1; transform:none; transition:none; }
+  .bp-states .ring, .bp-states .ring-ok, .bp-states .ok{ stroke-dashoffset:0; }
+  .bp-states .nd.wait.on rect{ animation:none; }
+}
+/* signal wires are invisible until the signal runs them (no stray caps) */
+.fx .chg{ opacity:0; }
+.fx .chg.live{ opacity:1; }
+.fx .chg.live.fade{ opacity:0; }
+.bp-states .ring, .bp-states .ring-ok, .bp-states .ok{ opacity:0; transition:opacity .4s var(--fxe); }
+.bp-states .live{ opacity:1; }
+@media (prefers-reduced-motion:reduce){ .fx .chg, .bp-states .ring, .bp-states .ring-ok{ opacity:.55; } .bp-states .ok{ opacity:1; } }

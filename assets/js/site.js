@@ -130,6 +130,7 @@
         document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
       });
       if (pos) pos.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(tabs.length).padStart(2, '0');
+      document.dispatchEvent(new CustomEvent('focustab', { detail:i }));
       if (focus) tabs[i].focus();
     };
     tabs.forEach(function(t, i){
@@ -258,4 +259,249 @@
   function k(){ var w = r.getBoundingClientRect().width; if (w) r.style.setProperty('--k', (560 / w).toFixed(3)); }
   k(); window.addEventListener('resize', k); window.addEventListener('load', k);
   if ('ResizeObserver' in window) new ResizeObserver(k).observe(r);
+})();
+
+/* ── Focus FX: a signal runs through each scheme; chips light up as it arrives ──
+   One thing moves at a time. Hover (or tap) a chip to send the signal there.
+   Reduced motion: a still, fully drawn scheme. */
+(function(){
+  var stages = Array.prototype.slice.call(document.querySelectorAll('.fx'));
+  if (!stages.length) return;
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var FINE = window.matchMedia('(pointer:fine)').matches;
+  var CSSV = getComputedStyle(stages[0]);
+  var C = { y: (CSSV.getPropertyValue('--accent') || '#E1E635').trim(), ok:'#5BD08F', err:'#FF8F80', wait:'#EDB66C' };
+
+  function inout(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+  function out(t){ return 1 - Math.pow(1 - t, 3); }
+  function Ctx(){ this.dead = false; this.timers = []; }
+  Ctx.prototype.kill = function(){ this.dead = true; this.timers.forEach(clearTimeout); };
+  function tween(ctx, dur, fn, e){
+    e = e || inout;
+    return new Promise(function(res){
+      var s = performance.now();
+      (function f(now){
+        if (ctx.dead){ res(false); return; }
+        var t = Math.min(1, (now - s) / dur); fn(e(t), t);
+        if (t < 1) requestAnimationFrame(f); else res(true);
+      })(s);
+    });
+  }
+  function wait(ctx, ms){ return new Promise(function(res){ ctx.timers.push(setTimeout(function(){ res(!ctx.dead); }, ms)); }); }
+
+  function Scene(el){
+    this.el = el; this.svg = el.querySelector('svg'); this.kind = el.dataset.fx;
+    this.head = el.querySelector('.hd'); this.ctx = null; this.hover = null; this.idle = null;
+  }
+  Scene.prototype.q = function(s){ return this.el.querySelector(s); };
+  Scene.prototype.qa = function(s){ return Array.prototype.slice.call(this.el.querySelectorAll(s)); };
+  Scene.prototype.w = function(id){ return this.q('.chg[data-w="' + id + '"]'); };
+  Scene.prototype.n = function(id){ return this.q('[data-n="' + id + '"]'); };
+
+  /* the signal: a bright head travels the wire, the wire fills behind it */
+  Scene.prototype.travel = function(ctx, id, color, onStep){
+    var p = this.w(id), hd = this.head; if (!p) return Promise.resolve(true);
+    var L = p.getTotalLength(), dur = Math.max(320, Math.min(1100, L * 5.2));
+    p.classList.remove('fade', 'settle'); p.style.setProperty('--c', color); p.style.strokeDashoffset = 1; p.classList.add('live');
+    hd.style.setProperty('--c', color); hd.classList.add('on');
+    return tween(ctx, dur, function(k){
+      p.style.strokeDashoffset = 1 - k;
+      var pt = p.getPointAtLength(L * k);
+      hd.setAttribute('transform', 'translate(' + pt.x.toFixed(2) + ' ' + pt.y.toFixed(2) + ')');
+      if (onStep) onStep(pt, k);
+    }).then(function(ok){
+      hd.classList.remove('on');
+      setTimeout(function(){ p.classList.add('settle'); }, 120);
+      return ok;
+    });
+  };
+  /* a chip lights up in its colour with one soft ring */
+  Scene.prototype.on = function(id, color, quiet){
+    var g = typeof id === 'string' ? this.n(id) : id; if (!g) return;
+    g.style.setProperty('--c', color); g.classList.add('on');
+    var r = g.querySelector('rect'); if (!r || quiet || RM) return;
+    var rp = r.cloneNode(); rp.setAttribute('class', 'rp'); rp.style.setProperty('--c', color); g.appendChild(rp);
+    var a = rp.animate([{ transform:'scale(1)', opacity:.7 }, { transform:'scale(1.22,1.5)', opacity:0 }], { duration:700, easing:'cubic-bezier(.22,1,.36,1)' });
+    a.onfinish = function(){ rp.remove(); };
+  };
+  Scene.prototype.decay = function(){
+    this.qa('.chg').forEach(function(p){ if (p.style.strokeDashoffset !== '' && p.style.strokeDashoffset !== '1') p.classList.add('fade'); });
+    this.qa('.nd.on, .tip.on').forEach(function(g){ g.classList.remove('on'); });
+    this.qa('.ring.live, .ring-ok.live, .ok.live').forEach(function(p){ p.classList.remove('live'); });
+    this.qa('.nd.dim').forEach(function(g){ g.classList.remove('dim'); });
+  };
+  Scene.prototype.reset = function(){
+    this.qa('.chg').forEach(function(p){ p.classList.remove('fade', 'settle', 'live'); p.style.strokeDashoffset = 1; });
+    this.qa('.ring, .ring-ok, .ok').forEach(function(p){ p.classList.remove('live'); p.style.strokeDashoffset = 1; });
+  };
+
+  /* ── Numa: one “+” reaches every corner of the structure ── */
+  Scene.prototype.arch = async function(ctx, only){
+    var s = this, y = C.y, tabs = only == null ? [0, 1, 2] : [only];
+    s.reset();
+    if (only != null) [0, 1, 2].forEach(function(i){ if (i !== only){ s.n('t' + i).classList.add('dim'); s.n('c' + i + '0').classList.add('dim'); s.n('c' + i + '1').classList.add('dim'); } });
+    var plus = s.n('plus');
+    if (!RM) plus.animate([{ transform:'scale(1)' }, { transform:'scale(.88)' }, { transform:'scale(1)' }], { duration:420, easing:'cubic-bezier(.22,1,.36,1)' });
+    s.on('plus', y, true);
+    if (!await wait(ctx, 260)) return false;
+    if (!await s.travel(ctx, 'plus', y)) return false;
+    s.on('root', y);
+    if (!await s.travel(ctx, 'trunk', y)) return false;
+    var r = await Promise.all(tabs.map(function(i, k){
+      return wait(ctx, k * 110).then(function(ok){ return ok && s.travel(ctx, 't' + i, y); }).then(function(ok){
+        if (!ok) return false; s.on('t' + i, y);
+        return Promise.all([0, 1].map(function(j){
+          return wait(ctx, 140 + j * 160).then(function(ok){ return ok && s.travel(ctx, 'c' + i + j, y); }).then(function(ok){
+            if (!ok) return false; s.q('.tip[data-n="c' + i + j + '"]').classList.add('on'); s.on('c' + i + j, y, true); return true;
+          });
+        }));
+      });
+    }));
+    return !ctx.dead;
+  };
+
+  /* ── Lunora: Processing fills its ring; Failed and Timeout lead back ── */
+  Scene.prototype.ring = function(ctx, dur){
+    var ring = this.q('.ring'), ok = this.q('.ring-ok');
+    ok.style.strokeDashoffset = 1; ok.classList.add('live'); ring.classList.add('live');
+    return tween(ctx, dur, function(k){ ring.style.strokeDashoffset = 1 - k; }, out).then(function(done){
+      if (!done) return false;
+      return tween(ctx, 260, function(k){ ok.style.strokeDashoffset = 1 - k; }, out);
+    });
+  };
+  Scene.prototype.states = async function(ctx, only){
+    var s = this, col = { s:C.ok, f:C.err, t:C.wait }, routes = only ? [only] : ['s', 'f', 't'];
+    for (var i = 0; i < routes.length; i++){
+      var r = routes[i];
+      s.reset();
+      if (only) ['s', 'f', 't'].forEach(function(x){ if (x !== only) s.n(x).classList.add('dim'); });
+      if (!await s.travel(ctx, 'in', C.y)) return false;
+      s.on('p', C.y);
+      if (!await s.ring(ctx, 1100)) return false;
+      if (!await s.travel(ctx, 'o' + r, col[r])) return false;
+      s.on(r, col[r]);
+      if (r === 's'){
+        var ok = s.q('.ok'); ok.classList.add('live'); if (!await tween(ctx, 340, function(k){ ok.style.strokeDashoffset = 1 - k; }, out)) return false;
+      } else {
+        if (!await wait(ctx, 520)) return false;
+        s.q('.ring').style.strokeDashoffset = 1; s.q('.ring-ok').style.strokeDashoffset = 1;
+        if (!await s.travel(ctx, 'l' + r, col[r])) return false;
+        s.on('p', col[r]);
+        if (!await wait(ctx, 160)) return false;
+        s.n('p').style.setProperty('--c', C.y);
+        if (!await s.ring(ctx, 700)) return false;
+      }
+      if (only) return true;
+      if (!await wait(ctx, 1500)) return false;
+      s.decay(); if (!await wait(ctx, 900)) return false;
+    }
+    return true;
+  };
+
+  /* ── Open Kharkiv: one token set, four modes. Tokens flip, the card re-themes behind a wipe ── */
+  var MODES = [
+    { bg:'#F3F3F5', line:'#D6D6DC', tx:'#08080B', sub:'#5A6B63', acc:'#1C7154', on:'#FFFFFF', k:1 },
+    { bg:'#0F1F18', line:'#28423A', tx:'#E6F2EC', sub:'#9DB5AA', acc:'#5BC79A', on:'#08140F', k:1 },
+    { bg:'#FFFFFF', line:'#000000', tx:'#000000', sub:'#000000', acc:'#000000', on:'#FFFFFF', k:1.3 },
+    { bg:'#000000', line:'#FFFFFF', tx:'#FFFFFF', sub:'#FFFFFF', acc:'#FFFFFF', on:'#000000', k:1.6 }
+  ];
+  function paint(g, m){
+    var cb = g.querySelector('.cb'), ct = g.querySelector('.ct'), cs = g.querySelector('.cs'), bb = g.querySelector('.bb'), bt = g.querySelector('.bt');
+    var ft = 13 * m.k, fs = 10 * m.k, fb = 10 * m.k;
+    cb.setAttribute('fill', m.bg); cb.setAttribute('stroke', m.line);
+    ct.setAttribute('fill', m.tx); ct.setAttribute('font-size', ft.toFixed(1));
+    cs.setAttribute('fill', m.sub); cs.setAttribute('font-size', fs.toFixed(1));
+    var yT = 36 + 18 + ft, yS = yT + 8 + fs, yB = yS + 14, hB = 12 + fb;
+    ct.setAttribute('y', yT.toFixed(1)); cs.setAttribute('y', yS.toFixed(1));
+    bt.setAttribute('fill', m.on); bt.setAttribute('font-size', fb.toFixed(1));
+    var w = 0; try { w = bt.getComputedTextLength(); } catch (e) {}
+    if (!w) w = fb * 4.4;
+    bb.setAttribute('fill', m.acc); bb.setAttribute('y', yB.toFixed(1)); bb.setAttribute('height', hB.toFixed(1)); bb.setAttribute('width', (w + 2 * 6 * m.k).toFixed(1));
+    bt.setAttribute('x', (144 + 6 * m.k).toFixed(1)); bt.setAttribute('y', (yB + hB / 2 + fb * .36).toFixed(1));
+  }
+  Scene.prototype.setSteps = function(i){ this.qa('.bp-steps li').forEach(function(li, k){ li.classList.toggle('on', k === i); }); };
+  Scene.prototype.swatches = function(m){
+    var map = { bg:m.bg, surface:m.line, text:m.tx, accent:m.acc };
+    this.qa('.tok').forEach(function(t){ t.querySelector('.sw').setAttribute('fill', map[t.dataset.k]); });
+  };
+  Scene.prototype.a11y = async function(ctx, only){
+    var s = this, A = s.q('.card.ca'), B = s.q('.card.cb2'), wipe = s.q('.wipe'), edge = s.q('.wipe-edge');
+    if (s.mode == null){ s.mode = 0; paint(A, MODES[0]); s.swatches(MODES[0]); s.setSteps(0); }
+    var seq = only != null ? [only] : [1, 2, 3, 0];
+    for (var i = 0; i < seq.length; i++){
+      var next = seq[i]; if (next === s.mode){ if (only != null) return true; continue; }
+      var m = MODES[next], toks = s.qa('.tok'), ys = [48, 92, 136, 180], done = [false, false, false, false];
+      var map = { bg:m.bg, surface:m.line, text:m.tx, accent:m.acc };
+      s.reset();
+      if (!await s.travel(ctx, 'bus', C.y, function(pt){
+        ys.forEach(function(yy, k){
+          if (!done[k] && pt.y >= yy){ done[k] = true; var t = toks[k]; t.querySelector('.sw').setAttribute('fill', map[t.dataset.k]); s.on(t, C.y, false); t.classList.remove('on'); }
+        });
+      })) return false;
+      if (!await s.travel(ctx, 'feed', C.y)) return false;
+      paint(B, m); s.setSteps(next);
+      edge.style.opacity = 1;
+      if (!await tween(ctx, 820, function(k){ var w = 224 * k; wipe.setAttribute('width', w.toFixed(1)); edge.setAttribute('x', (128 + w - .75).toFixed(1)); })) return false;
+      edge.style.transition = 'opacity .4s'; edge.style.opacity = 0;
+      paint(A, m); wipe.setAttribute('width', 0); s.mode = next;
+      if (only != null) return true;
+      if (!await wait(ctx, 1800)) return false;
+      s.decay(); if (!await wait(ctx, 500)) return false;
+    }
+    return true;
+  };
+
+  Scene.prototype.play = async function(only){
+    if (this.ctx) this.ctx.kill();
+    var ctx = this.ctx = new Ctx(), s = this;
+    if (only == null){
+      if (!await wait(ctx, s.first ? 0 : 1300)) return; s.first = true;
+      while (!ctx.dead){
+        var ok = await s[s.kind](ctx, null);
+        if (!ok || ctx.dead) return;
+        if (s.kind === 'arch'){ if (!await wait(ctx, 1600)) return; s.decay(); if (!await wait(ctx, 1200)) return; }
+      }
+    } else {
+      s.decay(); s.reset();
+      await s[s.kind](ctx, only);
+    }
+  };
+  Scene.prototype.stop = function(){ if (this.ctx) this.ctx.kill(); this.ctx = null; this.head.classList.remove('on'); };
+  Scene.prototype.still = function(){
+    var s = this;
+    s.qa('.chg').forEach(function(p){ p.style.strokeDashoffset = 0; p.style.setProperty('--c', C.y); p.classList.add('live'); });
+    s.qa('.ring, .ring-ok, .ok').forEach(function(p){ p.style.strokeDashoffset = 0; p.classList.add('live'); });
+    if (s.kind === 'a11y'){ s.mode = 0; paint(s.q('.card.ca'), MODES[0]); s.swatches(MODES[0]); s.setSteps(0); }
+    if (s.kind === 'states'){ ['lf', 'lt', 'of', 'ot'].forEach(function(w){ s.w(w).style.opacity = 0; }); s.w('os').style.setProperty('--c', C.ok); s.on('s', C.ok, true); s.on('p', C.y, true); }
+    if (s.kind === 'arch'){ s.qa('.tip').forEach(function(t){ t.classList.add('on'); }); }
+  };
+
+  var scenes = stages.map(function(el){ return new Scene(el); });
+  function visible(s){ var p = s.el.closest('[role="tabpanel"]'); return !p || !p.hidden; }
+  var inView = false;
+  function sync(){
+    scenes.forEach(function(s){
+      if (RM) return;
+      var go = inView && visible(s) && !document.hidden;
+      if (go && !s.ctx && !s.hover) s.play(null);
+      if (!go && s.ctx){ s.stop(); s.decay(); s.reset(); }
+    });
+  }
+  if (RM){ scenes.forEach(function(s){ s.still(); }); return; }
+  scenes.forEach(function(s){
+    if (s.kind === 'a11y'){ s.mode = 0; paint(s.q('.card.ca'), MODES[0]); s.swatches(MODES[0]); s.setSteps(0); }
+    s.qa('.hit').forEach(function(h){
+      var key = h.dataset.hit, arg = key === 'all' ? null : (s.kind === 'states' ? key : +key);
+      var go = function(){ clearTimeout(s.idle); s.hover = key; s.stop(); if (arg == null){ s.hover = null; s.play(null); } else s.play(arg); };
+      var leave = function(){ if (s.hover !== key) return; s.hover = null; clearTimeout(s.idle); s.idle = setTimeout(function(){ if (!s.hover){ s.stop(); s.decay(); s.reset(); sync(); } }, 900); };
+      if (FINE){ h.addEventListener('pointerenter', go); h.addEventListener('pointerleave', leave); }
+      else h.addEventListener('click', function(){ go(); clearTimeout(s.idle); s.idle = setTimeout(function(){ s.hover = null; s.stop(); s.decay(); s.reset(); sync(); }, 5000); });
+    });
+  });
+  var host = document.querySelector('.focus-card') || stages[0];
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ inView = e[0].isIntersecting; sync(); }, { threshold:.25 }).observe(host);
+  else inView = true;
+  document.addEventListener('focustab', function(){ scenes.forEach(function(s){ if (!visible(s)){ s.stop(); s.decay(); s.reset(); s.first = false; } }); setTimeout(sync, 30); });
+  document.addEventListener('visibilitychange', sync);
+  sync();
 })();
