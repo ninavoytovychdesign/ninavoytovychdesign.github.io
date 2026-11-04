@@ -1235,3 +1235,6 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 }
 @media (prefers-reduced-motion:reduce){ .md[open] .md-box, .md[open]::backdrop, .md-done .md-tick path{ animation:none; stroke-dashoffset:0; } }
 .md-body[hidden], .md-done[hidden]{ display:none; }
+/* testimonial actions sit in the content column, under the cards */
+.t-actions{ margin-left:calc(100% / 6); margin-top:40px; }
+@media (max-width:1023px){ .t-actions{ margin-left:0; } }
