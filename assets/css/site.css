@@ -1246,3 +1246,16 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 @media (max-width:767px){
   .hero-cta, .foot-actions{ display:grid; grid-auto-flow:row; grid-auto-columns:auto; grid-template-columns:1fr; width:100%; }
 }
+/* targets ≥ 24px without changing the look */
+.crumbs a{ display:inline-block; padding:4px 0; margin:-4px 0; }
+.dg-go{ padding-top:4px !important; padding-bottom:4px !important; margin-top:-4px; margin-bottom:-4px; min-height:26px; }
+/* keyboard focus on a radar point shows its label on mobile too */
+@media (max-width:767px){ .radar-node:focus-visible .lb{ opacity:1; } }
+/* header: content centred vertically in the 60px pill (link hit areas are 44px tall) */
+@media (min-width:768px){ .nav-pill{ padding-top:8px; padding-bottom:8px; } }
+/* 404 */
+.nf{ padding-top:180px; padding-bottom:160px; display:grid; gap:24px; justify-items:start; }
+.nf .h64 span{ color:var(--t3); }
+.nf-sub{ font:400 18px/28px var(--sans); color:var(--t2); max-width:640px; }
+.nf-cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:16px; }
+@media (max-width:767px){ .nf{ padding-top:128px; padding-bottom:96px; } .nf-cta{ display:grid; width:100%; } }
