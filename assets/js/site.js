@@ -190,17 +190,18 @@
 
 /* Local time in the header (Fano, Italy) – CET in winter, CEST in summer */
 (function(){
-  var t = document.querySelector('.nav-time .t'), z = document.querySelector('.nav-time .tz');
-  if (!t || !window.Intl) return;
-  var tz = t.getAttribute('data-tz') || 'Europe/Rome';
+  var ts = document.querySelectorAll('.nav-time .t'), zs = document.querySelectorAll('.nav-time .tz');
+  if (!ts.length || !window.Intl) return;
+  var tz = ts[0].getAttribute('data-tz') || 'Europe/Rome';
   function tick(){
     var d = new Date();
     try {
       var hm = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).format(d);
       var name = new Intl.DateTimeFormat('en-GB', { timeZone: tz, timeZoneName: 'short' }).formatToParts(d).filter(function(p){ return p.type === 'timeZoneName'; })[0];
-      t.textContent = hm; t.setAttribute('datetime', d.toISOString());
-      if (z) z.textContent = name ? name.value.replace('GMT+1', 'CET').replace('GMT+2', 'CEST') : '';
-    } catch (e) { t.textContent = ''; }
+      var zn = name ? name.value.replace('GMT+1', 'CET').replace('GMT+2', 'CEST') : '';
+      ts.forEach(function(t){ t.textContent = hm; t.setAttribute('datetime', d.toISOString()); });
+      zs.forEach(function(z){ z.textContent = zn; });
+    } catch (e) { ts.forEach(function(t){ t.textContent = ''; }); }
   }
   tick(); setInterval(tick, 30000);
 })();
@@ -614,19 +615,48 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
 })();
 
-/* Long testimonials: show the «Read more» button only when the text is actually cut */
+/* Long testimonials: the quote fills its card to the height of the tallest neighbour, ends in «…», and «Read more» opens the rest */
 (function(){
+  var track = document.getElementById('t-track');
+  var items = [];
   document.querySelectorAll('.t-toggle').forEach(function(b){
     var q = document.getElementById(b.getAttribute('aria-controls')); if (!q) return;
-    var body = q.querySelector('.t-body');
-    function check(){ if (q.classList.contains('open')) return; b.hidden = body.scrollHeight <= body.clientHeight + 2; }
-    check(); addEventListener('resize', check); if (document.fonts) document.fonts.ready.then(check);
+    var card = q.closest('.t-card'), ps = Array.prototype.slice.call(q.querySelectorAll('.t-body > p'));
+    items.push({ b:b, q:q, card:card, ps:ps });
     b.addEventListener('click', function(){
       var open = q.classList.toggle('open');
       b.setAttribute('aria-expanded', open); b.textContent = open ? b.dataset.less : b.dataset.more;
-      if (!open) check();
+      if (!open) fitAll();
     });
   });
+  function lh(p){ return parseFloat(getComputedStyle(p).lineHeight) || 24; }
+  function reset(it){ it.ps.forEach(function(p){ p.classList.remove('lc','hide'); p.style.removeProperty('--lc'); }); }
+  function fit(it){
+    if (it.q.classList.contains('open')) return;
+    reset(it); it.b.hidden = false;
+    var align = track ? track.style.alignItems : ''; if (track) track.style.alignItems = 'flex-start';
+    var others = track ? Array.prototype.slice.call(track.querySelectorAll('.t-card')).filter(function(c){ return c !== it.card; }) : [];
+    var H = others.reduce(function(m, c){ return Math.max(m, c.offsetHeight); }, 0);
+    var body = it.q.querySelector('.t-body');
+    var nonBody = it.card.offsetHeight - body.offsetHeight;
+    var gap = parseFloat(getComputedStyle(body).rowGap) || 16;
+    var p0 = it.ps[0], minAvail = lh(p0) * 4;
+    var avail = Math.max(minAvail, H - nonBody);
+    if (body.offsetHeight <= avail + 2){ it.b.hidden = true; if (track) track.style.alignItems = align; return; }
+    var used = 0, cut = false;
+    it.ps.forEach(function(p){
+      if (cut){ p.classList.add('hide'); return; }
+      var h = p.offsetHeight, l = lh(p), room = avail - used - (used ? gap : 0);
+      if (h <= room){ used += (used ? gap : 0) + h; return; }
+      var n = Math.floor(room / l);
+      if (n < 1){ p.classList.add('hide'); }
+      else { p.classList.add('lc'); p.style.setProperty('--lc', n); }
+      cut = true;
+    });
+    if (track) track.style.alignItems = align;
+  }
+  function fitAll(){ items.forEach(fit); }
+  fitAll(); addEventListener('resize', fitAll); if (document.fonts) document.fonts.ready.then(fitAll);
 })();
 
 /* Testimonials row: arrows scroll one card; they switch off at the ends and hide when everything fits */

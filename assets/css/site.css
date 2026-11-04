@@ -1321,3 +1321,11 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .t-nav[hidden]{ display:none; }
 @media (max-width:1023px){ .t-grid{ display:flex; gap:16px; margin-left:0; margin-right:calc(-1 * var(--pad, 20px)); padding-right:var(--pad, 20px); } .t-grid .t-card{ flex-basis:85%; } .t-nav{ display:none; } }
 @media (prefers-reduced-motion:reduce){ .t-grid{ scroll-behavior:auto; } }
+/* Long testimonial fills its card: paragraphs are cut by JS (.lc = N lines with «…», .hide = the rest) */
+.t-clamp:not(.open) .t-body{ display:grid; -webkit-line-clamp:unset; line-clamp:none; overflow:visible; }
+.t-clamp:not(.open) .t-more{ display:block; }
+.t-clamp:not(.open) .lc{ display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:var(--lc); line-clamp:var(--lc); overflow:hidden; }
+.t-clamp:not(.open) .hide{ display:none; }
+/* Local time in the mobile menu, next to the language switch */
+@media (max-width:1199px){ .sheet-extra .nav-time{ display:inline-flex; } }
+@media (min-width:1024px) and (max-width:1199px){ .nav-pill .nav-time{ display:inline-flex; } }
