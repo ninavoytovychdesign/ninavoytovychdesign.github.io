@@ -10,8 +10,8 @@
 <link rel="preload" href="../assets/fonts/outfit-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="alternate" hreflang="en" href="../work/nova-poshta.html">
 <link rel="alternate" hreflang="uk" href="../ua/work/nova-poshta.html">
-<link rel="stylesheet" href="../assets/css/case-blocks.css?v=62a7aed4">
-<link rel="stylesheet" href="../assets/css/site.css?v=62a7aed4">
+<link rel="stylesheet" href="../assets/css/case-blocks.css?v=a68fd956">
+<link rel="stylesheet" href="../assets/css/site.css?v=a68fd956">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -81,7 +81,7 @@
     <div class="foot-cta">
       <h2 class="h40">Hiring a product designer for something with a lot of states? Write to me.</h2>
       <a class="foot-mail" href="mailto:voytovychnina@gmail.com">voytovychnina@gmail.com</a>
-      <a class="btn btn--ink" href="../assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Download CV</a>
+      <div class="foot-actions"><button type="button" class="btn btn--ink" data-modal="contact">Contact me</button><a class="btn btn--line" href="../assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Download CV</a></div>
     </div>
     <div class="sign-off">
       <p class="foot-word" aria-hidden="true">Nina Voytovych</p>
@@ -96,6 +96,50 @@
     </div>
   </div>
 </footer>
-<script src="../assets/js/site.js?v=62a7aed4" defer></script>
+<dialog class="md" id="md-contact" aria-labelledby="md-contact-h">
+  <form class="md-box" data-jf="263072045940049" data-kind="contact" novalidate>
+    <button type="button" class="md-x" data-close aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <div class="md-body">
+      <span class="label">Contact</span>
+      <h2 class="md-h" id="md-contact-h">Write to me</h2>
+      <p class="md-sub">It goes straight to my inbox, and I’ll reply from there.</p>
+      <div class="md-f"><label for="c-name">Name</label><input id="c-name" name="q2_textbox0" type="text" autocomplete="name" required aria-describedby="c-name-e"><span class="md-err" id="c-name-e" aria-live="polite"></span></div>
+      <div class="md-f"><label for="c-mail">Email</label><input id="c-mail" name="q3_email1" type="email" autocomplete="email" required aria-describedby="c-mail-e"><span class="md-err" id="c-mail-e" aria-live="polite"></span></div>
+      <div class="md-f"><label for="c-msg">Message</label><textarea id="c-msg" name="q4_textarea2" rows="5" required aria-describedby="c-msg-e" placeholder="About the project, the role or just hello"></textarea><span class="md-err" id="c-msg-e" aria-live="polite"></span></div>
+      <div class="md-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="md-fail" hidden>Couldn’t send. Please write to me directly at <a href="mailto:voytovychnina@gmail.com">voytovychnina@gmail.com</a></p>
+      <button type="submit" class="btn md-send"><span class="md-l">Send</span><span class="md-busy">Sending…</span></button>
+    </div>
+    <div class="md-done" hidden tabindex="-1">
+      <span class="md-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      <h2 class="md-h">Thank you!</h2>
+      <p class="md-sub">Your message is in my inbox. I’ll reply by email.</p>
+      <button type="button" class="btn btn--ink" data-close>Close</button>
+    </div>
+  </form>
+</dialog><dialog class="md" id="md-testimonial" aria-labelledby="md-testi-h">
+  <form class="md-box" data-jf="263071288449061" data-kind="testimonial" novalidate>
+    <button type="button" class="md-x" data-close aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <div class="md-body">
+      <span class="label">Testimonials</span>
+      <h2 class="md-h" id="md-testi-h">Leave a testimonial</h2>
+      <p class="md-sub">It appears on the site after I review it.</p>
+      <div class="md-f"><label for="t-name">Name</label><input id="t-name" name="t_name" type="text" autocomplete="name" required aria-describedby="t-name-e"><span class="md-err" id="t-name-e" aria-live="polite"></span></div>
+      <div class="md-f"><label for="t-role">Role and company<span class="md-hint">optional</span></label><input id="t-role" name="q3_textbox1" type="text" autocomplete="organization-title" aria-describedby="t-role-e"><span class="md-err" id="t-role-e" aria-live="polite"></span></div>
+      <div class="md-f"><label for="t-text">Testimonial</label><textarea id="t-text" name="q4_textarea2" rows="5" required aria-describedby="t-text-e" placeholder="What it was like to work with me"></textarea><span class="md-err" id="t-text-e" aria-live="polite"></span></div>
+      <div class="md-f md-check"><label><input id="t-ok" name="q5_widget_TermsAndConditions3" type="checkbox" value="Accepted" required aria-describedby="t-ok-e"><span>I agree that my name, role and testimonial can be published on this site</span></label><span class="md-err" id="t-ok-e" aria-live="polite"></span></div>
+      <div class="md-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="md-fail" hidden>Couldn’t send. Please write to me directly at <a href="mailto:voytovychnina@gmail.com">voytovychnina@gmail.com</a></p>
+      <button type="submit" class="btn md-send"><span class="md-l">Send testimonial</span><span class="md-busy">Sending…</span></button>
+    </div>
+    <div class="md-done" hidden tabindex="-1">
+      <span class="md-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      <h2 class="md-h">Thank you!</h2>
+      <p class="md-sub">Your testimonial will appear on the site after I review it.</p>
+      <button type="button" class="btn btn--ink" data-close>Close</button>
+    </div>
+  </form>
+</dialog><script>window.MD_MSG={"req": "Fill this in", "mail": "Check the email – it looks incomplete", "ok": "Please confirm to publish"};</script>
+<script src="../assets/js/site.js?v=a68fd956" defer></script>
 </body>
 </html>

@@ -10,8 +10,8 @@
 <link rel="preload" href="../../assets/fonts/outfit-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="alternate" hreflang="en" href="../../work/tripstone.html">
 <link rel="alternate" hreflang="uk" href="../work/tripstone.html">
-<link rel="stylesheet" href="../../assets/css/case-blocks.css?v=62a7aed4">
-<link rel="stylesheet" href="../../assets/css/site.css?v=62a7aed4">
+<link rel="stylesheet" href="../../assets/css/case-blocks.css?v=a68fd956">
+<link rel="stylesheet" href="../../assets/css/site.css?v=a68fd956">
 </head>
 <body>
 <a class="skip" href="#main">Перейти до змісту</a>
@@ -58,7 +58,7 @@
     <div class="foot-cta">
       <h2 class="h40">Шукаєте продуктову дизайнерку для продукту з купою станів? Напишіть мені.</h2>
       <a class="foot-mail" href="mailto:voytovychnina@gmail.com">voytovychnina@gmail.com</a>
-      <a class="btn btn--ink" href="../../assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Завантажити CV</a>
+      <div class="foot-actions"><button type="button" class="btn btn--ink" data-modal="contact">Написати мені</button><a class="btn btn--line" href="../../assets/cv/Nina_Voytovych_CV_Product_Designer.pdf" download>Завантажити CV</a></div>
     </div>
     <div class="sign-off">
       <p class="foot-word" aria-hidden="true">Ніна Войтович</p>
@@ -73,6 +73,50 @@
     </div>
   </div>
 </footer>
-<script src="../../assets/js/site.js?v=62a7aed4" defer></script>
+<dialog class="md" id="md-contact" aria-labelledby="md-contact-h">
+  <form class="md-box" data-jf="263072045940049" data-kind="contact" novalidate>
+    <button type="button" class="md-x" data-close aria-label="Закрити"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <div class="md-body">
+      <span class="label">Контакт</span>
+      <h2 class="md-h" id="md-contact-h">Напишіть мені</h2>
+      <p class="md-sub">Лист прийде мені на пошту, відповім звідти.</p>
+      <div class="md-f"><label for="c-name">Ім’я</label><input id="c-name" name="q2_textbox0" type="text" autocomplete="name" required aria-describedby="c-name-e"><span class="md-err" id="c-name-e" aria-live="polite"></span></div>
+      <div class="md-f"><label for="c-mail">Пошта</label><input id="c-mail" name="q3_email1" type="email" autocomplete="email" required aria-describedby="c-mail-e"><span class="md-err" id="c-mail-e" aria-live="polite"></span></div>
+      <div class="md-f"><label for="c-msg">Повідомлення</label><textarea id="c-msg" name="q4_textarea2" rows="5" required aria-describedby="c-msg-e" placeholder="Про проєкт, роль або просто привіт"></textarea><span class="md-err" id="c-msg-e" aria-live="polite"></span></div>
+      <div class="md-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="md-fail" hidden>Не вдалося надіслати. Напишіть мені напряму на <a href="mailto:voytovychnina@gmail.com">voytovychnina@gmail.com</a></p>
+      <button type="submit" class="btn md-send"><span class="md-l">Надіслати</span><span class="md-busy">Надсилаю…</span></button>
+    </div>
+    <div class="md-done" hidden tabindex="-1">
+      <span class="md-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      <h2 class="md-h">Дякую!</h2>
+      <p class="md-sub">Лист уже в мене на пошті. Відповім вам на email.</p>
+      <button type="button" class="btn btn--ink" data-close>Закрити</button>
+    </div>
+  </form>
+</dialog><dialog class="md" id="md-testimonial" aria-labelledby="md-testi-h">
+  <form class="md-box" data-jf="263071288449061" data-kind="testimonial" novalidate>
+    <button type="button" class="md-x" data-close aria-label="Закрити"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <div class="md-body">
+      <span class="label">Відгуки</span>
+      <h2 class="md-h" id="md-testi-h">Залишити відгук</h2>
+      <p class="md-sub">Відгук з’явиться на сайті після того, як я його перегляну.</p>
+      <div class="md-f"><label for="t-name">Ім’я</label><input id="t-name" name="t_name" type="text" autocomplete="name" required aria-describedby="t-name-e"><span class="md-err" id="t-name-e" aria-live="polite"></span></div>
+      <div class="md-f"><label for="t-role">Роль і компанія<span class="md-hint">необов’язково</span></label><input id="t-role" name="q3_textbox1" type="text" autocomplete="organization-title" aria-describedby="t-role-e"><span class="md-err" id="t-role-e" aria-live="polite"></span></div>
+      <div class="md-f"><label for="t-text">Відгук</label><textarea id="t-text" name="q4_textarea2" rows="5" required aria-describedby="t-text-e" placeholder="Як вам працювалось зі мною"></textarea><span class="md-err" id="t-text-e" aria-live="polite"></span></div>
+      <div class="md-f md-check"><label><input id="t-ok" name="q5_widget_TermsAndConditions3" type="checkbox" value="Accepted" required aria-describedby="t-ok-e"><span>Погоджуюсь, що моє ім’я, роль і відгук можуть бути опубліковані на цьому сайті</span></label><span class="md-err" id="t-ok-e" aria-live="polite"></span></div>
+      <div class="md-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="md-fail" hidden>Не вдалося надіслати. Напишіть мені напряму на <a href="mailto:voytovychnina@gmail.com">voytovychnina@gmail.com</a></p>
+      <button type="submit" class="btn md-send"><span class="md-l">Надіслати відгук</span><span class="md-busy">Надсилаю…</span></button>
+    </div>
+    <div class="md-done" hidden tabindex="-1">
+      <span class="md-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+      <h2 class="md-h">Дякую!</h2>
+      <p class="md-sub">Відгук з’явиться на сайті, щойно я його перегляну.</p>
+      <button type="button" class="btn btn--ink" data-close>Закрити</button>
+    </div>
+  </form>
+</dialog><script>window.MD_MSG={"req": "Заповніть це поле", "mail": "Перевірте пошту – схоже, адреса неповна", "ok": "Потрібна ваша згода на публікацію"};</script>
+<script src="../../assets/js/site.js?v=a68fd956" defer></script>
 </body>
 </html>

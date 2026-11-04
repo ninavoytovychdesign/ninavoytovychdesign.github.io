@@ -508,3 +508,74 @@
   document.addEventListener('visibilitychange', sync);
   sync();
 })();
+
+/* ── Modals: contact and testimonial. Native <dialog>, sent to Jotform in the background ── */
+(function(){
+  var M = window.MD_MSG || { req:'Fill this in', mail:'Check the email', ok:'Please confirm' };
+  var opener = null;
+  function open(id){
+    var d = document.getElementById('md-' + id); if (!d || !d.showModal) return;
+    opener = document.activeElement; d.showModal();
+    document.documentElement.style.overflow = 'hidden';
+    var f = d.querySelector('.md-body:not([hidden]) input:not([type=checkbox]):not([tabindex="-1"])'); if (f) setTimeout(function(){ f.focus(); }, 60);
+  }
+  function close(d){ d.close(); }
+  document.querySelectorAll('[data-modal]').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); open(b.dataset.modal); }); });
+  document.querySelectorAll('dialog.md').forEach(function(d){
+    d.addEventListener('close', function(){
+      document.documentElement.style.overflow = '';
+      var form = d.querySelector('form'), done = d.querySelector('.md-done');
+      if (done && !done.hidden){ form.reset(); done.hidden = true; d.querySelector('.md-body').hidden = false; }
+      if (opener && opener.focus) opener.focus();
+    });
+    d.addEventListener('click', function(e){ if (e.target === d) close(d); });
+    d.querySelectorAll('[data-close]').forEach(function(x){ x.addEventListener('click', function(){ close(d); }); });
+  });
+
+  function err(field, msg){
+    var w = field.closest('.md-f'), e = w && w.querySelector('.md-err');
+    if (w) w.classList.toggle('bad', !!msg);
+    if (e) e.textContent = msg || '';
+    field.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+  function check(field){
+    var v = field.type === 'checkbox' ? field.checked : field.value.trim();
+    if (field.required && !v) return field.type === 'checkbox' ? M.ok : M.req;
+    if (field.type === 'email' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return M.mail;
+    return '';
+  }
+  document.querySelectorAll('form[data-jf]').forEach(function(form){
+    var fields = Array.prototype.slice.call(form.querySelectorAll('input[required], textarea[required], input[type=email]'));
+    fields.forEach(function(f){
+      f.addEventListener('blur', function(){ if (f.value || f.checked) err(f, check(f)); });
+      f.addEventListener('input', function(){ if (f.closest('.md-f').classList.contains('bad')) err(f, check(f)); });
+      f.addEventListener('change', function(){ if (f.type === 'checkbox') err(f, check(f)); });
+    });
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var first = null;
+      fields.forEach(function(f){ var m = check(f); err(f, m); if (m && !first) first = f; });
+      if (first){ first.focus(); return; }
+      var fail = form.querySelector('.md-fail'); fail.hidden = true;
+      var done = function(){
+        form.classList.remove('sending');
+        form.querySelector('.md-body').hidden = true;
+        var d = form.querySelector('.md-done'); d.hidden = false; d.focus();
+      };
+      if (form.querySelector('[name=website]').value){ done(); return; }   /* bot */
+      var fd = new FormData(), id = form.dataset.jf;
+      fd.append('formID', id);
+      form.querySelectorAll('input, textarea').forEach(function(f){
+        if (!f.name || f.name === 'website' || f.name === 't_name') return;
+        if (f.type === 'checkbox'){ if (f.checked) fd.append(f.name, f.value); return; }
+        fd.append(f.name, f.value.trim());
+      });
+      var tn = form.querySelector('[name=t_name]');
+      if (tn){ var parts = tn.value.trim().split(/\s+/); fd.append('q2_fullname0[first]', parts.shift() || ''); fd.append('q2_fullname0[last]', parts.join(' ')); }
+      form.classList.add('sending');
+      fetch('https://submit.jotform.com/submit/' + id + '/', { method:'POST', body:fd, mode:'no-cors' })
+        .then(done)
+        .catch(function(){ form.classList.remove('sending'); fail.hidden = false; });
+    });
+  });
+})();
