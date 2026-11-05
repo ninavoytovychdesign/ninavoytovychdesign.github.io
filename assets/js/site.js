@@ -84,7 +84,7 @@
       n.addEventListener('mouseleave', off); n.addEventListener('blur', off);
     });
 
-    /* Domain filters under the radar: a domain lights up its projects, dims the rest and pauses the sweep */
+    /* Domain filters under the radar: a domain lights up its projects and dims the rest; the sweep keeps going and only pings the lit ones */
     var chips = Array.prototype.slice.call(document.querySelectorAll('.radar-filters .rf'));
     chips.forEach(function(c){
       c.addEventListener('click', function(){
@@ -92,17 +92,26 @@
         chips.forEach(function(x){ x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
         radar.dataset.filter = d;
         nodes.forEach(function(n){ n.classList.toggle('muted', !!d && n.dataset.domain !== d); });
-        held = !!d;
         if (d){ var first = nodes.filter(function(n){ return n.dataset.domain === d; })[0]; if (first) select(first); }
       });
-    });
-    nodes.forEach(function(n){
-      n.addEventListener('mouseleave', function(){ if (radar.dataset.filter) held = true; });
     });
     nodes.forEach(function(n){ var x = +n.dataset.x, y = +n.dataset.y; n._ang = (Math.atan2(x, -y) * 180 / Math.PI + 360) % 360; });
     if ('IntersectionObserver' in window){ new IntersectionObserver(function(e){ inView = e[0].isIntersecting; }).observe(radar); }
     document.addEventListener('visibilitychange', function(){ paused = document.hidden; });
 
+    /* Shock wave from the centre to the outer ring; radius animated directly so the line stays 1px */
+    var wave = radar.querySelector('.core-pulse');
+    if (wave && !reduce){
+      var WAVE = 4800;
+      (function w(now){
+        if (inView && !paused){
+          var k = (now % WAVE) / WAVE, e = 1 - Math.pow(1 - k, 2.2);
+          wave.setAttribute('r', (18 + 258 * e).toFixed(1));
+          wave.style.opacity = (0.5 * (1 - k)).toFixed(3);
+        }
+        requestAnimationFrame(w);
+      })(performance.now());
+    }
     if (!reduce && sweep){
       var PERIOD = 40000, t = 0, last = performance.now(), prev = 0;
       (function tick(now){
@@ -112,7 +121,7 @@
         sweep.setAttribute('transform', 'rotate(' + ang.toFixed(2) + ' 280 280)');
         if (!held) nodes.forEach(function(n){
           var crossed = prev <= ang ? (n._ang > prev && n._ang <= ang) : (n._ang > prev || n._ang <= ang);
-          if (crossed){ n.classList.remove('ping'); void n.offsetWidth; n.classList.add('ping'); setTimeout(function(){ n.classList.remove('ping'); }, 1400); select(n); }
+          if (crossed && !n.classList.contains('muted')){ n.classList.remove('ping'); void n.offsetWidth; n.classList.add('ping'); setTimeout(function(){ n.classList.remove('ping'); }, 1400); select(n); }
         });
         prev = ang;
         requestAnimationFrame(tick);

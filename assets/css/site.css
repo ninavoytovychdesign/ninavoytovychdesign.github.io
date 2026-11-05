@@ -1424,3 +1424,9 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .t-grid .t-card .t-toggle{ margin-top:auto; padding-top:16px; }
 /* Hero: the left column ends on the same line as the radar legend */
 @media (min-width:1200px){ .hero-bottom{ align-self:stretch; justify-content:space-between; } }
+/* Radar shock wave: from the centre out to the outer ring; the next one starts as the previous one ends */
+.radar .core-pulse{ animation:core-wave 4.8s cubic-bezier(.25,.6,.4,1) infinite; }
+@keyframes core-wave{ 0%{ opacity:.55; transform:scale(1); } 85%{ opacity:.12; } 100%{ opacity:0; transform:scale(15.33); } }
+@media (prefers-reduced-motion:reduce){ .radar .core-pulse{ animation:none; opacity:0; } }
+/* The wave radius is driven from JS; no CSS scale (it thickened the line) */
+.radar .core-pulse{ animation:none; transform:none; opacity:0; }
