@@ -1419,3 +1419,6 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .foot-mail.done .fm-ico{ background:transparent; color:var(--t1); }
 .foot-mail{ gap:8px; } .fm-ico svg{ width:24px; height:24px; stroke-width:1.8; }
 @media (max-width:767px){ .foot-mail{ gap:4px; } .fm-ico svg{ width:20px; height:20px; } }
+/* «Read more» sits at the bottom of the card */
+.t-grid .t-card{ display:flex; flex-direction:column; }
+.t-grid .t-card .t-toggle{ margin-top:auto; padding-top:16px; }
