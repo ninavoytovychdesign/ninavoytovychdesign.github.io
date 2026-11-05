@@ -1394,3 +1394,22 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 @media (max-width:767px){ .sign-off{ margin-top:64px; padding-top:48px; } }
 .site-footer{ padding-top:96px; } .sign-off{ margin-top:96px; padding-top:72px; }
 @media (max-width:767px){ .site-footer{ padding-top:64px; } .sign-off{ margin-top:64px; padding-top:48px; } }
+/* Copy icon instead of the «Copy» tag; on mobile the address and the icon fit one line */
+.foot-mail{ align-items:center; gap:12px; flex-wrap:nowrap; max-width:100%; }
+.foot-mail .fm-addr{ white-space:nowrap; }
+.fm-ico{ position:relative; flex:none; width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--t1); border-radius:4px; transition:background-color .3s var(--ease), color .3s var(--ease); }
+.fm-ico svg{ position:absolute; width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; transition:opacity .25s var(--ease), transform .35s cubic-bezier(.2,.7,.3,1); }
+.fm-ico .i-ok{ opacity:0; transform:scale(.6); }
+.foot-mail:hover .fm-ico{ background:var(--t1); color:var(--accent); }
+.foot-mail.done .fm-ico{ background:var(--t1); color:var(--accent); }
+.foot-mail.done .i-copy{ opacity:0; transform:scale(.6); }
+.foot-mail.done .i-ok{ opacity:1; transform:none; }
+@media (max-width:767px){
+  .foot-mail{ gap:8px; }
+  .foot-mail .fm-addr{ font-size:clamp(15px, 4.7vw, 20px); line-height:28px; letter-spacing:0; }
+  .fm-ico{ width:36px; height:36px; }
+  .fm-ico svg{ width:18px; height:18px; }
+}
+#words{ overflow-x:clip; }
+@media (max-width:359px){ .t-actions .t-link{ white-space:normal; } }
+.sheet-extra{ flex-wrap:wrap; row-gap:8px; }

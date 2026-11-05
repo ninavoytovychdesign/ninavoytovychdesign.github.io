@@ -680,10 +680,10 @@
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mail = document.querySelector('.foot-mail'), live = document.querySelector('.fm-live');
   if (mail){
-    var tag = mail.querySelector('.fm-tag'), tag0 = tag.textContent, timer;
+    var timer;
     mail.addEventListener('click', function(){
       var v = mail.dataset.copy;
-      var done = function(){ mail.classList.add('done'); tag.textContent = mail.dataset.copied; if (live) live.textContent = mail.dataset.copied; clearTimeout(timer); timer = setTimeout(function(){ mail.classList.remove('done'); tag.textContent = tag0; if (live) live.textContent = ''; }, 2200); };
+      var done = function(){ mail.classList.add('done'); if (live) live.textContent = mail.dataset.copied; clearTimeout(timer); timer = setTimeout(function(){ mail.classList.remove('done'); if (live) live.textContent = ''; }, 2200); };
       if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(v).then(done, fallback); else fallback();
       function fallback(){ var ta = document.createElement('textarea'); ta.value = v; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) { location.href = 'mailto:' + v; } ta.remove(); }
     });
