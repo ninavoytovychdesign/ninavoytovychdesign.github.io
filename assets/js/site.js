@@ -735,3 +735,15 @@
     }
   }
 })();
+
+/* Analytics events (GoatCounter, if it is loaded): CV downloads, «Contact me» / testimonial modals, email copy */
+(function(){
+  function count(path, title){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path:path, title:title, event:true }); } catch (e) {} }
+  document.addEventListener('click', function(e){
+    var el = e.target.closest && e.target.closest('a[href*="assets/cv/"], [data-modal], .foot-mail'); if (!el) return;
+    var lang = document.documentElement.lang === 'uk' ? 'ua' : 'en';
+    if (el.matches('a[href*="assets/cv/"]')) count('cv-download-' + lang, 'CV download');
+    else if (el.dataset.modal) count(el.dataset.modal + '-open-' + lang, el.dataset.modal + ' form opened');
+    else count('email-copy-' + lang, 'Email copied');
+  }, true);
+})();
