@@ -1380,3 +1380,17 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .foot-word .fw{ display:inline-block; white-space:nowrap; }
 .foot-word.split{ word-spacing:-0.07em; }
 .foot-status{ align-items:flex-start; } .foot-status i{ flex:none; margin-top:4px; }
+
+/* Footer variant В: yellow only for the call to write; the sign-off (name, ©, links) sits on black like the header pill */
+.site-footer{ padding-bottom:0; }
+.sign-off{ margin-top:112px; padding:96px 0 24px; background:#000000; color:var(--w1); box-shadow:0 0 0 100vmax #000000; clip-path:inset(0 -100vmax); }
+.sign-off .foot-word{ color:var(--w1); }
+.sign-off .foot-bar{ border-top-color:rgba(255,255,255,.2); color:var(--w2); }
+.sign-off .foot-bar a{ color:var(--w1); }
+.sign-off .foot-bar a:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+.foot-status i, .foot-status i::after{ background:var(--t1); }
+.foot-mail .fm-tag{ opacity:1; }
+.foot-now{ color:rgba(8,8,11,.72); }
+@media (max-width:767px){ .sign-off{ margin-top:64px; padding-top:48px; } }
+.site-footer{ padding-top:96px; } .sign-off{ margin-top:96px; padding-top:72px; }
+@media (max-width:767px){ .site-footer{ padding-top:64px; } .sign-off{ margin-top:64px; padding-top:48px; } }
