@@ -1413,3 +1413,9 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 #words{ overflow-x:clip; }
 @media (max-width:359px){ .t-actions .t-link{ white-space:normal; } }
 .sheet-extra{ flex-wrap:wrap; row-gap:8px; }
+/* Copy icon without the outline */
+.fm-ico{ border:0; border-radius:4px; }
+.foot-mail:hover .fm-ico{ background:rgba(8,8,11,.08); color:var(--t1); }
+.foot-mail.done .fm-ico{ background:transparent; color:var(--t1); }
+.foot-mail{ gap:8px; } .fm-ico svg{ width:24px; height:24px; stroke-width:1.8; }
+@media (max-width:767px){ .foot-mail{ gap:4px; } .fm-ico svg{ width:20px; height:20px; } }
