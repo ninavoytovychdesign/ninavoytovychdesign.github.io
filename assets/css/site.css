@@ -1422,3 +1422,5 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 /* «Read more» sits at the bottom of the card */
 .t-grid .t-card{ display:flex; flex-direction:column; }
 .t-grid .t-card .t-toggle{ margin-top:auto; padding-top:16px; }
+/* Hero: the left column ends on the same line as the radar legend */
+@media (min-width:1200px){ .hero-bottom{ align-self:stretch; justify-content:space-between; } }
