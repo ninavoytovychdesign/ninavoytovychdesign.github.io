@@ -1604,3 +1604,10 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
   .rf-3d[aria-busy="true"]{ opacity:.6; }
   .radar-node .lb{ background:none; padding:0; }
 }
+/* Desktop: the 3D entry is visible in the radar's top-left corner, people did not see that the radar opens */
+@media (min-width:768px){
+  .r3d-open{ left:0; top:0; bottom:auto; translate:none; clip-path:none; opacity:1; pointer-events:auto; z-index:3; height:36px; padding:0 16px; gap:8px; font:600 12px/16px var(--mono); letter-spacing:2px; background:var(--bg); }
+  .r3d-open svg{ width:16px; height:16px; }
+  .r3d-open:hover{ background:var(--ink); color:var(--bg); }
+  .r3d-open:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+}

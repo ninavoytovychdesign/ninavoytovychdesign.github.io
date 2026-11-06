@@ -799,3 +799,16 @@
   window.addEventListener('load', fit);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 })();
+/* Desktop: keep the 3D button in the radar's bottom-left corner, clear of the title and the case labels */
+(function(){
+  var cell = document.querySelector('.radar-cell'), radar = document.querySelector('.radar'), b = document.querySelector('.r3d-open');
+  if (!cell || !radar || !b) return;
+  var mq = window.matchMedia('(min-width:768px)');
+  function place(){
+    if (!mq.matches) { b.style.top = ''; return; }
+    b.style.top = (radar.offsetTop + radar.offsetHeight - b.offsetHeight) + 'px';
+  }
+  place();
+  window.addEventListener('resize', place);
+  window.addEventListener('load', place);
+})();
