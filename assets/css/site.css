@@ -1620,15 +1620,21 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 @media (min-width:768px) and (max-width:1023px){ .rf-wrap{ flex-wrap:wrap; justify-content:center; } .rf-wrap .radar-filters{ flex-wrap:wrap; justify-content:center; } .radar-key{ text-align:center; } }
 /* Desktop side layout: the 3D button and the domain chips form one solid bar across three grid columns */
 @media (min-width:1024px){
-  .rf-wrap.r-al{ gap:0; justify-content:flex-start; }
-  .rf-wrap.r-al .radar-filters{ flex:1 1 auto; gap:0; min-width:0; }
+  .rf-wrap.r-al{ gap:8px; justify-content:flex-start; }
+  .rf-wrap.r-al .radar-filters{ flex:1 1 auto; gap:8px; min-width:0; }
   .rf-wrap.r-al .radar-filters li{ flex:1 1 auto; display:flex; }
-  .rf-wrap.r-al .rf{ width:100%; justify-content:center; padding:0 6px; letter-spacing:1px; margin-left:-1px; position:relative; }
+  .rf-wrap.r-al .rf{ width:100%; justify-content:center; padding:0 6px; letter-spacing:1px; position:relative; }
   .rf-wrap.r-al .rf:hover, .rf-wrap.r-al .rf[aria-pressed="true"]{ z-index:1; }
   .rf-wrap.r-al .rf-3d{ position:relative; z-index:2; padding:0 12px; letter-spacing:1px; }
   .rf-wrap.r-al.short .rf-3d .l{ display:none; }
   .rf-wrap.r-al.short .rf-3d .s{ display:inline; }
 }
-/* Paired buttons sit edge to edge on the grid, no gap between them */
-.hero-cta, .foot-actions{ gap:0; }
+/* Paired buttons: 12px apart */
+.hero-cta, .foot-actions{ gap:12px; }
 @media (min-width:768px){ .hero-cta, .foot-actions{ grid-auto-columns:minmax(0,1fr); } .hero-cta .btn, .foot-actions .btn{ padding-left:12px; padding-right:12px; } }
+/* Pattern: sharp corners everywhere. Exceptions: things that are round by meaning (status dot, list and timeline dots)
+   and the wireframe illustrations of other products inside cases. :not(#_a):not(#_b) only raises specificity. */
+body *:not(#_a):not(#_b):not(.wf *):not(.foot-status i):not(.ba-line i):not(.dg-t i):not(.wf-donut),
+body *:not(#_a):not(#_b):not(.wf *):not(.ab-pains li):not(.foot-status i)::before,
+body *:not(#_a):not(#_b):not(.wf *):not(.foot-status i)::after{ border-radius:0 !important; }
+@media (min-width:768px){ .radar-filters{ gap:8px; } }
