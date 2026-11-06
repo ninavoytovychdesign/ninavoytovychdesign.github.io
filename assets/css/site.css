@@ -1430,3 +1430,18 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 @media (prefers-reduced-motion:reduce){ .radar .core-pulse{ animation:none; opacity:0; } }
 /* The wave radius is driven from JS; no CSS scale (it thickened the line) */
 .radar .core-pulse{ animation:none; transform:none; opacity:0; }
+.radar svg{ overflow:visible; }
+/* Radar trail as one smooth conic gradient (no slices), ~80° long; its colour eases to the last case */
+@property --sc{ syntax:'<color>'; inherits:true; initial-value:#08080B; }
+.radar{ transition:--sc 1.2s var(--ease); }
+.radar .trail{ display:none; }
+.sweep-cone{ position:absolute; left:0.714%; top:0.714%; width:98.571%; height:98.571%; border-radius:50%; pointer-events:none; will-change:transform;
+  background:conic-gradient(from -80deg,
+    transparent 0deg,
+    color-mix(in srgb, var(--sc) 1.5%, transparent) 20deg,
+    color-mix(in srgb, var(--sc) 4%, transparent) 40deg,
+    color-mix(in srgb, var(--sc) 8%, transparent) 56deg,
+    color-mix(in srgb, var(--sc) 12.5%, transparent) 70deg,
+    color-mix(in srgb, var(--sc) 17%, transparent) 80deg,
+    transparent 80deg); }
+@media (prefers-reduced-motion:reduce){ .sweep-cone{ display:none; } }

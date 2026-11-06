@@ -99,19 +99,20 @@
     if ('IntersectionObserver' in window){ new IntersectionObserver(function(e){ inView = e[0].isIntersecting; }).observe(radar); }
     document.addEventListener('visibilitychange', function(){ paused = document.hidden; });
 
-    /* Shock wave from the centre to the outer ring; radius animated directly so the line stays 1px */
+    /* Shock wave from the centre to a little past the outer ring; radius animated directly so the line stays 1px */
     var wave = radar.querySelector('.core-pulse');
     if (wave && !reduce){
       var WAVE = 4800;
       (function w(now){
         if (inView && !paused){
           var k = (now % WAVE) / WAVE, e = 1 - Math.pow(1 - k, 2.2);
-          wave.setAttribute('r', (18 + 258 * e).toFixed(1));
-          wave.style.opacity = (0.5 * (1 - k)).toFixed(3);
+          wave.setAttribute('r', (18 + 290 * e).toFixed(1));
+          wave.style.opacity = (0.5 * (1 - k * k)).toFixed(3);
         }
         requestAnimationFrame(w);
       })(performance.now());
     }
+    var cone = radar.querySelector('.sweep-cone');
     if (!reduce && sweep){
       var PERIOD = 40000, t = 0, last = performance.now(), prev = 0;
       (function tick(now){
@@ -119,6 +120,7 @@
         if (!held && !paused && inView) t += dt;
         var ang = (t / PERIOD * 360) % 360;
         sweep.setAttribute('transform', 'rotate(' + ang.toFixed(2) + ' 280 280)');
+        if (cone) cone.style.transform = 'rotate(' + ang.toFixed(2) + 'deg)';
         if (!held) nodes.forEach(function(n){
           var crossed = prev <= ang ? (n._ang > prev && n._ang <= ang) : (n._ang > prev || n._ang <= ang);
           if (crossed && !n.classList.contains('muted')){ n.classList.remove('ping'); void n.offsetWidth; n.classList.add('ping'); setTimeout(function(){ n.classList.remove('ping'); }, 1400); select(n); }
