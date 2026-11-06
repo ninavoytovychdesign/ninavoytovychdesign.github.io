@@ -810,6 +810,15 @@
     row.classList.toggle('r-al', side); if (key) key.classList.toggle('r-al', side);
     row.style.marginRight = side ? (-d) + 'px' : '';
     if (key) key.style.marginRight = side ? (-d) + 'px' : '';
+    /* the bar spans the last three grid columns */
+    var cols = document.querySelectorAll('.col-lines span');
+    row.style.marginLeft = '';
+    row.classList.remove('short');
+    if (side && cols.length >= 3) {
+      var start = cols[cols.length - 3].getBoundingClientRect().left;
+      row.style.marginLeft = Math.round(start - c.left) + 'px';
+      if (row.scrollWidth > row.clientWidth + 1) row.classList.add('short');
+    }
   }
   align();
   window.addEventListener('resize', align);
