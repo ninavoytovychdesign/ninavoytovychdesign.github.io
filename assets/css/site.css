@@ -1629,9 +1629,6 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
   .rf-wrap.r-al.short .rf-3d .l{ display:none; }
   .rf-wrap.r-al.short .rf-3d .s{ display:inline; }
 }
-/* Sharp corners across the site chrome: the style is technical and grid-based */
-.btn, .nav-pill, .nav-menu-btn, .nav-sheet, .nav-lang, .nav-lang .lang, .nav-sheet .sheet-extra .lang,
-.fm-ico, .foot-mail .fm-tag, .case .ba-tag, .r3-btn, .r3-arw, .r3-chip, .r3-co .go, .rf, .rf-3d, .rf-toggle{ border-radius:0; }
 /* Paired buttons sit edge to edge on the grid, no gap between them */
 .hero-cta, .foot-actions{ gap:0; }
 @media (min-width:768px){ .hero-cta, .foot-actions{ grid-auto-columns:minmax(0,1fr); } .hero-cta .btn, .foot-actions .btn{ padding-left:12px; padding-right:12px; } }
