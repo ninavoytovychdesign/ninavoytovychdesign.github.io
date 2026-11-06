@@ -1586,3 +1586,11 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 
 .r3-co.c{padding-bottom:0}
 .r3-co.c .go{position:static;margin-top:8px}
+/* Mobile: radar labels stay inside the screen, so the page never gets wider than the screen and the column lines stay on the radar axis */
+@media (max-width:767px){
+  .hero{ overflow-x:clip; }
+  .radar-node.fit-r{ flex-direction:row; transform:translate(-4px,-50%); }
+  .radar-node.fit-r .lb{ align-items:flex-start; text-align:left; }
+  .radar-node.fit-l{ flex-direction:row-reverse; transform:translate(calc(-100% + 4px),-50%); }
+  .radar-node.fit-l .lb{ align-items:flex-end; text-align:right; }
+}

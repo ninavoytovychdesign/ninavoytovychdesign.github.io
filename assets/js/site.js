@@ -775,3 +775,24 @@
     radar.addEventListener('click', function(e){ if (e.target.closest('.radar-node, a, button')) return; open(); });
   }
 })();
+/* Mobile: flip a radar label to the other side of its dot when it would go past the screen edge */
+(function(){
+  var radar = document.querySelector('.radar'); if (!radar) return;
+  var mq = window.matchMedia('(max-width:767px)');
+  function fit(){
+    var nodes = radar.querySelectorAll('.radar-node');
+    for (var i = 0; i < nodes.length; i++) nodes[i].classList.remove('fit-r', 'fit-l');
+    if (!mq.matches) return;
+    var W = document.documentElement.clientWidth, pad = 8;
+    for (var j = 0; j < nodes.length; j++) {
+      var n = nodes[j], lb = n.querySelector('.lb'); if (!lb) continue;
+      var r = lb.getBoundingClientRect();
+      if (r.left < pad) n.classList.add('fit-r');
+      else if (r.right > W - pad) n.classList.add('fit-l');
+    }
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
