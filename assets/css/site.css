@@ -1558,3 +1558,9 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 @media (min-width:1200px){ .hero{ padding-top:116px; padding-bottom:24px; } }
 /* 16px between the CTA and the product card; the radar follows the card (site.js aligns the filters to it) */
 @media (min-width:1200px){ .hero-bottom{ align-self:start; justify-content:flex-start; gap:16px; } }
+/* hero rhythm (desktop): header → 32 → status → 16 → title → 16 → text → 24 → CTA → 16 → card */
+@media (min-width:1200px){
+  .hero{ padding-top:106px; }
+  .hero-status{ margin-bottom:16px; }
+  .hero-stage{ margin-top:16px; }
+}
