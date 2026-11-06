@@ -799,16 +799,19 @@
   window.addEventListener('load', fit);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 })();
-/* Desktop: keep the 3D button in the radar's bottom-left corner, clear of the title and the case labels */
+/* Desktop: the chips row (3D button + domains) and the key end on the header's right edge */
 (function(){
-  var cell = document.querySelector('.radar-cell'), radar = document.querySelector('.radar'), b = document.querySelector('.r3d-open');
-  if (!cell || !radar || !b) return;
-  var mq = window.matchMedia('(min-width:768px)');
-  function place(){
-    if (!mq.matches) { b.style.top = ''; return; }
-    b.style.top = (radar.offsetTop + radar.offsetHeight - b.offsetHeight) + 'px';
+  var cell = document.querySelector('.radar-cell'), nav = document.querySelector('.nav-pill');
+  var row = document.querySelector('.rf-wrap'), key = document.querySelector('.radar-key');
+  if (!cell || !nav || !row) return;
+  function align(){
+    var c = cell.getBoundingClientRect(), d = Math.round(nav.getBoundingClientRect().right - c.right);
+    var side = window.innerWidth >= 1024 && c.left > window.innerWidth * 0.4 && d >= 0 && d < 160;
+    row.classList.toggle('r-al', side); if (key) key.classList.toggle('r-al', side);
+    row.style.marginRight = side ? (-d) + 'px' : '';
+    if (key) key.style.marginRight = side ? (-d) + 'px' : '';
   }
-  place();
-  window.addEventListener('resize', place);
-  window.addEventListener('load', place);
+  align();
+  window.addEventListener('resize', align);
+  window.addEventListener('load', align);
 })();
