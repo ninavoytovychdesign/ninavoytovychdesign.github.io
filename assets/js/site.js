@@ -221,9 +221,9 @@
   tick(); setInterval(tick, 30000);
 })();
 
-/* Hero: the radar filters sit on the same line as the bottom of the hero card (desktop) */
+/* Hero: the bottom of the radar block (the key line) sits on the same line as the bottom of the hero card (desktop) */
 (function(){
-  var cell = document.querySelector('.radar-cell'), card = document.querySelector('.hero-card'), f = document.querySelector('.radar-filters');
+  var cell = document.querySelector('.radar-cell'), card = document.querySelector('.hero-card'), f = document.querySelector('.radar-key') || document.querySelector('.radar-filters');
   if (!cell || !card || !f) return;
   var mq = window.matchMedia('(min-width:1200px)');
   function align(){
