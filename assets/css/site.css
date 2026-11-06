@@ -1632,9 +1632,9 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 /* Paired buttons: 12px apart */
 .hero-cta, .foot-actions{ gap:12px; }
 @media (min-width:768px){ .hero-cta, .foot-actions{ grid-auto-columns:minmax(0,1fr); } .hero-cta .btn, .foot-actions .btn{ padding-left:12px; padding-right:12px; } }
-/* Pattern: sharp corners everywhere. Exceptions: things that are round by meaning (status dot, list and timeline dots)
+/* Pattern: sharp corners everywhere. Exceptions: things that are round by meaning (radar sweep, status dot, list and timeline dots)
    and the wireframe illustrations of other products inside cases. :not(#_a):not(#_b) only raises specificity. */
-body *:not(#_a):not(#_b):not(.wf *):not(.foot-status i):not(.ba-line i):not(.dg-t i):not(.wf-donut),
-body *:not(#_a):not(#_b):not(.wf *):not(.ab-pains li):not(.foot-status i)::before,
-body *:not(#_a):not(#_b):not(.wf *):not(.foot-status i)::after{ border-radius:0 !important; }
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.ba-line i):not(.dg-t i):not(.wf-donut),
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.ab-pains li):not(.foot-status i)::before,
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i)::after{ border-radius:0 !important; }
 @media (min-width:768px){ .radar-filters{ gap:8px; } }
