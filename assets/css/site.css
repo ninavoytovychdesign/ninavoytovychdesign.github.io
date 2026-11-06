@@ -1556,3 +1556,5 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 /* radar rises to the title line so the hero fits one screen */
 @media (min-width:1200px){ .radar-cell{ margin-top:-116px; } }
 @media (min-width:1200px){ .hero{ padding-top:116px; padding-bottom:24px; } }
+/* 16px between the CTA and the product card; the radar follows the card (site.js aligns the filters to it) */
+@media (min-width:1200px){ .hero-bottom{ align-self:start; justify-content:flex-start; gap:16px; } }
