@@ -752,3 +752,19 @@
     else count('email-copy-' + lang, 'Email copied');
   }, true);
 })();
+
+/* 3D project map: loads three.js only when asked */
+(function(){
+  var b = document.querySelector('[data-r3d]'); if (!b || !window.R3D) return;
+  var radar = document.querySelector('.radar'), loading = null;
+  function load(){ if (window.Radar3D) return Promise.resolve(); if (loading) return loading;
+    loading = new Promise(function(res, rej){ var s = document.createElement('script'); s.src = window.R3D.src; s.onload = res; s.onerror = function(){ loading = null; rej(); }; document.head.appendChild(s); });
+    return loading; }
+  b.addEventListener('pointerenter', function(){ load().catch(function(){}); }, { once: true });
+  b.addEventListener('click', function(){
+    b.setAttribute('aria-busy', 'true');
+    load().then(function(){ b.removeAttribute('aria-busy'); window.Radar3D.open(radar || b);
+      if (window.goatcounter && goatcounter.count) goatcounter.count({ path: 'radar-3d-open', title: '3D map opened', event: true }); })
+      .catch(function(){ b.removeAttribute('aria-busy'); location.href = window.R3D.fallback; });
+  });
+})();
