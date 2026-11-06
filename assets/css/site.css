@@ -1548,3 +1548,11 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 
 .radar.r3d-dive{cursor:zoom-in}
 .radar.r3d-dive .radar-node{cursor:pointer}
+
+/* 3D entry: the radar field is the way in; the button stays only for keyboard and screen readers */
+.radar-cell{position:relative}
+.r3d-open{position:absolute;left:50%;bottom:0;margin:0;translate:-50% 0;clip-path:inset(50%);opacity:0;pointer-events:none;background:var(--bg)}
+.r3d-open:focus-visible{clip-path:none;opacity:1;pointer-events:auto;outline:2px solid var(--ink);outline-offset:3px}
+/* radar rises to the title line so the hero fits one screen */
+@media (min-width:1200px){ .radar-cell{ margin-top:-116px; } }
+@media (min-width:1200px){ .hero{ padding-top:116px; padding-bottom:24px; } }
