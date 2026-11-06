@@ -1634,7 +1634,12 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 @media (min-width:768px){ .hero-cta, .foot-actions{ grid-auto-columns:minmax(0,1fr); } .hero-cta .btn, .foot-actions .btn{ padding-left:12px; padding-right:12px; } }
 /* Pattern: sharp corners everywhere. Exceptions: things that are round by meaning (radar sweep, status dot, list and timeline dots)
    and the wireframe illustrations of other products inside cases. :not(#_a):not(#_b) only raises specificity. */
-body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.ba-line i):not(.dg-t i):not(.wf-donut),
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.dg-t i):not(.wf-donut),
 body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.ab-pains li):not(.foot-status i)::before,
 body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i)::after{ border-radius:0 !important; }
 @media (min-width:768px){ .radar-filters{ gap:8px; } }
+
+/* Before/after slider handle: square like the rest of the site, arrows drawn as one centred icon */
+.case .ba-line i{ width:40px; height:40px; margin:0; left:50%; top:50%; translate:-50% -50%; box-sizing:border-box; font-size:0; letter-spacing:0; display:grid; place-items:center; }
+.case .ba-line i::before{ content:""; width:20px; height:12px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 12' fill='none' stroke='%2308080B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 1 1 6l5 5M14 1l5 5-5 5'/%3E%3C/svg%3E") center/20px 12px no-repeat; }
+@media (max-width:767px){ .case .ba-line i{ width:32px; height:32px; } .case .ba-line i::before{ width:16px; height:10px; background-size:16px 10px; } }
