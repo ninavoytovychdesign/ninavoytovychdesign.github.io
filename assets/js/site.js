@@ -761,10 +761,17 @@
     loading = new Promise(function(res, rej){ var s = document.createElement('script'); s.src = window.R3D.src; s.onload = res; s.onerror = function(){ loading = null; rej(); }; document.head.appendChild(s); });
     return loading; }
   b.addEventListener('pointerenter', function(){ load().catch(function(){}); }, { once: true });
-  b.addEventListener('click', function(){
+  function open(){
     b.setAttribute('aria-busy', 'true');
     load().then(function(){ b.removeAttribute('aria-busy'); window.Radar3D.open(radar || b);
       if (window.goatcounter && goatcounter.count) goatcounter.count({ path: 'radar-3d-open', title: '3D map opened', event: true }); })
       .catch(function(){ b.removeAttribute('aria-busy'); location.href = window.R3D.fallback; });
-  });
+  }
+  b.addEventListener('click', open);
+  /* the radar itself is a way in: a click on its field (not on a case) dives into the 3D map */
+  if (radar) {
+    radar.classList.add('r3d-dive');
+    radar.addEventListener('pointerenter', function(){ load().catch(function(){}); }, { once: true });
+    radar.addEventListener('click', function(e){ if (e.target.closest('.radar-node, a, button')) return; open(); });
+  }
 })();

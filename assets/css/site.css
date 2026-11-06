@@ -1545,3 +1545,6 @@ html.r3-open .r3-ui{display:flex;animation:r3In .6s var(--r3-e) 1.6s forwards}
 @media (max-width:767px){ .r3d-open{margin:16px 0 0} }
 html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s linear .95s;opacity:0}
 /* R3D-END */
+
+.radar.r3d-dive{cursor:zoom-in}
+.radar.r3d-dive .radar-node{cursor:pointer}
