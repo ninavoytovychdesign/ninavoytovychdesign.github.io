@@ -106,8 +106,11 @@
       (function w(now){
         if (inView && !paused){
           var k = (now % WAVE) / WAVE, e = 1 - Math.pow(1 - k, 2.2);
-          wave.setAttribute('r', (18 + 290 * e).toFixed(1));
-          wave.style.opacity = (0.5 * (1 - k * k)).toFixed(3);
+          var rr = 18 + 290 * e;
+          wave.setAttribute('r', rr.toFixed(1));
+          // inside the radar it fades 0.5 → 0.12; past the outer ring it is barely there and gone by the end
+          var op = rr <= 276 ? 0.5 - 0.38 * Math.pow((rr - 18) / 258, 1.5) : 0.06 * (1 - (rr - 276) / 32);
+          wave.style.opacity = Math.max(0, op).toFixed(3);
         }
         requestAnimationFrame(w);
       })(performance.now());
