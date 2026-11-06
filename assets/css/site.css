@@ -1583,3 +1583,6 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 /* the case button hangs under the callout line, the text stays above it */
 .r3-co.c .go{position:absolute;top:100%;left:8px;margin-top:12px}
 .r3-co.c.left .go{left:auto;right:8px}
+
+.r3-co.c{padding-bottom:0}
+.r3-co.c .go{position:static;margin-top:8px}
