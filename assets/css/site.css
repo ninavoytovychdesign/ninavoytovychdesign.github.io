@@ -1594,3 +1594,13 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
   .radar-node.fit-l{ flex-direction:row-reverse; transform:translate(calc(-100% + 4px),-50%); }
   .radar-node.fit-l .lb{ align-items:flex-end; text-align:right; }
 }
+/* Mobile: 3D button next to the domain filter; case labels on the radar have no background */
+.rf-3d{ display:none; }
+@media (max-width:767px){
+  .rf-wrap{ display:flex; gap:8px; }
+  .rf-wrap .rf-toggle{ flex:1; width:auto; min-width:0; }
+  .rf-3d{ display:inline-flex; flex:none; align-items:center; justify-content:center; gap:8px; height:44px; padding:0 16px; font:600 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--ink); background:var(--bg, #F4F4F4); border:1px solid var(--ink); border-radius:0; cursor:pointer; }
+  .rf-3d svg{ width:16px; height:16px; }
+  .rf-3d[aria-busy="true"]{ opacity:.6; }
+  .radar-node .lb{ background:none; padding:0; }
+}

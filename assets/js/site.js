@@ -768,6 +768,9 @@
       .catch(function(){ b.removeAttribute('aria-busy'); location.href = window.R3D.fallback; });
   }
   b.addEventListener('click', open);
+  /* mobile: a visible 3D button next to the domain filter, the radar field is too small to tap past the cases */
+  var bm = document.querySelector('[data-r3d-m]');
+  if (bm) { bm.addEventListener('click', open); bm.addEventListener('pointerdown', function(){ load().catch(function(){}); }, { once: true }); }
   /* the radar itself is a way in: a click on its field (not on a case) dives into the 3D map */
   if (radar) {
     radar.classList.add('r3d-dive');
