@@ -1634,9 +1634,9 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 @media (min-width:768px){ .hero-cta, .foot-actions{ grid-auto-columns:minmax(0,1fr); } .hero-cta .btn, .foot-actions .btn{ padding-left:12px; padding-right:12px; } }
 /* Pattern: sharp corners everywhere. Exceptions: things that are round by meaning (radar sweep, status dot, list and timeline dots)
    and the wireframe illustrations of other products inside cases. :not(#_a):not(#_b) only raises specificity. */
-body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.dg-t i):not(.wf-donut):not(.okp-dev):not(.okp-dev *),
-body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.ab-pains li):not(.foot-status i):not(.okp-dev *)::before,
-body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.okp-dev *)::after{ border-radius:0 !important; }
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.dg-t i):not(.wf-donut):not(.okp-dev):not(.okp-dev *):not(.tsp-dev):not(.tsp-dev *),
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.ab-pains li):not(.foot-status i):not(.okp-dev *):not(.tsp-dev *)::before,
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.okp-dev *):not(.tsp-dev *)::after{ border-radius:0 !important; }
 @media (min-width:768px){ .radar-filters{ gap:8px; } }
 
 /* Before/after slider handle: square like the rest of the site, arrows drawn as one centred icon */
@@ -1704,3 +1704,40 @@ body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.ok
   .okp .live .stage{cursor:default}
 
 /* OKP-END */
+
+/* TSP-START · TripStone prototype in the case */
+.case figure.tsp{ display:grid; gap:32px; margin:0; padding:48px; background:var(--tile, #F4F4F2); border:1px solid var(--line); }
+@media (max-width:1023px){ .case figure.tsp{ gap:24px; padding:32px 16px; } }
+.tsp-k{ margin:0 0 8px; font:500 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t3); }
+.tsp-t{ margin:0 0 8px; font:400 22px/28px var(--sans); letter-spacing:-.5px; color:var(--t1); }
+.tsp-l{ margin:0; color:var(--t2); }
+.tsp-steps{ list-style:none; margin:0 0 24px; padding:0; counter-reset:s; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); column-gap:24px; }
+@media (max-width:767px){ .tsp-steps{ grid-template-columns:1fr 1fr; } }
+.tsp-steps li{ counter-increment:s; display:grid; grid-template-columns:32px 1fr; gap:8px; padding:8px 0; border-top:1px solid var(--line); color:var(--t3); font-size:14px; line-height:20px; transition:color .3s; }
+.tsp-steps li::before{ content:counter(s,decimal-leading-zero); font:500 12px/20px var(--mono); }
+.tsp-steps li.on{ color:var(--t1); }
+.tsp-ctl{ display:flex; flex-wrap:wrap; gap:12px; }
+.tsp-ctl button{ height:40px; padding:0 16px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:500 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:background-color .2s, color .2s; }
+.tsp-ctl button:hover, .tsp-ctl button[aria-pressed=true]{ background:var(--ink); color:#fff; }
+.tsp-ctl button:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.tsp-h{ min-height:20px; margin:12px 0 0; font-size:14px; line-height:20px; color:var(--t3); }
+/* browser */
+.tsp-dev{ border-radius:12px; overflow:hidden; background:#fff; box-shadow:0 0 0 1px rgba(0,0,0,.08),0 40px 80px -32px rgba(0,0,0,.35),0 12px 24px -12px rgba(0,0,0,.2); }
+.tsp-bar{ display:flex; align-items:center; gap:16px; height:32px; padding:0 12px; background:#ECECEA; border-bottom:1px solid rgba(0,0,0,.06); }
+.tsp-bar .dots{ display:flex; gap:8px; }
+.tsp-bar .dots i{ width:10px; height:10px; border-radius:50%; background:#D6D6D3; display:block; }
+.tsp-bar .url{ flex:1; max-width:440px; margin:0 auto; height:20px; border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font:400 12px/16px var(--sans); color:#6B6B73; white-space:nowrap; overflow:hidden; }
+.tsp-vp{ position:relative; width:100%; aspect-ratio:1440/1003; overflow:hidden; background:#F3F3F0; }
+.tsp-stage{ position:absolute; left:0; top:0; width:1440px; height:1003px; transform-origin:0 0; user-select:none; -webkit-user-select:none; }
+.tsp-stage div, .tsp-stage img, .tsp-stage button{ position:absolute; }
+.tsp-stage img{ display:block; width:1440px; max-width:none; height:auto; pointer-events:none; -webkit-user-drag:none; }
+.tsp-L{ left:0; top:0; width:1440px; height:1003px; overflow:hidden; background:#F3F3F0; visibility:hidden; }
+.tsp-L.on{ visibility:visible; }
+.tsp-scrim{ left:0; top:0; width:1440px; height:1003px; background:#101010; opacity:0; pointer-events:none; z-index:30; }
+.tsp-modal{ left:460px; top:194px; width:520px; z-index:31; opacity:0; visibility:hidden; }
+.tsp-stage .tsp-modal img{ width:520px; }
+.tsp-dot{ width:36px; height:36px; margin:-18px 0 0 -18px; border-radius:50%; background:rgba(20,24,28,.2); box-shadow:0 0 0 2px rgba(255,255,255,.95) inset,0 0 0 1px rgba(0,0,0,.2); opacity:0; pointer-events:none; z-index:60; }
+.tsp-hs{ background:transparent; border:0; padding:0; margin:0; cursor:pointer; border-radius:10px; z-index:70; color:transparent; }
+.tsp-hs:focus-visible{ outline:3px solid #0D99FF; outline-offset:2px; }
+.flash .tsp-hs{ background:rgba(13,153,255,.18); box-shadow:0 0 0 2px rgba(13,153,255,.8) inset; }
+/* TSP-END */
