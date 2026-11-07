@@ -136,7 +136,7 @@
 .case .pull{font:500 clamp(20px,1.7vw,24px)/1.45 var(--body);color:var(--ink);max-width:36ch;margin:0 0 16px;letter-spacing:-.005em}
 .case .d2{display:grid;gap:12px;padding:0 0 8px}
 .case .d2 + .d2{margin-top:56px}
-.case .d2 h3{font:600 clamp(20px,1.6vw,24px)/1.3 var(--body);margin:0;color:var(--ink)}
+.case .d2 h3{font:600 clamp(18px,1.47vw,22px)/1.3 var(--head);margin:0;color:var(--ink)}
 .case .d2-dl{margin:8px 0 0;display:grid;gap:8px;max-width:68ch}
 .case .d2-dl > div{display:grid;grid-template-columns:120px 1fr;gap:16px}
 .case .d2-dl dt{font:500 12px/1.9 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--dim)}
@@ -426,10 +426,10 @@
 /* metrics: light row with one continuous top line (all cases) */
 .case-body .metrics, .short-wrap .metrics, main .metrics{gap:0;row-gap:24px}
 main .metrics .metric{min-height:0;margin:0;padding:16px 24px 0 0;background:none;color:var(--t1,#08080B);border-top:1px solid rgba(8,8,11,.16);align-content:start;gap:8px}
-main .metrics .metric b{font:500 32px/40px var(--sans);letter-spacing:-0.02em;color:var(--ink,#08080B)}
+main .metrics .metric b{font:500 28px/36px var(--head);letter-spacing:-0.02em;color:var(--ink,#08080B)}
 main .metrics .metric span{font:400 16px/24px var(--sans);color:var(--t3,#5E5E66)}
 main .in-short + .metrics .metric{min-height:0}
-main .in-short + .metrics .metric b{font-size:32px;line-height:40px;letter-spacing:-0.02em}
+main .in-short + .metrics .metric b{font-size:28px;line-height:36px;letter-spacing:-0.02em}
 main .decision-visual .metric{min-height:0}
 .case .ratios{gap:0}
 .case .ratios li{padding-right:24px}
