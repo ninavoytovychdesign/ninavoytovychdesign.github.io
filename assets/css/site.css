@@ -1634,12 +1634,73 @@ html.r3-open .radar svg,html.r3-open .radar .radar-node{transition:opacity .2s l
 @media (min-width:768px){ .hero-cta, .foot-actions{ grid-auto-columns:minmax(0,1fr); } .hero-cta .btn, .foot-actions .btn{ padding-left:12px; padding-right:12px; } }
 /* Pattern: sharp corners everywhere. Exceptions: things that are round by meaning (radar sweep, status dot, list and timeline dots)
    and the wireframe illustrations of other products inside cases. :not(#_a):not(#_b) only raises specificity. */
-body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.dg-t i):not(.wf-donut),
-body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.ab-pains li):not(.foot-status i)::before,
-body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i)::after{ border-radius:0 !important; }
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.dg-t i):not(.wf-donut):not(.okp-dev):not(.okp-dev *),
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.ab-pains li):not(.foot-status i):not(.okp-dev *)::before,
+body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.okp-dev *)::after{ border-radius:0 !important; }
 @media (min-width:768px){ .radar-filters{ gap:8px; } }
 
 /* Before/after slider handle: square like the rest of the site, arrows drawn as one centred icon */
 .case .ba-line i{ width:40px; height:40px; margin:0; left:50%; top:50%; translate:-50% -50%; box-sizing:border-box; font-size:0; line-height:0; color:transparent; letter-spacing:0; display:block; overflow:hidden; }
 .case .ba-line i::before{ content:""; position:absolute; inset:0; margin:auto; width:20px; height:12px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 12' fill='none' stroke='%2308080B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 1 1 6l5 5M14 1l5 5-5 5'/%3E%3C/svg%3E") center/20px 12px no-repeat; }
 @media (max-width:767px){ .case .ba-line i{ width:32px; height:32px; } .case .ba-line i::before{ width:16px; height:10px; background-size:16px 10px; } }
+
+/* OKP-START · Open Kharkiv prototype in the case */
+.case figure.okp{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:48px; align-items:center; padding:48px; background:var(--tile, #F4F4F2); border:1px solid var(--line); }
+@media (max-width:1023px){ .case figure.okp{ grid-template-columns:1fr; justify-items:center; gap:32px; padding:32px 16px; } .case .okp-side{ width:100%; } }
+.okp-k{ margin:0 0 8px; font:500 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t3); }
+.okp-t{ margin:0 0 8px; font:400 22px/28px var(--sans); letter-spacing:-.5px; color:var(--t1); }
+.okp-l{ margin:0; color:var(--t2); }
+.okp-steps{ list-style:none; margin:24px 0; padding:0; counter-reset:s; }
+.okp-steps li{ counter-increment:s; display:grid; grid-template-columns:32px 1fr; gap:8px; padding:8px 0; border-top:1px solid var(--line); color:var(--t3); transition:color .3s; }
+.okp-steps li::before{ content:counter(s,decimal-leading-zero); font:500 12px/24px var(--mono); }
+.okp-steps li.on{ color:var(--t1); }
+.okp-ctl{ display:flex; flex-wrap:wrap; gap:12px; }
+.okp-ctl button{ height:40px; padding:0 16px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:500 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:background-color .2s, color .2s; }
+.okp-ctl button:hover, .okp-ctl button[aria-pressed=true]{ background:var(--ink); color:#fff; }
+.okp-ctl button:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.okp-h{ min-height:24px; margin:12px 0 0; font-size:14px; line-height:20px; color:var(--t3); }
+.okp .stage img{ max-width:none; }
+@keyframes okp-bl{50%{opacity:0}}
+/* phone */
+  .okp .phone{width:min(340px,82vw);position:relative;padding:12px;border-radius:62px;background:#1B1B1D;
+    box-shadow:0 0 0 2px #3A3A3E inset,0 40px 80px -24px rgba(0,0,0,.35),0 12px 24px -12px rgba(0,0,0,.25)}
+  .okp .scr{position:relative;width:100%;aspect-ratio:393/852;border-radius:50px;overflow:hidden;background:#fff;-webkit-mask-image:-webkit-radial-gradient(white,black)}
+  .okp .stage{position:absolute;left:0;top:0;width:393px;height:852px;transform-origin:0 0;touch-action:none;user-select:none;-webkit-user-select:none}
+  .okp .stage div,.okp .stage img,.okp .stage button,.okp .stage span{position:absolute}
+  .okp .stage img{display:block;width:393px;height:auto;-webkit-user-drag:none;pointer-events:none}
+  .okp .L{left:0;top:0;width:393px;height:852px;overflow:hidden;background:#fff;visibility:hidden}
+  .okp .L.on{visibility:visible}
+  .okp .cr{overflow:hidden}
+  .okp .dim{left:0;top:0;width:393px;height:852px;background:#000;opacity:0;pointer-events:none}
+  .okp .dot{width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:rgba(20,24,28,.22);box-shadow:0 0 0 2px rgba(255,255,255,.92) inset;opacity:0;pointer-events:none;z-index:60}
+  .okp .cur{width:2px;height:20px;background:#fff;top:177px;left:62px;opacity:0}
+  .okp .cur.blink{animation:okp-bl 1s steps(1) infinite}
+  
+  .okp .hl{left:16px;top:352px;width:361px;height:68px;border-radius:12px;background:rgba(0,0,0,.07);opacity:0}
+  /* sheet */
+  .okp #sheet{left:0;top:48px;width:393px;height:804px;border-radius:16px 16px 0 0;overflow:hidden;background:#fff;transform:translateY(804px);visibility:hidden;z-index:30;box-shadow:0 -8px 24px rgba(0,0,0,.12)}
+  .okp #sheetBar{left:0;top:631px;width:393px;height:173px;background:linear-gradient(rgba(255,255,255,0),#fff 16px)}
+  .okp #sheetBar img{top:16px}
+  /* keyboard (UA, iOS-like) */
+  .okp #kb{left:0;top:852px;width:393px;height:315px;background:#CED0D5;z-index:40;font-family:-apple-system,"SF Pro Text",system-ui,sans-serif}
+  .okp #kb .pred{left:0;top:0;width:393px;height:44px;display:flex;align-items:center}
+  .okp #kb .pred span{position:relative;flex:1;text-align:center;font-size:16px;color:#1C1C1E;white-space:nowrap}
+  .okp #kb .pred span+span{border-left:1px solid rgba(0,0,0,.12)}
+  .okp #kb .row{left:3px;width:387px;height:42px;display:flex;gap:5px}
+  .okp #kb .k{position:relative;flex:1 1 0;height:42px;border-radius:5px;background:#fff;box-shadow:0 1px 0 #898A8D;display:grid;place-items:center;font-size:22px;line-height:1;color:#000}
+  .okp #kb .k.sp{flex:0 0 42px;background:#ABB0BA}
+  .okp #kb .k.w{flex:0 0 88px;font-size:16px;background:#ABB0BA}
+  .okp #kb .k.go{background:#007AFF;color:#fff}
+  .okp #kb .k svg{width:22px;height:22px}
+  .okp #kb.up .k:not(.sp):not(.w){text-transform:uppercase}
+  .okp #kb .k.dn{background:#ABB0BA}
+  .okp #kb .pop{left:50%;bottom:0;width:58px;height:100px;margin-left:-29px;border-radius:9px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);display:none;padding-top:14px;text-align:center;font-size:34px;line-height:40px;z-index:2}
+  .okp #kb .k.dn .pop{display:block}
+  .okp #kb .bar{left:0;top:264px;width:393px;height:51px}
+  /* hotspots */
+  .okp .hs{background:transparent;border:0;padding:0;margin:0;cursor:pointer;border-radius:10px;z-index:70;color:transparent}
+  .okp .hs:focus-visible{outline:3px solid #0D99FF;outline-offset:2px}
+  .okp .flash .hs{background:rgba(13,153,255,.22);box-shadow:0 0 0 2px rgba(13,153,255,.8) inset;transition:background .15s}
+  .okp .live .stage{cursor:default}
+
+/* OKP-END */
