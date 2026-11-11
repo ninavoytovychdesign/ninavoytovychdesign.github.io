@@ -2297,20 +2297,20 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .fz .fz-chip text{ font-family:var(--mono); font-size:10px; letter-spacing:1px; text-transform:uppercase; fill:var(--w2); transition:fill .3s; }
 .fz .fz-chip.on rect{ stroke:rgba(255,255,255,.7); }
 .fz .fz-chip.on text{ fill:var(--w1); }
-/* Phones only: one scale for the whole scene instead of patches – the scene leads, the annotation stays quieter */
+/* Phones only: the scenes use a portrait layout, so the type can sit near its desktop size */
 @media (max-width:767px){
-  .fz text{ font-size:19px; }
-  .fz .fz-nd.kid text, .fz .fz-nd.step text, .fz .fz-nd.more text{ font-size:17px; }
-  .fz .fz-nd.root text{ font-size:21px; }
-  .fz .fz-nd.plus text{ font-size:30px; }
-  .fz .fz-mono{ font-size:20px; letter-spacing:1px; }
-  .fz .ann .fz-mono{ font-size:20px; letter-spacing:1px; }
-  .fz .ann .fz-mono.name{ font-size:17px; letter-spacing:.5px; }
-  .fz .ann .fz-mono.desc{ font-size:20px; }
-  .fz .fz-mono.cap{ font-size:20px; letter-spacing:1px; }
-  .fz .fz-tok .nm{ font-size:20px; }
-  .fz .fz-tok .val{ font-size:17px; }
-  .fz .fz-chip text{ font-size:17px; }
+  .fz text{ font-size:15px; }
+  .fz .fz-nd.kid text, .fz .fz-nd.step text, .fz .fz-nd.more text{ font-size:14px; }
+  .fz .fz-nd.root text{ font-size:17px; }
+  .fz .fz-nd.plus text{ font-size:25px; }
+  .fz .fz-mono{ font-size:13px; letter-spacing:.5px; }
+  .fz .ann .fz-mono{ font-size:14px; letter-spacing:1px; }
+  .fz .ann .fz-mono.name{ font-size:12px; letter-spacing:.5px; }
+  .fz .ann .fz-mono.desc{ font-size:14px; }
+  .fz .fz-mono.cap{ font-size:14px; letter-spacing:1px; }
+  .fz .fz-tok .nm{ font-size:14px; }
+  .fz .fz-tok .val{ font-size:12px; }
+  .fz .fz-chip text{ font-size:12px; }
   .fz .fz-w{ stroke-width:1.2; }
   .fz-cap{ font-size:11px; letter-spacing:1.5px; }
 }
@@ -2379,8 +2379,6 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 
 /* Focus on phones: the scene sits below the annotation, which keeps its own layer */
 @media (max-width:767px){
-  .fz-stage.fz-m svg.fz{ aspect-ratio:640/610; }
-  .fz-stage.fz-m .fz-l:not(.ann){ transform:translateY(150px); }
 }
 
 /* Focus on phones: the label needs room inside the black block, the scene a little air at the edges */

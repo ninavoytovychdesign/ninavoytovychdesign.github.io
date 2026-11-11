@@ -43,28 +43,40 @@
   function Arch(stage, cfg){
     var svg = stage.querySelector('svg'); layers(svg); this.svg = svg; this.cfg = cfg; this.stage = stage;
     var s = this;
-    var RX = 300, RY = 116, BUS = 184, TX = [96, 268, 440], TY = 218, CY = [298, 354], PX = 584, PY = RY, CHY = [200, 270, 340, 410];
-    s.root = node(svg, RX, RY, 124, 44, cfg.root, 'root');
+    var M = MOBQ.matches; s.box = M ? [420, 640] : [640, 440];
+    var RX, RY, BUS, TX, TY, CY, PX, PY, CHY, KW, TW, SW, CHX;
+    if (M){ /* portrait: the tree on top, the flow underneath */
+      RX = 210; RY = 150; BUS = 206; TX = [70, 210, 350]; TY = 252; CY = [322, 366];
+      PX = 60; PY = 440; CHX = 250; CHY = [440, 496, 552, 604]; KW = 128; TW = 124; SW = 160;
+    } else {
+      RX = 300; RY = 116; BUS = 184; TX = [96, 268, 440]; TY = 218; CY = [298, 354];
+      PX = 584; PY = RY; CHX = PX; CHY = [200, 270, 340, 410]; KW = 112; TW = 118; SW = 104;
+    }
+    s.root = node(svg, RX, RY, M ? 150 : 124, 44, cfg.root, 'root');
     s.plus = node(svg, PX, PY, 44, 44, cfg.plus, 'plus');
-    s.wPlus = wire(svg, 'M' + (RX + 62) + ' ' + RY + ' H' + (PX - 22));
+    s.wPlus = M ? wire(svg, 'M' + RX + ' ' + (RY + 22) + ' V' + 400 + ' H' + PX + ' V' + (PY - 22))
+                : wire(svg, 'M' + (RX + 62) + ' ' + RY + ' H' + (PX - 22));
     s.trunk = wire(svg, 'M' + RX + ' ' + (RY + 22) + ' V' + BUS);
     s.busL = wire(svg, 'M' + RX + ' ' + BUS + ' H' + TX[0]); s.busR = wire(svg, 'M' + RX + ' ' + BUS + ' H' + TX[2]);
     s.tabs = []; s.drops = []; s.kids = []; s.kw = [];
     cfg.tabs.forEach(function(t, i){
-      s.drops.push(wire(svg, 'M' + TX[i] + ' ' + BUS + ' V' + (TY - 18)));
-      s.tabs.push(node(svg, TX[i], TY, 118, 36, t[0], 'tab hit'));
+      s.drops.push(wire(svg, 'M' + TX[i] + ' ' + BUS + ' V' + (TY - 17)));
+      s.tabs.push(node(svg, TX[i], TY, TW, M ? 34 : 36, t[0], 'tab hit'));
       t[1].forEach(function(k, j){
-        s.kw.push(wire(svg, 'M' + (TX[i] - 44) + ' ' + (TY + 18) + ' V' + CY[j] + ' H' + (TX[i] - 32), 'thin'));
-        s.kids.push(node(svg, TX[i] + 24, CY[j], MOBQ.matches ? 144 : 112, 28, k, 'kid'));
+        if (M) s.kw.push(wire(svg, 'M' + TX[i] + ' ' + (TY + 17) + ' V' + (CY[j] - 14), 'thin'));
+        else s.kw.push(wire(svg, 'M' + (TX[i] - 44) + ' ' + (TY + 18) + ' V' + CY[j] + ' H' + (TX[i] - 32), 'thin'));
+        s.kids.push(node(svg, M ? TX[i] : TX[i] + 24, CY[j], KW, 28, k, 'kid'));
       });
     });
     s.chain = []; s.cw = [];
     cfg.path.forEach(function(p, i){
-      s.cw.push(wire(svg, 'M' + PX + ' ' + ((i ? CHY[i-1] + 16 : PY + 22)) + ' V' + (CHY[i] - 16), 'flow'));
-      s.chain.push(node(svg, PX, CHY[i], 104, 32, p, 'step'));
+      if (M) s.cw.push(wire(svg, i ? 'M' + CHX + ' ' + (CHY[i-1] + 17) + ' V' + (CHY[i] - 17)
+                                  : 'M' + (PX + 22) + ' ' + PY + ' H' + (CHX - SW / 2), 'flow'));
+      else s.cw.push(wire(svg, 'M' + PX + ' ' + (i ? CHY[i-1] + 16 : PY + 22) + ' V' + (CHY[i] - 16), 'flow'));
+      s.chain.push(node(svg, M ? CHX : PX, CHY[i], SW, M ? 34 : 32, p, 'step'));
     });
-    s.name = annot(svg, 24, 24, 'name'); s.name.textContent = cfg.cap;
-    s.cap = annot(svg, 24, 60, 'cap');
+    s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap;
+    s.cap = annot(svg, 20, M ? 62 : 60, 'cap');
     s.hd = head(svg, C.lime);
   }
   Arch.prototype.reset = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on', 'dim'); });
@@ -108,23 +120,41 @@
   /* ---------- scene 2: states ---------- */
   function States(stage, cfg){
     var svg = stage.querySelector('svg'); layers(svg); this.svg = svg; this.cfg = cfg; this.stage = stage; var s = this;
-    var CX = 150, CY = 214;
-    s.core = node(svg, CX + 12, CY, 150, 48, cfg.core, 'core');
-    s.core._t.setAttribute('x', -34);
-    s.ring = ring(svg, CX - 46, CY, 11);
-    s.checks = cfg.checks.map(function(c, i){ var t = mono(svg, CX - 62, CY + 50 + i * 20, 'check'); t.textContent = '✓  ' + c; return t; });
-    var MX = 430, MY = [110, 214, 318], EX = 574, EY = [70, 150, 278, 358];
-    s.main = cfg.main.map(function(m, i){ return node(svg, MX, MY[i], 124, 40, m[0], 'st hit'); });
-    s.wm = MY.map(function(y){ return wire(svg, 'M' + (CX + 87) + ' ' + CY + ' H300 V' + y + ' H' + (MX - 62)); });
-    s.more = cfg.more.map(function(m, i){ return node(svg, EX, EY[i], 100, 30, m[0], 'st more hit'); });
-    /* second row: Offline ← Timeout, Cancelled ← Error, Limit ← Error, Empty ← Success */
-    var SRC = [MY[2], MY[1], MY[1], MY[0]], EYI = [358, 150, 278, 84];
-    s.more.forEach(function(g, i){ g.setAttribute('transform', 'translate(' + EX + ' ' + EYI[i] + ')'); g._y = EYI[i]; });
-    s.we = SRC.map(function(y0, i){ return wire(svg, 'M' + (MX + 62) + ' ' + y0 + ' H508 V' + EYI[i] + ' H' + (EX - 50), 'thin'); });
-    /* return paths: left of the main column, under everything, back into the left side of the core */
-    s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 75), 'loop'),
-                wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 75), 'loop') ];
-    s.name = annot(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.counter = annot(svg, 24, 60, 'cnt'); s.desc = annot(svg, 24, 84, 'desc');
+    var M = MOBQ.matches; s.box = M ? [420, 520] : [640, 440];
+    var CX, CY, MX, MY, EX, EY, MW, EW;
+    if (M){ /* portrait: processing on top, the three states in a row, the rest below */
+      CX = 210; CY = 160; MX = [78, 210, 342]; MY = 320; EX = [368, 156, 262, 50]; EY = 418; MW = 120; EW = 90;
+    } else { CX = 150; CY = 214; MX = 430; MY = [110, 214, 318]; EX = 574; MW = 124; EW = 100; }
+    if (M){
+      s.core = node(svg, CX, CY, 180, 46, cfg.core, 'core');
+      s.ring = ring(svg, CX - 72, CY, 11);
+      s.core._t.setAttribute('x', 12);
+      s.checks = cfg.checks.map(function(c, i){ var t = mono(svg, CX - 86, CY + 44 + i * 22, 'check'); t.textContent = '✓  ' + c; return t; });
+      s.main = cfg.main.map(function(m, i){ return node(svg, MX[i], MY, MW, 40, m[0], 'st hit'); });
+      /* core → the row of three */
+      s.wm = MX.map(function(x){ return wire(svg, 'M' + CX + ' ' + (CY + 23) + ' V' + 272 + ' H' + x + ' V' + (MY - 20)); });
+      s.more = cfg.more.map(function(m, i){ return node(svg, EX[i], EY, EW, 30, m[0], 'st more hit'); });
+      /* second row: Offline ← Timeout, Cancelled ← Error, Limit ← Error, Empty ← Success */
+      var SRC = [MX[2], MX[1], MX[1], MX[0]];
+      s.we = SRC.map(function(x0, i){ return wire(svg, 'M' + x0 + ' ' + (MY + 20) + ' V' + 382 + ' H' + EX[i] + ' V' + (EY - 15), 'thin'); });
+      /* return paths run down the sides and back into the core */
+      s.loops = [ wire(svg, 'M' + (MX[1] + 60) + ' ' + MY + ' H' + 400 + ' V' + 240 + ' H' + (CX + 90), 'loop'),
+                  wire(svg, 'M' + (MX[2] + 60) + ' ' + MY + ' H' + 408 + ' V' + 232 + ' H' + (CX + 90), 'loop') ];
+    } else {
+      s.core = node(svg, CX + 12, CY, 150, 48, cfg.core, 'core');
+      s.core._t.setAttribute('x', -34);
+      s.ring = ring(svg, CX - 46, CY, 11);
+      s.checks = cfg.checks.map(function(c, i){ var t = mono(svg, CX - 62, CY + 50 + i * 20, 'check'); t.textContent = '✓  ' + c; return t; });
+      s.main = cfg.main.map(function(m, i){ return node(svg, MX, MY[i], MW, 40, m[0], 'st hit'); });
+      s.wm = MY.map(function(y){ return wire(svg, 'M' + (CX + 87) + ' ' + CY + ' H300 V' + y + ' H' + (MX - 62)); });
+      s.more = cfg.more.map(function(m, i){ return node(svg, EX, 0, EW, 30, m[0], 'st more hit'); });
+      var SRC2 = [MY[2], MY[1], MY[1], MY[0]], EYI = [358, 150, 278, 84];
+      s.more.forEach(function(g, i){ g.setAttribute('transform', 'translate(' + EX + ' ' + EYI[i] + ')'); g._y = EYI[i]; });
+      s.we = SRC2.map(function(y0, i){ return wire(svg, 'M' + (MX + 62) + ' ' + y0 + ' H508 V' + EYI[i] + ' H' + (EX - 50), 'thin'); });
+      s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 75), 'loop'),
+                  wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 75), 'loop') ];
+    }
+    s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.counter = annot(svg, 20, M ? 62 : 60, 'cnt'); s.desc = annot(svg, 20, M ? 88 : 84, 'desc');
     s.hd = head(svg, C.violet);
     s.colors = [C.ok, C.err, C.warn]; s.moreColors = [C.off, C.cancel, C.limit, C.empty];
   }
@@ -193,11 +223,26 @@
   function contrast(a, b){ var la = lum(a), lb = lum(b); var hi = Math.max(la, lb), lo = Math.min(la, lb); return (hi + .05) / (lo + .05); }
   function A11y(stage, cfg){
     var svg = stage.querySelector('svg'); layers(svg); this.svg = svg; this.cfg = cfg; this.stage = stage; var s = this;
-    var TX = 24, TY = [128, 188, 248, 308], BUSX = 196, CX = 232, CY = 96, CW = 384;
-    s.tok = cfg.tokens.map(function(n, i){ var g = el('g', { 'class':'fz-tok', transform:'translate(' + TX + ' ' + TY[i] + ')' }, svg.nodes); el('rect', { x:0, y:-9, width:18, height:18, 'class':'sw' }, g); var t = el('text', { x:0, y:22, 'class':'fz-mono nm', 'dominant-baseline':'central' }, g); t.textContent = n; var v = el('text', { x:0, y:38, 'class':'fz-mono val', 'dominant-baseline':'central' }, g); g._sw = g.firstChild; g._v = v; return g; });
-    s.name = annot(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.note = annot(svg, 24, 60, 'cnt'); s.cr = annot(svg, 24, 84, 'val cr');
-    s.tw = TY.map(function(y){ return wire(svg, 'M' + (TX + 18) + ' ' + y + ' H' + BUSX + ' V' + 212 + ' H' + CX, 'thin'); });
-    s.back = el('rect', { x:CX - 16, y:CY - 24, width:CW + 32, height:340, 'class':'back' }, svg.lines);
+    var M = MOBQ.matches; s.box = M ? [420, 560] : [640, 440];
+    var TX, TY, BUSX, CX, CY, CW, CHIPY, CHIPX;
+    if (M){ CX = 20; CY = 260; CW = 380; CHIPY = 500; CHIPX = 14; }
+    else { TX = 24; TY = [128, 188, 248, 308]; BUSX = 196; CX = 232; CY = 96; CW = 384; CHIPY = 404; CHIPX = CX - 8; }
+    s.CX = CX; s.CY = CY; s.CW = CW;
+    if (M){
+      /* portrait: the four tokens in a row on top, the card full width below */
+      var TXS = [20, 120, 220, 320];
+      s.tok = cfg.tokens.map(function(n, i){ var g = el('g', { 'class':'fz-tok', transform:'translate(' + TXS[i] + ' ' + 150 + ')' }, svg.nodes);
+        el('rect', { x:0, y:-9, width:18, height:18, 'class':'sw' }, g);
+        var t = el('text', { x:0, y:24, 'class':'fz-mono nm', 'dominant-baseline':'central' }, g); t.textContent = n;
+        var v = el('text', { x:0, y:42, 'class':'fz-mono val', 'dominant-baseline':'central' }, g); g._sw = g.firstChild; g._v = v; return g; });
+      s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.note = annot(svg, 20, 62, 'cnt'); s.cr = annot(svg, 20, 88, 'val cr');
+      s.tw = TXS.map(function(x){ return wire(svg, 'M' + (x + 9) + ' ' + 196 + ' V' + 224 + ' H210 V' + (CY - 8), 'thin'); });
+    } else {
+      s.tok = cfg.tokens.map(function(n, i){ var g = el('g', { 'class':'fz-tok', transform:'translate(' + TX + ' ' + TY[i] + ')' }, svg.nodes); el('rect', { x:0, y:-9, width:18, height:18, 'class':'sw' }, g); var t = el('text', { x:0, y:22, 'class':'fz-mono nm', 'dominant-baseline':'central' }, g); t.textContent = n; var v = el('text', { x:0, y:38, 'class':'fz-mono val', 'dominant-baseline':'central' }, g); g._sw = g.firstChild; g._v = v; return g; });
+      s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.note = annot(svg, 20, 60, 'cnt'); s.cr = annot(svg, 20, 84, 'val cr');
+      s.tw = TY.map(function(y){ return wire(svg, 'M' + (TX + 18) + ' ' + y + ' H' + BUSX + ' V' + 212 + ' H' + CX, 'thin'); });
+    }
+    s.back = el('rect', { x:CX - 16, y:CY - 24, width:CW + 32, height:M ? 300 : 340, 'class':'back' }, svg.lines);
     s.card = el('g', { 'class':'fz-card', transform:'translate(' + CX + ' ' + CY + ')' }, svg.nodes);
     s.cbg = el('rect', { x:0, y:0, width:CW, height:200, 'class':'cbg' }, s.card);
     s.ct = el('text', { x:24, y:44, 'class':'ct' }, s.card); s.ct.textContent = cfg.card[0];
@@ -205,13 +250,14 @@
     s.cb = el('rect', { x:24, y:112, width:100, height:32, 'class':'cb' }, s.card);
     s.cbt = el('text', { x:40, y:133, 'class':'cbt' }, s.card); s.cbt.textContent = cfg.card[2];
     s.focus = el('rect', { x:0, y:0, width:0, height:0, 'class':'fz-focus' }, svg.top);
-    s.chips = cfg.modes.map(function(m, i){ var g = el('g', { 'class':'fz-chip', transform:'translate(' + (CX + i * 96) + ' ' + 410 + ')' }, svg.ui); var t = el('text', { x:0, y:0, 'dominant-baseline':'central' }, g); t.textContent = m; var tl = t.getComputedTextLength ? t.getComputedTextLength() : 0; var w = (tl > 0 ? tl : m.length * 5.7) + 16; el('rect', { x:-8, y:-13, width:w, height:26 }, g); g.appendChild(t); g._w = w; return g; });
-    var x = CX - 8, cy = 404; s.chips.forEach(function(g){ if (x + g._w > 648){ x = CX - 8; cy += 34; } g.setAttribute('transform', 'translate(' + x + ' ' + cy + ')'); x += g._w + 8; });
+    s.chips = cfg.modes.map(function(m, i){ var g = el('g', { 'class':'fz-chip', transform:'translate(' + (CHIPX + i * 96) + ' ' + CHIPY + ')' }, svg.ui); var t = el('text', { x:0, y:0, 'dominant-baseline':'central' }, g); t.textContent = m; var tl = t.getComputedTextLength ? t.getComputedTextLength() : 0; var w = (tl > 0 ? tl : m.length * 5.7) + 16; el('rect', { x:-8, y:-13, width:w, height:26 }, g); g.appendChild(t); g._w = w; return g; });
+    var x = CHIPX, cy = CHIPY, lim = M ? 410 : 648;
+    s.chips.forEach(function(g){ if (x + g._w > lim){ x = CHIPX; cy += 34; } g.setAttribute('transform', 'translate(' + x + ' ' + cy + ')'); x += g._w + 8; });
     s.hd = []; for (var i = 0; i < 4; i++) s.hd.push(head(svg, C.green));
     s.mode = 0; s.cur = -1;
   }
   A11y.prototype.paint = function(m, k){
-    var s = this, M = MODES[m], cfg = s.cfg, sc = M.sc * (MOBQ.matches ? 1.3 : 1);
+    var s = this, M = MODES[m], cfg = s.cfg, sc = M.sc;
     s.cbg.setAttribute('fill', M.sf); s.cbg.setAttribute('stroke', M.bg === M.sf ? 'rgba(0,0,0,.25)' : 'transparent');
     s.ct.style.fill = M.tx; s.cs1.style.fill = M.tx; s.cs2.style.fill = M.tx; s.cb.setAttribute('fill', M.ac); s.cbt.style.fill = m === 0 || m === 2 ? '#FFFFFF' : '#0E1A14';
     s.tok[0]._sw.setAttribute('fill', M.bg); s.tok[1]._sw.setAttribute('fill', M.sf); s.tok[2]._sw.setAttribute('fill', M.tx); s.tok[3]._sw.setAttribute('fill', M.ac);
@@ -221,13 +267,13 @@
     var ft = 22 * sc, fs = 14 * sc, pad = 24;
     s.ct.style.fontSize = ft + 'px'; s.cs1.style.fontSize = fs + 'px'; s.cs2.style.fontSize = fs + 'px'; s.cbt.style.fontSize = (13 * sc) + 'px';
     var words = cfg.card[1].split(' '), l1 = '', l2 = '';
-    s.cs1.textContent = cfg.card[1]; var maxW = 384 - pad * 2;
+    s.cs1.textContent = cfg.card[1]; var maxW = s.CW - pad * 2;
     if (s.cs1.getComputedTextLength() > maxW){ var i = 0; s.cs1.textContent = ''; for (; i < words.length; i++){ var t = (l1 ? l1 + ' ' : '') + words[i]; s.cs1.textContent = t; if (s.cs1.getComputedTextLength() > maxW){ break; } l1 = t; } s.cs1.textContent = l1; l2 = words.slice(i).join(' '); }
     s.cs2.textContent = l2;
     var y = pad + ft; s.ct.setAttribute('y', y); y += fs * 1.8; s.cs1.setAttribute('y', y); if (l2){ y += fs * 1.45; s.cs2.setAttribute('y', y); }
     y += 18; var bh = 32 * sc; s.cb.setAttribute('y', y); s.cb.setAttribute('height', bh); s.cbt.setAttribute('y', y + bh / 2 + 4.5 * sc);
     s.cbt.setAttribute('x', pad + 16 * sc); s.cb.setAttribute('width', s.cbt.getComputedTextLength() + 32 * sc);
-    s.cbg.setAttribute('height', y + bh + pad); s.back.setAttribute('height', y + bh + pad + 48);
+    s.cbg.setAttribute('width', s.CW); s.cbg.setAttribute('height', y + bh + pad); s.back.setAttribute('width', s.CW + 32); s.back.setAttribute('height', y + bh + pad + 48);
     s.chips.forEach(function(g, i){ g.classList.toggle('on', i === m); });
     s.mode = m;
   };
@@ -245,7 +291,7 @@
     /* focus walks the card: title → text → button */
     var targets = [s.ct, s.cs1, s.cb];
     for (var i = 0; i < targets.length; i++){
-      var b = targets[i].getBBox(); s.focus.setAttribute('x', 232 + b.x - 6); s.focus.setAttribute('y', 96 + b.y - 4); s.focus.setAttribute('width', b.width + 12); s.focus.setAttribute('height', b.height + 8); s.focus.classList.add('on');
+      var b = targets[i].getBBox(); s.focus.setAttribute('x', s.CX + b.x - 6); s.focus.setAttribute('y', s.CY + b.y - 4); s.focus.setAttribute('width', b.width + 12); s.focus.setAttribute('height', b.height + 8); s.focus.classList.add('on');
       if (!await wait(ctx, 380)) return false;
     }
     s.focus.classList.remove('on');
@@ -263,19 +309,21 @@
 
   /* ---------- orchestration ---------- */
   /* on a phone the annotation type is larger, so the stage grows and the scene slides below it */
-  var MOB = matchMedia('(max-width: 767px)');
-  function fit(){ var m = MOB.matches; stages.forEach(function(st){ var svg = st.querySelector('svg'); if (!svg) return;
-    svg.setAttribute('viewBox', m ? '0 0 640 610' : '0 0 640 440'); st.classList.toggle('fz-m', m);
-    /* the annotation type is larger on a phone, so its three lines need more room */
-    var ys = m ? [28, 86, 133] : [24, 60, 84];
-    [].slice.call(svg.querySelectorAll('.ann text')).forEach(function(t, i){ t.setAttribute('y', ys[Math.min(i, 2)]); });
-  }); }
-  var scenes = stages.map(function(st){
+  function fit(){ scenes.forEach(function(sc){ var svg = sc.svg, b = sc.box || [640, 440];
+    svg.setAttribute('viewBox', '0 0 ' + b[0] + ' ' + b[1]); svg.style.aspectRatio = b[0] + '/' + b[1];
+    sc.stage.classList.toggle('fz-m', MOBQ.matches); }); }
+
+  function build(){ return stages.map(function(st){
     var cfg = JSON.parse(st.querySelector('.fz-cfg').textContent), kind = st.dataset.fz;
     var sc = kind === 'arch' ? new Arch(st, cfg) : kind === 'states' ? new States(st, cfg) : new A11y(st, cfg);
     sc.kind = kind; sc.panel = st.closest('[role="tabpanel"]'); sc.ctx = null; return sc;
-  });
-  fit(); (MOB.addEventListener ? MOB.addEventListener('change', fit) : MOB.addListener(fit));
+  }); }
+  var scenes = build();
+  fit();
+  /* the phone and the desktop have their own layouts, so the scenes are rebuilt when it switches */
+  function relayout(){ scenes.forEach(function(sc){ if (sc.ctx){ sc.ctx.dead = true; sc.ctx = null; } });
+    scenes = build(); fit(); if (typeof sync === 'function') sync(); }
+  (MOBQ.addEventListener ? MOBQ.addEventListener('change', relayout) : MOBQ.addListener(relayout));
 
   function visible(sc){ return !sc.panel || !sc.panel.hidden; }
 
