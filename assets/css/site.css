@@ -1033,13 +1033,15 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 @media (max-width:767px){
   /* screen 1: status → CTA fills the viewport, CTA sits at the bottom */
   .hero{ padding-bottom:64px; }
-  .hero-intro{ min-height:calc(100svh - var(--intro-top, 300px) - 24px); display:flex; flex-direction:column; justify-content:space-between; gap:32px; }
+  /* --intro-min and --radar-w are frozen in px by site.js on load, so the address bar
+     collapsing can't restretch the first screen; the svh calc is the no-JS fallback */
+  .hero-intro{ min-height:var(--intro-min, calc(100svh - var(--intro-top, 300px) - 24px)); display:flex; flex-direction:column; justify-content:space-between; gap:32px; }
   .hero-cta{ display:flex; flex-direction:column; align-items:stretch; gap:12px; }
   .hero-cta .btn{ width:100%; justify-content:center; text-align:center; }
   .hero-cta .tlink{ display:flex; align-items:center; justify-content:center; height:52px; border:1px solid var(--ink); text-decoration:none; }
   /* screen 2: radar + product card fit one viewport under the fixed header */
   .radar-cell{ position:relative; margin:108px 0 0; display:flex; flex-direction:column; align-items:center; }
-  .radar{ width:min(100%, max(240px, calc(100svh - 92px - 24px - 24px - 322px - 60px))); height:auto; aspect-ratio:1; }
+  .radar{ width:min(100%, max(240px, var(--radar-w, calc(100svh - 92px - 24px - 24px - 322px - 60px)))); height:auto; aspect-ratio:1; }
   .hero-card{ margin-top:24px; }
   .rf-wrap{ position:relative; order:-1; width:100%; margin-bottom:24px; z-index:5; }
   .rf-toggle{ display:flex; width:100%; align-items:center; gap:12px; height:44px; padding:0 16px; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t1); background:var(--bg, #F4F4F4); border:1px solid var(--line); cursor:pointer; }

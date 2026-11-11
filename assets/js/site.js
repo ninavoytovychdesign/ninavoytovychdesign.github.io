@@ -249,16 +249,26 @@
 (function(){
   var hero = document.querySelector('.hero'), intro = document.querySelector('.hero-intro');
   var mq = window.matchMedia('(max-width:767px)');
+  /* The first screen is measured against the viewport height once. On phones the address bar
+     collapses as you scroll, which fires resize with a taller viewport; recomputing there made
+     the hero stretch and its content drift down until the page was reloaded. So the height is
+     only re-taken when the width changes too – a rotation or a real resize. */
+  var vw = 0, vh = 0;
   function setTop(){
     if (!hero || !intro) return;
-    if (!mq.matches){ hero.style.removeProperty('--intro-top'); return; }
+    if (!mq.matches){ hero.style.removeProperty('--intro-top'); hero.style.removeProperty('--intro-min'); hero.style.removeProperty('--radar-w'); return; }
     intro.style.minHeight = '0px';
     var top = intro.getBoundingClientRect().top - hero.getBoundingClientRect().top;
     intro.style.minHeight = '';
     hero.style.setProperty('--intro-top', Math.round(top) + 'px');
+    hero.style.setProperty('--intro-min', Math.max(0, Math.round(vh - top - 24)) + 'px');
+    hero.style.setProperty('--radar-w', Math.round(vh - 92 - 24 - 24 - 322 - 60) + 'px');
   }
-  setTop(); window.addEventListener('load', setTop); window.addEventListener('resize', setTop);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setTop);
+  function measure(keepHeight){ if (!keepHeight) vh = innerHeight; vw = innerWidth; setTop(); }
+  measure();
+  window.addEventListener('load', function(){ measure(); });
+  window.addEventListener('resize', function(){ measure(innerWidth === vw); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ measure(true); });
 
   var wrap = document.querySelector('.rf-wrap'), tg = wrap && wrap.querySelector('.rf-toggle'), cur = wrap && wrap.querySelector('.rf-cur');
   if (!wrap || !tg) return;
