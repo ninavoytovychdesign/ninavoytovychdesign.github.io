@@ -132,7 +132,8 @@
       s.checks = cfg.checks.map(function(c, i){ var t = mono(svg, CX - 86, CY + 44 + i * 22, 'check'); t.textContent = '✓  ' + c; return t; });
       s.main = cfg.main.map(function(m, i){ return node(svg, MX[i], MY, MW, 40, m[0], 'st hit'); });
       /* core → the row of three */
-      s.wm = MX.map(function(x){ return wire(svg, 'M' + CX + ' ' + (CY + 23) + ' V' + 272 + ' H' + x + ' V' + (MY - 20)); });
+      /* the trunk leaves the core on the left and runs down past the checklist, not through it */
+      s.wm = MX.map(function(x){ return wire(svg, 'M' + (CX - 90) + ' ' + CY + ' H44 V272 H' + x + ' V' + (MY - 20)); });
       s.more = cfg.more.map(function(m, i){ return node(svg, EX[i], EY, EW, 30, m[0], 'st more hit'); });
       /* second row: Offline ← Timeout, Cancelled ← Error, Limit ← Error, Empty ← Success */
       var SRC = [MX[2], MX[1], MX[1], MX[0]];
