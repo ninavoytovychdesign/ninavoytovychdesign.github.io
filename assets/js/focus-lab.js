@@ -66,7 +66,7 @@
   Arch.prototype.reset = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on', 'dim'); });
     [s.root, s.plus].concat(s.tabs, s.kids, s.chain).forEach(unpop); s.cap.textContent = ''; s.hd.classList.remove('on'); s.svg.classList.remove('dimmed'); };
   Arch.prototype.still = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDashoffset = 0; w.classList.add('on'); });
-    [s.root, s.plus].concat(s.tabs, s.kids, s.chain).forEach(function(g){ pop(g); g._t.textContent = g._label; }); s.cap.textContent = s.cfg.path_cap; };
+    [s.root, s.plus].concat(s.tabs, s.kids, s.chain).forEach(function(g){ pop(g); g._t.textContent = g._label; }); var L = s.chain[s.chain.length - 1]; L.style.setProperty('--c', C.ok); L.classList.add('lit'); s.cw[s.cw.length - 1].style.setProperty('--c', C.ok); s.cap.textContent = s.cfg.path_cap; };
   Arch.prototype.run = async function(ctx){
     var s = this; glow(C.lime);
     pop(s.root); await type(ctx, s.root, 300); if (ctx.dead) return;
@@ -85,9 +85,10 @@
     s.svg.classList.add('dimmed'); s.plus.classList.add('lit'); s.root.classList.add('lit');
     typeTo(ctx, s.cap, s.cfg.path_cap, 500);
     for (var j = 0; j < s.chain.length; j++){
-      await draw(ctx, s.cw[j], 420, C.lime, s.hd); if (ctx.dead) return;
-      pop(s.chain[j]); s.chain[j].classList.add('lit'); await type(ctx, s.chain[j], 200); if (ctx.dead) return;
-      if (j === s.chain.length - 1) wave(s.svg, s.chain[j]._x, s.chain[j]._y, C.lime);
+      var last = j === s.chain.length - 1, col = last ? C.ok : C.lime; /* the saved record is a success state, so it gets the success green */
+      await draw(ctx, s.cw[j], 420, col, s.hd); if (ctx.dead) return;
+      pop(s.chain[j]); s.chain[j].style.setProperty('--c', col); s.chain[j].classList.add('lit'); await type(ctx, s.chain[j], 200); if (ctx.dead) return;
+      if (last){ wave(s.svg, s.chain[j]._x, s.chain[j]._y, C.ok); glow(C.ok); }
     }
     s.hd.classList.remove('on');
     await wait(ctx, 2000); if (ctx.dead) return;
