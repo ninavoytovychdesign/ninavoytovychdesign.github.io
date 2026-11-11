@@ -24,8 +24,13 @@
 
   /* a wire: drawn with dashoffset; a signal head can run along it */
   function wire(svg, d, cls){ var p = el('path', { d:d, 'class':'fz-w ' + (cls || '') }, svg.lines); var L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; p._L = L; return p; }
-  function draw(ctx, p, dur, color, head){ p.style.setProperty('--c', color || ''); p.classList.add('on'); return tween(ctx, dur, function(k){ p.style.strokeDashoffset = p._L * (1 - k); if (head){ var pt = p.getPointAtLength(p._L * k); head.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')'); head.classList.add('on'); } }, out); }
-  function undraw(ctx, p, dur){ return tween(ctx, dur, function(k){ p.style.strokeDashoffset = p._L * k; }, ease).then(function(ok){ if (ok) p.classList.remove('on'); return ok; }); }
+  /* Once a wire is fully drawn the dash is dropped altogether: with non-scaling-stroke the dash
+     length is measured in screen px, so at a scale other than 1 it could fall a little short of
+     the path and leave the line visibly unfinished. */
+  function draw(ctx, p, dur, color, head){ p.style.setProperty('--c', color || ''); p.style.strokeDasharray = p._L; p.classList.add('on');
+    return tween(ctx, dur, function(k){ p.style.strokeDashoffset = p._L * (1 - k); if (head){ var pt = p.getPointAtLength(p._L * k); head.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')'); head.classList.add('on'); } }, out)
+      .then(function(ok){ if (ok) p.style.strokeDasharray = 'none'; return ok; }); }
+  function undraw(ctx, p, dur){ p.style.strokeDasharray = p._L; return tween(ctx, dur, function(k){ p.style.strokeDashoffset = p._L * k; }, ease).then(function(ok){ if (ok) p.classList.remove('on'); return ok; }); }
   function head(svg, color){ var g = el('g', { 'class':'fz-hd' }, svg.top); el('circle', { r:10, 'class':'hd-glow' }, g); el('circle', { r:2.6, 'class':'hd-core' }, g); if (color) g.style.setProperty('--c', color); return g; }
   /* a node: box + label, pops in with scale */
   function node(svg, x, y, w, h, label, cls){ var g = el('g', { 'class':'fz-nd ' + (cls || ''), transform:'translate(' + x + ' ' + y + ')' }, svg.nodes); var ig = el('g', { 'class':'ig' }, g); el('rect', { x:-w/2, y:-h/2, width:w, height:h }, ig); var t = el('text', { x:0, y:0, 'text-anchor':'middle', 'dominant-baseline':'central' }, ig); t.textContent = ''; g._label = label; g._t = t; g._x = x; g._y = y; return g; }
@@ -97,9 +102,9 @@
     s.cap = annot(svg, 20, M ? 62 : 60, 'cap');
     s.hd = head(svg, C.lime);
   }
-  Arch.prototype.reset = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on', 'dim'); });
+  Arch.prototype.reset = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDasharray = w._L; w.style.strokeDashoffset = w._L; w.classList.remove('on', 'dim'); });
     [s.root, s.plus].concat(s.tabs, s.kids, s.chain).forEach(unpop); s.cap.textContent = ''; s.hd.classList.remove('on'); s.svg.classList.remove('dimmed'); };
-  Arch.prototype.still = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDashoffset = 0; w.classList.add('on'); });
+  Arch.prototype.still = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDasharray = 'none'; w.style.strokeDashoffset = 0; w.classList.add('on'); });
     [s.root, s.plus].concat(s.tabs, s.kids, s.chain).forEach(function(g){ pop(g); g._t.textContent = g._label; }); var L = s.chain[s.chain.length - 1]; L.style.setProperty('--c', C.ok); L.classList.add('lit'); s.cw[s.cw.length - 1].style.setProperty('--c', C.ok); s.cap.textContent = s.cfg.path_cap; };
   Arch.prototype.run = async function(ctx){
     var s = this; glow(C.lime);
@@ -179,10 +184,10 @@
     s.hd = head(svg, C.violet);
     s.colors = [C.ok, C.err, C.warn]; s.moreColors = [C.off, C.cancel, C.limit, C.empty];
   }
-  States.prototype.reset = function(){ var s = this; s.wm.concat(s.we, s.loops).forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on'); });
+  States.prototype.reset = function(){ var s = this; s.wm.concat(s.we, s.loops).forEach(function(w){ w.style.strokeDasharray = w._L; w.style.strokeDashoffset = w._L; w.classList.remove('on'); });
     s.main.concat(s.more).forEach(unpop); unpop(s.core); s.ring.classList.remove('in'); setRing(s.ring, 0); s.checks.forEach(function(t){ t.classList.remove('on'); }); s.counter.textContent = ''; s.desc.textContent = ''; s.hd.classList.remove('on'); };
   States.prototype.still = function(){ var s = this; pop(s.core); s.core._t.textContent = s.cfg.core; s.ring.classList.add('in'); setRing(s.ring, 1); s.checks.forEach(function(t){ t.classList.add('on'); });
-    s.wm.forEach(function(w, i){ w.style.strokeDashoffset = 0; w.style.setProperty('--c', s.colors[i]); w.classList.add('on'); }); s.we.forEach(function(w, i){ w.style.strokeDashoffset = 0; w.style.setProperty('--c', s.moreColors[i]); w.classList.add('on'); });
+    s.wm.forEach(function(w, i){ w.style.strokeDasharray = 'none'; w.style.strokeDashoffset = 0; w.style.setProperty('--c', s.colors[i]); w.classList.add('on'); }); s.we.forEach(function(w, i){ w.style.strokeDasharray = 'none'; w.style.strokeDashoffset = 0; w.style.setProperty('--c', s.moreColors[i]); w.classList.add('on'); });
     s.main.forEach(function(g, i){ pop(g); g._t.textContent = g._label; g.style.setProperty('--c', s.colors[i]); g.classList.add('lit'); }); s.more.forEach(function(g, i){ pop(g); g._t.textContent = g._label; g.style.setProperty('--c', s.moreColors[i]); g.classList.add('lit'); }); s.counter.textContent = s.cfg.counter + ' 9 / 9'; };
   States.prototype.process = async function(ctx, upto, color){
     var s = this; s.checks.forEach(function(t){ t.classList.remove('on'); });
@@ -264,6 +269,8 @@
       s.tw = TY.map(function(y){ return wire(svg, 'M' + (TX + 18) + ' ' + y + ' H' + BUSX + ' V' + 212 + ' H' + CX, 'thin'); });
     }
     s.back = el('rect', { x:CX - 16, y:CY - 24, width:CW + 32, height:M ? 300 : 340, 'class':'back' }, svg.lines);
+    /* the glow plate sits behind the wires, not over them – it was cutting their last stretch */
+    svg.lines.insertBefore(s.back, svg.lines.firstChild);
     s.card = el('g', { 'class':'fz-card', transform:'translate(' + CX + ' ' + CY + ')' }, svg.nodes);
     s.cbg = el('rect', { x:0, y:0, width:CW, height:200, 'class':'cbg' }, s.card);
     s.ct = el('text', { x:24, y:44, 'class':'ct' }, s.card); s.ct.textContent = cfg.card[0];
@@ -298,11 +305,11 @@
     s.chips.forEach(function(g, i){ g.classList.toggle('on', i === m); });
     s.mode = m;
   };
-  A11y.prototype.reset = function(){ var s = this; s.tw.forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on'); }); s.card.classList.remove('in'); s.back.classList.remove('in'); s.tok.forEach(function(g){ g.classList.remove('in'); }); s.chips.forEach(function(g){ g.classList.remove('in'); }); s.focus.classList.remove('on'); s.hd.forEach(function(h){ h.classList.remove('on'); }); s.cr.textContent = ''; s.note.textContent = ''; s.paint(0); };
-  A11y.prototype.still = function(){ var s = this; s.tw.forEach(function(w){ w.style.strokeDashoffset = 0; w.classList.add('on'); }); s.card.classList.add('in'); s.back.classList.add('in'); s.tok.forEach(function(g){ g.classList.add('in'); }); s.chips.forEach(function(g){ g.classList.add('in'); }); s.paint(0); s.note.textContent = s.cfg.modes[0]; s.cr.textContent = s.cfg.contrast + ' ' + contrast(MODES[0].tx, MODES[0].sf).toFixed(1) + ':1'; };
+  A11y.prototype.reset = function(){ var s = this; s.tw.forEach(function(w){ w.style.strokeDasharray = w._L; w.style.strokeDashoffset = w._L; w.classList.remove('on'); }); s.card.classList.remove('in'); s.back.classList.remove('in'); s.tok.forEach(function(g){ g.classList.remove('in'); }); s.chips.forEach(function(g){ g.classList.remove('in'); }); s.focus.classList.remove('on'); s.hd.forEach(function(h){ h.classList.remove('on'); }); s.cr.textContent = ''; s.note.textContent = ''; s.paint(0); };
+  A11y.prototype.still = function(){ var s = this; s.tw.forEach(function(w){ w.style.strokeDasharray = 'none'; w.style.strokeDashoffset = 0; w.classList.add('on'); }); s.card.classList.add('in'); s.back.classList.add('in'); s.tok.forEach(function(g){ g.classList.add('in'); }); s.chips.forEach(function(g){ g.classList.add('in'); }); s.paint(0); s.note.textContent = s.cfg.modes[0]; s.cr.textContent = s.cfg.contrast + ' ' + contrast(MODES[0].tx, MODES[0].sf).toFixed(1) + ':1'; };
   A11y.prototype.feed = async function(ctx, m){
     var s = this; var M = MODES[m];
-    s.tw.forEach(function(w){ w.style.strokeDashoffset = w._L; });
+    s.tw.forEach(function(w){ w.style.strokeDasharray = w._L; w.style.strokeDashoffset = w._L; });
     await Promise.all(s.tw.map(function(w, i){ return wait(ctx, i * 60).then(function(){ return draw(ctx, w, 520, C.green, s.hd[i]); }); })); if (ctx.dead) return false;
     s.hd.forEach(function(h){ h.classList.remove('on'); });
     var from = s.mode; s.paint(m); s.card.classList.add('flash'); setTimeout(function(){ s.card.classList.remove('flash'); }, 500);
