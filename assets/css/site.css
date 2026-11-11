@@ -2316,3 +2316,10 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .fz-stage svg.fz{ animation:none; }
   .fz *{ transition:none !important; animation:none !important; }
 }
+
+/* header: CV as a plain underlined link (like “Read on LinkedIn”), 16px from the joined lang + CTA buttons */
+.nav-cv{ border:0 !important; padding:0 !important; height:auto; margin-right:16px; gap:6px; font:600 14px/20px var(--mono); letter-spacing:2px; text-transform:uppercase; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; transition:text-decoration-color .25s var(--ease); }
+.nav-cv:hover{ background:none !important; text-decoration-color:transparent; }
+.nav-cv .ico-dl{ width:1em; height:1em; flex:none; }
+@media (min-width:1024px) and (max-width:1199px){ .nav-cv{ letter-spacing:1px; } }
+
