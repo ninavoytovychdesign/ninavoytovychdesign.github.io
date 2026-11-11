@@ -2381,3 +2381,11 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .fz-stage.fz-m .fz-l:not(.ann){ transform:translateY(90px); }
 }
 
+/* Focus on phones: the label needs room inside the black block, the scene a little air at the edges */
+@media (max-width:767px){
+  .focus{ padding-top:56px !important; }
+  .focus .focus-head{ margin-top:0 !important; }
+  .focus-card .fz-stage{ padding:0 16px; }
+  .focus-card .fz-stage .fz-cap{ padding-left:16px; }
+}
+
