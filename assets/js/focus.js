@@ -7,6 +7,7 @@
   var sec = document.querySelector('.focus'); if (!sec) return;
   var stages = [].slice.call(sec.querySelectorAll('.fz-stage')); if (!stages.length) return;
   var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MOBQ = matchMedia('(max-width: 767px)');
   var NS = 'http://www.w3.org/2000/svg';
   var C = { lime:'#B5D640', violet:'#6C58CE', green:'#1C7154', ok:'#4FD18B', err:'#E5484D', warn:'#F5A524', off:'#8B9BB4', cancel:'#B8B8C2', limit:'#FF8A65', empty:'#9C8CFF', white:'#F4F4F6' };
 
@@ -54,7 +55,7 @@
       s.tabs.push(node(svg, TX[i], TY, 118, 36, t[0], 'tab hit'));
       t[1].forEach(function(k, j){
         s.kw.push(wire(svg, 'M' + (TX[i] - 44) + ' ' + (TY + 18) + ' V' + CY[j] + ' H' + (TX[i] - 32), 'thin'));
-        s.kids.push(node(svg, TX[i] + 24, CY[j], 112, 28, k, 'kid'));
+        s.kids.push(node(svg, TX[i] + 24, CY[j], MOBQ.matches ? 144 : 112, 28, k, 'kid'));
       });
     });
     s.chain = []; s.cw = [];
@@ -210,7 +211,7 @@
     s.mode = 0; s.cur = -1;
   }
   A11y.prototype.paint = function(m, k){
-    var s = this, M = MODES[m], cfg = s.cfg, sc = M.sc * (innerWidth < 768 ? 1.25 : 1);
+    var s = this, M = MODES[m], cfg = s.cfg, sc = M.sc * (MOBQ.matches ? 1.3 : 1);
     s.cbg.setAttribute('fill', M.sf); s.cbg.setAttribute('stroke', M.bg === M.sf ? 'rgba(0,0,0,.25)' : 'transparent');
     s.ct.style.fill = M.tx; s.cs1.style.fill = M.tx; s.cs2.style.fill = M.tx; s.cb.setAttribute('fill', M.ac); s.cbt.style.fill = m === 0 || m === 2 ? '#FFFFFF' : '#0E1A14';
     s.tok[0]._sw.setAttribute('fill', M.bg); s.tok[1]._sw.setAttribute('fill', M.sf); s.tok[2]._sw.setAttribute('fill', M.tx); s.tok[3]._sw.setAttribute('fill', M.ac);
