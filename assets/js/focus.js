@@ -32,8 +32,10 @@
   function ring(svg, x, y, r){ var g = el('g', { 'class':'fz-ring', transform:'translate(' + x + ' ' + y + ')' }, svg.nodes); el('circle', { r:r, 'class':'rg' }, g); var a = el('circle', { r:r, 'class':'ra', transform:'rotate(-90)' }, g); var L = 2 * Math.PI * r; a.style.strokeDasharray = L; a.style.strokeDashoffset = L; a._L = L; g._a = a; return g; }
   function setRing(g, k){ g._a.style.strokeDashoffset = g._a._L * (1 - k); }
   function wave(svg, x, y, color){ var c = el('circle', { cx:x, cy:y, r:6, 'class':'fz-wave' }, svg.top); c.style.setProperty('--c', color); setTimeout(function(){ c.remove(); }, 1300); }
-  function layers(svg){ svg.innerHTML = ''; svg.lines = el('g', { 'class':'fz-l lines' }, svg); svg.nodes = el('g', { 'class':'fz-l nodes' }, svg); svg.top = el('g', { 'class':'fz-l top' }, svg); svg.ui = el('g', { 'class':'fz-l ui' }, svg); }
+  function layers(svg){ svg.innerHTML = ''; svg.lines = el('g', { 'class':'fz-l lines' }, svg); svg.nodes = el('g', { 'class':'fz-l nodes' }, svg); svg.top = el('g', { 'class':'fz-l top' }, svg); svg.ui = el('g', { 'class':'fz-l ui' }, svg); svg.ann = el('g', { 'class':'fz-l ann' }, svg); }
   function mono(svg, x, y, cls, anchor){ var t = el('text', { x:x, y:y, 'class':'fz-mono ' + (cls || ''), 'text-anchor':anchor || 'start' }, svg.ui); return t; }
+  /* the project name and the live annotation sit in their own layer at the top of the stage */
+  function annot(svg, x, y, cls, anchor){ var t = el('text', { x:x, y:y, 'class':'fz-mono ' + (cls || ''), 'text-anchor':anchor || 'start' }, svg.ann); return t; }
   function typeTo(ctx, t, s, dur){ return tween(ctx, dur || Math.max(400, s.length * 30), function(k){ t.textContent = s.slice(0, Math.ceil(s.length * k)) + (k < 1 ? '▍' : ''); }, function(x){ return x; }); }
 
   /* ---------- scene 1: architecture ---------- */
@@ -60,8 +62,8 @@
       s.cw.push(wire(svg, 'M' + PX + ' ' + ((i ? CHY[i-1] + 16 : PY + 22)) + ' V' + (CHY[i] - 16), 'flow'));
       s.chain.push(node(svg, PX, CHY[i], 104, 32, p, 'step'));
     });
-    s.name = mono(svg, 24, 24, 'name'); s.name.textContent = cfg.cap;
-    s.cap = mono(svg, 24, 60, 'cap');
+    s.name = annot(svg, 24, 24, 'name'); s.name.textContent = cfg.cap;
+    s.cap = annot(svg, 24, 60, 'cap');
     s.hd = head(svg, C.lime);
   }
   Arch.prototype.reset = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on', 'dim'); });
@@ -121,7 +123,7 @@
     /* return paths: left of the main column, under everything, back into the left side of the core */
     s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 75), 'loop'),
                 wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 75), 'loop') ];
-    s.name = mono(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.counter = mono(svg, 24, 60, 'cnt'); s.desc = mono(svg, 24, 84, 'desc');
+    s.name = annot(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.counter = annot(svg, 24, 60, 'cnt'); s.desc = annot(svg, 24, 84, 'desc');
     s.hd = head(svg, C.violet);
     s.colors = [C.ok, C.err, C.warn]; s.moreColors = [C.off, C.cancel, C.limit, C.empty];
   }
@@ -192,7 +194,7 @@
     var svg = stage.querySelector('svg'); layers(svg); this.svg = svg; this.cfg = cfg; this.stage = stage; var s = this;
     var TX = 24, TY = [128, 188, 248, 308], BUSX = 196, CX = 232, CY = 96, CW = 384;
     s.tok = cfg.tokens.map(function(n, i){ var g = el('g', { 'class':'fz-tok', transform:'translate(' + TX + ' ' + TY[i] + ')' }, svg.nodes); el('rect', { x:0, y:-9, width:18, height:18, 'class':'sw' }, g); var t = el('text', { x:0, y:22, 'class':'fz-mono nm', 'dominant-baseline':'central' }, g); t.textContent = n; var v = el('text', { x:0, y:38, 'class':'fz-mono val', 'dominant-baseline':'central' }, g); g._sw = g.firstChild; g._v = v; return g; });
-    s.name = mono(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.note = mono(svg, 24, 60, 'cnt'); s.cr = mono(svg, 24, 84, 'val cr');
+    s.name = annot(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.note = annot(svg, 24, 60, 'cnt'); s.cr = annot(svg, 24, 84, 'val cr');
     s.tw = TY.map(function(y){ return wire(svg, 'M' + (TX + 18) + ' ' + y + ' H' + BUSX + ' V' + 212 + ' H' + CX, 'thin'); });
     s.back = el('rect', { x:CX - 16, y:CY - 24, width:CW + 32, height:340, 'class':'back' }, svg.lines);
     s.card = el('g', { 'class':'fz-card', transform:'translate(' + CX + ' ' + CY + ')' }, svg.nodes);
@@ -259,6 +261,12 @@
   A11y.prototype.collapse = async function(ctx){ var s = this; s.card.classList.remove('in'); s.back.classList.remove('in'); s.tok.forEach(function(g){ g.classList.remove('in'); }); s.chips.forEach(function(g){ g.classList.remove('in'); }); await Promise.all(s.tw.map(function(w){ return undraw(ctx, w, 380); })); s.reset(); };
 
   /* ---------- orchestration ---------- */
+  /* on a phone the annotation type is larger, so the stage grows and the scene slides below it */
+  var MOB = matchMedia('(max-width: 767px)');
+  function fit(){ stages.forEach(function(st){ var svg = st.querySelector('svg'); if (!svg) return;
+    svg.setAttribute('viewBox', MOB.matches ? '0 0 640 530' : '0 0 640 440'); st.classList.toggle('fz-m', MOB.matches); }); }
+  fit(); (MOB.addEventListener ? MOB.addEventListener('change', fit) : MOB.addListener(fit));
+
   var scenes = stages.map(function(st){
     var cfg = JSON.parse(st.querySelector('.fz-cfg').textContent), kind = st.dataset.fz;
     var sc = kind === 'arch' ? new Arch(st, cfg) : kind === 'states' ? new States(st, cfg) : new A11y(st, cfg);

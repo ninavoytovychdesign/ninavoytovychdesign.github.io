@@ -2374,3 +2374,10 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .r3-chips .r3-chip:hover, .r3-chips .r3-chip:focus-visible{ z-index:3; }
 .nav-pill .nav-end > *{ position:relative; }
 .nav-pill .nav-end .nav-cta{ z-index:2; }
+
+/* Focus on phones: the scene sits below the annotation, which keeps its own layer */
+@media (max-width:767px){
+  .fz-stage.fz-m svg.fz{ aspect-ratio:640/530; }
+  .fz-stage.fz-m .fz-l:not(.ann){ transform:translateY(90px); }
+}
+
