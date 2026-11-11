@@ -289,15 +289,14 @@
 .focus.fz3::before{ content:""; position:absolute; z-index:-1; right:-10%; top:10%; width:60%; height:80%; pointer-events:none;
   background:radial-gradient(closest-side, var(--glow) 0%, transparent 70%); opacity:.22; filter:blur(40px); transition:background .9s var(--ease); }
 @media (min-width:1024px){
-  .focus.fz3 .focus-grid{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:40px; }
+  /* the words keep their full width, the scene takes everything that is left and hugs the right edge */
+  .focus.fz3 .focus-grid{ grid-template-columns:minmax(max-content,5fr) minmax(0,7fr); gap:40px; }
   .focus.fz3 .focus-card{ max-width:none; width:100%; }
   .focus.fz3 .focus-card [role="tabpanel"]{ gap:12px; }
-  .focus.fz3 .fz-stage{ flex:1 1 0; min-height:440px; margin-bottom:8px; }
+  .focus.fz3 .fz-stage{ flex:1 1 0; min-height:0; margin-bottom:8px; justify-content:center; }
 }
-@media (min-width:1024px) and (max-width:1359px){ .focus.fz3 .fz-stage{ min-height:360px; } }
 .fz-stage{ position:relative; display:flex; flex-direction:column; width:100%; --mx:0; --my:0; }
-.fz-stage svg.fz{ display:block; width:100%; height:100%; flex:1 1 auto; overflow:visible; animation:fzdrift 9s ease-in-out infinite alternate; }
-@media (max-width:1023px){ .fz-stage svg.fz{ aspect-ratio:640/440; height:auto; } }
+.fz-stage svg.fz{ display:block; width:100%; height:auto; aspect-ratio:640/440; flex:0 0 auto; overflow:visible; animation:fzdrift 9s ease-in-out infinite alternate; }
 @media (max-width:767px){ .focus-card .fz-stage{ margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); padding:0 12px; width:auto; } .focus-card .fz-stage .fz-cap{ padding-left:12px; } }
 .fz-cap{ margin-top:12px; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--w2); }
 @keyframes fzdrift{ from{ transform:translate(0,0) } to{ transform:translate(0,-6px) } }
