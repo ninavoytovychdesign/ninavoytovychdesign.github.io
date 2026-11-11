@@ -2347,3 +2347,12 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .hero-cta .btn, .foot-actions .btn, .t-actions .btn, .md .btn, .nf-cta .btn{ padding:16px 20px; }
 .nav-pill .nav-cta.btn{ padding:14px 20px; }
 @media (max-width:767px){ .hero-cta .btn, .foot-actions .btn{ padding:16px 20px; } }
+
+/* Home order: Selected work right after the hero, About below Focus – the gaps keep the old rhythm */
+.work{ padding-top:188px; }
+.about{ padding-top:188px; }
+.about + .proof, .about + .proof.wrap{ padding-top:0 !important; }
+.about:has(+ .proof){ padding-bottom:150px; }
+@media (min-width:1024px){ .work{ padding-top:120px; } .about{ padding-top:128px; } }
+@media (max-width:767px){ .work{ padding-top:0; } .about{ padding-top:96px; } }
+
