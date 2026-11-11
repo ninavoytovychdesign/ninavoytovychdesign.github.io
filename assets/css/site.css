@@ -2317,9 +2317,13 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .fz *{ transition:none !important; animation:none !important; }
 }
 
-/* header: CV as a plain underlined link (like “Read on LinkedIn”), 16px from the joined lang + CTA buttons */
-.nav-cv{ border:0 !important; padding:0 !important; height:auto; margin-right:16px; gap:6px; font:600 14px/20px var(--mono); letter-spacing:2px; text-transform:uppercase; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; transition:text-decoration-color .25s var(--ease); }
-.nav-cv:hover{ background:none !important; text-decoration-color:transparent; }
-.nav-cv .ico-dl{ width:1em; height:1em; flex:none; }
-@media (min-width:1024px) and (max-width:1199px){ .nav-cv{ letter-spacing:1px; } }
+/* footer CTA: CV as a plain underlined link (like “Read on LinkedIn”) with a download icon, 16px from the button */
+.foot-actions{ display:flex !important; flex-wrap:wrap; align-items:center; gap:16px !important; }
+.foot-actions .btn{ width:auto; }
+.foot-cv{ display:inline-flex; align-items:center; gap:6px; color:var(--ink); padding:4px 0; }
+.foot-cv .ico-dl{ width:1em; height:1em; flex:none; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:square; }
+@media (max-width:767px){ .foot-actions{ flex-direction:column; align-items:stretch; } .foot-actions .btn{ width:100%; } .foot-cv{ align-self:center; } }
 
+/* 3D map: the callout’s “Open the case” is a filled black button */
+.r3-co .go{ background:var(--r3-ink) !important; color:#fff !important; border-color:var(--r3-ink) !important; }
+.r3-co .go:hover{ background:#2A2A30 !important; color:#fff !important; }
