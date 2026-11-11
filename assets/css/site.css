@@ -2424,3 +2424,10 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .nav-bar{ justify-content:center; }
   .nav-pill{ width:100%; max-width:none; flex:1 1 auto; }
 }
+
+/* «Product Designer» stays on one line on phones. The size is the widest that still fits
+   the content column with a ~4% margin: the column is 100vw − 48px and the title needs
+   about 7.74px of width per 1px of font-size at this letter-spacing. */
+@media (max-width:767px){
+  .hero-title{ font-size:calc(12.4vw - 6px); line-height:1.08; white-space:nowrap; }
+}
