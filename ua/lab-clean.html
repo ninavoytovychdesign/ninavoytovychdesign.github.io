@@ -310,6 +310,7 @@
 /* ── Focus round 2: the scene takes the right half and lives ── */
 .focus.fz3{ --glow:#B5D640; overflow:hidden; }
 .focus.fz3 .rings{ opacity:.3; }
+.focus.fz3 .focus-pos{ display:none !important; }
 .focus.fz3::before{ content:""; position:absolute; z-index:-1; right:-10%; top:10%; width:60%; height:80%; pointer-events:none;
   background:radial-gradient(closest-side, var(--glow) 0%, transparent 70%); opacity:.22; filter:blur(40px); transition:background .9s var(--ease); }
 @media (min-width:1024px){
