@@ -2238,9 +2238,12 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .fz .fz-mono.check{ opacity:0; transition:opacity .25s var(--ease); fill:var(--w1); }
 .fz .fz-mono.check.on{ opacity:1; }
 /* wires */
-.fz .fz-w{ fill:none; stroke:rgba(255,255,255,.12); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; transition:stroke .5s var(--ease), stroke-opacity .5s var(--ease); }
+/* A wire is only visible while it carries .on. The dash offset alone isn't enough to hide it:
+   with non-scaling-stroke the dash is measured in screen px, so at a scale below 1 the tail
+   of every undrawn path stayed on screen as a stray fragment. */
+.fz .fz-w{ fill:none; stroke:rgba(255,255,255,.12); stroke-opacity:0; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; transition:stroke .5s var(--ease), stroke-opacity .5s var(--ease); }
 .fz .fz-w.thin{ stroke-width:1; }
-.fz .fz-w.on{ stroke:var(--c, #fff); }
+.fz .fz-w.on{ stroke:var(--c, #fff); stroke-opacity:1; }
 .fz .fz-w.loop.on{ stroke-dasharray:none; }
 .fz.dimmed .fz-w.on:not(.flow){ stroke-opacity:.28; }
 /* signal head */
