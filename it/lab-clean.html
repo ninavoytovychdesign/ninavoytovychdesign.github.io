@@ -127,7 +127,7 @@
 <svg aria-hidden="true" class="rings" viewbox="0 0 1100 1100"><circle cx="550" cy="550" r="546"></circle><circle cx="550" cy="550" r="350"></circle><line x1="0" x2="1100" y1="550" y2="550"></line><line x1="550" x2="550" y1="0" y2="1100"></line></svg>
 <div class="wrap">
 <div class="work-head focus-head">
-<span class="label">Focus</span><span class="fz-top" aria-hidden="true"></span>
+<span class="label">Focus</span>
 <h2 class="h64 sr-only" id="focus-h">In cosa sono più forte</h2>
 </div>
 <div class="focus-grid">
@@ -280,7 +280,7 @@
 </form>
 </dialog><script>window.MD_MSG={"req": "Fill this in", "mail": "Check the email – it looks incomplete", "ok": "Please confirm to publish"};</script>
 <script defer="" src="../assets/js/site.js?v=c4d0ffe5"></script>
-<script src="../assets/js/focus-lab.js?v=1794390900" defer></script>
+<script src="../assets/js/focus-lab.js?v=1794391228" defer></script>
 <style id="lab-edits">
 
 /* ── Focus round 2: the scene takes the right half and lives ── */
@@ -301,8 +301,7 @@
 @media (max-width:767px){ .focus-card .fz-stage{ margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); padding:0 12px; width:auto; } .focus-card .fz-stage .fz-cap{ padding-left:12px; } }
 .fz-cap{ display:none; }
 /* scene caption sits in the top-right corner, paired with the “Focus” label */
-.focus.fz3 .fz-top{ position:absolute; top:0; right:var(--pad,48px); font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--w2); }
-@media (max-width:767px){ .focus.fz3 .fz-top{ position:static; display:block; margin-top:4px; } }
+.fz .fz-mono.name{ font-size:12px; letter-spacing:2px; text-transform:uppercase; fill:var(--w2); }
 .fz .fz-mono.desc{ font-family:var(--mono); font-size:12px; letter-spacing:0; fill:var(--w1); }
 @keyframes fzdrift{ from{ transform:translate(0,0) } to{ transform:translate(0,-6px) } }
 /* parallax layers answer the mouse: wires slowly, nodes faster */
@@ -387,7 +386,7 @@
   .fz .fz-nd.root text{ font-size:19px; }
   .fz .fz-nd.plus text{ font-size:26px; }
   .fz .fz-mono{ font-size:13px; letter-spacing:.5px; }
-  .fz .fz-mono.cnt{ font-size:14px; letter-spacing:1.5px; }
+  .fz .fz-mono.cnt, .fz .fz-mono.name, .fz .fz-mono.cap{ font-size:14px; letter-spacing:1.5px; }
   .fz .fz-mono.desc{ font-size:16px; }
   .fz .fz-mono.cr{ font-size:14px; }
   .fz .fz-tok .nm{ font-size:15px; }
