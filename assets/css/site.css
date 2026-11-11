@@ -2303,10 +2303,12 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .fz .fz-nd.kid text, .fz .fz-nd.step text, .fz .fz-nd.more text{ font-size:15px; }
   .fz .fz-nd.root text{ font-size:19px; }
   .fz .fz-nd.plus text{ font-size:26px; }
-  .fz .fz-mono{ font-size:13px; letter-spacing:.5px; }
-  .fz .fz-mono.cnt, .fz .fz-mono.name, .fz .fz-mono.cap{ font-size:14px; letter-spacing:1.5px; }
-  .fz .fz-mono.desc{ font-size:16px; }
-  .fz .fz-mono.cr{ font-size:14px; }
+  .fz .fz-mono{ font-size:15px; letter-spacing:.5px; }
+  /* the annotation is drawn in SVG units and the scheme is scaled down, so it needs a bigger size to read */
+  .fz .ann .fz-mono{ font-size:22px; letter-spacing:1.5px; }
+  .fz .ann .fz-mono.name{ font-size:18px; letter-spacing:1px; }   /* the project line is the longest, it has to fit the width */
+  .fz .ann .fz-mono.desc{ font-size:24px; }
+  .fz .fz-mono.cap{ font-size:22px; letter-spacing:1.5px; }
   .fz .fz-tok .nm{ font-size:15px; }
   .fz .fz-tok .val{ font-size:12px; }
   .fz .fz-chip text{ font-size:12px; }
@@ -2377,8 +2379,8 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 
 /* Focus on phones: the scene sits below the annotation, which keeps its own layer */
 @media (max-width:767px){
-  .fz-stage.fz-m svg.fz{ aspect-ratio:640/530; }
-  .fz-stage.fz-m .fz-l:not(.ann){ transform:translateY(90px); }
+  .fz-stage.fz-m svg.fz{ aspect-ratio:640/610; }
+  .fz-stage.fz-m .fz-l:not(.ann){ transform:translateY(150px); }
 }
 
 /* Focus on phones: the label needs room inside the black block, the scene a little air at the edges */

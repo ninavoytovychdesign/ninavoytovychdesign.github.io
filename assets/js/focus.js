@@ -263,8 +263,12 @@
   /* ---------- orchestration ---------- */
   /* on a phone the annotation type is larger, so the stage grows and the scene slides below it */
   var MOB = matchMedia('(max-width: 767px)');
-  function fit(){ stages.forEach(function(st){ var svg = st.querySelector('svg'); if (!svg) return;
-    svg.setAttribute('viewBox', MOB.matches ? '0 0 640 530' : '0 0 640 440'); st.classList.toggle('fz-m', MOB.matches); }); }
+  function fit(){ var m = MOB.matches; stages.forEach(function(st){ var svg = st.querySelector('svg'); if (!svg) return;
+    svg.setAttribute('viewBox', m ? '0 0 640 610' : '0 0 640 440'); st.classList.toggle('fz-m', m);
+    /* the annotation type is larger on a phone, so its three lines need more room */
+    var ys = m ? [28, 76, 110] : [24, 60, 84];
+    [].slice.call(svg.querySelectorAll('.ann text')).forEach(function(t, i){ t.setAttribute('y', ys[Math.min(i, 2)]); });
+  }); }
   fit(); (MOB.addEventListener ? MOB.addEventListener('change', fit) : MOB.addListener(fit));
 
   var scenes = stages.map(function(st){
