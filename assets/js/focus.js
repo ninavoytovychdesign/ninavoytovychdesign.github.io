@@ -37,7 +37,23 @@
   function mono(svg, x, y, cls, anchor){ var t = el('text', { x:x, y:y, 'class':'fz-mono ' + (cls || ''), 'text-anchor':anchor || 'start' }, svg.ui); return t; }
   /* the project name and the live annotation sit in their own layer at the top of the stage */
   function annot(svg, x, y, cls, anchor){ var t = el('text', { x:x, y:y, 'class':'fz-mono ' + (cls || ''), 'text-anchor':anchor || 'start' }, svg.ann); return t; }
-  function typeTo(ctx, t, s, dur){ return tween(ctx, dur || Math.max(400, s.length * 30), function(k){ t.textContent = s.slice(0, Math.ceil(s.length * k)) + (k < 1 ? '▍' : ''); }, function(x){ return x; }); }
+  /* break a line into chunks of at most `max` characters, on word boundaries */
+  function wrapTo(s, max){ var out = [], cur = ''; s.split(' ').forEach(function(w){
+      if (cur && (cur + ' ' + w).length > max){ out.push(cur); cur = w; } else cur = cur ? cur + ' ' + w : w; });
+    if (cur) out.push(cur); return out; }
+  /* write `n` characters of the already-wrapped lines into the text node, caret on the last one */
+  function putWrapped(t, ls, n, caret){ t.textContent = ''; var used = 0, x = t.getAttribute('x');
+    for (var i = 0; i < ls.length; i++){ var take = Math.max(0, Math.min(ls[i].length, n - used));
+      if (i && take === 0) break;
+      var sp = el('tspan', { x:x, dy:i ? 19 : 0 }, t);
+      var last = take < ls[i].length || i === ls.length - 1;
+      sp.textContent = ls[i].slice(0, take) + (caret && last ? '▍' : '');
+      used += ls[i].length + 1; if (take < ls[i].length) break; } }
+  function typeTo(ctx, t, s, dur){ var W = t._wrap || 0, ls = W ? wrapTo(s, W) : null;
+    return tween(ctx, dur || Math.max(400, s.length * 30), function(k){
+      var n = Math.ceil(s.length * k);
+      if (ls) putWrapped(t, ls, n, k < 1); else t.textContent = s.slice(0, n) + (k < 1 ? '▍' : '');
+    }, function(x){ return x; }); }
 
   /* ---------- scene 1: architecture ---------- */
   function Arch(stage, cfg){
@@ -128,7 +144,7 @@
     if (M){
       s.core = node(svg, CX, CY, 180, 46, cfg.core, 'core');
       s.ring = ring(svg, CX - 72, CY, 11);
-      s.core._t.setAttribute('x', 12);
+      s.core._t.setAttribute('x', -48);
       s.checks = cfg.checks.map(function(c, i){ var t = mono(svg, CX - 86, CY + 44 + i * 22, 'check'); t.textContent = '✓  ' + c; return t; });
       s.main = cfg.main.map(function(m, i){ return node(svg, MX[i], MY, MW, 40, m[0], 'st hit'); });
       /* core → the row of three */
@@ -155,7 +171,7 @@
       s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 75), 'loop'),
                   wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 75), 'loop') ];
     }
-    s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.counter = annot(svg, 20, M ? 62 : 60, 'cnt'); s.desc = annot(svg, 20, M ? 88 : 84, 'desc');
+    s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.counter = annot(svg, 20, M ? 62 : 60, 'cnt'); s.desc = annot(svg, 20, M ? 88 : 84, 'desc'); if (M) s.desc._wrap = 40;
     s.hd = head(svg, C.violet);
     s.colors = [C.ok, C.err, C.warn]; s.moreColors = [C.off, C.cancel, C.limit, C.empty];
   }
@@ -310,9 +326,11 @@
 
   /* ---------- orchestration ---------- */
   /* on a phone the annotation type is larger, so the stage grows and the scene slides below it */
-  function fit(){ scenes.forEach(function(sc){ var svg = sc.svg, b = sc.box || [640, 440];
-    svg.setAttribute('viewBox', '0 0 ' + b[0] + ' ' + b[1]); svg.style.aspectRatio = b[0] + '/' + b[1];
-    sc.stage.classList.toggle('fz-m', MOBQ.matches); }); }
+  /* all three scenes share one canvas height, so switching tabs doesn't move anything below them */
+  function fit(){ var H = 0; scenes.forEach(function(sc){ H = Math.max(H, (sc.box || [640, 440])[1]); });
+    scenes.forEach(function(sc){ var svg = sc.svg, b = sc.box || [640, 440], off = (H - b[1]) / 2;
+      svg.setAttribute('viewBox', '0 ' + (-off) + ' ' + b[0] + ' ' + H); svg.style.aspectRatio = b[0] + '/' + H;
+      sc.stage.classList.toggle('fz-m', MOBQ.matches); }); }
 
   function build(){ return stages.map(function(st){
     var cfg = JSON.parse(st.querySelector('.fz-cfg').textContent), kind = st.dataset.fz;
