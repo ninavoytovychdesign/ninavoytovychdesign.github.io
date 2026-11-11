@@ -34,13 +34,13 @@
   function wave(svg, x, y, color){ var c = el('circle', { cx:x, cy:y, r:6, 'class':'fz-wave' }, svg.top); c.style.setProperty('--c', color); setTimeout(function(){ c.remove(); }, 1300); }
   function layers(svg){ svg.innerHTML = ''; svg.lines = el('g', { 'class':'fz-l lines' }, svg); svg.nodes = el('g', { 'class':'fz-l nodes' }, svg); svg.top = el('g', { 'class':'fz-l top' }, svg); svg.ui = el('g', { 'class':'fz-l ui' }, svg); }
   function mono(svg, x, y, cls, anchor){ var t = el('text', { x:x, y:y, 'class':'fz-mono ' + (cls || ''), 'text-anchor':anchor || 'start' }, svg.ui); return t; }
-  function typeTo(ctx, t, s, dur){ return tween(ctx, dur || 300, function(k){ t.textContent = s.slice(0, Math.ceil(s.length * k)); }, function(x){ return x; }); }
+  function typeTo(ctx, t, s, dur){ return tween(ctx, dur || Math.max(300, s.length * 22), function(k){ t.textContent = s.slice(0, Math.ceil(s.length * k)) + (k < 1 ? '▍' : ''); }, function(x){ return x; }); }
 
   /* ---------- scene 1: architecture ---------- */
   function Arch(stage, cfg){
     var svg = stage.querySelector('svg'); layers(svg); this.svg = svg; this.cfg = cfg; this.stage = stage;
     var s = this;
-    var RX = 300, RY = 56, BUS = 128, TX = [96, 268, 440], TY = 162, CY = [246, 306], PX = 584, PY = RY, CHY = [150, 224, 298, 372];
+    var RX = 300, RY = 76, BUS = 148, TX = [96, 268, 440], TY = 182, CY = [266, 326], PX = 584, PY = RY, CHY = [170, 244, 318, 392];
     s.root = node(svg, RX, RY, 124, 44, cfg.root, 'root');
     s.plus = node(svg, PX, PY, 44, 44, cfg.plus, 'plus');
     s.wPlus = wire(svg, 'M' + (RX + 62) + ' ' + RY + ' H' + (PX - 22));
@@ -60,7 +60,7 @@
       s.cw.push(wire(svg, 'M' + PX + ' ' + ((i ? CHY[i-1] + 16 : PY + 22)) + ' V' + (CHY[i] - 16), 'flow'));
       s.chain.push(node(svg, PX, CHY[i], 104, 32, p, 'step'));
     });
-    s.cap = mono(svg, 640, 428, 'cap', 'end');
+    s.cap = mono(svg, 24, 24, 'cap');
     s.hd = head(svg, C.lime);
   }
   Arch.prototype.reset = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on', 'dim'); });
@@ -120,7 +120,7 @@
     /* return paths: left of the main column, under everything, back into the left side of the core */
     s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 75), 'loop'),
                 wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 75), 'loop') ];
-    s.counter = mono(svg, 640, 18, 'cnt', 'end'); s.desc = mono(svg, 640, 40, 'desc', 'end');
+    s.counter = mono(svg, 24, 24, 'cnt'); s.desc = mono(svg, 24, 46, 'desc');
     s.hd = head(svg, C.violet);
     s.colors = [C.ok, C.err, C.warn]; s.moreColors = [C.off, C.cancel, C.limit, C.empty];
   }
@@ -191,7 +191,7 @@
     var svg = stage.querySelector('svg'); layers(svg); this.svg = svg; this.cfg = cfg; this.stage = stage; var s = this;
     var TX = 24, TY = [96, 156, 216, 276], BUSX = 196, CX = 232, CY = 64, CW = 384;
     s.tok = cfg.tokens.map(function(n, i){ var g = el('g', { 'class':'fz-tok', transform:'translate(' + TX + ' ' + TY[i] + ')' }, svg.nodes); el('rect', { x:0, y:-9, width:18, height:18, 'class':'sw' }, g); var t = el('text', { x:0, y:22, 'class':'fz-mono nm', 'dominant-baseline':'central' }, g); t.textContent = n; var v = el('text', { x:0, y:38, 'class':'fz-mono val', 'dominant-baseline':'central' }, g); g._sw = g.firstChild; g._v = v; return g; });
-    s.cr = mono(svg, TX, TY[3] + 64, 'val cr');
+    s.note = mono(svg, 24, 24, 'cnt'); s.cr = mono(svg, 24, 46, 'val cr');
     s.tw = TY.map(function(y){ return wire(svg, 'M' + (TX + 18) + ' ' + y + ' H' + BUSX + ' V' + 190 + ' H' + CX, 'thin'); });
     s.back = el('rect', { x:CX - 16, y:CY - 24, width:CW + 32, height:340, 'class':'back' }, svg.lines);
     s.card = el('g', { 'class':'fz-card', transform:'translate(' + CX + ' ' + CY + ')' }, svg.nodes);
@@ -227,14 +227,15 @@
     s.chips.forEach(function(g, i){ g.classList.toggle('on', i === m); });
     s.mode = m;
   };
-  A11y.prototype.reset = function(){ var s = this; s.tw.forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on'); }); s.card.classList.remove('in'); s.back.classList.remove('in'); s.tok.forEach(function(g){ g.classList.remove('in'); }); s.chips.forEach(function(g){ g.classList.remove('in'); }); s.focus.classList.remove('on'); s.hd.forEach(function(h){ h.classList.remove('on'); }); s.cr.textContent = ''; s.paint(0); };
-  A11y.prototype.still = function(){ var s = this; s.tw.forEach(function(w){ w.style.strokeDashoffset = 0; w.classList.add('on'); }); s.card.classList.add('in'); s.back.classList.add('in'); s.tok.forEach(function(g){ g.classList.add('in'); }); s.chips.forEach(function(g){ g.classList.add('in'); }); s.paint(0); s.cr.textContent = s.cfg.contrast + ' ' + contrast(MODES[0].tx, MODES[0].sf).toFixed(1) + ':1'; };
+  A11y.prototype.reset = function(){ var s = this; s.tw.forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on'); }); s.card.classList.remove('in'); s.back.classList.remove('in'); s.tok.forEach(function(g){ g.classList.remove('in'); }); s.chips.forEach(function(g){ g.classList.remove('in'); }); s.focus.classList.remove('on'); s.hd.forEach(function(h){ h.classList.remove('on'); }); s.cr.textContent = ''; s.note.textContent = ''; s.paint(0); };
+  A11y.prototype.still = function(){ var s = this; s.tw.forEach(function(w){ w.style.strokeDashoffset = 0; w.classList.add('on'); }); s.card.classList.add('in'); s.back.classList.add('in'); s.tok.forEach(function(g){ g.classList.add('in'); }); s.chips.forEach(function(g){ g.classList.add('in'); }); s.paint(0); s.note.textContent = s.cfg.modes[0]; s.cr.textContent = s.cfg.contrast + ' ' + contrast(MODES[0].tx, MODES[0].sf).toFixed(1) + ':1'; };
   A11y.prototype.feed = async function(ctx, m){
     var s = this; var M = MODES[m];
     s.tw.forEach(function(w){ w.style.strokeDashoffset = w._L; });
     await Promise.all(s.tw.map(function(w, i){ return wait(ctx, i * 60).then(function(){ return draw(ctx, w, 520, C.green, s.hd[i]); }); })); if (ctx.dead) return false;
     s.hd.forEach(function(h){ h.classList.remove('on'); });
     var from = s.mode; s.paint(m); s.card.classList.add('flash'); setTimeout(function(){ s.card.classList.remove('flash'); }, 500);
+    typeTo(ctx, s.note, s.cfg.modes[m]);
     var c0 = contrast(MODES[from].tx, MODES[from].sf), c1 = contrast(M.tx, M.sf);
     await tween(ctx, 600, function(k){ s.cr.textContent = s.cfg.contrast + ' ' + (c0 + (c1 - c0) * k).toFixed(1) + ':1'; }); if (ctx.dead) return false;
     /* focus walks the card: title → text → button */
@@ -263,6 +264,9 @@
     sc.kind = kind; sc.panel = st.closest('[role="tabpanel"]'); sc.ctx = null; return sc;
   });
   function visible(sc){ return !sc.panel || !sc.panel.hidden; }
+  var top = sec.querySelector('.fz-top');
+  function caption(){ if (!top) return; var v = scenes.filter(visible)[0]; top.textContent = v ? v.cfg.cap : ''; }
+  caption(); document.addEventListener('focustab', function(){ setTimeout(caption, 0); });
   if (RM){ scenes.forEach(function(sc){ sc.still(); }); return; }
   var inView = false;
   function play(sc){ if (sc.ctx) sc.ctx.dead = true; var ctx = sc.ctx = new Ctx(); (async function(){ while (!ctx.dead){ await sc.run(ctx); if (ctx.dead) return; await wait(ctx, 500); } })(); }
