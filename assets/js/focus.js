@@ -17,7 +17,7 @@
   function out(t){ return 1 - Math.pow(1 - t, 3); }
   function Ctx(){ this.dead = false; }
   /* On a phone the scenes are taller and the type is bigger, so the same timings read as rushed. */
-  function spd(ms){ return MOBQ.matches ? ms * 1.4 : ms; }
+  function spd(ms){ return MOBQ.matches ? ms * 1.75 : ms * 1.15; }
   function tween(ctx, dur, fn, e){ dur = spd(dur); e = e || ease; return new Promise(function(res){ var s = performance.now(); (function f(now){ if (ctx.dead){ res(false); return; } var t = Math.min(1, (now - s) / dur); fn(e(t), t); if (t < 1) requestAnimationFrame(f); else res(true); })(s); }); }
   function wait(ctx, ms){ return new Promise(function(res){ setTimeout(function(){ res(!ctx.dead); }, spd(ms)); }); }
   function glow(c){ sec.style.setProperty('--glow', c); }
@@ -180,6 +180,13 @@
       s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 63), 'loop'),
                   wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 63), 'loop') ];
     }
+    /* Centre the ring and the label as one group inside the core box: the label's width changes
+       with the language, so measure it once at full length and place both from that. */
+    (function(){ var r = 11, gap = M ? 16 : 14, cx = M ? CX : CX + 12;
+      s.core._t.textContent = cfg.core; var tw = s.core._t.getBBox().width; s.core._t.textContent = '';
+      var x0 = -(2 * r + gap + tw) / 2;
+      s.ring.setAttribute('transform', 'translate(' + (cx + x0 + r) + ' ' + CY + ')');
+      s.core._t.setAttribute('x', x0 + 2 * r + gap); })();
     s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.counter = annot(svg, 20, M ? 62 : 60, 'cnt'); s.desc = annot(svg, 20, M ? 88 : 84, 'desc'); if (M) s.desc._wrap = 40;
     s.hd = head(svg, C.violet);
     s.colors = [C.ok, C.err, C.warn]; s.moreColors = [C.off, C.cancel, C.limit, C.empty];
