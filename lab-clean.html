@@ -305,6 +305,13 @@
 </dialog><script>window.MD_MSG={"req": "Fill this in", "mail": "Check the email – it looks incomplete", "ok": "Please confirm to publish"};</script>
 <script src="assets/js/site.js?v=659fb4a9" defer></script>
 <style id="lab-edits">
+/* decorative lines a step lighter: dividers, column grid, dark-section rings, 3D map grid */
+:root{ --line:rgba(40,40,70,.085); --grid:rgba(40,40,70,.055); --w-line:rgba(255,255,255,.14); }
+.r3-root{ --r3-line:rgba(40,40,70,.085); }
+/* testimonials: the two arrows are joined, one shared line between them */
+.t-nav{ gap:0 !important; }
+.t-nav .t-arrow{ box-shadow:none; border:1px solid var(--ink); }
+.t-nav .t-arrow + .t-arrow{ border-left:0; }
 /* About facts: no squares, text flush with the column line, first line bolder */
 .facts--photo li{ padding-left:0 !important; }
 .facts--photo li.mk::before{ display:none !important; }
