@@ -2322,8 +2322,11 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .foot-actions .btn{ width:auto; }
 .foot-cv{ display:inline-flex; align-items:center; gap:6px; color:var(--ink); padding:4px 0; }
 .foot-cv .ico-dl{ width:1em; height:1em; flex:none; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:square; }
-@media (max-width:767px){ .foot-actions{ flex-direction:column; align-items:stretch; } .foot-actions .btn{ width:100%; } .foot-cv{ align-self:center; } }
+@media (max-width:767px){ .foot-actions{ flex-direction:column; flex-wrap:nowrap; align-items:stretch; } .foot-actions .btn{ width:100%; flex:0 0 auto; } .foot-cv{ align-self:center; } }
 
 /* 3D map: the callout’s “Open the case” is a filled black button */
 .r3-co .go{ background:var(--r3-ink) !important; color:#fff !important; border-color:var(--r3-ink) !important; }
 .r3-co .go:hover{ background:#2A2A30 !important; color:#fff !important; }
+
+/* case-card links: 6px before the arrow, like the other links */
+.pcard .tlink .arrow, .work-grid .tlink .arrow, .wl-row .tlink .arrow{ margin-left:6px; }
