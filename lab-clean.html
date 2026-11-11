@@ -305,11 +305,12 @@
 </dialog><script>window.MD_MSG={"req": "Fill this in", "mail": "Check the email – it looks incomplete", "ok": "Please confirm to publish"};</script>
 <script src="assets/js/site.js?v=774f2344" defer></script>
 <style id="lab-edits">
-/* Selected work right after the hero: it takes over the top padding, About takes the one that followed Focus */
-.work{ padding-top:188px; }
-.about{ padding-top:188px; }
+/* New order: the gaps between blocks stay the same as before the swap */
+.work{ padding-top:188px; }            /* takes the top padding About had after the hero */
+.about{ padding-top:188px; }           /* takes the one Досвід had after Focus */
+.about + .proof, .about + .proof.wrap{ padding-top:0 !important; }  /* About keeps the gap in its own padding-bottom */
 @media (min-width:1024px){ .work{ padding-top:120px; } .about{ padding-top:128px; } }
-@media (max-width:767px){ .work{ padding-top:96px; } .about{ padding-top:96px; } }
+@media (max-width:767px){ .work{ padding-top:0; } .about{ padding-top:96px; } }
 </style>
 <script id="lab-js">
 </script>
