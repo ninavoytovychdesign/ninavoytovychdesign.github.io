@@ -85,12 +85,12 @@
 </div><div class="d2" id="lu-d2">
 <span class="label">Decisione 02</span>
 <h3>Timeout non è Failed</h3>
-<dl class="d2-dl"><div><dt>Perché</dt><dd>Durante un timeout le persone non sanno se i soldi sono stati addebitati e non sono sicure di dover ripetere il pagamento. Se il timeout viene mostrato come un errore, rischiano di pagare due volte.</dd></div><div><dt>Cosa ho fatto</dt><dd>Due stati diversi. Failed – un messaggio senza colpe e due azioni: Retry o Change payment method. Timeout – un neutro «We’re still processing the payment».</dd></div><div><dt>Risultato</dt><dd>Un timeout non sembra più un errore, quindi non c’è motivo di pagare due volte.</dd></div></dl><p class="d-status"><span>Stato</span>Un pattern comune nell’UI kit con la stessa logica delle CTA.</p>
+<dl class="d2-dl"><div><dt>Perché</dt><dd>Durante un timeout le persone non sanno se i soldi sono stati addebitati e non sono sicure di dover ripetere il pagamento. Se il timeout viene mostrato come un errore, rischiano di pagare due volte.</dd></div><div><dt>Cosa ho fatto</dt><dd>Due stati diversi. Failed – un messaggio senza colpe e due azioni: Retry o Change payment method. Timeout – un neutro «We’re still processing the payment».</dd></div><div><dt>Risultato</dt><dd>L’interfaccia distingue il timeout da un errore: il timeout dice che il pagamento è ancora in elaborazione e non propone di pagare di nuovo.</dd></div></dl><p class="d-status"><span>Stato</span>Un pattern comune nell’UI kit con la stessa logica delle CTA.</p>
 <figure class=""><img alt="Elaborazione, errore di pagamento, pagamento ancora in elaborazione" class="gl" decoding="async" height="1050" loading="lazy" src="../../assets/cases/lunora/m-states.webp?v=75c7cc9a" width="1680"/><figcaption>Processing · Failed · Timeout</figcaption></figure>
 </div><div class="d2">
 <span class="label">Decisione 03</span>
 <h3>Un passo successivo in ogni stato</h3>
-<dl class="d2-dl"><div><dt>Perché</dt><dd>Quando un pagamento non va a buon fine, le persone non vedono un passo successivo chiaro e non sanno quando l’abbonamento tornerà attivo.</dd></div><div><dt>Cosa ho fatto</dt><dd>I dettagli dell’abbonamento mostrano stato, importo, data e metodo del prossimo pagamento. Dopo il successo – una breve conferma e il ritorno ad Active con la nuova data.</dd></div><div><dt>Risultato</dt><dd>Dopo qualsiasi esito del pagamento, le persone sanno se l’abbonamento è attivo e quando è previsto il prossimo pagamento.</dd></div></dl><p class="d-status"><span>Stato</span>Nel prototipo con Smart Animate.</p>
+<dl class="d2-dl"><div><dt>Perché</dt><dd>Quando un pagamento non va a buon fine, le persone non vedono un passo successivo chiaro e non sanno quando l’abbonamento tornerà attivo.</dd></div><div><dt>Cosa ho fatto</dt><dd>I dettagli dell’abbonamento mostrano stato, importo, data e metodo del prossimo pagamento. Dopo il successo – una breve conferma e il ritorno ad Active con la nuova data.</dd></div><div><dt>Risultato</dt><dd>Dopo qualsiasi esito del pagamento la schermata mostra se l’abbonamento è attivo e quando è previsto il prossimo pagamento.</dd></div></dl><p class="d-status"><span>Stato</span>Nel prototipo con Smart Animate.</p>
 <figure class=""><img alt="Dettagli dell’abbonamento con un errore, pagamento confermato, abbonamento attivo" class="gl" decoding="async" height="1050" loading="lazy" src="../../assets/cases/lunora/m-next-step.webp?v=62a66a39" width="1680"/><figcaption>Failed nei dettagli · Pagamento confermato · Active</figcaption></figure>
 </div><div class="d2">
 <span class="label">Decisione 04</span>
@@ -116,13 +116,12 @@
 <footer class="site-footer" data-spy="contact" id="contact">
 <div class="wrap">
 <div class="foot-cta">
-<p class="foot-status"><i aria-hidden="true"></i>Disponibile per nuovi progetti · rispondo entro un giorno</p>
-<h2 class="h64 foot-h">Cerchi una product designer per qualcosa con molti stati? Scrivimi.</h2>
+<p class="foot-status"><i aria-hidden="true"></i>Collaborazione</p>
+<h2 class="h64 foot-h">Disponibile per ruoli in team e collaborazioni su progetto.</h2>
 <div class="foot-mailrow">
 <button class="foot-mail" data-copied="Copied ✓" data-copy="nina.voytovych.design@gmail.com" type="button"><span class="fm-addr">nina.voytovych.design@gmail.com</span><span aria-hidden="true" class="fm-ico"><svg class="i-copy" viewbox="0 0 24 24"><rect height="12" rx="2" width="12" x="8" y="8"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg><svg class="i-ok" viewbox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><span class="sr-only">– copia l’indirizzo</span></button>
 <span aria-live="polite" class="fm-live sr-only" role="status"></span>
 </div>
-<p class="foot-now" data-day="– orario di lavoro" data-off="– fuori orario di lavoro, risponderò entro un giorno" hidden="">A Fano sono le <time class="fn-t"></time> <span class="fn-s"></span></p>
 <div class="foot-actions"><button class="btn btn--ink" data-modal="contact" type="button">Contattami</button><a class="tlink foot-cv" download="" href="../../assets/cv/Nina_Voytovych_CV_Product_Designer.pdf">Scarica il CV<svg aria-hidden="true" class="ico-dl" viewbox="0 0 16 16"><path d="M8 2v8M4.5 6.5 8 10l3.5-3.5M2.5 13h11"></path></svg></a></div>
 </div>
 <div class="sign-off">
