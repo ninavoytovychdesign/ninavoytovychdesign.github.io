@@ -22,8 +22,8 @@
   --t1:rgba(8,8,11,.92);
   --t2:rgba(8,8,11,.70);
   --t3:rgba(8,8,11,.58);
-  --line:rgba(40,40,70,.12);
-  --grid:rgba(40,40,70,.08);
+  --line:rgba(40,40,70,.085);
+  --grid:rgba(40,40,70,.055);
   --accent:#E1E635;
   --accent-hover:#D3D82A;
   --on-accent:#08080B;
@@ -32,7 +32,7 @@
   --w1:#FFFFFF;
   --w2:rgba(255,255,255,.72);
   --w3:rgba(255,255,255,.40);
-  --w-line:rgba(255,255,255,.20);
+  --w-line:rgba(255,255,255,.14);
 
   --sans:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif; --head:"Geologica", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -1446,7 +1446,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 /* R3D-START */
 /* ── 3D project map ── */
 @property --sw{syntax:'<angle>';inherits:true;initial-value:0deg}
-.r3-root{--r3-bg:#F5F5F5;--r3-ink:#08080B;--r3-t2:#55555E;--r3-t3:#8A8A93;--r3-line:rgba(40,40,70,.12);--r3-acc:#E1E635;--r3-e:cubic-bezier(.22,1,.36,1);
+.r3-root{--r3-bg:#F5F5F5;--r3-ink:#08080B;--r3-t2:#55555E;--r3-t3:#8A8A93;--r3-line:rgba(40,40,70,.085);--r3-acc:#E1E635;--r3-e:cubic-bezier(.22,1,.36,1);
   --r3-sans:var(--sans,"Inter",system-ui,sans-serif);--r3-mono:var(--mono,"IBM Plex Mono",ui-monospace,monospace);color:var(--r3-ink);font-family:var(--r3-sans)}
 .r3-veil,.r3-view{--sw:0deg;transition:--sw 1.05s cubic-bezier(.55,0,.3,1)}
 .r3-veil.in,.r3-view.in{--sw:360deg}
@@ -2330,3 +2330,20 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 
 /* case-card links: 6px before the arrow, like the other links */
 .pcard .tlink .arrow, .work-grid .tlink .arrow, .wl-row .tlink .arrow{ margin-left:6px; }
+
+/* === Nov 11, 2026 (from prototype) === */
+/* testimonials: the two arrows are joined, one shared line between them */
+.t-nav{ gap:0 !important; }
+.t-nav .t-arrow{ box-shadow:none; border:1px solid var(--ink); }
+.t-nav .t-arrow + .t-arrow{ border-left:0; }
+/* About facts: no squares, text flush with the column line, first line bolder */
+.facts--photo li{ padding-left:0 !important; }
+.facts--photo li.mk::before{ display:none !important; }
+.facts--photo li.mk{ font-weight:600; }
+/* About facts on tablets: three lists in one row under the photo */
+@media (min-width:768px) and (max-width:1023px){ .facts--photo{ grid-template-columns:repeat(3,minmax(0,1fr)) !important; column-gap:24px; } .facts--photo .me{ grid-column:1 / -1 !important; } }
+/* buttons: one padding everywhere – 16px 20px, as on “Leave a review”; header buttons keep their 48px height */
+.btn, .r3-btn{ padding:16px 20px; }
+.hero-cta .btn, .foot-actions .btn, .t-actions .btn, .md .btn, .nf-cta .btn{ padding:16px 20px; }
+.nav-pill .nav-cta.btn{ padding:14px 20px; }
+@media (max-width:767px){ .hero-cta .btn, .foot-actions .btn{ padding:16px 20px; } }
