@@ -16,8 +16,10 @@
   function ease(t){ return t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2; }
   function out(t){ return 1 - Math.pow(1 - t, 3); }
   function Ctx(){ this.dead = false; }
-  function tween(ctx, dur, fn, e){ e = e || ease; return new Promise(function(res){ var s = performance.now(); (function f(now){ if (ctx.dead){ res(false); return; } var t = Math.min(1, (now - s) / dur); fn(e(t), t); if (t < 1) requestAnimationFrame(f); else res(true); })(s); }); }
-  function wait(ctx, ms){ return new Promise(function(res){ setTimeout(function(){ res(!ctx.dead); }, ms); }); }
+  /* On a phone the scenes are taller and the type is bigger, so the same timings read as rushed. */
+  function spd(ms){ return MOBQ.matches ? ms * 1.4 : ms; }
+  function tween(ctx, dur, fn, e){ dur = spd(dur); e = e || ease; return new Promise(function(res){ var s = performance.now(); (function f(now){ if (ctx.dead){ res(false); return; } var t = Math.min(1, (now - s) / dur); fn(e(t), t); if (t < 1) requestAnimationFrame(f); else res(true); })(s); }); }
+  function wait(ctx, ms){ return new Promise(function(res){ setTimeout(function(){ res(!ctx.dead); }, spd(ms)); }); }
   function glow(c){ sec.style.setProperty('--glow', c); }
 
   /* a wire: drawn with dashoffset; a signal head can run along it */
@@ -358,7 +360,8 @@
   document.addEventListener('focustab', function(){ setTimeout(sync, 60); });
   /* parallax: the stage answers the mouse – lines slow, nodes faster */
   stages.forEach(function(st){
-    st.addEventListener('pointermove', function(e){ var r = st.getBoundingClientRect(); st.style.setProperty('--mx', ((e.clientX - r.left) / r.width - .5).toFixed(3)); st.style.setProperty('--my', ((e.clientY - r.top) / r.height - .5).toFixed(3)); });
+    /* mouse only: on a touch screen every scroll over the stage fired this and shook the scene */
+    st.addEventListener('pointermove', function(e){ if (e.pointerType && e.pointerType !== 'mouse') return; var r = st.getBoundingClientRect(); st.style.setProperty('--mx', ((e.clientX - r.left) / r.width - .5).toFixed(3)); st.style.setProperty('--my', ((e.clientY - r.top) / r.height - .5).toFixed(3)); });
     st.addEventListener('pointerleave', function(){ st.style.setProperty('--mx', 0); st.style.setProperty('--my', 0); });
   });
 })();

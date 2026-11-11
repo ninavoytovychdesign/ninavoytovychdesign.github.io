@@ -2319,6 +2319,8 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .fz .fz-tok .val{ font-size:12px; }
   .fz .fz-chip text{ font-size:12px; }
   .fz .fz-w{ stroke-width:1.2; }
+  /* no pointer parallax on phones – nothing should shift under a finger */
+  .fz .fz-l.lines, .fz .fz-l.nodes, .fz .fz-l.top{ transform:none; }
   .fz-cap{ font-size:11px; letter-spacing:1.5px; }
 }
 @media (prefers-reduced-motion: reduce){
