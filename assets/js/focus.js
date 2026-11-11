@@ -266,16 +266,16 @@
   function fit(){ var m = MOB.matches; stages.forEach(function(st){ var svg = st.querySelector('svg'); if (!svg) return;
     svg.setAttribute('viewBox', m ? '0 0 640 610' : '0 0 640 440'); st.classList.toggle('fz-m', m);
     /* the annotation type is larger on a phone, so its three lines need more room */
-    var ys = m ? [28, 76, 110] : [24, 60, 84];
+    var ys = m ? [28, 86, 144] : [24, 60, 84];
     [].slice.call(svg.querySelectorAll('.ann text')).forEach(function(t, i){ t.setAttribute('y', ys[Math.min(i, 2)]); });
   }); }
-  fit(); (MOB.addEventListener ? MOB.addEventListener('change', fit) : MOB.addListener(fit));
-
   var scenes = stages.map(function(st){
     var cfg = JSON.parse(st.querySelector('.fz-cfg').textContent), kind = st.dataset.fz;
     var sc = kind === 'arch' ? new Arch(st, cfg) : kind === 'states' ? new States(st, cfg) : new A11y(st, cfg);
     sc.kind = kind; sc.panel = st.closest('[role="tabpanel"]'); sc.ctx = null; return sc;
   });
+  fit(); (MOB.addEventListener ? MOB.addEventListener('change', fit) : MOB.addListener(fit));
+
   function visible(sc){ return !sc.panel || !sc.panel.hidden; }
 
   if (RM){ scenes.forEach(function(sc){ sc.still(); }); return; }
