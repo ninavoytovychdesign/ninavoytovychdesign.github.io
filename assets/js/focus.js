@@ -155,8 +155,9 @@
       var SRC = [MX[2], MX[1], MX[1], MX[0]];
       s.we = SRC.map(function(x0, i){ return wire(svg, 'M' + x0 + ' ' + (MY + 20) + ' V' + 382 + ' H' + EX[i] + ' V' + (EY - 15), 'thin'); });
       /* return paths run down the sides and back into the core */
-      s.loops = [ wire(svg, 'M' + (MX[1] + 60) + ' ' + MY + ' H' + 400 + ' V' + 240 + ' H' + (CX + 90), 'loop'),
-                  wire(svg, 'M' + (MX[2] + 60) + ' ' + MY + ' H' + 408 + ' V' + 232 + ' H' + (CX + 90), 'loop') ];
+      /* the return paths come back into the right edge of the core, not into empty space below it */
+      s.loops = [ wire(svg, 'M' + (MX[1] + 60) + ' ' + MY + ' H' + 400 + ' V' + (CY - 10) + ' H' + (CX + 90), 'loop'),
+                  wire(svg, 'M' + (MX[2] + 60) + ' ' + MY + ' H' + 408 + ' V' + (CY + 12) + ' H' + (CX + 90), 'loop') ];
     } else {
       s.core = node(svg, CX + 12, CY, 150, 48, cfg.core, 'core');
       s.core._t.setAttribute('x', -34);
@@ -168,8 +169,9 @@
       var SRC2 = [MY[2], MY[1], MY[1], MY[0]], EYI = [358, 150, 278, 84];
       s.more.forEach(function(g, i){ g.setAttribute('transform', 'translate(' + EX + ' ' + EYI[i] + ')'); g._y = EYI[i]; });
       s.we = SRC2.map(function(y0, i){ return wire(svg, 'M' + (MX + 62) + ' ' + y0 + ' H508 V' + EYI[i] + ' H' + (EX - 50), 'thin'); });
-      s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 75), 'loop'),
-                  wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 75), 'loop') ];
+      /* the return paths end on the left edge of the core (CX + 12 - 75), not 12 units short of it */
+      s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 63), 'loop'),
+                  wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 63), 'loop') ];
     }
     s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.counter = annot(svg, 20, M ? 62 : 60, 'cnt'); s.desc = annot(svg, 20, M ? 88 : 84, 'desc'); if (M) s.desc._wrap = 40;
     s.hd = head(svg, C.violet);
@@ -253,7 +255,7 @@
         var t = el('text', { x:0, y:24, 'class':'fz-mono nm', 'dominant-baseline':'central' }, g); t.textContent = n;
         var v = el('text', { x:0, y:42, 'class':'fz-mono val', 'dominant-baseline':'central' }, g); g._sw = g.firstChild; g._v = v; return g; });
       s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.note = annot(svg, 20, 62, 'cnt'); s.cr = annot(svg, 20, 88, 'val cr');
-      s.tw = TXS.map(function(x){ return wire(svg, 'M' + (x + 9) + ' ' + 196 + ' V' + 224 + ' H210 V' + (CY - 8), 'thin'); });
+      s.tw = TXS.map(function(x){ return wire(svg, 'M' + (x + 9) + ' ' + 196 + ' V' + 224 + ' H210 V' + CY, 'thin'); });
     } else {
       s.tok = cfg.tokens.map(function(n, i){ var g = el('g', { 'class':'fz-tok', transform:'translate(' + TX + ' ' + TY[i] + ')' }, svg.nodes); el('rect', { x:0, y:-9, width:18, height:18, 'class':'sw' }, g); var t = el('text', { x:0, y:22, 'class':'fz-mono nm', 'dominant-baseline':'central' }, g); t.textContent = n; var v = el('text', { x:0, y:38, 'class':'fz-mono val', 'dominant-baseline':'central' }, g); g._sw = g.firstChild; g._v = v; return g; });
       s.name = annot(svg, 20, 24, 'name'); s.name.textContent = cfg.cap; s.note = annot(svg, 20, 60, 'cnt'); s.cr = annot(svg, 20, 84, 'val cr');
