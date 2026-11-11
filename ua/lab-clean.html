@@ -351,15 +351,17 @@
 .fz .fz-nd .ig{ opacity:0; transform:scale(.72); transform-box:fill-box; transform-origin:center; transition:opacity .35s var(--ease), transform .45s cubic-bezier(.2,1.4,.4,1); }
 .fz .fz-nd.in .ig{ opacity:1; transform:none; }
 .fz .fz-nd rect{ fill:#0B0B0F; stroke:rgba(255,255,255,.28); stroke-width:1; vector-effect:non-scaling-stroke; transition:fill .4s var(--ease), stroke .4s var(--ease), fill-opacity .4s var(--ease); }
-.fz .fz-nd.root rect{ stroke:var(--w1); }
+.fz .fz-nd.root rect{ stroke:rgba(255,255,255,.55); }
+.fz-stage[data-fz="arch"] .fz{ --c:#B5D640; }
 .fz .fz-nd.root text{ font-size:15px; font-weight:500; }
 .fz .fz-nd.plus text{ font-size:22px; }
-.fz .fz-nd.plus rect, .fz .fz-nd.plus.lit rect{ fill:#B5D640; fill-opacity:1; stroke:#B5D640; }
+.fz .fz-nd.plus rect, .fz .fz-nd.plus.lit rect{ fill:#B5D640; fill-opacity:1; stroke:#B5D640; stroke-opacity:1; }
+.fz .fz-nd.plus text, .fz .fz-nd.plus.lit text{ fill:#000; }
 .fz .fz-nd.plus text{ fill:#000; }
 .fz .fz-nd.kid text, .fz .fz-nd.step text, .fz .fz-nd.more text{ font-size:12px; fill:var(--w2); }
-.fz .fz-nd.lit rect{ fill:var(--c, #fff); fill-opacity:.16; stroke:var(--c, #fff); }
+.fz .fz-nd.lit rect{ fill:var(--c, #fff); fill-opacity:.14; stroke:var(--c, #fff); stroke-opacity:.7; }
 .fz .fz-nd.lit text{ fill:var(--w1); }
-.fz .fz-nd.core rect{ stroke:var(--w1); }
+.fz .fz-nd.core rect{ stroke:rgba(255,255,255,.55); }
 .fz .fz-nd.core text{ text-anchor:start; }
 .fz.dimmed .fz-nd:not(.lit) .ig{ opacity:.28; }
 .fz .fz-nd.shake .ig{ animation:fzshake .5s var(--ease); }
@@ -396,7 +398,7 @@
 .fz .fz-chip.in{ opacity:1; }
 .fz .fz-chip rect{ fill:none; stroke:rgba(255,255,255,.22); stroke-width:1; vector-effect:non-scaling-stroke; transition:stroke .3s, fill .3s; }
 .fz .fz-chip text{ font-family:var(--mono); font-size:10px; letter-spacing:1px; text-transform:uppercase; fill:var(--w2); transition:fill .3s; }
-.fz .fz-chip.on rect{ stroke:var(--w1); }
+.fz .fz-chip.on rect{ stroke:rgba(255,255,255,.7); }
 .fz .fz-chip.on text{ fill:var(--w1); }
 /* mobile: the scheme is 0.6× – bigger type so it stays readable */
 @media (max-width:767px){

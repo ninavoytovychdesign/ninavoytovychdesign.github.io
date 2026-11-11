@@ -110,14 +110,15 @@
     s.checks = cfg.checks.map(function(c, i){ var t = mono(svg, CX - 62, CY + 50 + i * 20, 'check'); t.textContent = '✓  ' + c; return t; });
     var MX = 430, MY = [110, 214, 318], EX = 574, EY = [70, 150, 278, 358];
     s.main = cfg.main.map(function(m, i){ return node(svg, MX, MY[i], 124, 40, m[0], 'st hit'); });
-    s.wm = MY.map(function(y){ return wire(svg, 'M' + (CX + 87) + ' ' + CY + ' C ' + (CX + 170) + ' ' + CY + ' ' + (MX - 160) + ' ' + y + ' ' + (MX - 62) + ' ' + y); });
+    s.wm = MY.map(function(y){ return wire(svg, 'M' + (CX + 87) + ' ' + CY + ' H300 V' + y + ' H' + (MX - 62)); });
     s.more = cfg.more.map(function(m, i){ return node(svg, EX, EY[i], 100, 30, m[0], 'st more hit'); });
     /* second row: Offline ← Timeout, Cancelled ← Error, Limit ← Error, Empty ← Success */
     var SRC = [MY[2], MY[1], MY[1], MY[0]], EYI = [358, 150, 278, 84];
     s.more.forEach(function(g, i){ g.setAttribute('transform', 'translate(' + EX + ' ' + EYI[i] + ')'); g._y = EYI[i]; });
-    s.we = SRC.map(function(y0, i){ return wire(svg, 'M' + (MX + 62) + ' ' + y0 + ' C ' + (MX + 110) + ' ' + y0 + ' ' + (EX - 100) + ' ' + EYI[i] + ' ' + (EX - 50) + ' ' + EYI[i], 'thin'); });
-    s.loops = [ wire(svg, 'M' + MX + ' ' + (MY[1] + 20) + ' C ' + MX + ' ' + 300 + ' ' + (CX + 40) + ' ' + 330 + ' ' + (CX + 12) + ' ' + (CY + 24), 'loop'),
-                wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' C ' + MX + ' ' + 410 + ' ' + (CX - 20) + ' ' + 400 + ' ' + (CX + 12) + ' ' + (CY + 24), 'loop') ];
+    s.we = SRC.map(function(y0, i){ return wire(svg, 'M' + (MX + 62) + ' ' + y0 + ' H508 V' + EYI[i] + ' H' + (EX - 50), 'thin'); });
+    /* return paths: left of the main column, under everything, back into the left side of the core */
+    s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 63), 'loop'),
+                wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 63), 'loop') ];
     s.counter = mono(svg, 640, 18, 'cnt', 'end'); s.desc = mono(svg, 640, 40, 'desc', 'end');
     s.hd = head(svg, C.violet);
     s.colors = [C.ok, C.err, C.warn]; s.moreColors = [C.off, C.cancel, C.limit, C.empty];
