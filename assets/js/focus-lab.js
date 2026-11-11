@@ -40,7 +40,7 @@
   function Arch(stage, cfg){
     var svg = stage.querySelector('svg'); layers(svg); this.svg = svg; this.cfg = cfg; this.stage = stage;
     var s = this;
-    var RX = 300, RY = 96, BUS = 166, TX = [96, 268, 440], TY = 200, CY = [282, 340], PX = 584, PY = RY, CHY = [182, 254, 326, 398];
+    var RX = 300, RY = 116, BUS = 184, TX = [96, 268, 440], TY = 218, CY = [298, 354], PX = 584, PY = RY, CHY = [200, 270, 340, 410];
     s.root = node(svg, RX, RY, 124, 44, cfg.root, 'root');
     s.plus = node(svg, PX, PY, 44, 44, cfg.plus, 'plus');
     s.wPlus = wire(svg, 'M' + (RX + 62) + ' ' + RY + ' H' + (PX - 22));
@@ -61,7 +61,7 @@
       s.chain.push(node(svg, PX, CHY[i], 104, 32, p, 'step'));
     });
     s.name = mono(svg, 24, 24, 'name'); s.name.textContent = cfg.cap;
-    s.cap = mono(svg, 24, 46, 'cap');
+    s.cap = mono(svg, 24, 60, 'cap');
     s.hd = head(svg, C.lime);
   }
   Arch.prototype.reset = function(){ var s = this; [s.wPlus, s.trunk, s.busL, s.busR].concat(s.drops, s.kw, s.cw).forEach(function(w){ w.style.strokeDashoffset = w._L; w.classList.remove('on', 'dim'); });
@@ -121,7 +121,7 @@
     /* return paths: left of the main column, under everything, back into the left side of the core */
     s.loops = [ wire(svg, 'M' + (MX - 62) + ' ' + (MY[1] + 14) + ' H290 V380 H70 V' + CY + ' H' + (CX - 75), 'loop'),
                 wire(svg, 'M' + MX + ' ' + (MY[2] + 20) + ' V400 H70 V' + CY + ' H' + (CX - 75), 'loop') ];
-    s.name = mono(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.counter = mono(svg, 24, 46, 'cnt'); s.desc = mono(svg, 24, 66, 'desc');
+    s.name = mono(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.counter = mono(svg, 24, 60, 'cnt'); s.desc = mono(svg, 24, 84, 'desc');
     s.hd = head(svg, C.violet);
     s.colors = [C.ok, C.err, C.warn]; s.moreColors = [C.off, C.cancel, C.limit, C.empty];
   }
@@ -190,10 +190,10 @@
   function contrast(a, b){ var la = lum(a), lb = lum(b); var hi = Math.max(la, lb), lo = Math.min(la, lb); return (hi + .05) / (lo + .05); }
   function A11y(stage, cfg){
     var svg = stage.querySelector('svg'); layers(svg); this.svg = svg; this.cfg = cfg; this.stage = stage; var s = this;
-    var TX = 24, TY = [96, 156, 216, 276], BUSX = 196, CX = 232, CY = 64, CW = 384;
+    var TX = 24, TY = [128, 188, 248, 308], BUSX = 196, CX = 232, CY = 96, CW = 384;
     s.tok = cfg.tokens.map(function(n, i){ var g = el('g', { 'class':'fz-tok', transform:'translate(' + TX + ' ' + TY[i] + ')' }, svg.nodes); el('rect', { x:0, y:-9, width:18, height:18, 'class':'sw' }, g); var t = el('text', { x:0, y:22, 'class':'fz-mono nm', 'dominant-baseline':'central' }, g); t.textContent = n; var v = el('text', { x:0, y:38, 'class':'fz-mono val', 'dominant-baseline':'central' }, g); g._sw = g.firstChild; g._v = v; return g; });
-    s.name = mono(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.note = mono(svg, 24, 46, 'cnt'); s.cr = mono(svg, 24, 66, 'val cr');
-    s.tw = TY.map(function(y){ return wire(svg, 'M' + (TX + 18) + ' ' + y + ' H' + BUSX + ' V' + 190 + ' H' + CX, 'thin'); });
+    s.name = mono(svg, 24, 24, 'name'); s.name.textContent = cfg.cap; s.note = mono(svg, 24, 60, 'cnt'); s.cr = mono(svg, 24, 84, 'val cr');
+    s.tw = TY.map(function(y){ return wire(svg, 'M' + (TX + 18) + ' ' + y + ' H' + BUSX + ' V' + 212 + ' H' + CX, 'thin'); });
     s.back = el('rect', { x:CX - 16, y:CY - 24, width:CW + 32, height:340, 'class':'back' }, svg.lines);
     s.card = el('g', { 'class':'fz-card', transform:'translate(' + CX + ' ' + CY + ')' }, svg.nodes);
     s.cbg = el('rect', { x:0, y:0, width:CW, height:200, 'class':'cbg' }, s.card);
@@ -242,7 +242,7 @@
     /* focus walks the card: title → text → button */
     var targets = [s.ct, s.cs1, s.cb];
     for (var i = 0; i < targets.length; i++){
-      var b = targets[i].getBBox(); s.focus.setAttribute('x', 232 + b.x - 6); s.focus.setAttribute('y', 64 + b.y - 4); s.focus.setAttribute('width', b.width + 12); s.focus.setAttribute('height', b.height + 8); s.focus.classList.add('on');
+      var b = targets[i].getBBox(); s.focus.setAttribute('x', 232 + b.x - 6); s.focus.setAttribute('y', 96 + b.y - 4); s.focus.setAttribute('width', b.width + 12); s.focus.setAttribute('height', b.height + 8); s.focus.classList.add('on');
       if (!await wait(ctx, 380)) return false;
     }
     s.focus.classList.remove('on');
