@@ -2007,7 +2007,7 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .radar-filters li + li .rf{ border-left:0; }
   .radar-filters .rf[aria-pressed="true"]{ position:relative; z-index:1; box-shadow:0 0 0 1px var(--ink); } }
 @media (min-width:768px) and (max-width:1023px){ .view-tg{ position:static; margin:24px 0 0; } .view-tg + .rf-wrap{ margin-top:0 !important; } }
-@media (max-width:767px){ .view-tg{ align-self:stretch; width:100%; order:-2; margin-bottom:0; } .view-tg .seg{ display:flex; width:100%; } .view-tg .seg button{ flex:1 1 0; height:42px; } }
+@media (max-width:767px){ .view-tg{ align-self:stretch; width:100%; order:-2; margin-bottom:8px; } .view-tg .seg{ display:flex; width:100%; } .view-tg .seg button{ flex:1 1 0; height:42px; } }
 /* 8px between buttons everywhere */
 .hero-cta, .foot-actions, .t-nav, .rf-wrap, .r3-panel .pa{ gap:8px !important; }
 @media (max-width:1023px){ .radar-filters{ gap:8px !important; } }
@@ -2336,10 +2336,10 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .pcard .tlink .arrow, .work-grid .tlink .arrow, .wl-row .tlink .arrow{ margin-left:6px; }
 
 /* === Nov 11, 2026 (from prototype) === */
-/* testimonials: the two arrows are joined, one shared line between them */
-.t-nav{ gap:0 !important; }
+/* testimonials: the two arrows sit 8px apart, each with its own border */
+.t-nav{ gap:8px !important; }
 .t-nav .t-arrow{ box-shadow:none; border:1px solid var(--ink); }
-.t-nav .t-arrow + .t-arrow{ border-left:0; }
+.t-nav .t-arrow + .t-arrow{ border-left:1px solid var(--ink); }
 /* About facts: no squares, text flush with the column line, first line bolder */
 .facts--photo li{ padding-left:0 !important; }
 .facts--photo li.mk::before{ display:none !important; }
@@ -2361,10 +2361,11 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 @media (max-width:767px){ .work{ padding-top:0; } .about{ padding-top:96px; } }
 
 
-/* Joined buttons: the borders overlap and the active one sits on top, so no half-grey edge */
-.t-nav{ gap:0 !important; }
+/* Joined buttons: the borders overlap and the active one sits on top, so no half-grey edge.
+   The testimonial arrows are the exception – 8px apart, like the other bordered pairs. */
+.t-nav{ gap:8px !important; }
 .t-nav .t-arrow{ box-shadow:none; border:1px solid var(--ink); position:relative; }
-.t-nav .t-arrow + .t-arrow{ border-left:1px solid var(--ink); margin-left:-1px; }
+.t-nav .t-arrow + .t-arrow{ border-left:1px solid var(--ink); margin-left:0; }
 .t-nav .t-arrow:not(:disabled){ z-index:2; }
 .t-nav .t-arrow:not(:disabled):hover, .t-nav .t-arrow:focus-visible{ z-index:3; }
 .radar-filters li{ position:relative; }

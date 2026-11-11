@@ -272,12 +272,14 @@
 
   var wrap = document.querySelector('.rf-wrap'), tg = wrap && wrap.querySelector('.rf-toggle'), cur = wrap && wrap.querySelector('.rf-cur');
   if (!wrap || !tg) return;
+  if (cur) cur._all = cur.textContent.trim();
   function close(){ wrap.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); }
   tg.addEventListener('click', function(e){ e.stopPropagation(); var o = !wrap.classList.contains('open'); wrap.classList.toggle('open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); });
   wrap.querySelectorAll('.rf').forEach(function(c){
     c.addEventListener('click', function(){
       var t = c.firstChild && c.firstChild.nodeType === 3 ? c.firstChild.nodeValue : c.textContent;
-      if (cur) cur.textContent = t.trim();
+      /* with no filter on, the toggle reads as a phrase ("All domains"), not as the chip label */
+      if (cur) cur.textContent = c.dataset.domain ? t.trim() : (cur._all || t.trim());
       if (mq.matches){ close(); tg.focus(); }
     });
   });
