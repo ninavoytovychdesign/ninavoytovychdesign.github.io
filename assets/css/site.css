@@ -2109,4 +2109,93 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .focus .focus-head{ margin:0 0 40px !important; }
 }
 
-
+/* === Focus: three scroll-driven scenes on real screens (Nina, 11 Nov 2026) === */
+@property --glow { syntax:'<color>'; inherits:true; initial-value:#B5D640; }
+.focus.fx2{ padding:0 !important; overflow:visible; background:#000; color:#fff; --glow:#B5D640; --fx-ease:cubic-bezier(.22,1,.36,1); }
+.fx2 .fx-stage{ position:relative; overflow:hidden; min-height:100svh; display:flex; align-items:center; transition:--glow .8s ease; }
+.fx2.on{ height:340svh; }
+.fx2.on .fx-stage{ position:sticky; top:0; height:100svh; min-height:0; }
+.fx2 .rings{ position:absolute; left:50%; top:50%; width:min(140vh,1400px); height:auto; transform:translate(-30%,-50%); opacity:.5; }
+.fx-glow{ position:absolute; inset:-20%; pointer-events:none; background:radial-gradient(closest-side at 68% 50%, var(--glow), transparent 70%); opacity:.26; filter:blur(40px); transition:--glow .8s ease; }
+.fx-grid{ position:relative; z-index:1; width:100%; display:grid; grid-template-columns:var(--label) minmax(0,2fr) minmax(0,3fr); column-gap:var(--gap); align-items:center; }
+.fx-side{ grid-column:1 / 3; display:grid; grid-template-columns:var(--label) minmax(0,1fr); column-gap:var(--gap); align-items:start; }
+.fx-side > .label{ color:rgba(255,255,255,.55); padding-top:10px; }
+.fx-titles{ list-style:none; margin:0; padding:0; grid-column:2; }
+.fx-t{ margin:0 0 20px; }
+.fx-t .big{ display:block; font:500 56px/1.02 var(--head); letter-spacing:-2px; color:rgba(255,255,255,.22); transition:color .5s ease; }
+.fx-t.is-on .big{ color:#fff; }
+.fx-t .sub{ display:block; max-height:0; overflow:hidden; opacity:0; margin-top:0; font:400 16px/24px var(--sans); color:rgba(255,255,255,.6); transition:max-height .5s var(--fx-ease), opacity .5s ease, margin .5s var(--fx-ease); }
+.fx-t.is-on .sub{ max-height:56px; opacity:1; margin-top:10px; }
+.fx-meta{ grid-column:2; display:flex; align-items:center; gap:16px; margin-top:28px; font:400 12px/16px var(--mono); letter-spacing:2px; color:rgba(255,255,255,.5); }
+.fx-bar{ position:relative; width:120px; height:2px; background:rgba(255,255,255,.15); overflow:hidden; }
+.fx-bar i{ position:absolute; inset:0; background:var(--glow); transform-origin:left; transform:scaleX(0); transition:--glow .8s ease; }
+.fx-scenes{ grid-column:3; position:relative; height:min(640px, 78svh); }
+.fx-scene{ position:absolute; inset:0; opacity:0; transform:translateY(28px); transition:opacity .6s var(--fx-ease), transform .6s var(--fx-ease); pointer-events:none; }
+.fx-scene.is-on{ opacity:1; transform:none; }
+.fx-cap{ position:absolute; right:0; top:0; margin:0; text-align:right; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.45); }
+/* phone: clip-path instead of border-radius because the site forces square corners everywhere */
+.fx-ph{ margin:0; position:relative; aspect-ratio:600 / 1301; background:#0C0C0E; clip-path:inset(0 round 7.5%/3.5%); box-shadow:inset 0 0 0 1px rgba(255,255,255,.14); }
+.fx-ph img{ position:absolute; left:2.5%; top:1.3%; width:95%; height:97.4%; object-fit:cover; clip-path:inset(0 round 6%/2.8%); }
+/* scene 1: the flow fans out, one screen at a time, along a line */
+.fx-fan{ position:absolute; left:0; right:0; top:32px; bottom:72px; }
+.fx-fl{ position:absolute; top:50%; left:calc(var(--k) * 118px); width:200px; z-index:calc(1 + var(--k)); opacity:0; transform:translate(48px,-46%) scale(.96); transition:opacity .55s var(--fx-ease), transform .55s var(--fx-ease); }
+.fx-fl.in{ opacity:1; transform:translate(0,-50%); }
+.fx-path{ position:absolute; left:100px; width:calc(100% - 200px); bottom:-24px; height:2px; background:var(--c0); transform-origin:left; transform:scaleX(var(--w,0)); transition:transform .6s var(--fx-ease); z-index:0; }
+.fx-flow{ list-style:none; margin:0; padding:0; position:absolute; left:0; right:0; bottom:0; height:40px; }
+.fx-flow li{ position:absolute; left:calc(var(--k) * 118px + 100px); top:0; transform:translate(-50%,8px); padding-top:14px; font:400 11px/16px var(--mono); letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.55); white-space:nowrap; opacity:0; transition:.5s var(--fx-ease); }
+.fx-flow li::before{ content:""; position:absolute; left:50%; top:-4px; width:8px; height:8px; margin-left:-4px; background:var(--c0); }
+.fx-flow li:nth-child(even){ padding-top:34px; }
+.fx-flow li.in{ opacity:1; transform:translate(-50%,0); }
+/* scenes 2 and 3: one phone, screens swap */
+.fx-states, .fx-a11y{ display:grid; grid-template-columns:minmax(0,1fr) 250px; column-gap:40px; align-items:center; padding-bottom:40px; }
+.fx-one{ width:250px; }
+.fx-one img{ opacity:0; transition:opacity .45s ease; }
+.fx-one img.is-on{ opacity:1; }
+.fx-rail{ list-style:none; margin:0; padding:0; border-bottom:1px solid rgba(255,255,255,.12); }
+.fx-rail li{ display:grid; grid-template-columns:12px minmax(0,1fr) auto; align-items:center; column-gap:14px; padding:14px 0; border-top:1px solid rgba(255,255,255,.12); font:400 15px/20px var(--sans); color:rgba(255,255,255,.3); transition:color .4s ease; }
+.fx-rail li b{ font-weight:500; }
+.fx-rail li span{ font:400 12px/16px var(--mono); letter-spacing:1px; }
+.fx-rail li i{ width:8px; height:8px; background:currentColor; transition:.4s ease; }
+.fx-rail li.is-on{ color:rgba(255,255,255,.75); }
+.fx-rail li.is-cur{ color:#fff; }
+.fx-rail li.is-cur i{ background:var(--sc, var(--c1)); box-shadow:0 0 14px var(--sc, var(--c1)); }
+.fx-rail li.is-cur span{ color:var(--sc, var(--c1)); }
+.fx-ctl-l{ margin:0 0 10px; font:400 12px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.5); }
+.fx-ctl-l + .fx-seg{ margin-bottom:32px; }
+.fx-seg{ position:relative; display:flex; border:1px solid rgba(255,255,255,.22); }
+.fx-seg span{ position:relative; z-index:1; flex:1 1 0; padding:12px 8px; text-align:center; font:500 14px/20px var(--sans); color:rgba(255,255,255,.6); transition:color .35s ease, background .35s ease; }
+.fx-seg-t span.is-on{ background:#fff; color:#000; }
+.fx-seg-s span.is-on{ color:#fff; }
+.fx-knob{ position:absolute; top:0; bottom:0; left:calc(var(--x,0) * 33.333%); width:33.333%; background:var(--c2); transition:left .45s var(--fx-ease); }
+.fx-a11y:not(.is-text) .fx-seg-s{ opacity:.45; }
+/* no JS / reduced motion: scenes stack, each already built */
+.fx2:not(.on) .fx-grid{ padding:96px 0; align-items:start; }
+.fx2:not(.on) .fx-scenes{ height:auto; display:grid; row-gap:96px; }
+.fx2:not(.on) .fx-scene{ position:relative; opacity:1; transform:none; min-height:420px; }
+.fx2:not(.on) .fx-t .big{ color:#fff; }
+.fx2:not(.on) .fx-meta{ display:none; }
+@media (max-width:1199px){ .fx-t .big{ font-size:44px; letter-spacing:-1.5px; } .fx-fl{ width:160px; left:calc(var(--k) * 96px); } .fx-flow li{ left:calc(var(--k) * 96px + 80px); } .fx-path{ left:80px; width:calc(100% - 160px); } .fx-states, .fx-a11y{ grid-template-columns:minmax(0,1fr) 210px; column-gap:24px; } .fx-one{ width:210px; } }
+@media (max-width:1023px){
+  .fx-grid{ grid-template-columns:1fr; row-gap:32px; align-items:start; padding:88px 0 56px; }
+  .fx-side{ grid-column:1; grid-template-columns:1fr; row-gap:16px; }
+  .fx-side > .label{ padding-top:0; }
+  .fx-titles{ grid-column:1; display:flex; flex-wrap:wrap; gap:8px 24px; }
+  .fx-t{ margin:0; }
+  .fx-t .big{ font-size:32px; letter-spacing:-1px; }
+  .fx-t .sub{ display:none; }
+  .fx-meta{ grid-column:1; margin-top:8px; }
+  .fx-scenes{ grid-column:1; height:min(520px, calc(100svh - 300px)); }
+  .fx-fan{ bottom:40px; }
+  .fx-fl{ width:110px; left:calc(var(--k) * 58px); }
+  .fx-flow li{ left:calc(var(--k) * 58px + 55px); font-size:10px; letter-spacing:1px; }
+  .fx-flow li:nth-child(even){ padding-top:30px; }
+  .fx-path{ left:55px; width:calc(100% - 110px); }
+  .fx-states, .fx-a11y{ grid-template-columns:minmax(0,1fr) 150px; column-gap:20px; padding-bottom:32px; }
+  .fx-one{ width:150px; }
+  .fx-rail li{ padding:10px 0; font-size:13px; line-height:18px; grid-template-columns:8px minmax(0,1fr) auto; column-gap:10px; }
+  .fx-rail li span{ font-size:11px; }
+  .fx-seg span{ padding:10px 4px; font-size:12px; line-height:16px; }
+  .fx-ctl-l + .fx-seg{ margin-bottom:20px; }
+  .fx-cap{ font-size:10px; letter-spacing:1.5px; }
+  .fx2:not(.on) .fx-scene{ min-height:360px; }
+}
