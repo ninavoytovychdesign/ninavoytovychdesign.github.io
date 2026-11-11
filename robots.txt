@@ -4,4 +4,4 @@ Disallow: /lab-clean.html
 Disallow: /ua/lab-clean.html
 Disallow: /it/lab-clean.html
 
-Sitemap: https://ninavoytovychdesign.github.io/sitemap.xml
+Sitemap: https://ninavoytovych.com/sitemap.xml
