@@ -2417,3 +2417,10 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .wi-head{ grid-template-columns:1fr; row-gap:16px; align-items:start; }
   .wi-head .filters{ padding-top:0; }
 }
+
+/* The header pill always spans the bar on phones, whatever else is in it.
+   Without this it can fall back to shrink-to-fit and sit off to one side. */
+@media (max-width:767px){
+  .nav-bar{ justify-content:center; }
+  .nav-pill{ width:100%; max-width:none; flex:1 1 auto; }
+}
