@@ -2362,12 +2362,14 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 @media (max-width:767px){ .hero-cta .btn, .foot-actions .btn{ padding:16px 20px; } }
 
 /* Home order: Selected work right after the hero, About below Focus – the gaps keep the old rhythm */
-.work{ padding-top:188px; }
+.work:not(.work-index){ padding-top:188px; }
 .about{ padding-top:188px; }
 .about + .proof, .about + .proof.wrap{ padding-top:0 !important; }
 .about:has(+ .proof){ padding-bottom:150px; }
-@media (min-width:1024px){ .work{ padding-top:120px; } .about{ padding-top:128px; } }
-@media (max-width:767px){ .work{ padding-top:0; } .about{ padding-top:96px; } }
+/* these set the rhythm of the home page only – the projects index keeps its own top padding,
+   otherwise its breadcrumbs and title ended up under the fixed header on phones */
+@media (min-width:1024px){ .work:not(.work-index){ padding-top:120px; } .about{ padding-top:128px; } }
+@media (max-width:767px){ .work:not(.work-index){ padding-top:0; } .about{ padding-top:96px; } }
 
 
 /* Joined buttons: the borders overlap and the active one sits on top, so no half-grey edge.
@@ -2401,3 +2403,17 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .focus-card .fz-stage .fz-cap{ padding-left:16px; }
 }
 
+
+/* Touch targets on phones: these two sat at 16 and 24px tall, below the 24px minimum
+   or too tight for a thumb. Only the vertical padding grows – nothing moves sideways. */
+@media (max-width:767px){
+  .pub-acts a{ padding:7px 0; }
+  .filter{ padding:10px 0; }
+}
+
+/* Projects index at tablet widths: the three-column head squeezed the title into two lines
+   and the filter row ran straight through it. Below 1024 the head stacks instead. */
+@media (max-width:1023px){
+  .wi-head{ grid-template-columns:1fr; row-gap:16px; align-items:start; }
+  .wi-head .filters{ padding-top:0; }
+}
