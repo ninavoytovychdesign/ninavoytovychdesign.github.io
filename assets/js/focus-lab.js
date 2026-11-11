@@ -34,7 +34,7 @@
   function wave(svg, x, y, color){ var c = el('circle', { cx:x, cy:y, r:6, 'class':'fz-wave' }, svg.top); c.style.setProperty('--c', color); setTimeout(function(){ c.remove(); }, 1300); }
   function layers(svg){ svg.innerHTML = ''; svg.lines = el('g', { 'class':'fz-l lines' }, svg); svg.nodes = el('g', { 'class':'fz-l nodes' }, svg); svg.top = el('g', { 'class':'fz-l top' }, svg); svg.ui = el('g', { 'class':'fz-l ui' }, svg); }
   function mono(svg, x, y, cls, anchor){ var t = el('text', { x:x, y:y, 'class':'fz-mono ' + (cls || ''), 'text-anchor':anchor || 'start' }, svg.ui); return t; }
-  function typeTo(ctx, t, s, dur){ return tween(ctx, dur || Math.max(300, s.length * 22), function(k){ t.textContent = s.slice(0, Math.ceil(s.length * k)) + (k < 1 ? '▍' : ''); }, function(x){ return x; }); }
+  function typeTo(ctx, t, s, dur){ return tween(ctx, dur || Math.max(400, s.length * 30), function(k){ t.textContent = s.slice(0, Math.ceil(s.length * k)) + (k < 1 ? '▍' : ''); }, function(x){ return x; }); }
 
   /* ---------- scene 1: architecture ---------- */
   function Arch(stage, cfg){
