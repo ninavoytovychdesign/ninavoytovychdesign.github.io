@@ -86,3 +86,15 @@ document.addEventListener('DOMContentLoaded',function(){
   go(); addEventListener('load',function(){ go(); setTimeout(go,150); });
 })();
 
+/* The domain menu becomes a dropdown at tablet too, so it has to close on a pick. */
+(function(){
+  var mq = matchMedia('(min-width:768px) and (max-width:1023px)');
+  var wrap = document.querySelector('.rf-wrap'); if (!wrap) return;
+  var tg = wrap.querySelector('.rf-toggle'); if (!tg) return;
+  wrap.querySelectorAll('.rf').forEach(function(c){
+    c.addEventListener('click', function(){
+      if (!mq.matches) return;
+      wrap.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); tg.focus();
+    });
+  });
+})();
