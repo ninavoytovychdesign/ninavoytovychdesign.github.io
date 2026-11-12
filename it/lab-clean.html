@@ -328,16 +328,22 @@
   .r3-hint{ order:-2; align-self:stretch; width:100%; margin:0 0 12px; text-align:left; }
   .radar-domain, .radar-node .lb{ display:none; }
 
-  /* 3. Touch targets: a tablet is a touch screen, but the 24px minimum was
+  /* 3. Empty scroll after the hero: the 188px section padding is the base
+     value, and the overrides only existed below 768 (0px) and above 1023
+     (120-128px), so the tablet had more air than the desktop. */
+  .work:not(.work-index){ padding-top:96px; }
+  .about{ padding-top:96px; }
+
+  /* 4. Touch targets: a tablet is a touch screen, but the 24px minimum was
      only applied below 768, so these links were 16px tall here. */
   .pub-acts a{ padding:7px 0; }
   .filter{ padding:10px 0; }
 
-  /* 4. Section heads stack instead of squeezing a centred title */
+  /* 5. Section heads stack instead of squeezing a centred title */
   .work-head, .words-head{ grid-template-columns:1fr; row-gap:8px; margin-bottom:48px; align-items:start; }
   .work-head .label, .words-head .label, .words-head .crumbs{ padding-top:0; }
 
-  /* 5. Focus: the tablet took the phone's stacked layout, so the scene was
+  /* 6. Focus: the tablet took the phone's stacked layout, so the scene was
      blown up to the full column width and the section ran 1090px tall. It
      gets the desktop's two columns instead, at phone-sized headings. */
   .focus.fz3 .focus-grid{ grid-template-columns:minmax(max-content,5fr) minmax(0,7fr); gap:32px; align-items:center; }
