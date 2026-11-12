@@ -2538,3 +2538,15 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .rf-3d{ position:relative; width:44px; padding:0; gap:0; }
   .rf-3d .s, .rf-3d .l{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 }
+
+/* CV in the mobile header, next to Menu: it used to live only in the footer */
+@media (max-width:1023px){
+  .nav-pill .nav-end{ display:inline-flex; align-items:center; margin-left:auto; }
+  .nav-pill .nav-end > :not(.nav-cv){ display:none; }
+  .nav-pill .nav-cv{ height:40px; padding:0 14px; gap:6px; border:1px solid rgba(255,255,255,.3); border-radius:8px; }
+  .nav-pill{ gap:8px; }
+}
+@media (max-width:359px){
+  .nav-pill .nav-cv{ padding:0 10px; }
+  .nav-menu-btn{ padding:0 12px; }
+}
