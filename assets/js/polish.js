@@ -58,7 +58,8 @@ document.addEventListener('DOMContentLoaded',function(){
   var radar=document.querySelector('.radar'); if(!radar) return;
   var c=document.createElement('div'); c.className='r3-cur'; c.setAttribute('aria-hidden','true'); var L=({uk:['Відкрити мапу','Мапа проєктів'],it:['Apri la mappa','Mappa dei progetti']})[document.documentElement.lang]||['Open the map','Map of work'];
   c.innerHTML='<i>'+L[0]+'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5"/></svg></i>'; document.body.appendChild(c);
-  var hero=document.querySelector('.hero'); if(hero){ var hint=document.createElement('p'); hint.className='r3-hint'; hint.textContent=L[1]; hero.appendChild(hint); }
+  /* the hint belongs in the radar column, between the filters and the radar */
+  var cell=document.querySelector('.radar-cell'); if(cell){ var hint=document.createElement('p'); hint.className='r3-hint'; hint.textContent=L[1]; cell.insertBefore(hint, cell.firstChild); }
   var tx=0,ty=0,x=0,y=0,raf=0,on=false;
   function tick(){ x+=(tx-x)*.22; y+=(ty-y)*.22; c.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)'; if(on||Math.abs(tx-x)>.5||Math.abs(ty-y)>.5) raf=requestAnimationFrame(tick); else raf=0; }
   function go(){ if(!raf) raf=requestAnimationFrame(tick); }

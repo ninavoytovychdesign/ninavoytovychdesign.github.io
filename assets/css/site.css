@@ -2049,7 +2049,7 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .radar.r3d-dive{ cursor:none !important; }
   .r3-cur{ position:fixed; left:0; top:0; width:auto; height:auto; margin:0; pointer-events:none; z-index:10000; will-change:transform; white-space:nowrap; }
   /* what you get, not what to do: a lime pill «Відкрити 3D-мапу →» under the cursor */
-  .r3-hint{ position:absolute; top:calc(var(--tg-top, 0px) - .5em); right:var(--pad); margin:0; font:500 12px/1 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); z-index:4; }
+  .r3-hint{ align-self:stretch; width:100%; margin:0 0 12px; font:500 12px/1 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-align:right; }
   .r3-cur i{ display:flex; align-items:center; gap:8px; height:40px; padding:0 16px; clip-path:inset(0 round 999px); background:var(--accent); color:var(--ink); font:500 12px/1 var(--mono); font-style:normal; letter-spacing:.08em; text-transform:uppercase; transform:translate(-50%,-50%) scale(0); opacity:0; transition:transform .3s cubic-bezier(.22,1,.36,1), opacity .2s ease; }
   .r3-cur i svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:square; }
   /* 3: click response – a short lime ripple that hands over to the 3D entry */
@@ -2431,3 +2431,6 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 @media (max-width:767px){
   .hero-title{ font-size:calc(12.4vw - 6px); line-height:1.08; white-space:nowrap; }
 }
+
+/* the map hint sits with the filters above the radar, left-aligned like them on phones */
+@media (max-width:767px){ .r3-hint{ text-align:left; margin-bottom:10px; } }
