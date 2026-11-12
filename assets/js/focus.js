@@ -346,8 +346,11 @@
   /* on a phone the annotation type is larger, so the stage grows and the scene slides below it */
   /* all three scenes share one canvas height, so switching tabs doesn't move anything below them */
   function fit(){ var H = 0; scenes.forEach(function(sc){ H = Math.max(H, (sc.box || [640, 440])[1]); });
-    scenes.forEach(function(sc){ var svg = sc.svg, b = sc.box || [640, 440], off = (H - b[1]) / 2;
-      svg.setAttribute('viewBox', '0 ' + (-off) + ' ' + b[0] + ' ' + H); svg.style.aspectRatio = b[0] + '/' + H;
+    /* FZ_TIGHT: on a phone each scene keeps its own height instead of the tallest one's,
+       which left about a hundred pixels of empty black under the shorter two. */
+    var tight = window.FZ_TIGHT && MOBQ.matches;
+    scenes.forEach(function(sc){ var svg = sc.svg, b = sc.box || [640, 440], H2 = tight ? b[1] : H, off = (H2 - b[1]) / 2;
+      svg.setAttribute('viewBox', '0 ' + (-off) + ' ' + b[0] + ' ' + H2); svg.style.aspectRatio = b[0] + '/' + H2;
       sc.stage.classList.toggle('fz-m', MOBQ.matches); }); }
 
   function build(){ return stages.map(function(st){
