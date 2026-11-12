@@ -2550,3 +2550,9 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .nav-pill .nav-cv{ padding:0 10px; }
   .nav-menu-btn{ padding:0 12px; }
 }
+
+/* The 3D map's filters follow the same joined bar as the domain chips under the radar:
+   shared borders inside a group, the separator keeping years and domains apart */
+.r3-chips{ gap:0; }
+.r3-chip + .r3-chip{ margin-left:-1px; }
+.r3-sep{ margin:0 8px; }
