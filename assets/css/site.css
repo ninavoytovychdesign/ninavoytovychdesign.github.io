@@ -2476,7 +2476,7 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .rf-3d .l{ display:none; }
   .rf-3d .s{ display:inline; }
   .r3-hint{ order:-2; align-self:stretch; width:100%; margin:0 0 12px; text-align:left; }
-  .radar-domain, .radar-node .lb{ display:none; }
+  .radar-domain{ display:none; }
 
   /* 3. Empty scroll after the hero: the 188px section padding is the base
      value, and the overrides only existed below 768 (0px) and above 1023
@@ -2558,3 +2558,8 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .r3-chips{ gap:0; }
 .r3-chip + .r3-chip{ margin-left:-1px; }
 .r3-sep{ margin:0 8px; }
+
+/* Touch targets the 24px minimum had missed above 1023px: these are standalone
+   action links, not links inside a sentence, so the inline exception is out */
+.pub-acts a{ padding:7px 0; }
+.proof ul.rows .sub a{ display:inline-block; padding:3px 0; }
