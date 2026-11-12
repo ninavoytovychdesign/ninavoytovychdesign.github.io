@@ -457,3 +457,9 @@ main .decision-visual .metric{min-height:0}
 .case .pers2 .d2 .d2-dl > div{grid-template-columns:1fr!important;gap:4px}
 .case .pers2 .d2-dl dt,.case .pers2 .d2-dl dd{grid-column:1!important;padding-right:0}
 @media (max-width:640px){.case .mt-hyp tr{display:block;padding:16px 0;border-bottom:1px solid rgba(8,8,11,.10)}.case .mt-hyp td{border:0;padding:2px 0;width:auto!important}.case .mt-hyp td:nth-child(3),.case .mt-hyp td:nth-child(4){padding-top:8px}.case .pers2{grid-template-columns:1fr;gap:40px}}
+
+/* 44px tap target for the decision links, without pushing their underline off the text */
+@media (max-width:1023px), (pointer:coarse){
+  .case .dg-go::after{ content:""; position:absolute; left:0; right:0; top:50%; height:44px; transform:translateY(-50%); }
+  .case .dg-go{ position:relative; }
+}

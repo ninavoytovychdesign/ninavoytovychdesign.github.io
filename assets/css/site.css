@@ -2563,3 +2563,12 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
    action links, not links inside a sentence, so the inline exception is out */
 .pub-acts a{ padding:7px 0; }
 .proof ul.rows .sub a{ display:inline-block; padding:3px 0; }
+
+/* 44px tap targets on touch, without moving anything: the hit area is an invisible
+   overlay, so the underline of a link stays where it is drawn */
+@media (max-width:1023px), (pointer:coarse){
+  .crumbs a, .foot-actions a, .foot-bar nav a, .foot-mail, .pcard .tlink, .next-link, .wordmark{ position:relative; }
+  .crumbs a::after, .foot-actions a::after, .foot-bar nav a::after, .foot-mail::after,
+  .pcard .tlink::after, .next-link::after, .wordmark::after{
+    content:""; position:absolute; left:0; right:0; top:50%; height:44px; transform:translateY(-50%); }
+}
