@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ninavoytovych.com/</loc><lastmod>2026-11-12</lastmod></url>
-  <url><loc>https://ninavoytovych.com/it/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://ninavoytovych.com/it/index.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/it/work/gora.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/it/work/index.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/it/work/lunora.html</loc><lastmod>2026-11-12</lastmod></url>
@@ -10,7 +10,7 @@
   <url><loc>https://ninavoytovych.com/it/work/open-kharkiv.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/it/work/tripstone.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/it/work/ulovo.html</loc><lastmod>2026-11-12</lastmod></url>
-  <url><loc>https://ninavoytovych.com/ua/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://ninavoytovych.com/ua/index.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/ua/work/gora.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/ua/work/index.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/ua/work/lunora.html</loc><lastmod>2026-11-12</lastmod></url>
@@ -20,7 +20,7 @@
   <url><loc>https://ninavoytovych.com/ua/work/tripstone.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/ua/work/ulovo.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/work/gora.html</loc><lastmod>2026-11-12</lastmod></url>
-  <url><loc>https://ninavoytovych.com/work/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://ninavoytovych.com/work/index.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/work/lunora.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/work/nova-poshta.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://ninavoytovych.com/work/numa.html</loc><lastmod>2026-11-12</lastmod></url>

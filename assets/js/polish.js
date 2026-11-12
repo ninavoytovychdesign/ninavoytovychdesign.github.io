@@ -7,8 +7,9 @@
  addEventListener('load',run); var t; addEventListener('resize',function(){clearTimeout(t); t=setTimeout(run,150);}); if(document.fonts) document.fonts.ready.then(run);})();
 (function(){function g(){var h=document.querySelector('.hero.wrap'), n=document.querySelector('.nav-bar'), f=document.querySelector('.hero-status'); if(f&&getComputedStyle(f).display==='none') f=h.querySelector('.hero-title'); if(!h||!n||!f) return;
  f.style.removeProperty('top'); h.style.removeProperty('padding-top');
- if(getComputedStyle(f).position==='absolute'){ var nb=n.getBoundingClientRect().bottom-h.getBoundingClientRect().top; f.style.setProperty('top',(nb+60)+'px','important'); var ttl=h.querySelector('.hero-title'); return; }
- var pad=parseFloat(getComputedStyle(h).paddingTop); var d=f.getBoundingClientRect().top-n.getBoundingClientRect().bottom-60;
+ if(getComputedStyle(f).position==='absolute'){ var nb=n.getBoundingClientRect().bottom-h.getBoundingClientRect().top-window.scrollY; f.style.setProperty('top',(nb+60)+'px','important'); var ttl=h.querySelector('.hero-title'); return; }
+ var pad=parseFloat(getComputedStyle(h).paddingTop); /* the title's position in document coordinates: taken from the viewport it shrinks as the page scrolls, while the header is fixed, so every resize fired mid-scroll turned the whole scroll distance into padding and the first screen came back empty */
+ var d=f.getBoundingClientRect().top+window.scrollY-n.getBoundingClientRect().bottom-60;
  h.style.setProperty('padding-top',Math.max(0,pad-d)+'px','important');}
  function g2(){g();g();g();} addEventListener('load',g2); var t; addEventListener('resize',function(){clearTimeout(t);t=setTimeout(g2,150)}); if(document.fonts) document.fonts.ready.then(g2);})();
 })();

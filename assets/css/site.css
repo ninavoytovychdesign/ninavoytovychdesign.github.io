@@ -2522,3 +2522,19 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .pub-acts a{ padding:7px 0; }
   .filter{ padding:10px 0; }
 }
+
+/* QA round, 12 Nov 2026 */
+/* The focus ring is near-black, which disappears against the dark header and the Focus block */
+.nav-bar :focus-visible, .nav-sheet :focus-visible, .focus :focus-visible{ outline-color:var(--w1); }
+.nav-bar .radar-node:focus-visible .lb, .focus .radar-node:focus-visible .lb{ outline-color:var(--w1); }
+
+/* Below 420px «All domains» wrapped onto two lines inside its own button, because the map button
+   took half the row. The map button keeps its icon and gives the label up to the screen reader. */
+@media (max-width:767px){
+  .rf-toggle{ padding:0 12px; gap:8px; }
+  .rf-3d{ padding:0 10px; letter-spacing:1px; gap:6px; }
+}
+@media (max-width:420px){
+  .rf-3d{ position:relative; width:44px; padding:0; gap:0; }
+  .rf-3d .s, .rf-3d .l{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+}

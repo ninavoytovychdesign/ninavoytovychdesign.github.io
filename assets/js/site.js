@@ -660,6 +660,7 @@
       var open = q.classList.toggle('open');
       b.setAttribute('aria-expanded', open); b.textContent = open ? b.dataset.less : b.dataset.more;
       if (!open) fitAll();
+      syncAlign();
     });
   });
   function lh(p){ return parseFloat(getComputedStyle(p).lineHeight) || 24; }
@@ -689,6 +690,8 @@
     if (track) track.style.alignItems = align;
   }
   function fitAll(){ items.forEach(fit); }
+  /* with an open card the row would stretch every neighbour to its height, leaving them half empty as you page across */
+  function syncAlign(){ if (!track) return; var any = items.some(function(it){ return it.q.classList.contains('open'); }); track.style.alignItems = any ? 'flex-start' : ''; }
   fitAll(); addEventListener('resize', fitAll); if (document.fonts) document.fonts.ready.then(fitAll);
 })();
 
