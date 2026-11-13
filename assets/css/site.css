@@ -2590,7 +2590,8 @@ main .in-short + .metrics .metric b{ display:block; white-space:nowrap; font-wei
   font-size:128px; line-height:.86; letter-spacing:-.04em; }
 main .in-short + .metrics .metric b i{ font-style:normal; font-size:24px; letter-spacing:1px;
   text-transform:uppercase; padding-left:10px; vertical-align:baseline; }
-main .in-short + .metrics .metric span{ display:block; max-width:34ch; padding-top:20px;
+main .in-short + .metrics .metric:last-child{ padding-right:0; }
+main .in-short + .metrics .metric span{ display:block; max-width:none; padding-top:20px;
   font:400 13px/18px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t3); }
 @media (min-width:768px) and (max-width:1279px){
   /* three in a row only fit once the content column is past 1100px: below that the longest
