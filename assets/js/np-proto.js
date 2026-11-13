@@ -84,7 +84,7 @@
   function layer(k) {
     if (L[k]) return L[k];
     const d = el('div', 'npp-L', `height:${H}px`);
-    const im = el('img', '', 'left:0;top:0;width:1440px', d); im.alt = ''; im.decoding = 'async'; im.src = src(k);
+    const im = el('img', '', 'left:0;top:0;width:1440px', d); im.alt = ''; im.decoding = 'async'; if (window.imgset) window.imgset(im, BASE, LANG + '-' + k, '?v=' + V); im.src = src(k);
     L[k] = { d, im, y: 0, max: Math.max(0, SCR[k].h - H) };
     return L[k];
   }
@@ -123,7 +123,7 @@
   async function openPop(k) {
     if (cur !== POP[k].base) await go(POP[k].base, 200);
     pop = k; const p = POP[k];
-    popImg.src = src(k); Object.assign(popBox.style, { left: p.x + 'px', top: p.y + 'px', width: p.w + 'px', height: p.h + 'px', visibility: 'visible' });
+    if (window.imgset) window.imgset(popImg, BASE, LANG + '-' + k, '?v=' + V); popImg.src = src(k); Object.assign(popBox.style, { left: p.x + 'px', top: p.y + 'px', width: p.w + 'px', height: p.h + 'px', visibility: 'visible' });
     fade(scrim, 0, 0.4, 260); await fade(popBox, 0, 1, 260); mark(); hotspots();
   }
   async function closePop(quick) {

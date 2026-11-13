@@ -9,7 +9,7 @@
   const stage = root.querySelector('[data-stage]'), vp = stage.parentElement, dev = root.querySelector('[data-dev]');
   const url = root.querySelector('[data-url]'), hint = root.querySelector('[data-hint]');
   const el = (tag, cls, css, parent) => { const e = document.createElement(tag); if (cls) e.className = cls; if (css) e.style.cssText = css; (parent || stage).appendChild(e); return e; };
-  const img = (src, parent, css) => { const i = el('img', '', css || '', parent); i.src = BASE + src + '.webp'; i.alt = ''; i.decoding = 'async'; return i; };
+  const img = (src, parent, css) => { const i = el('img', '', css || '', parent); if (window.imgset) window.imgset(i, BASE, src, ''); i.src = BASE + src + '.webp'; i.alt = ''; i.decoding = 'async'; return i; };
 
   /* screens: full = one 1440×1003 picture; page = scrolling plan page with a fixed app bar, side rail and bottom bar */
   const SCR = {
@@ -30,7 +30,7 @@
     else {
       s.C = el('div', '', 'left:0;top:0;width:1440px', L); img(s.page, s.C);
       s.max = s.h - (1003 - s.bar);
-      el('div', 'tsp-cr', 'left:0;top:0;width:1440px;height:60px;overflow:hidden', L).appendChild(Object.assign(new Image(), { src: BASE + s.page + '-top.webp', alt: '', style: 'position:absolute;left:0;top:0;width:1440px' }));
+      img(s.page + '-top', el('div', 'tsp-cr', 'left:0;top:0;width:1440px;height:60px;overflow:hidden', L), 'left:0;top:0;width:1440px');
       img('aside', L, 'left:0;top:0;width:64px');
       const b = el('div', '', `left:0;top:${1003 - s.bar}px;width:1440px;height:${s.bar}px;overflow:hidden`, L); img(s.page + '-bar', b);
     }

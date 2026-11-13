@@ -13,7 +13,7 @@
   const stage = root.querySelector('[data-stage]'), scr = stage.parentElement, phone = root.querySelector('[data-phone]');
   const hint = root.querySelector('[data-hint]');
   const el = (tag, cls, css, parent) => { const e = document.createElement(tag); if (cls) e.className = cls; if (css) e.style.cssText = css; (parent || stage).appendChild(e); return e; };
-  const img = (src, parent, css) => { const i = el('img', '', css || '', parent); i.src = BASE + src + '.webp?v=20261108c'; i.alt = ''; i.decoding = 'async'; return i; };
+  const img = (src, parent, css) => { const i = el('img', '', css || '', parent); if (window.imgset) window.imgset(i, BASE, src, '?v=20261108c'); i.src = BASE + src + '.webp?v=20261108c'; i.alt = ''; i.decoding = 'async'; return i; };
 
   /* ── screens ── */
   const SCR = {

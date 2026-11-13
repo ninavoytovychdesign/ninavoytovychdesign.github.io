@@ -20,7 +20,7 @@
   const hint = root.querySelector('[data-hint]');
   const el = (tag, cls, css, parent) => { const e = document.createElement(tag); if (cls) e.className = cls; if (css) e.style.cssText = css; (parent || stage).appendChild(e); return e; };
   const ALL = [];
-  const img = (src, parent, css) => { const i = el('img', '', css || '', parent); i.src = BASE + src + '.webp?v=' + V; i.alt = ''; ALL.push(i); return i; };
+  const img = (src, parent, css) => { const i = el('img', '', css || '', parent); if (window.imgset) window.imgset(i, BASE, src, '?v=' + V); i.src = BASE + src + '.webp?v=' + V; i.alt = ''; ALL.push(i); return i; };
   // every layer is decoded before the first frame, so a screen never comes in empty
   const ready = () => Promise.all([...ALL.map((i) => (i.decode ? i.decode().catch(() => {}) : Promise.resolve())), ...VIDS.map((v) => (v.readyState >= 3 ? 0 : new Promise((r) => { v.addEventListener('canplaythrough', r, { once: true }); v.addEventListener('error', r, { once: true }); setTimeout(r, 4000); })))]);
   const raf2 = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
