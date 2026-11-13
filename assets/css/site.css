@@ -2571,3 +2571,29 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .pcard .tlink::after, .next-link::after, .wordmark::after{
     content:""; position:absolute; left:0; right:0; top:50%; height:44px; transform:translateY(-50%); }
 }
+
+/* The figures under «In short»: a summary of three equal facts, so they stay side by side and
+   just get louder. The size follows the length of the value against the width of its own
+   column — one digit fills it, «160%» is smaller, «30 problems» smaller still — so nothing
+   wraps and nothing spills. --n is the character count, which the build writes onto each <b>. */
+main .in-short + .metrics{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:0;
+  border-top:1px solid rgba(8,8,11,.55); padding-top:24px; }
+main .in-short + .metrics .metric{ border-top:0; min-width:0; min-height:0; gap:0;
+  padding:0 32px 0 0; align-content:start; container-type:inline-size; }
+main .in-short + .metrics .metric b{ display:block; white-space:nowrap; font-weight:500;
+  line-height:.84; letter-spacing:-.06em;
+  font-size:clamp(44px, calc(400px / var(--n,1)), 168px);        /* without container queries */
+  font-size:min(168px, calc(170cqw / var(--n,1)));
+}
+main .in-short + .metrics .metric span{ display:block; max-width:34ch; padding-top:20px;
+  font:400 13px/18px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t3); }
+@media (min-width:768px) and (max-width:1023px){
+  /* three in a row here squeezed «30 problems» down to 25px, which is no longer a figure */
+  main .in-short + .metrics{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:32px; }
+}
+@media (max-width:767px){
+  main .in-short + .metrics{ grid-template-columns:1fr; row-gap:28px; }
+  main .in-short + .metrics .metric{ padding-right:0; }
+  main .in-short + .metrics .metric b{ font-size:clamp(44px, calc(340px / var(--n,1)), 112px);
+    font-size:min(112px, calc(165cqw / var(--n,1))); }
+}
