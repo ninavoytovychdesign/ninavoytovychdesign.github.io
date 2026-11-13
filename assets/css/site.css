@@ -2087,7 +2087,7 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 
 /* mobile – photo exactly one grid column, lines between fact groups, LinkedIn link centred */
 @media (max-width:767px){
-  .facts--photo .me{ width:50% !important; max-width:none !important; margin-bottom:24px !important; }
+  .facts--photo .me{ width:100% !important; max-width:none !important; margin-bottom:24px !important; }
   .facts--photo{ row-gap:0 !important; }
   .facts--photo ul{ gap:12px !important; }
   .facts--photo li.mk{ border-top:1px solid var(--line); padding-top:16px; margin-top:8px; }
@@ -2527,15 +2527,16 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .nav-bar :focus-visible, .nav-sheet :focus-visible, .focus :focus-visible{ outline-color:var(--w1); }
 .nav-bar .radar-node:focus-visible .lb, .focus .radar-node:focus-visible .lb{ outline-color:var(--w1); }
 
-/* Below 420px «All domains» wrapped onto two lines inside its own button, because the map button
-   took half the row. The map button keeps its icon and gives the label up to the screen reader. */
+/* The map button used to shrink to a bare icon below 420px, so nothing said it opened a map.
+   The domain filter and the map button now split the row into two equal halves, label and all. */
 @media (max-width:767px){
-  .rf-toggle{ padding:0 12px; gap:8px; }
-  .rf-3d{ padding:0 10px; letter-spacing:1px; gap:6px; }
+  .rf-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:stretch; }
+  .rf-wrap .rf-toggle, .rf-wrap .rf-3d{ width:100%; min-width:0; flex:none; padding:0 12px; gap:8px; letter-spacing:1px; }
+  .rf-wrap .rf-toggle .rf-cur, .rf-wrap .rf-3d .s{ min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .rf-wrap .rf-3d svg, .rf-wrap .rf-toggle .rf-chev{ flex:none; }
 }
-@media (max-width:420px){
-  .rf-3d{ position:relative; width:44px; padding:0; gap:0; }
-  .rf-3d .s, .rf-3d .l{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media (max-width:400px){
+  .rf-wrap .rf-toggle, .rf-wrap .rf-3d{ padding:0 8px; gap:6px; font-size:11px; letter-spacing:0; }
 }
 
 /* CV in the mobile header, next to Menu: it used to live only in the footer */
