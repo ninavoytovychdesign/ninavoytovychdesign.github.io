@@ -2572,29 +2572,28 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
     content:""; position:absolute; left:0; right:0; top:50%; height:44px; transform:translateY(-50%); }
 }
 
-/* The figures under «In short»: a summary of three equal facts, so they stay side by side and
-   just get louder. The size follows the length of the value against the width of its own
-   column — one digit fills it, «160%» is smaller, «30 problems» smaller still — so nothing
-   wraps and nothing spills. --n is the character count, which the build writes onto each <b>. */
+/* The figures under «In short»: one pattern in every case. The digits are always the same
+   size, and a word that comes with them — mo, px, problems — is set small beside them, so a
+   longer value never drags the whole block down to a different size. */
 main .in-short + .metrics{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:0;
   border-top:1px solid rgba(8,8,11,.55); padding-top:24px; }
 main .in-short + .metrics .metric{ border-top:0; min-width:0; min-height:0; gap:0;
-  padding:0 32px 0 0; align-content:start; container-type:inline-size; }
+  padding:0 32px 0 0; align-content:start; }
 main .in-short + .metrics .metric b{ display:block; white-space:nowrap; font-weight:500;
   font-family:var(--mono); font-variant-numeric:tabular-nums;
-  line-height:.86; letter-spacing:-.04em;
-  font-size:clamp(40px, calc(350px / var(--n,1)), 168px);        /* without container queries */
-  font-size:min(168px, calc(150cqw / var(--n,1)));
-}
+  font-size:128px; line-height:.86; letter-spacing:-.04em; }
+main .in-short + .metrics .metric b i{ font-style:normal; font-size:24px; letter-spacing:1px;
+  text-transform:uppercase; padding-left:10px; vertical-align:baseline; }
 main .in-short + .metrics .metric span{ display:block; max-width:34ch; padding-top:20px;
   font:400 13px/18px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t3); }
-@media (min-width:768px) and (max-width:1023px){
-  /* three in a row here squeezed «30 problems» down to 25px, which is no longer a figure */
+@media (min-width:768px) and (max-width:1279px){
+  /* three in a row only fit once the content column is past 1100px: below that the longest
+     value runs into its neighbour */
   main .in-short + .metrics{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:32px; }
 }
 @media (max-width:767px){
   main .in-short + .metrics{ grid-template-columns:1fr; row-gap:28px; }
   main .in-short + .metrics .metric{ padding-right:0; }
-  main .in-short + .metrics .metric b{ font-size:clamp(40px, calc(300px / var(--n,1)), 112px);
-    font-size:min(112px, calc(148cqw / var(--n,1))); }
+  main .in-short + .metrics .metric b{ font-size:96px; }
+  main .in-short + .metrics .metric b i{ font-size:20px; padding-left:8px; }
 }
