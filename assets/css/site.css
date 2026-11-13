@@ -2626,3 +2626,7 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
   .site-footer{ position:relative; overflow:visible; margin-top:72px; }
   .to-top{ position:absolute; top:-58px; left:50%; right:auto; transform:translateX(-50%); margin-top:0; }
 }
+
+/* Case prose runs the full content width, like the figures and the rules above it,
+   so a case takes less scrolling. */
+.case-sec .content > .txt, .case .txt, .case-sec .content > h2{ max-width:none; }
