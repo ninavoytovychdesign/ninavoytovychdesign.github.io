@@ -6,7 +6,9 @@
   var btn = document.querySelector('.nav-menu-btn'), sheet = document.querySelector('.nav-sheet');
   if (btn && sheet){
     var uk = document.documentElement.lang === 'uk', it = document.documentElement.lang === 'it';
-    var setOpen = function(o){ sheet.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); btn.textContent = o ? (uk ? 'Закрити' : it ? 'Chiudi' : 'Close') : (uk ? 'Меню' : 'Menu'); };
+    /* the page scrolled under the open sheet, the way it does not under a modal */
+    var setOpen = function(o){ sheet.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); btn.textContent = o ? (uk ? 'Закрити' : it ? 'Chiudi' : 'Close') : (uk ? 'Меню' : 'Menu');
+      document.documentElement.style.overflow = o ? 'hidden' : ''; };
     btn.addEventListener('click', function(){ setOpen(!sheet.classList.contains('open')); });
     sheet.addEventListener('click', function(e){ if (e.target.closest('a')) setOpen(false); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && sheet.classList.contains('open')){ setOpen(false); btn.focus(); } });
