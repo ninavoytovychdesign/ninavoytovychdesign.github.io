@@ -2566,9 +2566,11 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 /* 44px tap targets on touch, without moving anything: the hit area is an invisible
    overlay, so the underline of a link stays where it is drawn */
 @media (max-width:1023px), (pointer:coarse){
+  /* ::before, not ::after: the footer links already draw their arrow in ::after, and the hit
+     area was taking it over and laying it across the text */
   .crumbs a, .foot-actions a, .foot-bar nav a, .foot-mail, .pcard .tlink, .next-link, .wordmark{ position:relative; }
-  .crumbs a::after, .foot-actions a::after, .foot-bar nav a::after, .foot-mail::after,
-  .pcard .tlink::after, .next-link::after, .wordmark::after{
+  .crumbs a::before, .foot-actions a::before, .foot-bar nav a::before, .foot-mail::before,
+  .pcard .tlink::before, .next-link::before, .wordmark::before{
     content:""; position:absolute; left:0; right:0; top:50%; height:44px; transform:translateY(-50%); }
 }
 
