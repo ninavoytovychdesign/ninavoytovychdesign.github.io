@@ -2582,7 +2582,7 @@ main .in-short + .metrics{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:0;
   border-top:1px solid var(--t1); padding-top:24px; }
 /* out to the full width of the case: the block sits inside the content column, which starts
    one column in, and 20% of that column is exactly the label column beside it */
-@media (min-width:768px){ main .in-short + .metrics{ margin-left:-20%; } }
+/* the figures sit inside the case column, flush with the rules above and below them */
 main .in-short + .metrics .metric{ border-top:0; min-width:0; min-height:0; gap:0;
   padding:0 32px 0 0; align-content:start; }
 main .in-short + .metrics .metric b{ display:block; white-space:nowrap; font-weight:500;
