@@ -2579,7 +2579,7 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
    size, and a word that comes with them — mo, px, problems — is set small beside them, so a
    longer value never drags the whole block down to a different size. */
 main .in-short + .metrics{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:0;
-  border-top:1px solid var(--t1); padding-top:24px; }
+  border-top:1px solid var(--line); padding-top:24px; }
 /* out to the full width of the case: the block sits inside the content column, which starts
    one column in, and 20% of that column is exactly the label column beside it */
 /* the figures sit inside the case column, flush with the rules above and below them */
