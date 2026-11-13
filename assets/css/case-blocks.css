@@ -178,14 +178,15 @@
 .case .nda-cover{background-size:56px 56px;background-position:center center}
 .case .nda-tag{border:0;border-radius:0;padding:0;top:24px;left:24px;font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 .case .ins-block .ins-grid, .case .ins-block .ins-grid.ins-2{display:grid!important;grid-template-columns:1fr!important;gap:0!important;margin-top:20px;border-top:1px solid rgba(8,8,11,0.092)}
-.case .ins-block .ins{display:grid!important;grid-template-columns:132px minmax(0,1fr);column-gap:28px;row-gap:4px;align-items:start;background:none!important;border-radius:0!important;padding:16px 0!important;border-bottom:1px solid rgba(8,8,11,0.092)}
-.case .ins-block .ins b{grid-row:1 / span 2;display:grid;gap:8px;font:500 20px/1 var(--mono)!important;letter-spacing:0!important;color:var(--ink)!important;font-variant-numeric:tabular-nums;padding-top:2px}
-.case .ins-block .ins b::after{content:"";display:block;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--ink) 0 calc(var(--v,0)*100%),rgba(8,8,11,0.115) calc(var(--v,0)*100%) 100%)}
+.case .ins-block .ins{display:grid!important;grid-template-columns:190px minmax(0,1fr);column-gap:32px;row-gap:4px;align-items:start;background:none!important;border-radius:0!important;padding:16px 0!important;border-bottom:1px solid rgba(8,8,11,0.092)}
+/* the figure leads the finding, so it is set large enough to be read first */
+.case .ins-block .ins b{grid-row:1 / span 2;display:grid;gap:10px;font:500 36px/1 var(--mono)!important;letter-spacing:-.02em!important;color:var(--ink)!important;font-variant-numeric:tabular-nums;padding-top:0}
+.case .ins-block .ins b::after{content:"";display:block;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--ink) 0 calc(var(--v,0)*100%),rgba(8,8,11,0.115) calc(var(--v,0)*100%) 100%)}
 .case .ins-block .ins p{grid-column:2;font:500 16px/1.45 var(--body)!important;color:var(--ink)}
 .case .ins-block .ins span{grid-column:2;margin:0!important;padding:0!important;font:400 14px/1.5 var(--body)!important;color:var(--dim)}
 @media (max-width:640px){
-.case .ins-block .ins{grid-template-columns:84px minmax(0,1fr);column-gap:16px}
-.case .ins-block .ins b{font-size:16px!important}
+.case .ins-block .ins{grid-template-columns:96px minmax(0,1fr);column-gap:16px}
+.case .ins-block .ins b{font-size:24px!important;gap:8px}
 }
 .case .nda-cover:has(.nda-mock){background:var(--surface)!important;background-image:none!important;aspect-ratio:16/10}
 .case .nda-mock{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}

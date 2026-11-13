@@ -26,11 +26,11 @@
 <link rel="alternate" hreflang="uk" href="https://ninavoytovych.com/ua/work/ulovo.html">
 <link rel="alternate" hreflang="it" href="https://ninavoytovych.com/it/work/ulovo.html">
 <link rel="alternate" hreflang="x-default" href="https://ninavoytovych.com/work/ulovo.html">
-<link rel="stylesheet" href="../../assets/css/case-blocks.css?v=53121f2e">
+<link rel="stylesheet" href="../../assets/css/case-blocks.css?v=0d47bc40">
 <script>document.documentElement.className+=' js';setTimeout(function(){document.querySelectorAll('.reveal:not(.in)').forEach(function(e){e.classList.add('in');});},3000);</script>
-<link rel="stylesheet" href="../../assets/css/site.css?v=53121f2e">
-<script src="../../assets/js/polish.js?v=53121f2e" defer></script>
-<script src="../../assets/js/focus.js?v=53121f2e" defer></script>
+<link rel="stylesheet" href="../../assets/css/site.css?v=0d47bc40">
+<script src="../../assets/js/polish.js?v=0d47bc40" defer></script>
+<script src="../../assets/js/focus.js?v=0d47bc40" defer></script>
 <script>if(["ninavoytovychdesign.github.io", "ninavoytovych.com", "www.ninavoytovych.com"].indexOf(location.hostname)>-1){var s=document.createElement('script');s.async=1;s.src='https://gc.zgo.at/count.js';s.dataset.goatcounter='https://ninavoytovych.goatcounter.com/count';document.head.appendChild(s);}</script>
 </head>
 <body>
@@ -56,10 +56,10 @@
 <div class="wrap"><article class="case case-body" id="view-ulovo" data-case="ulovo">
 <section class="row case-sec" id="ul-task"><span class="label">Контекст</span><div class="content"><div class="txt"><p>Дані для неї розкидані – погода, вітер, тиск, Місяць, сутінки. Задача – звести їх у прогноз, який читається за кілька секунд, і закрити всі стани реального застосунку. ТЗ не було: вимоги збирала по ходу з замовником і розробником. Тестувань із людьми теж не було, тож рішення спираються на сценарії, обмеження iOS і API погоди.</p></div></div></section>
 <section class="row case-sec" id="ul-flows"><span class="label">Структура</span><div class="content"><h2>Структура</h2><div class="txt"><p>Ядро – три вкладки прогнозу: Головна, Погода, Календар. Навколо – вхід, Pro-підписка, профіль і стани, що можуть зʼявитися на будь-якому екрані.</p></div><div aria-label="Карта флоу Ulovo: 12 флоу, 86 екранів і станів" class="dgm dg-map" role="group">
-<div class="dg-group"><span class="dg-h">Вхід і акаунт</span><div class="dg-card dg-flow"><span class="dg-n">01</span><span class="dg-t">Сплеш і онбординг</span><b style="--n:1">4</b></div><div class="dg-card dg-flow"><span class="dg-n">02</span><span class="dg-t">Вхід через e-mail</span><b style="--n:1">9</b></div><div class="dg-card dg-flow"><span class="dg-n">03</span><span class="dg-t">Вхід через Google</span><b style="--n:1">4</b></div><div class="dg-card dg-flow"><span class="dg-n">04</span><span class="dg-t">Реєстрація</span><b style="--n:2">11</b></div><div class="dg-card dg-flow"><span class="dg-n">05</span><span class="dg-t">Відновлення пароля</span><b style="--n:1">8</b></div></div>
-<div class="dg-group"><span class="dg-h">Прогноз</span><div class="dg-card dg-flow"><span class="dg-n">06</span><span class="dg-t">Головна</span><b style="--n:2">15</b></div><div class="dg-card dg-flow"><span class="dg-n">07</span><span class="dg-t">Погода</span><b style="--n:1">6</b></div><div class="dg-card dg-flow"><span class="dg-n">08</span><span class="dg-t">Календар</span><b style="--n:1">5</b></div></div>
-<div class="dg-group"><span class="dg-h">Pro</span><div class="dg-card dg-flow"><span class="dg-n">09</span><span class="dg-t">Pro-підписка</span><b style="--n:1">4</b></div><p class="dg-note">Пейвол відкривається з фільтра риби на Головній, з Календаря і з Налаштувань</p></div>
-<div class="dg-group"><span class="dg-h">Профіль і система</span><div class="dg-card dg-flow"><span class="dg-n">10</span><span class="dg-t">Налаштування</span><b style="--n:2">14</b></div><div class="dg-card dg-flow"><span class="dg-n">11</span><span class="dg-t">Сповіщення</span><b style="--n:1">4</b></div><div class="dg-card dg-flow"><span class="dg-n">12</span><span class="dg-t">Системні стани</span><b style="--n:1">2</b></div><p class="dg-note">Системні стани можуть зʼявитися на будь-якому екрані: сесія завершилася, обовʼязкове оновлення</p></div>
+<div class="dg-group"><span class="dg-h">Вхід і акаунт</span><div class="dg-card dg-flow"><span class="dg-n">01</span><span class="dg-t">Сплеш і онбординг</span><b>4</b></div><div class="dg-card dg-flow"><span class="dg-n">02</span><span class="dg-t">Вхід через e-mail</span><b>9</b></div><div class="dg-card dg-flow"><span class="dg-n">03</span><span class="dg-t">Вхід через Google</span><b>4</b></div><div class="dg-card dg-flow"><span class="dg-n">04</span><span class="dg-t">Реєстрація</span><b>11</b></div><div class="dg-card dg-flow"><span class="dg-n">05</span><span class="dg-t">Відновлення пароля</span><b>8</b></div></div>
+<div class="dg-group"><span class="dg-h">Прогноз</span><div class="dg-card dg-flow"><span class="dg-n">06</span><span class="dg-t">Головна</span><b>15</b></div><div class="dg-card dg-flow"><span class="dg-n">07</span><span class="dg-t">Погода</span><b>6</b></div><div class="dg-card dg-flow"><span class="dg-n">08</span><span class="dg-t">Календар</span><b>5</b></div></div>
+<div class="dg-group"><span class="dg-h">Pro</span><div class="dg-card dg-flow"><span class="dg-n">09</span><span class="dg-t">Pro-підписка</span><b>4</b></div><p class="dg-note">Пейвол відкривається з фільтра риби на Головній, з Календаря і з Налаштувань</p></div>
+<div class="dg-group"><span class="dg-h">Профіль і система</span><div class="dg-card dg-flow"><span class="dg-n">10</span><span class="dg-t">Налаштування</span><b>14</b></div><div class="dg-card dg-flow"><span class="dg-n">11</span><span class="dg-t">Сповіщення</span><b>4</b></div><div class="dg-card dg-flow"><span class="dg-n">12</span><span class="dg-t">Системні стани</span><b>2</b></div><p class="dg-note">Системні стани можуть зʼявитися на будь-якому екрані: сесія завершилася, обовʼязкове оновлення</p></div>
 <p class="dg-foot">12 флоу · 86 екранів і станів. Цифра на картці – кількість екранів і станів у флоу.</p>
 </div></div></section>
 <section class="row case-sec" id="ul-decisions"><span class="label">Рішення</span><div class="content"><div class="d2">
@@ -164,6 +164,6 @@
     </div>
   </form>
 </dialog><script>window.MD_MSG={"req": "Заповніть це поле", "mail": "Перевірте пошту – схоже, адреса неповна", "ok": "Потрібна ваша згода на публікацію"};</script>
-<script src="../../assets/js/site.js?v=53121f2e" defer></script>
+<script src="../../assets/js/site.js?v=0d47bc40" defer></script>
 </body>
 </html>
