@@ -2603,3 +2603,24 @@ main .in-short + .metrics .metric span{ display:block; max-width:34ch; padding-t
   main .in-short + .metrics .metric b{ font-size:96px; }
   main .in-short + .metrics .metric b i{ font-size:20px; padding-left:8px; }
 }
+
+/* Back to top, in the footer's top right corner. It takes the second grid column
+   of the first row, so the CTA below it keeps the full width it had. */
+.foot-cta{ grid-template-columns:minmax(0,1fr) auto; }
+.foot-cta > *{ grid-column:1; }
+.foot-cta > .to-top{ grid-column:2; grid-row:1; justify-self:end; align-self:start;
+  display:inline-flex; align-items:center; gap:8px; min-height:24px; padding:4px 0;
+  font:600 14px/20px var(--mono); letter-spacing:1px; text-transform:uppercase; color:var(--t1);
+  background:none; border:0; cursor:pointer;
+  text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px;
+  transition:text-decoration-color .25s var(--ease); }
+.foot-cta > .to-top::after{ content:"↑"; font-family:var(--sans); transition:transform .3s var(--ease); }
+.foot-cta > .to-top:hover{ text-decoration-color:transparent; }
+.foot-cta > .to-top:hover::after{ transform:translateY(-2px); }
+@media (max-width:767px){
+  .foot-cta > .to-top{ font-size:12px; letter-spacing:1px; gap:6px; }
+}
+@media (max-width:1023px), (pointer:coarse){
+  .foot-cta > .to-top{ position:relative; }
+  .foot-cta > .to-top::before{ content:""; position:absolute; left:0; right:0; top:50%; height:44px; transform:translateY(-50%); }
+}

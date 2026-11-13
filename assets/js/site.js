@@ -847,3 +847,15 @@
   window.addEventListener('resize', align);
   window.addEventListener('load', align);
 })();
+
+/* Back to top. Focus moves to the header so the keyboard lands where the eye does. */
+(function () {
+  var btn = document.querySelector('[data-top]');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var slow = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: slow ? 'auto' : 'smooth' });
+    var nav = document.querySelector('.nav-bar a, .nav-bar button');
+    if (nav) nav.focus({ preventScroll: true });
+  });
+})();
