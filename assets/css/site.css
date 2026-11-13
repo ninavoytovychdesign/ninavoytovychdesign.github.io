@@ -2623,5 +2623,5 @@ main .in-short + .metrics .metric span{ display:block; max-width:34ch; padding-t
   /* the strip the arrow stands in; the footer's own overflow is only needed for the
      wide wordmark, which wraps at this width */
   .site-footer{ position:relative; overflow:visible; margin-top:72px; }
-  .to-top{ position:absolute; top:-58px; right:24px; margin-top:0; }
+  .to-top{ position:absolute; top:-58px; left:50%; right:auto; transform:translateX(-50%); margin-top:0; }
 }
