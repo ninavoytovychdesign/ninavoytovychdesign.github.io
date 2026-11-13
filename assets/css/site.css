@@ -2219,13 +2219,14 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   .focus.fz3 .fz-stage{ flex:1 1 0; min-height:0; margin-bottom:8px; justify-content:center; }
 }
 .fz-stage{ position:relative; display:flex; flex-direction:column; width:100%; --mx:0; --my:0; }
-.fz-stage svg.fz{ display:block; width:100%; height:auto; aspect-ratio:640/440; flex:0 0 auto; overflow:visible; animation:fzdrift 9s ease-in-out infinite alternate; }
+/* no drift: moving the whole scene 6px forever made the text shimmer as it was
+   re-rendered at fractional offsets, which reads as trembling */
+.fz-stage svg.fz{ display:block; width:100%; height:auto; aspect-ratio:640/440; flex:0 0 auto; overflow:visible; }
 @media (max-width:767px){ .focus-card .fz-stage{ margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); padding:0 12px; width:auto; } .focus-card .fz-stage .fz-cap{ padding-left:12px; } }
 .fz-cap{ display:none; }
 /* scene caption sits in the top-right corner, paired with the “Focus” label */
 .fz .fz-mono.name{ font-size:12px; letter-spacing:2px; text-transform:uppercase; fill:var(--w2); }
 .fz .fz-mono.desc{ font-family:var(--mono); font-size:12px; letter-spacing:0; fill:var(--w1); }
-@keyframes fzdrift{ from{ transform:translate(0,0) } to{ transform:translate(0,-6px) } }
 /* parallax layers answer the mouse: wires slowly, nodes faster */
 .fz .fz-l{ transition:transform .6s var(--ease); }
 .fz .fz-l.lines{ transform:translate(calc(var(--mx) * -6px), calc(var(--my) * -6px)); }
@@ -2322,11 +2323,9 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
   /* no pointer parallax on phones – nothing should shift under a finger */
   .fz .fz-l.lines, .fz .fz-l.nodes, .fz .fz-l.top{ transform:none; }
   /* and no idle drift: a 6px float reads as a shake at this scale */
-  .fz-stage svg.fz{ animation:none; }
   .fz-cap{ font-size:11px; letter-spacing:1.5px; }
 }
 @media (prefers-reduced-motion: reduce){
-  .fz-stage svg.fz{ animation:none; }
   .fz *{ transition:none !important; animation:none !important; }
 }
 
