@@ -412,9 +412,9 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 
 /* Carried-over case blocks, aligned to this system */
 .case{ --display:var(--head); --body:var(--sans);
-  --ink:#08080B; --muted:rgba(8,8,11,.70); --dim:rgba(8,8,11,.58); --line:rgba(40,40,70,.12); --ln:rgba(40,40,70,.12);
-  --panel:#EFEFF1; --panel-line:rgba(40,40,70,.12); --surface:#EFEFF1; --surface-2:#F5F5F5;
-  --sp-bg:#F5F5F5; --sp-card:#EFEFF1; --sp-raise:#FFFFFF; --sp-ctl:#F5F5F5; --sp-line:rgba(40,40,70,.12);
+  --ink:#08080B; --muted:rgba(8,8,11,.70); --dim:rgba(8,8,11,.58); --line:rgba(40,40,70,.085); --ln:rgba(40,40,70,.085);
+  --panel:#EFEFF1; --panel-line:rgba(40,40,70,.085); --surface:#EFEFF1; --surface-2:#F5F5F5;
+  --sp-bg:#F5F5F5; --sp-card:#EFEFF1; --sp-raise:#FFFFFF; --sp-ctl:#F5F5F5; --sp-line:rgba(40,40,70,.085);
   --ctl-line:rgba(40,40,70,.16); --ctl-line-h:rgba(8,8,11,.4); --ctl-fill-h:rgba(8,8,11,.04);
   --accent:#08080B; --accent-ink:#E1E635;
   --t-h1:64px; --t-h2:40px; --t-h3:26px; --t-lead:28px; --t-body:18px; --t-meta:14px; --t-eye:12px;
@@ -1725,7 +1725,7 @@ body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.ok
 .tsp-h{ min-height:20px; margin:12px 0 0; font-size:14px; line-height:20px; color:var(--t3); }
 /* browser */
 .tsp-dev{ border-radius:12px; overflow:hidden; background:#fff; box-shadow:0 0 0 1px rgba(0,0,0,.08),0 40px 80px -32px rgba(0,0,0,.35),0 12px 24px -12px rgba(0,0,0,.2); }
-.tsp-bar{ display:flex; align-items:center; gap:16px; height:32px; padding:0 12px; background:#ECECEA; border-bottom:1px solid rgba(0,0,0,.06); }
+.tsp-bar{ display:flex; align-items:center; gap:16px; height:32px; padding:0 12px; background:#ECECEA; border-bottom:1px solid var(--line); }
 .tsp-bar .dots{ display:flex; gap:8px; }
 .tsp-bar .dots i{ width:10px; height:10px; border-radius:50%; background:#D6D6D3; display:block; }
 .tsp-bar .url{ flex:1; max-width:440px; margin:0 auto; height:20px; border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font:400 12px/16px var(--sans); color:#6B6B73; white-space:nowrap; overflow:hidden; }
