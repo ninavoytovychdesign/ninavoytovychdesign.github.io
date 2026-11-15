@@ -467,3 +467,57 @@ main .decision-visual .metric{min-height:0}
 
 /* a table closes on its last row – no line left hanging under it */
 .case .mtable tr:last-child td{border-bottom:0}
+
+/* ─── named metrics: the figure itself, before the prose ─────────────── */
+.case .kpi{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 24px; padding:0; }
+.case .kpi span{ display:flex; flex-direction:column; gap:6px; background:var(--accent);
+  color:#08080B; padding:14px 18px; min-width:0; max-width:300px;
+  font:500 13px/18px var(--mono); letter-spacing:.04em; }
+.case .kpi b{ font:600 34px/1 var(--mono); letter-spacing:-.01em; }
+@media (max-width:600px){
+  .case .kpi span{ max-width:none; flex:1 1 100%; padding:12px 14px; }
+  .case .kpi b{ font-size:28px; }
+}
+
+/* ─── a screenshot in a browser frame, with numbered callouts ─────────── */
+.case .shot{ margin:24px 0 0; }
+.case .shot-fr{ border:1px solid var(--line); background:#fff; }
+.case .shot-bar{ display:flex; align-items:center; gap:6px; padding:10px 14px;
+  border-bottom:1px solid var(--line); }
+.case .shot-bar i{ width:8px; height:8px; border-radius:50%; background:rgba(8,8,11,.14); }
+.case .shot-bar em{ margin-left:10px; font:400 12px/16px var(--mono); font-style:normal;
+  color:rgba(8,8,11,.55); letter-spacing:.02em; }
+.case .shot-im{ position:relative; display:block; }
+.case .shot-im img{ display:block; width:100%; height:auto; }
+.case .mk{ position:absolute; left:var(--x); top:var(--y); width:var(--w); height:var(--h); }
+.case .mk i{ position:absolute; left:50%; top:0; transform:translate(-50%,-50%);
+  width:24px; height:24px; display:flex; align-items:center; justify-content:center;
+  background:#08080B; color:#fff; border-radius:50%;
+  font:600 12px/1 var(--mono); font-style:normal; }
+@media (max-width:600px){
+  .case .shot-bar{ padding:8px 10px; }
+  .case .shot-bar em{ display:none; }
+  .case .mk i{ width:18px; height:18px; font-size:10px; }
+}
+
+/* ─── one row of the page shown in several states, each in its own card ── */
+.case .states{ margin:24px 0 0; display:grid; gap:24px; }
+.case .states .st{ display:grid; gap:18px; background:#ECECE8; padding:28px; }
+.case .states .st-k{ margin:0; font:600 13px/18px var(--mono); letter-spacing:2px;
+  text-transform:uppercase; }
+.case .states .shot-im{ border:1px solid rgba(8,8,11,.09); background:#fff; }
+.case .states figcaption{ margin-top:12px; }
+.case .st-d{ margin:0; color:rgba(8,8,11,.68); }
+@media (max-width:600px){ .case .states .st{ padding:16px; gap:12px; } }
+
+/* ─── two phone screens side by side, same card treatment ─────────────── */
+.case .phones{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:24px 0 0;
+  align-items:stretch; }
+.case .phones figcaption{ grid-column:1/-1; margin-top:0; }
+.case .phones .ph{ display:grid; gap:18px; align-content:start;
+  background:#ECECE8; padding:28px; }
+.case .phones .ph img{ display:block; width:100%; height:auto; }
+@media (max-width:700px){
+  .case .phones{ grid-template-columns:1fr; }
+  .case .phones .ph{ padding:16px; gap:12px; }
+}
