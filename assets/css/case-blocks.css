@@ -503,8 +503,8 @@ main .decision-visual .metric{min-height:0}
 /* ─── one row of the page shown in several states, each in its own card ── */
 .case .states{ margin:24px 0 0; display:grid; gap:24px; }
 .case .states .st{ display:grid; gap:18px; background:rgba(8,8,11,.045); padding:28px; }
-.case .states .st-k{ margin:0; font:600 13px/18px var(--mono); letter-spacing:2px;
-  text-transform:uppercase; }
+.case .st-k{ margin:0; font:400 12px/16px var(--mono); letter-spacing:1px;
+  text-transform:uppercase; color:var(--t3); }
 .case .states .shot-im{ border:1px solid rgba(8,8,11,.09); background:#fff; }
 .case .states figcaption{ margin-top:12px; }
 .case .st-d{ margin:0; color:rgba(8,8,11,.68); }
@@ -514,7 +514,8 @@ main .decision-visual .metric{min-height:0}
 .case .phones{ margin:24px 0 0; }
 .case .phones .ph-row{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px;
   background:rgba(8,8,11,.045); padding:28px; align-items:start; }
-.case .phones .ph{ display:grid; gap:18px; align-content:start; }
+.case .phones .ph{ display:grid; gap:14px; align-content:start; }
+.case .phones .ph .st-k + .st-d{ margin-top:-6px; }
 /* the rounded corners are baked into the files: the site forces square corners,
    and a CSS clip left the device bezel showing in the corners */
 .case .phones .ph img{ display:block; width:100%; max-width:252px; height:auto; }
