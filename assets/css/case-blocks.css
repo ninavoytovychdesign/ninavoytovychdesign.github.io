@@ -546,3 +546,22 @@ main .decision-visual .metric{min-height:0}
   .case #ts-states .mtable td:first-child{ font-weight:600; margin-bottom:6px; }
   .case #ts-states .mtable td + td{ margin-top:4px; color:rgba(8,8,11,.68); }
 }
+
+/* ─── the problem register: four columns, the last one is a single digit ─── */
+.case .rtable{ table-layout:fixed; }
+.case .rtable th:nth-child(1), .case .rtable td:nth-child(1){ width:28%; }
+.case .rtable th:nth-child(2), .case .rtable td:nth-child(2){ width:30%; }
+.case .rtable th:nth-child(3), .case .rtable td:nth-child(3){ width:32%; }
+.case .rtable th:nth-child(4), .case .rtable td:nth-child(4){ width:10%; text-align:right; }
+@media (max-width:700px){
+  .case .rtable{ display:block; table-layout:auto; }
+  .case .rtable tbody, .case .rtable tr{ display:block; width:auto; }
+  .case .rtable thead{ display:none; }
+  .case .rtable tr{ padding:16px 0; border-bottom:1px solid var(--line); }
+  .case .rtable td,
+  .case .rtable td:nth-child(1), .case .rtable td:nth-child(2),
+  .case .rtable td:nth-child(3), .case .rtable td:nth-child(4){
+    display:block; width:auto; padding:0; border:0; text-align:left; }
+  .case .rtable td:first-child{ font-weight:600; margin-bottom:6px; }
+  .case .rtable td + td{ margin-top:6px; color:rgba(8,8,11,.68); }
+}
