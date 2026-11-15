@@ -517,7 +517,7 @@ main .decision-visual .metric{min-height:0}
 .case .phones .ph{ display:grid; gap:18px; align-content:start; }
 /* the rounded corners are baked into the files: the site forces square corners,
    and a CSS clip left the device bezel showing in the corners */
-.case .phones .ph img{ display:block; width:100%; height:auto; }
+.case .phones .ph img{ display:block; width:100%; max-width:252px; height:auto; }
 .case .phones figcaption{ margin-top:12px; }
 @media (max-width:980px){
   .case .phones .ph-row{ grid-template-columns:repeat(2,minmax(0,1fr)); }
