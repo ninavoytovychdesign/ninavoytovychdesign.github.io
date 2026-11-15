@@ -511,12 +511,12 @@ main .decision-visual .metric{min-height:0}
 @media (max-width:600px){ .case .states .st{ padding:16px; gap:12px; } }
 
 /* ─── two phone screens side by side, same card treatment ─────────────── */
-.case .phones{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:24px 0 0;
-  align-items:stretch; }
+.case .phones{ display:grid; grid-template-columns:repeat(2,minmax(0,320px)); gap:24px;
+  margin:24px 0 0; align-items:stretch; justify-content:start; }
 .case .phones figcaption{ grid-column:1/-1; margin-top:0; }
 .case .phones .ph{ display:grid; gap:18px; align-content:start;
   background:rgba(8,8,11,.045); padding:28px; }
-.case .phones .ph img{ display:block; width:100%; height:auto; }
+.case .phones .ph img{ display:block; width:100%; height:auto; border:1px solid rgba(8,8,11,.09); }
 @media (max-width:700px){
   .case .phones{ grid-template-columns:1fr; }
   .case .phones .ph{ padding:16px; gap:12px; }
