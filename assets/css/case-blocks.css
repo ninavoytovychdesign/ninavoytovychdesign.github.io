@@ -470,7 +470,7 @@ main .decision-visual .metric{min-height:0}
 
 /* ─── named metrics: the figure itself, before the prose ─────────────── */
 .case .kpi{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 24px; padding:0; }
-.case .kpi span{ display:flex; flex-direction:column; gap:6px; background:var(--accent);
+.case .kpi span{ display:flex; flex-direction:column; gap:6px; background:#E1E635;
   color:#08080B; padding:14px 18px; min-width:0; max-width:300px;
   font:500 13px/18px var(--mono); letter-spacing:.04em; }
 .case .kpi b{ font:600 34px/1 var(--mono); letter-spacing:-.01em; }
@@ -502,7 +502,7 @@ main .decision-visual .metric{min-height:0}
 
 /* ─── one row of the page shown in several states, each in its own card ── */
 .case .states{ margin:24px 0 0; display:grid; gap:24px; }
-.case .states .st{ display:grid; gap:18px; background:#ECECE8; padding:28px; }
+.case .states .st{ display:grid; gap:18px; background:rgba(8,8,11,.045); padding:28px; }
 .case .states .st-k{ margin:0; font:600 13px/18px var(--mono); letter-spacing:2px;
   text-transform:uppercase; }
 .case .states .shot-im{ border:1px solid rgba(8,8,11,.09); background:#fff; }
@@ -515,7 +515,7 @@ main .decision-visual .metric{min-height:0}
   align-items:stretch; }
 .case .phones figcaption{ grid-column:1/-1; margin-top:0; }
 .case .phones .ph{ display:grid; gap:18px; align-content:start;
-  background:#ECECE8; padding:28px; }
+  background:rgba(8,8,11,.045); padding:28px; }
 .case .phones .ph img{ display:block; width:100%; height:auto; }
 @media (max-width:700px){
   .case .phones{ grid-template-columns:1fr; }
