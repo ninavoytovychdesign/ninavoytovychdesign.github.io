@@ -505,7 +505,7 @@ main .decision-visual .metric{min-height:0}
 .case .st-k{ margin:0; font:var(--t-cap); letter-spacing:var(--t-cap-ls);
   text-transform:uppercase; color:var(--t3); }
 .case .states .shot-im{ border:1px solid rgba(8,8,11,.09); background:#fff; }
-.case .states figcaption{ margin-top:12px; }
+.case .states figcaption{ margin-top:0; }
 .case .st-d{ margin:0; color:rgba(8,8,11,.68); }
 @media (max-width:600px){ .case .states .st{ padding:16px; gap:12px; } }
 
@@ -547,3 +547,29 @@ main .decision-visual .metric{min-height:0}
   .case .rtable td:first-child{ font-weight:600; margin-bottom:6px; }
   .case .rtable td + td{ margin-top:6px; color:rgba(8,8,11,.68); }
 }
+
+/* ASVIDA: analogue matrix */
+.case .atable{ table-layout:fixed; font:400 16px/24px var(--sans); }
+.case .atable th:nth-child(1), .case .atable td:nth-child(1){ width:30%; }
+.case .atable th:nth-child(n+2), .case .atable td:nth-child(n+2){ width:17.5%; }
+.case .atable th, .case .atable td{ padding-right:16px; }
+.case .atable td[data-l]::before{ content:none; }
+@media (max-width:760px){
+  .case .atable{ display:block; table-layout:auto; }
+  .case .atable tbody, .case .atable tr{ display:block; width:auto; }
+  .case .atable thead{ display:none; }
+  .case .atable tr{ padding:16px 0; border-bottom:1px solid var(--line); }
+  .case .atable td,
+  .case .atable td:nth-child(1),
+  .case .atable td:nth-child(n+2){ display:block; width:auto; padding:0; border:0; text-align:left; }
+  .case .atable td:first-child{ font-weight:600; margin-bottom:6px; }
+  .case .atable td + td{ margin-top:4px; color:rgba(8,8,11,.68); }
+  .case .atable td[data-l]::before{ content:attr(data-l) ": "; color:var(--t3); }
+}
+
+/* Decision / metric blocks: the number is the marker, not a repeat of the section label */
+.case .d2 > .label.num{
+  font:400 28px/32px var(--head); letter-spacing:-.5px; text-transform:none;
+  color:rgba(8,8,11,.3); }
+.case .d2 > .label.num i{ font-style:normal; }
+@media (max-width:640px){ .case .d2 > .label.num{ font-size:24px; line-height:28px; } }

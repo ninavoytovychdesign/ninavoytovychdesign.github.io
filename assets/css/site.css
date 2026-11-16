@@ -433,7 +433,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .case .dg-loop{ display:none; }
 .case .dg-loop-m{ display:block; }
 .case .dgm, .case .wf, .case .ia-tree, .case .un-flow, .case .d3-card, .case .wf-card{ border-radius:0; }
-.case figure{ display:grid; gap:12px; }
+.case figure{ display:grid; gap:16px; }
 .case img.gl{ width:100%; height:auto; background:var(--cover-dark); border-radius:0; }
 .case figcaption{ font:var(--t-cap); letter-spacing:var(--t-cap-ls); text-transform:uppercase; color:var(--t3); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
 .case .ba{ border-radius:0; }
@@ -1297,7 +1297,7 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .bc-bar.bc-full{ background:#08080B; }
 .bc-bar b{ font:500 16px/20px var(--mono); font-variant-numeric:tabular-nums; color:#08080B; white-space:nowrap; }
 .bc-full b{ color:#fff; }
-.bchart figcaption{ font:400 14px/20px var(--sans); color:var(--t3); margin-top:4px; }
+.bchart figcaption{ font:400 14px/20px var(--sans); color:var(--t3); margin-top:0; }
 @media (max-width:767px){ .bc-row{ grid-template-columns:1fr; gap:6px; } }
 /* radar caption on screen */
 .radar-key{ margin:16px 0 0; font:var(--t-cap); letter-spacing:var(--t-cap-ls); text-transform:uppercase; color:var(--t3); text-align:center; }
