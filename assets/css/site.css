@@ -2050,7 +2050,7 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 @media (max-width:1279px){ .lead-br{ display:none; } }
 /* One size for all section titles on the home page (= the about statement): 46/52 on desktop */
 @media (min-width:1024px){
-  .about .statement, .work-head .h64, #record-h, .words-head .h64, .foot-h{ font-size:46px !important; line-height:52px !important; letter-spacing:-2px !important; }
+  .about .statement, .work-head .h64, .words-head .h64, .foot-h{ font-size:46px !important; line-height:52px !important; letter-spacing:-2px !important; }
   /* labels «Про мене» / «Досвід» centred on the 52px title line */
   .row > .label:has(+ div > .h64:first-child){ padding-top:28px !important; }
 }
@@ -2653,7 +2653,10 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 /* Variant B: publications as their own section between Track record and the testimonials.
    The empty label keeps them in the same column they occupied inside About. */
 .pubs-sec{ padding-top:0; padding-bottom:112px; }
+/* the head provides the gap and the list opens with its own rule,
+   since the old .pubs-h header is gone */
 .pubs-sec .pubs{ margin-top:0; }
+.pubs-sec .pub-list{ border-top:1px solid var(--line); }
 /* with the key moved to the label column, the DOU link keeps the right edge */
 .pubs-sec .pubs-h:not(:has(.pubs-k)){ justify-content:flex-end; }
 @media (max-width:767px){ .pubs-sec{ padding-bottom:96px; } }
@@ -2675,7 +2678,8 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 .proof .club .sub .arrow{ display:inline-block; margin-left:6px; }
 .nw{ white-space:nowrap; }
 /* the forced break belongs to the four-column layout only; wider columns wrap on their own */
-@media (max-width:1199px){ .proof .wbr{ display:none; } }
+@media (max-width:1199px){ .wbr{ display:none; } }
+
 @media (max-width:1199px){
   .proof ul.rows.cols4{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .proof ul.rows.cols4 li{ border-top:1px solid var(--line); }
@@ -2694,3 +2698,9 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
   .proof .club .num{ font-size:56px; }
   .proof .club .what{ padding-right:0; }
 }
+
+/* About now holds the counters too: the two halves need more air than a list gap.
+   The .proof wrapper is a div inside the section, not a section, so it carries no padding. */
+.about .proof{ padding:0; }
+.about .proof ul.rows.cols4{ margin-top:112px; }
+@media (max-width:767px){ .about .proof ul.rows.cols4{ margin-top:80px !important; } }
