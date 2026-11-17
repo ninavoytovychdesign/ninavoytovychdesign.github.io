@@ -2671,8 +2671,8 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 .proof ul.rows.cols4 .sub{ margin-top:auto; padding-top:10px; padding-right:0; }
 .proof .club{ display:grid; grid-template-columns:1fr 2fr 2fr; align-items:center; column-gap:0; margin-top:0; padding:28px 0; background:var(--accent); }
 .proof .club > *{ padding-left:20px; }
-.proof .club .num{ display:block; font:500 76px/1 var(--mono); letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
-.proof .club .what{ margin:0; padding-right:24px; font:600 24px/30px var(--sans); color:var(--ink); }
+.proof .club .num{ display:block; font:500 60px/72px var(--mono); letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
+.proof .club .what{ margin:0; padding-right:24px; font:600 20px/26px var(--sans); color:var(--ink); }
 .proof .club .sub{ margin:0; padding-right:20px; font:400 16px/24px var(--sans); color:rgba(8,8,11,.7); }
 .proof .club .sub a{ color:inherit; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; }
 .proof .club .sub .arrow{ display:inline-block; margin-left:6px; }
@@ -2686,8 +2686,7 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
   .proof ul.rows.cols4 li:nth-child(-n+2){ border-top:0; }
   .proof ul.rows.cols4 li:nth-child(odd){ border-left:0; padding-left:0; }
   .proof .club{ grid-template-columns:1fr; row-gap:8px; padding:24px 0; }
-  .proof .club .num{ font-size:60px; }
-  .proof .club .what{ font-size:20px; line-height:26px; padding-right:0; }
+  .proof .club .what{ padding-right:0; }
 }
 @media (max-width:767px){
   .proof ul.rows.cols4{ grid-template-columns:1fr; border-top:1px solid var(--line); }
