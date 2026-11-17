@@ -44,6 +44,17 @@
   --t-cap:400 12px/16px var(--mono);     --t-cap-ls:1px;     /* figure captions and tags */
   --t-ui:600 14px/20px var(--mono);      --t-ui-ls:2px;      /* buttons and text links */
   --t-nav:500 14px/20px var(--mono);     --t-nav-ls:1px;     /* navigation */
+  --t-num:500 36px/36px var(--mono);     --t-num-ls:-.02em;  /* the headline figure of a research or metric block */
+  --t-num-sm:500 24px/24px var(--mono);                      /* the same figure on a phone */
+  --t-note:400 14px/20px var(--sans);                        /* a note or caveat under a block */
+  --t-note-sm:400 12px/18px var(--sans);                     /* the same note inside a dense diagram */
+  --t-sub:400 16px/24px var(--sans);                         /* the secondary line under a figure or inside a cell */
+  --t-sub-strong:500 16px/24px var(--sans);                  /* the lead line of a research insight */
+  --t-table:400 18px/28px var(--sans);                       /* table body */
+  --t-table-sm:400 16px/24px var(--sans);                    /* table body from five columns up */
+  --t-dg-t:600 16px/24px var(--sans);                        /* title inside a diagram block */
+  --t-dg-h:500 12px/16px var(--mono);   --t-dg-h-ls:.04em;   /* eyebrow inside a diagram block */
+  --t-dg-n:400 12px/16px var(--mono);                        /* numerals inside a diagram block */
 
   --max:1344px;
   --pad:48px;
@@ -475,10 +486,10 @@ main, .site-footer, .nav-bar{ position:relative; z-index:1; }
 .in-short dt{ font:var(--t-label); letter-spacing:var(--t-label-ls); text-transform:uppercase; color:var(--t3); }
 .in-short dd{ font:400 20px/24px var(--sans); color:var(--t1); margin:0; }
 .in-short + .metrics{ margin-top:40px; }
-.case .d-status{ display:flex; gap:16px; font:400 14px/20px var(--sans); color:var(--t2); max-width:880px; }
+.case .d-status{ display:flex; gap:16px; font:var(--t-note); color:var(--t2); max-width:880px; }
 .case .d-status span{ flex:none; width:160px; font:var(--t-label); letter-spacing:var(--t-label-ls); text-transform:uppercase; color:var(--t3); }
 .outcome{ list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--gap); }
-.outcome li{ display:grid; gap:16px; align-content:start; padding-top:16px; border-top:1px solid var(--t1); }
+.outcome li{ display:grid; gap:16px; align-content:start; padding-top:16px; border-top:1px solid var(--t1); font:400 20px/24px var(--sans); }
 .outcome .n{ font:var(--t-label); letter-spacing:var(--t-label-ls); color:var(--t3); }
 .outcome p{ font:400 20px/24px var(--sans); color:var(--t1); }
 @media (max-width:1023px){ .in-short, .outcome{ grid-template-columns:1fr; row-gap:24px; } }
@@ -1882,18 +1893,18 @@ body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.ok
 
 /* NT-START Numa: test findings, first version → now (HTML instead of an image) */
 .case .nt{ margin:32px 0 0; padding:48px; background:var(--tile, #F1EFF2); border:1px solid var(--line); }
-.nt-h{ margin:0 0 8px; font:400 28px/36px var(--head); letter-spacing:-.5px; color:var(--t1); }
+.nt-h{ margin:0 0 8px; font:400 24px/28px var(--head); letter-spacing:-1px; color:var(--t1); }
 .nt-s{ margin:0 0 32px; font:var(--t-label); letter-spacing:var(--t-label-ls); text-transform:uppercase; color:var(--t3); }
 .nt-g{ display:grid; grid-template-columns:1fr 40px 1fr; gap:12px 0; align-items:stretch; }
 .nt-c{ grid-column:1; font:var(--t-label); letter-spacing:var(--t-label-ls); text-transform:uppercase; color:var(--t3); padding-bottom:4px; }
 .nt-c2{ grid-column:3; color:var(--t1); }
 .nt-a,.nt-b{ padding:20px 24px; }
 .nt-a{ grid-column:1; background:#fff; }
-.nt-b{ grid-column:3; background:#E1E635; color:#111; }
+.nt-b{ grid-column:3; background:#E1E635; color:var(--ink); }
 .nt-ar{ grid-column:2; display:grid; place-items:center; color:var(--t3); font-size:20px; }
-.nt-l{ display:block; margin-bottom:8px; font:500 11px/16px var(--mono); letter-spacing:2px; text-transform:uppercase; color:var(--t3); }
-.nt-b .nt-l{ color:rgba(17,17,17,.6); }
-.nt-a p,.nt-b p{ margin:0; font-size:17px; line-height:24px; }
+.nt-l{ display:block; margin-bottom:8px; font:var(--t-label); letter-spacing:var(--t-label-ls); text-transform:uppercase; color:var(--t3); }
+.nt-b .nt-l{ color:rgba(8,8,11,.58); }
+.nt-a p,.nt-b p{ margin:0; font:400 20px/24px var(--sans); }
 .nt-a p{ color:var(--t2, #444); }
 @media (max-width:767px){
   .case .nt{ padding:24px 16px; }
@@ -2638,3 +2649,48 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 /* Case prose runs the full content width, like the figures and the rules above it,
    so a case takes less scrolling. */
 .case-sec .content > .txt, .case .txt, .case-sec .content > h2{ max-width:none; }
+
+/* Variant B: publications as their own section between Track record and the testimonials.
+   The empty label keeps them in the same column they occupied inside About. */
+.pubs-sec{ padding-top:0; padding-bottom:112px; }
+.pubs-sec .pubs{ margin-top:0; }
+/* with the key moved to the label column, the DOU link keeps the right edge */
+.pubs-sec .pubs-h:not(:has(.pubs-k)){ justify-content:flex-end; }
+@media (max-width:767px){ .pubs-sec{ padding-bottom:96px; } }
+
+/* Track record, variant: four numbers side by side, community lifted out into its own band. */
+.proof ul.rows.cols4{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-bottom:1px solid var(--line); }
+.proof ul.rows.cols4 li{ display:flex; flex-direction:column; align-items:stretch; padding:28px 24px 32px 20px; border:0; border-left:1px solid var(--line); }
+.proof ul.rows.cols4 li:first-child{ border-left:0; padding-left:0; }
+.proof ul.rows.cols4 .num{ font-size:60px; }
+.proof ul.rows.cols4 .what{ margin-top:12px; padding-right:0; }
+/* the detail lines bottom-align, so uneven wrapping above them stays invisible */
+.proof ul.rows.cols4 .sub{ margin-top:auto; padding-top:10px; padding-right:0; }
+.proof .club{ display:grid; grid-template-columns:1fr 2fr 2fr; align-items:center; column-gap:0; margin-top:40px; padding:28px 0; background:var(--accent); }
+.proof .club > *{ padding-left:20px; }
+.proof .club .num{ display:block; font:500 76px/1 var(--mono); letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
+.proof .club .what{ margin:0; padding-right:24px; font:600 24px/30px var(--sans); color:var(--ink); }
+.proof .club .sub{ margin:0; padding-right:20px; font:400 16px/24px var(--sans); color:rgba(8,8,11,.7); }
+.proof .club .sub a{ color:inherit; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; }
+.proof .club .sub .arrow{ display:inline-block; margin-left:6px; }
+.nw{ white-space:nowrap; }
+/* the forced break belongs to the four-column layout only; wider columns wrap on their own */
+@media (max-width:1199px){ .proof .wbr{ display:none; } }
+@media (max-width:1199px){
+  .proof ul.rows.cols4{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .proof ul.rows.cols4 li{ border-top:1px solid var(--line); }
+  .proof ul.rows.cols4 li:nth-child(-n+2){ border-top:0; }
+  .proof ul.rows.cols4 li:nth-child(odd){ border-left:0; padding-left:0; }
+  .proof .club{ grid-template-columns:1fr; row-gap:8px; padding:24px 0; }
+  .proof .club .num{ font-size:60px; }
+  .proof .club .what{ font-size:20px; line-height:26px; padding-right:0; }
+}
+@media (max-width:767px){
+  .proof ul.rows.cols4{ grid-template-columns:1fr; border-top:1px solid var(--line); }
+  .proof ul.rows.cols4 li{ border-left:0; border-top:0; border-bottom:1px solid var(--line); padding:24px 0; }
+  .proof ul.rows.cols4 li:last-child{ border-bottom:0; }
+  .proof ul.rows.cols4 .num{ font-size:56px; }
+  .proof .club{ grid-template-columns:1fr; row-gap:8px; margin-top:32px; padding:24px 0; }
+  .proof .club .num{ font-size:56px; }
+  .proof .club .what{ padding-right:0; }
+}

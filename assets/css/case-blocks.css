@@ -85,10 +85,10 @@
 .case .ins-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px}
 .case .ins{background:var(--surface-2);border-radius:18px;padding:24px 24px 20px;display:grid;align-content:start;gap:8px}
 .case .ins b{font:600 36px/1 var(--display);letter-spacing:-.02em;color:var(--accent)}
-.case .ins p{margin:0;font:500 16px/24px var(--body);color:var(--ink)}
+.case .ins p{margin:0;font:var(--t-sub-strong);color:var(--ink)}
 .case .ins span{font:400 12px/18px var(--body);color:var(--dim)}
-.case .ins-lead{margin:8px 0 0;color:var(--muted);font-size:16px;line-height:24px;max-width:62ch}
-.case .ins-note{margin:16px 0 0;color:var(--dim);font-size:12px;line-height:18px;max-width:70ch}
+.case .ins-lead{margin:8px 0 0;color:var(--muted);font:400 20px/24px var(--body);max-width:62ch}
+.case .ins-note{margin:16px 0 0;color:var(--dim);font:var(--t-note);max-width:70ch}
 .case .ins-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (max-width:640px){
 .case .ins-2{grid-template-columns:1fr}
@@ -96,19 +96,19 @@
 .case .dgm{background:var(--surface);border-radius:24px;padding:28px}
 .case .dg-card{background:rgba(8,8,11,0.052);border:1px solid var(--line);border-radius:14px;padding:16px 16px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .case .dg-card p{margin:8px 0 0;font:400 12px/18px var(--body);color:var(--muted)}
-.case .dg-t{display:flex;align-items:center;gap:8px;font:600 16px/1.3 var(--body);color:var(--ink)}
+.case .dg-t{display:flex;align-items:center;gap:8px;font:var(--t-dg-t);color:var(--ink)}
 .case .dg-t i{width:7px;height:7px;border-radius:50%;background:var(--d);flex:none}
-.case .dg-note{margin:8px 2px 0;font:400 12px/18px var(--body);color:var(--dim)}
+.case .dg-note{margin:8px 2px 0;font:var(--t-note-sm);color:var(--dim)}
 .case .dg-states{display:grid;grid-template-columns:1fr auto 1fr auto 1.15fr auto 1fr;align-items:center;gap:12px}
 .case .dg-arr{color:var(--dim);font-size:16px}
 .case .dg-stack{display:grid;gap:8px}
 .case .dg-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start}
 .case .dg-group{display:grid;gap:8px}
-.case .dg-h{font:500 var(--t-eye)/1.4 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.case .dg-h{font:var(--t-dg-h);letter-spacing:var(--t-dg-h-ls);text-transform:uppercase;color:var(--accent);margin-bottom:4px}
 .case .dg-flow{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 16px}
-.case .dg-flow .dg-n{font:400 12px/1 var(--mono);color:var(--dim);font-variant-numeric:tabular-nums}
-.case .dg-flow b{font:600 12px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--accent)}
-.case .dg-foot{grid-column:1/-1;margin:8px 0 0;font:400 12px/18px var(--body);color:var(--dim)}
+.case .dg-flow .dg-n{font:var(--t-dg-n);color:var(--dim);font-variant-numeric:tabular-nums}
+.case .dg-flow b{font:var(--t-dg-n);font-weight:600;font-variant-numeric:tabular-nums;color:var(--accent)}
+.case .dg-foot{grid-column:1/-1;margin:8px 0 0;font:var(--t-note-sm);color:var(--dim)}
 @media (max-width:900px){
 .case .dg-states{grid-template-columns:1fr}
 .case .dg-arr{transform:rotate(90deg);justify-self:center}
@@ -148,7 +148,7 @@
 .case .ab-bars li{display:flex!important;justify-content:space-between;align-items:baseline;gap:24px;padding:12px 0!important;border-top:1px solid var(--line)}
 .case .ab-bars li:first-child{border-top:0}
 .case .ab-bars li::after{display:none!important}
-.case .ab-bars b{order:2;font:500 16px/1.4 var(--mono)!important;color:var(--ink)!important;white-space:nowrap}
+.case .ab-bars b{order:2;font:500 16px/24px var(--mono)!important;color:var(--ink)!important;white-space:nowrap}
 .case .ab-bars span{order:1;font-size:16px!important;line-height:24px;color:#08080B}
 .case .d2-dl > div{grid-template-columns:140px 1fr}
 .case .d2-dl > div + div{padding-top:8px}
@@ -179,13 +179,13 @@
 .case .ins-block .ins-grid, .case .ins-block .ins-grid.ins-2{display:grid!important;grid-template-columns:1fr!important;gap:0!important;margin-top:20px;border-top:1px solid var(--line)}
 .case .ins-block .ins{display:grid!important;grid-template-columns:190px minmax(0,1fr);column-gap:32px;row-gap:4px;align-items:start;background:none!important;border-radius:0!important;padding:16px 0!important;border-bottom:1px solid var(--line)}
 /* the figure leads the finding, so it is set large enough to be read first */
-.case .ins-block .ins b{grid-row:1 / span 2;display:grid;gap:10px;font:500 36px/1 var(--mono)!important;letter-spacing:-.02em!important;color:var(--ink)!important;font-variant-numeric:tabular-nums;padding-top:0}
+.case .ins-block .ins b{grid-row:1 / span 2;display:grid;gap:10px;font:var(--t-num)!important;letter-spacing:var(--t-num-ls)!important;color:var(--ink)!important;font-variant-numeric:tabular-nums;padding-top:0}
 .case .ins-block .ins b::after{content:"";display:block;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--ink) 0 calc(var(--v,0)*100%),rgba(8,8,11,0.115) calc(var(--v,0)*100%) 100%)}
-.case .ins-block .ins p{grid-column:2;font:500 16px/24px var(--body)!important;color:var(--ink)}
+.case .ins-block .ins p{grid-column:2;font:var(--t-sub-strong)!important;color:var(--ink)}
 .case .ins-block .ins span{grid-column:2;margin:0!important;padding:0!important;font:400 14px/20px var(--body)!important;color:var(--dim)}
 @media (max-width:640px){
 .case .ins-block .ins{grid-template-columns:96px minmax(0,1fr);column-gap:16px}
-.case .ins-block .ins b{font-size:24px!important;gap:8px}
+.case .ins-block .ins b{font:var(--t-num-sm)!important;gap:8px}
 }
 .case .nda-cover:has(.nda-mock){background:var(--surface)!important;background-image:none!important;aspect-ratio:16/10}
 .case .nda-mock{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
@@ -419,10 +419,10 @@
 /* contrast ratios row (accessibility) */
 .case .ratios{list-style:none;margin:32px 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:720px}
 .case .ratios li{border-top:1px solid var(--line);padding-top:16px;display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:8px;margin:0}
-.case .ratios b{font-size:32px;line-height:40px;font-weight:500;letter-spacing:-0.02em;color:var(--t1,#08080B)}
-.case .ratios .aa{justify-self:start;font-family:var(--mono,monospace);font-size:12px;line-height:16px;padding:2px 6px;border-radius:4px;background:#DDF3E6;color:#14653A}
-.case .ratios p{grid-column:1/-1;margin:8px 0 0;font-size:16px;line-height:24px;color:var(--t3,#5E5E66)}
-@media (max-width:640px){.case .ratios{grid-template-columns:1fr;gap:16px}}
+.case .ratios b{font:var(--t-num);letter-spacing:var(--t-num-ls);color:var(--t1,#08080B);font-variant-numeric:tabular-nums}
+.case .ratios .aa{justify-self:start;font:var(--t-cap);letter-spacing:var(--t-cap-ls);padding:2px 6px;border-radius:4px;background:#DDF3E6;color:#14653A}
+.case .ratios p{grid-column:1/-1;margin:8px 0 0;font:var(--t-sub);color:var(--t3,#5E5E66)}
+@media (max-width:640px){.case .ratios{grid-template-columns:1fr;gap:16px}.case .ratios b{font:var(--t-num-sm);letter-spacing:var(--t-num-ls)}}
 /* metrics: light row with one continuous top line (all cases) */
 .case-body .metrics, .short-wrap .metrics, main .metrics{gap:0;row-gap:24px}
 main .metrics .metric{min-height:0;margin:0;padding:16px 24px 0 0;background:none;color:var(--t1,#08080B);border-top:1px solid var(--line);align-content:start;gap:8px}
@@ -434,7 +434,7 @@ main .decision-visual .metric{min-height:0}
 .case .ratios{gap:0}
 .case .ratios li{padding-right:24px}
 /* measurement table */
-.case .mtable{width:100%;border-collapse:collapse;margin:24px 0 32px;font:400 18px/28px var(--sans)}
+.case .mtable{width:100%;border-collapse:collapse;margin:24px 0 32px;font:var(--t-table)}
 .case .mtable th{text-align:left;font:var(--t-label);letter-spacing:var(--t-label-ls);text-transform:uppercase;color:var(--t3,#5E5E66);padding:0 24px 12px 0;border-bottom:1px solid var(--line)}
 .case .mtable td{padding:16px 24px 16px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--t2)}
 .case .mtable td:first-child{color:var(--ink,#08080B);width:40%}
@@ -443,7 +443,7 @@ main .decision-visual .metric{min-height:0}
 .case .mt-hyp td:first-child{width:40px;color:var(--t3,#5E5E66);font-family:var(--mono)}
 .case .mt-hyp td:nth-child(2){color:var(--ink,#08080B);width:34%}
 .case .mt-hyp td:nth-child(3) b{font-weight:600;color:var(--ink,#08080B)}
-.case .mt-hyp .mt-sub{font-size:16px;line-height:24px}
+.case .mt-hyp .mt-sub{font:var(--t-sub)}
 .case .mt-hyp td:nth-child(4){color:var(--ink,#08080B);width:30%}
 .case .mt-more{margin:-16px 0 8px}
 .case .mt-more summary{cursor:pointer;font:var(--t-label);letter-spacing:var(--t-label-ls);text-transform:uppercase;color:var(--t3,#5E5E66);padding:8px 0;list-style:none}
@@ -472,10 +472,10 @@ main .decision-visual .metric{min-height:0}
 .case .kpi span{ display:flex; flex-direction:column; gap:6px; background:#E1E635;
   color:#08080B; padding:14px 18px; min-width:0; max-width:300px;
   font:var(--t-cap); letter-spacing:var(--t-cap-ls); }
-.case .kpi b{ font:600 34px/1 var(--mono); letter-spacing:-.01em; }
+.case .kpi b{ font:var(--t-num); letter-spacing:var(--t-num-ls); font-variant-numeric:tabular-nums; }
 @media (max-width:600px){
   .case .kpi span{ max-width:none; flex:1 1 100%; padding:12px 14px; }
-  .case .kpi b{ font-size:28px; }
+  .case .kpi b{ font:var(--t-num-sm); letter-spacing:var(--t-num-ls); }
 }
 
 /* ─── a screenshot in a browser frame, with numbered callouts ─────────── */
@@ -485,7 +485,7 @@ main .decision-visual .metric{min-height:0}
   border-bottom:1px solid var(--line); }
 .case .shot-bar i{ width:8px; height:8px; border-radius:50%; background:rgba(8,8,11,.14); }
 .case .shot-bar em{ margin-left:10px; font:400 12px/16px var(--mono); font-style:normal;
-  color:rgba(8,8,11,.55); letter-spacing:.02em; }
+  color:var(--t3); letter-spacing:.02em; }
 .case .shot-im{ position:relative; display:block; }
 .case .shot-im img{ display:block; width:100%; height:auto; }
 .case .mk{ position:absolute; left:var(--x); top:var(--y); width:var(--w); height:var(--h); }
@@ -506,7 +506,7 @@ main .decision-visual .metric{min-height:0}
   text-transform:uppercase; color:var(--t3); }
 .case .states .shot-im{ border:1px solid rgba(8,8,11,.09); background:#fff; }
 .case .states figcaption{ margin-top:0; }
-.case .st-d{ margin:0; color:rgba(8,8,11,.68); }
+.case .st-d{ margin:0; color:var(--t2); }
 @media (max-width:600px){ .case .states .st{ padding:16px; gap:12px; } }
 
 /* ─── the state matrix: three columns, so the two-column widths don't apply ── */
@@ -526,7 +526,7 @@ main .decision-visual .metric{min-height:0}
   .case #ts-states .mtable td:nth-child(2),
   .case #ts-states .mtable td:nth-child(3){ display:block; width:auto; padding:0; border:0; }
   .case #ts-states .mtable td:first-child{ font-weight:600; margin-bottom:6px; }
-  .case #ts-states .mtable td + td{ margin-top:4px; color:rgba(8,8,11,.68); }
+  .case #ts-states .mtable td + td{ margin-top:4px; color:var(--t2); }
 }
 
 /* ─── the problem register: four columns, the last one is a single digit ─── */
@@ -545,11 +545,11 @@ main .decision-visual .metric{min-height:0}
   .case .rtable td:nth-child(3), .case .rtable td:nth-child(4){
     display:block; width:auto; padding:0; border:0; text-align:left; }
   .case .rtable td:first-child{ font-weight:600; margin-bottom:6px; }
-  .case .rtable td + td{ margin-top:6px; color:rgba(8,8,11,.68); }
+  .case .rtable td + td{ margin-top:6px; color:var(--t2); }
 }
 
 /* ASVIDA: analogue matrix */
-.case .atable{ table-layout:fixed; font:400 16px/24px var(--sans); }
+.case .atable{ table-layout:fixed; font:var(--t-table-sm); }
 .case .atable th:nth-child(1), .case .atable td:nth-child(1){ width:30%; }
 .case .atable th:nth-child(n+2), .case .atable td:nth-child(n+2){ width:17.5%; }
 .case .atable th, .case .atable td{ padding-right:16px; }
@@ -563,7 +563,7 @@ main .decision-visual .metric{min-height:0}
   .case .atable td:nth-child(1),
   .case .atable td:nth-child(n+2){ display:block; width:auto; padding:0; border:0; text-align:left; }
   .case .atable td:first-child{ font-weight:600; margin-bottom:6px; }
-  .case .atable td + td{ margin-top:4px; color:rgba(8,8,11,.68); }
+  .case .atable td + td{ margin-top:4px; color:var(--t2); }
   .case .atable td[data-l]::before{ content:attr(data-l) ": "; color:var(--t3); }
 }
 
