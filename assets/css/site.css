@@ -2669,7 +2669,7 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 .proof ul.rows.cols4 .what{ margin-top:12px; padding-right:0; }
 /* the detail lines bottom-align, so uneven wrapping above them stays invisible */
 .proof ul.rows.cols4 .sub{ margin-top:auto; padding-top:10px; padding-right:0; }
-.proof .club{ display:grid; grid-template-columns:1fr 2fr 2fr; align-items:center; column-gap:0; margin-top:40px; padding:28px 0; background:var(--accent); }
+.proof .club{ display:grid; grid-template-columns:1fr 2fr 2fr; align-items:center; column-gap:0; margin-top:0; padding:28px 0; background:var(--accent); }
 .proof .club > *{ padding-left:20px; }
 .proof .club .num{ display:block; font:500 76px/1 var(--mono); letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
 .proof .club .what{ margin:0; padding-right:24px; font:600 24px/30px var(--sans); color:var(--ink); }
@@ -2694,7 +2694,7 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
   .proof ul.rows.cols4 li{ border-left:0; border-top:0; border-bottom:1px solid var(--line); padding:24px 0; }
   .proof ul.rows.cols4 li:last-child{ border-bottom:0; }
   .proof ul.rows.cols4 .num{ font-size:56px; }
-  .proof .club{ grid-template-columns:1fr; row-gap:8px; margin-top:32px; padding:24px 0; }
+  .proof .club{ grid-template-columns:1fr; row-gap:8px; margin-top:0; padding:24px 0; }
   .proof .club .num{ font-size:56px; }
   .proof .club .what{ padding-right:0; }
 }
