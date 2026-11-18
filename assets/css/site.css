@@ -2686,10 +2686,8 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
    font:600 20px/26px var(--sans); color:var(--ink); }
 .proof .club .club-stat{ grid-column:3; display:block; margin:0; padding-right:24px; }
 .proof .club .club-what{ grid-column:4; margin:0; padding-right:24px; }
-.proof .club .club-cta{ grid-column:5; justify-self:end; margin-right:24px; display:inline-flex; align-items:center; gap:8px;
-   padding:12px 20px; border:1px solid var(--ink); text-decoration:none;
-   font:500 16px/24px var(--sans); color:var(--ink); transition:background .2s var(--ease), color .2s var(--ease); }
-.proof .club .club-cta:hover{ background:var(--ink); color:var(--accent); }
+/* a text link like every other one on the page, so its first letter sits on the column line */
+.proof .club .club-cta{ grid-column:5; justify-self:start; gap:6px; color:var(--ink); }
 
 .proof .club .num{ display:block; font:500 60px/72px var(--mono); letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
 .proof .club .what{ margin:0; font:600 20px/26px var(--sans); color:var(--ink); }
@@ -2752,8 +2750,7 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
   .proof .club .club-cta{ grid-column:1; padding-right:0; }
   .proof .club .club-stat{ flex-wrap:wrap; }
   .proof .club .what{ white-space:normal; }
-  /* the button takes the full width of the plate once the row has stacked */
-  .proof .club .club-cta{ justify-self:stretch; justify-content:center; }
+  .proof .club .club-cta{ justify-self:start; }
 }
 @media (max-width:767px){
   .proof .club .num{ font-size:56px; }
