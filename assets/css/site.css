@@ -2664,12 +2664,13 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 
 /* Track record, variant: four numbers side by side, community lifted out into its own band. */
 .proof ul.rows.cols4{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-bottom:1px solid var(--line); }
-.proof ul.rows.cols4 li{ display:flex; flex-direction:column; align-items:stretch; padding:24px 24px 24px 0; border:0; }
+.proof ul.rows.cols4 li{ display:flex; flex-direction:column; align-items:stretch; row-gap:0; padding:24px 24px 24px 0; border:0; }
 
 .proof ul.rows.cols4 .num{ font-size:60px; }
 .proof ul.rows.cols4 .what{ margin-top:24px; padding-right:0; }
-/* the detail lines bottom-align, so uneven wrapping above them stays invisible */
-.proof ul.rows.cols4 .sub{ margin-top:auto; padding-top:24px; padding-right:0; }
+/* every label is forced to two lines, so the detail lines already sit level and no longer
+   need to be pushed to the bottom of the cell */
+.proof ul.rows.cols4 .sub{ margin-top:16px; padding-top:0; padding-right:0; }
 /* A coloured plate, so the text keeps a margin from its edge; inside it the same five
    columns as the counters above, with the second one skipped. */
 /* The plate spans the content column exactly, and its five columns are the page's own,
