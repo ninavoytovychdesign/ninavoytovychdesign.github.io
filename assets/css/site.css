@@ -1821,8 +1821,11 @@ body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.ok
 /* PUBS-END */
 /* PUBS-GRID: rows sit on the same 5-column grid as the facts above */
 @media (min-width:1024px){
-  /* on the page module: source one column, title three, meta two — 224 + 672 + 448 = 1344 */
-  .pub-row{ position:relative; grid-template-columns:224px 672px minmax(0,1fr); column-gap:0; }
+  /* on the page module: source on the first column, title through the fourth,
+     meta aligned to the last — 224 + 896 + 224 = 1344 */
+  /* in module units, so the columns scale with the layout instead of overflowing below 1440 */
+  .pub-row{ position:relative; column-gap:0;
+    grid-template-columns:minmax(0,1fr) minmax(0,4fr) minmax(0,1fr); }
   .pub-src{ grid-column:1; }
   .pub-t{ grid-column:2; padding-right:32px; }
   .pub-m{ grid-column:3; padding-right:32px; }
