@@ -2673,15 +2673,12 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 /* A coloured plate, so the text keeps a margin from its edge; inside it the same five
    columns as the counters above, with the second one skipped. */
 .proof .club{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); align-items:center;
-   column-gap:0; margin-top:0; padding:32px 0 32px 24px; background:var(--accent);
-   /* the plate bleeds 24px to the left of the content column, so the text keeps a margin
-      from the colour while still starting on the module line */
-   margin-left:-24px; width:calc(100% + 24px); }
+   column-gap:0; margin-top:0; padding:32px 24px; background:var(--accent); }
 .proof .club .club-lead{ grid-column:1 / span 2; margin:0; padding-right:24px;
    font:600 20px/26px var(--sans); color:var(--ink); }
 .proof .club .club-stat{ grid-column:3; display:block; margin:0; padding-right:24px; }
 .proof .club .club-what{ grid-column:4; margin:0; padding-right:24px; }
-.proof .club .club-cta{ grid-column:5; justify-self:start; display:inline-flex; align-items:center; gap:8px;
+.proof .club .club-cta{ grid-column:5; justify-self:end; display:inline-flex; align-items:center; gap:8px;
    padding:12px 20px; border:1px solid var(--ink); text-decoration:none;
    font:500 16px/24px var(--sans); color:var(--ink); transition:background .2s var(--ease), color .2s var(--ease); }
 .proof .club .club-cta:hover{ background:var(--ink); color:var(--accent); }
