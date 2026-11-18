@@ -1821,10 +1821,11 @@ body *:not(#_a):not(#_b):not(.wf *):not(.sweep-cone):not(.foot-status i):not(.ok
 /* PUBS-END */
 /* PUBS-GRID: rows sit on the same 5-column grid as the facts above */
 @media (min-width:1024px){
-  .pub-row{ position:relative; grid-template-columns:repeat(5,minmax(0,1fr)); column-gap:0; }
+  /* on the page module: source one column, title three, meta two — 224 + 672 + 448 = 1344 */
+  .pub-row{ position:relative; grid-template-columns:224px 672px minmax(0,1fr); column-gap:0; }
   .pub-src{ grid-column:1; }
-  .pub-t{ grid-column:2 / span 3; padding-right:32px; }
-  .pub-m{ grid-column:5; padding-right:32px; }
+  .pub-t{ grid-column:2; padding-right:32px; }
+  .pub-m{ grid-column:3; padding-right:32px; }
   .pub-row > .pub-arr, .pub-row > span:last-child:empty{ position:absolute; right:0; top:20px; }
   .pub-acts{ flex-direction:column; align-items:flex-start; gap:8px; }
 }
