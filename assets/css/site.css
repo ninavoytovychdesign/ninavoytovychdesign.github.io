@@ -2082,6 +2082,7 @@ html.r3-closing .r3-ui{ animation:none !important; opacity:0 !important; transit
 .proof ul.rows{ display:block; border:0; border-top:1px solid var(--line); margin-top:64px; }
 .proof ul.rows li{ display:grid; grid-template-columns:1fr 2fr 2fr; column-gap:0; align-items:center; padding:28px 0; border:0; border-bottom:1px solid var(--line); }
 .proof ul.rows li > *{ padding-left:20px; }
+.proof ul.rows.cols4 li > *{ padding-left:0; }
 .proof ul.rows li.hi{ background:var(--accent); }
 .proof ul.rows .num{ display:block; font:500 76px/1 var(--mono); letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
 .proof ul.rows .what{ margin:0; padding-right:24px; font:600 24px/30px var(--sans); color:var(--ink); }
@@ -2663,16 +2664,30 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 
 /* Track record, variant: four numbers side by side, community lifted out into its own band. */
 .proof ul.rows.cols4{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-bottom:1px solid var(--line); }
-.proof ul.rows.cols4 li{ display:flex; flex-direction:column; align-items:stretch; padding:28px 24px 32px 20px; border:0; border-left:1px solid var(--line); }
-.proof ul.rows.cols4 li:first-child{ border-left:0; padding-left:0; }
+.proof ul.rows.cols4 li{ display:flex; flex-direction:column; align-items:stretch; padding:24px 24px 24px 0; border:0; }
+
 .proof ul.rows.cols4 .num{ font-size:60px; }
-.proof ul.rows.cols4 .what{ margin-top:12px; padding-right:0; }
+.proof ul.rows.cols4 .what{ margin-top:24px; padding-right:0; }
 /* the detail lines bottom-align, so uneven wrapping above them stays invisible */
-.proof ul.rows.cols4 .sub{ margin-top:auto; padding-top:10px; padding-right:0; }
-.proof .club{ display:grid; grid-template-columns:1fr 2fr 2fr; align-items:center; column-gap:0; margin-top:0; padding:28px 0; background:var(--accent); }
-.proof .club > *{ padding-left:20px; }
+.proof ul.rows.cols4 .sub{ margin-top:auto; padding-top:24px; padding-right:0; }
+/* A coloured plate, so the text keeps a margin from its edge; inside it the same five
+   columns as the counters above, with the second one skipped. */
+.proof .club{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); align-items:center;
+   column-gap:0; margin-top:0; padding:32px 0 32px 24px; background:var(--accent);
+   /* the plate bleeds 24px to the left of the content column, so the text keeps a margin
+      from the colour while still starting on the module line */
+   margin-left:-24px; width:calc(100% + 24px); }
+.proof .club .club-lead{ grid-column:1 / span 2; margin:0; padding-right:24px;
+   font:600 20px/26px var(--sans); color:var(--ink); }
+.proof .club .club-stat{ grid-column:3; display:block; margin:0; padding-right:24px; }
+.proof .club .club-what{ grid-column:4; margin:0; padding-right:24px; }
+.proof .club .club-cta{ grid-column:5; justify-self:start; display:inline-flex; align-items:center; gap:8px;
+   padding:12px 20px; border:1px solid var(--ink); text-decoration:none;
+   font:500 16px/24px var(--sans); color:var(--ink); transition:background .2s var(--ease), color .2s var(--ease); }
+.proof .club .club-cta:hover{ background:var(--ink); color:var(--accent); }
+
 .proof .club .num{ display:block; font:500 60px/72px var(--mono); letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
-.proof .club .what{ margin:0; padding-right:24px; font:600 20px/26px var(--sans); color:var(--ink); }
+.proof .club .what{ margin:0; font:600 20px/26px var(--sans); color:var(--ink); }
 .proof .club .sub{ margin:0; padding-right:20px; font:400 16px/24px var(--sans); color:rgba(8,8,11,.7); }
 .proof .club .sub a{ color:inherit; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; }
 .proof .club .sub .arrow{ display:inline-block; margin-left:6px; }
@@ -2682,10 +2697,7 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 
 @media (max-width:1199px){
   .proof ul.rows.cols4{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .proof ul.rows.cols4 li{ border-top:1px solid var(--line); }
-  .proof ul.rows.cols4 li:nth-child(-n+2){ border-top:0; }
-  .proof ul.rows.cols4 li:nth-child(odd){ border-left:0; padding-left:0; }
-  .proof .club{ grid-template-columns:1fr; row-gap:8px; padding:24px 0; }
+
   .proof .club .what{ padding-right:0; }
 }
 @media (max-width:767px){
@@ -2693,7 +2705,6 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
   .proof ul.rows.cols4 li{ border-left:0; border-top:0; border-bottom:1px solid var(--line); padding:24px 0; }
   .proof ul.rows.cols4 li:last-child{ border-bottom:0; }
   .proof ul.rows.cols4 .num{ font-size:56px; }
-  .proof .club{ grid-template-columns:1fr; row-gap:8px; margin-top:0; padding:24px 0; }
   .proof .club .num{ font-size:56px; }
   .proof .club .what{ padding-right:0; }
 }
@@ -2723,4 +2734,22 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 }
 @media (max-width:767px){
   .about .proof ul.rows.cols4{ grid-template-columns:1fr; }
+}
+
+/* The band stacks below the full layout: three items in five columns need the width. */
+@media (max-width:1023px){
+  /* no bleed here: the plate sits inside the page margins and pads its own text */
+  .proof .club{ grid-template-columns:1fr; row-gap:20px; padding:24px; margin-left:0; width:100%; }
+  /* the class selectors above are more specific than > *, so reset them by name */
+  .proof .club .club-lead,
+  .proof .club .club-stat,
+  .proof .club .club-what,
+  .proof .club .club-cta{ grid-column:1; padding-right:0; }
+  .proof .club .club-stat{ flex-wrap:wrap; }
+  .proof .club .what{ white-space:normal; }
+  /* the button takes the full width of the plate once the row has stacked */
+  .proof .club .club-cta{ justify-self:stretch; justify-content:center; }
+}
+@media (max-width:767px){
+  .proof .club .num{ font-size:56px; }
 }
