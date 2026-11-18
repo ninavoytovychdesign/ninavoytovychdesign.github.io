@@ -2742,7 +2742,10 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 /* The band stacks below the full layout: three items in five columns need the width. */
 @media (max-width:1023px){
   /* no bleed here: the plate sits inside the page margins and pads its own text */
-  .proof .club{ grid-template-columns:1fr; row-gap:20px; padding:24px; margin-left:0; width:100%; }
+  /* the plate extends past the content column by exactly its own padding, so the text inside
+     lands on the same left edge as the counters above it */
+  .proof .club{ grid-template-columns:1fr; row-gap:20px; padding:24px;
+     margin-left:-24px; margin-right:-24px; width:calc(100% + 48px); }
   /* the class selectors above are more specific than > *, so reset them by name */
   .proof .club .club-lead,
   .proof .club .club-stat,
