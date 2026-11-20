@@ -1,41 +1,69 @@
-# ninavoytovychdesign.github.io
+# ninavoytovych.com
 
-Static site, no build step. Upload the folder contents to the repository root – GitHub Pages serves `index.html`.
+Portfolio site of Nina Voytovych, product designer. Live at
+[ninavoytovych.com](https://ninavoytovych.com), served from this repository
+by GitHub Pages.
 
-## Structure
+The repository holds the published output. The site is generated from a
+source project that is kept private, because it also carries case material
+that is under NDA.
 
-- `index.html` – home page (Home v2 from Figma)
-- `work/index.html` – all projects
-- `work/<slug>.html` – case pages: lunora, ulovo, open-kharkiv, numa, nova-poshta
-- `assets/css/site.css` – the system: colors, type, grid, components
-- `assets/css/case-blocks.css` – the diagrams and blocks from the previous site, recolored for the light theme
-- `assets/js/site.js` – radar, Focus tabs, before/after slider, section rail, mobile menu
-- `assets/covers/<slug>.webp` – card and case covers, 1600×1000
-- `assets/cases/<slug>/NN.webp` – case images
-- `assets/fonts/` – Outfit and IBM Plex Mono, self-hosted
-- `assets/cv/` – CV
+## What is here
 
-## Covers
+| Path | What it is |
+| --- | --- |
+| `index.html` | Home: hero, project map, selected work, about, media, testimonials, contact |
+| `work/index.html` | All projects |
+| `work/<slug>.html` | Case pages |
+| `ua/`, `it/` | Full Ukrainian and Italian versions of every page |
+| `assets/css/site.css` | The design system: tokens, type scale, grid, components |
+| `assets/css/case-blocks.css` | Case-specific blocks: decision cards, state galleries, screens |
+| `assets/js/` | Project map, 3D map, case prototypes, scroll behaviour |
+| `assets/fonts/` | Geologica, Inter and IBM Plex Mono, self-hosted as woff2 |
+| `assets/cases/`, `assets/covers/` | Case imagery and covers, WebP |
 
-The home page covers are exported from Figma (Cover v4 frames, at 2x):
+Every page exists in three languages. Translation is not a per-page copy:
+one English source is generated, then a dictionary rewrites the strings for
+Ukrainian and Italian, so a change to a case propagates to all three.
 
-- `assets/covers/lunora.webp`, `ulovo.webp`, `tripstone.webp` and `gora.webp` – 1320×824.
-- `assets/covers/open-kharkiv-wide.webp` – 2688×1168.
+## The system
 
-The Focus images in `assets/focus/` are 720×448.
+**Grid.** Six columns of 224 px with 1344 px of content centred in a 1440 px
+page. Section labels sit in the left margin; content starts at the second
+module line. The same grid governs case pages, so blocks from different
+cases line up with each other.
 
-To update a cover, export the frame at 2x as WebP and save it under the same name.
+**Type.** Geologica for display and headings, Inter for body text, IBM Plex
+Mono for labels, dates and figures. Sizes are multiples of two, spacing is a
+multiple of four, and design tokens carry no fractional values.
 
-## TripStone
+**Colour.** Tokens in `site.css` (`--ink`, `--t1`…`--t3`, `--line`,
+`--accent`) rather than literal values, so contrast is set in one place.
 
-`work/tripstone.html` uses the template. The dashed `TODO(Nina)` blocks show what each section still needs; the page only uses facts from the Home v2 description.
+**Covers.** 1320×824 for card covers, 2688×1168 for the wide cards.
+Images carry a content hash in the query string; CSS is versioned the same
+way, so a deploy never serves a stale stylesheet.
 
-## Rules
+## Accessibility
 
-- Font sizes are multiples of 2.
-- Spacing is a multiple of 4.
-- No fractional values in design tokens.
+- One `h1` per page and no skipped heading levels.
+- Every image carries alt text; decorative images are hidden from assistive
+  technology.
+- Checked for horizontal overflow across twelve pages, three languages and
+  three viewport widths.
+- Motion and reveal animations are decoration only: the page reads with
+  JavaScript disabled.
 
-## Languages
+## Running it locally
 
-English lives in the root, Ukrainian in `ua/` with the same file names. The EN / UA switch in the header links each page to its counterpart. Ukrainian case texts come from the previous site; the new texts are translated in the generator.
+The published site is static, so any static server will do:
+
+```sh
+python3 -m http.server 8810
+```
+
+Then open `http://localhost:8810`.
+
+## How it was built
+
+See [AI-WORKFLOW.md](AI-WORKFLOW.md) for what was built with which tools.
