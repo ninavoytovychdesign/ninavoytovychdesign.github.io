@@ -2759,3 +2759,9 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 @media (max-width:767px){
   .proof .club .num{ font-size:56px; }
 }
+
+/* CV button: a dropdown with the three language files */
+.cv-dd{ position:relative; display:inline-flex; }
+.cv-dd .nav-cv{ background:transparent; cursor:pointer; }
+.cv-btn[aria-expanded="true"]{ background:rgba(255,255,255,.08); }
+.cv-menu{ left:0; right:auto; min-width:120px; }

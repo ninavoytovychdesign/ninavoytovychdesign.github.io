@@ -36,13 +36,15 @@
   (function(){ var t=document.querySelector('.hero-title'), l=document.querySelector('.hero-intro .lead'); if(!t||!l) return; function fit(){ if(innerWidth<1200){ l.style.removeProperty('max-width'); l.style.removeProperty('font-size'); l.style.removeProperty('line-height'); return; } var r=document.createRange(); r.selectNodeContents(t); var tw=r.getBoundingClientRect().width; l.style.setProperty('max-width', Math.round(tw)+'px','important'); var fs=Math.max(16, Math.min(20, tw/33)); l.style.setProperty('font-size', fs.toFixed(1)+'px','important'); l.style.setProperty('line-height', Math.round(fs*1.4)+'px','important'); } fit(); addEventListener('load',fit); addEventListener('resize',fit); if(document.fonts) document.fonts.ready.then(fit); setTimeout(fit,300); })();
   (function(){ var h=document.querySelector('.hero'), t=document.querySelector('.hero-title'), g=document.querySelector('.view-tg'); if(!h||!t||!g) return; var cell=document.querySelector('.radar-cell'); function pos(){ if(innerWidth<1024){ h.style.removeProperty('--tg-top'); var rf=cell&&cell.querySelector('.rf-wrap'); if(rf&&g.nextElementSibling!==rf) cell.insertBefore(g,rf); else if(!rf&&cell&&g.parentElement!==cell) cell.insertBefore(g,cell.firstChild); return; } if(g.previousElementSibling!==t) t.insertAdjacentElement('afterend',g); var hr=h.getBoundingClientRect(), tr=t.getBoundingClientRect(); h.style.setProperty('--tg-top', Math.round(tr.top-hr.top+(tr.height-g.offsetHeight)/2)+'px'); } pos(); addEventListener('load',pos); addEventListener('resize',pos); if(document.fonts) document.fonts.ready.then(pos); setTimeout(pos,300); })();
 (function(){
-  var dd=document.querySelector('.lang-dd'); if(!dd) return;
-  var btn=dd.querySelector('.lang-btn'), menu=dd.querySelector('.lang-menu');
+  /* the language switch and the CV button are the same kind of menu */
+  [].slice.call(document.querySelectorAll('.lang-dd, .cv-dd')).forEach(function(dd){
+  var btn=dd.querySelector('.lang-btn, .cv-btn'), menu=dd.querySelector('.lang-menu'); if(!btn||!menu) return;
   function set(o){ btn.setAttribute('aria-expanded',o?'true':'false'); menu.hidden=!o; }
   btn.addEventListener('click',function(){ set(menu.hidden); if(!menu.hidden){ var a=menu.querySelector('a[aria-current]')||menu.querySelector('a'); a&&a.focus(); } });
   document.addEventListener('click',function(e){ if(!dd.contains(e.target)) set(false); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!menu.hidden){ set(false); btn.focus(); } });
   menu.addEventListener('keydown',function(e){ var as=[].slice.call(menu.querySelectorAll('a')), i=as.indexOf(document.activeElement); if(e.key==='ArrowDown'){ e.preventDefault(); as[(i+1)%as.length].focus(); } if(e.key==='ArrowUp'){ e.preventDefault(); as[(i-1+as.length)%as.length].focus(); } });
+  });
 })();
 (function(){
   /* the card's square takes the colour of the case lit on the radar */
