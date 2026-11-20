@@ -2765,3 +2765,8 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 .cv-dd .nav-cv{ background:transparent; cursor:pointer; }
 .cv-btn[aria-expanded="true"]{ background:rgba(255,255,255,.08); }
 .cv-menu{ left:0; right:auto; min-width:120px; }
+.cv-menu a{ gap:12px; }
+.cv-menu a .ico-dl{ flex:none; width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:square; opacity:.75; }
+.cv-menu a:hover .ico-dl{ opacity:1; }
+.cv-menu [aria-current]::after{ display:none; }
+.cv-menu [aria-current]{ color:#fff; }
