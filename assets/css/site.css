@@ -2770,3 +2770,11 @@ main .in-short + .metrics .metric span{ display:block; max-width:none; padding-t
 .cv-menu a:hover .ico-dl{ opacity:1; }
 .cv-menu [aria-current]::after{ display:none; }
 .cv-menu [aria-current]{ color:#fff; }
+/* mobile menu: CV downloads, since the header button is hidden below 1024px */
+.sheet-cv{ justify-content:space-between; }
+.sheet-cv .sheet-k{ font:var(--t-label); color:var(--w2); text-transform:uppercase; letter-spacing:.08em; }
+.sheet-cv .nav-lang{ gap:14px; }
+.sheet-cv .lang{ display:inline-flex; align-items:center; gap:5px; }
+.sheet-cv .ico-dl{ width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:square; opacity:.8; }
+.sheet-cv .lang{ color:var(--w2); }
+.sheet-cv .lang:hover, .sheet-cv .lang:active{ color:var(--w1); }
